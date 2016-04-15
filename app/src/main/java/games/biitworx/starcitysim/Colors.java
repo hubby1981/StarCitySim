@@ -24,6 +24,14 @@ public class Colors {
     public static int topOutlineFillColor = Color.argb(128, 90, 220, 250);
     public static Paint topOutlinePainter;
 
+    public static int leftOutlineFillColor = Color.argb(180, 160, 220, 250);
+    public static Paint leftOutlinePainter;
+
+
+    public static int color1 = Color.argb(180, 255,255,255);
+    public static int color2 = Color.argb(180, 30, 200, 250);
+
+
     static {
         outlinePainter = new Paint();
         outlinePainter.setColor(outlineFillColor);
@@ -44,9 +52,15 @@ public class Colors {
         backPainterLine = new Paint();
         backPainterLine.setColor(backFillColor);
         backPainterLine.setStyle(Paint.Style.STROKE);
+        backPainterLine.setStrokeWidth(2);
 
         topOutlinePainter = new Paint();
         topOutlinePainter.setColor(topOutlineFillColor);
         topOutlinePainter.setStyle(Paint.Style.FILL);
+
+        leftOutlinePainter = new Paint();
+        leftOutlinePainter.setColor(leftOutlineFillColor);
+        leftOutlinePainter.setStyle(Paint.Style.FILL);
+
     }
 }
