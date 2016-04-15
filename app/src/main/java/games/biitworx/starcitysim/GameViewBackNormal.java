@@ -12,6 +12,7 @@ import android.view.View;
 public class GameViewBackNormal extends View {
     private Rect outline;
     private Rect inline;
+    private Rect filler;
 
     private int inlineFaktor = 20;
 
@@ -25,7 +26,7 @@ public class GameViewBackNormal extends View {
 
         outlineRect(canvas);
         inlineRect(canvas);
-
+        fillerRect(canvas);
         outlineTriangle(canvas);
     }
 
@@ -44,8 +45,15 @@ public class GameViewBackNormal extends View {
 
     }
 
+    private void fillerRect(Canvas canvas) {
+        int fak = canvas.getWidth() / inlineFaktor *2;
+        filler = new Rect(0 + fak, 0 + fak, canvas.getWidth() - fak, getHeight() - fak);
+        canvas.drawRect(filler, Colors.backPainterContent);
 
-    private void outlineTriangle(Canvas canvas){
+    }
+
+
+    private void outlineTriangle(Canvas canvas) {
         int fak = canvas.getWidth() / inlineFaktor;
         Path left = new Path();
 
@@ -54,7 +62,7 @@ public class GameViewBackNormal extends View {
         int xx = outline.right;
         int yy = outline.bottom;
 
-        int fakInner= fak;
+        int fakInner = fak;
 
 
         left.moveTo(x, y);
@@ -72,6 +80,40 @@ public class GameViewBackNormal extends View {
         left2.lineTo(x + fakInner, y + fakInner);
         left2.close();
         canvas.drawPath(left2, Colors.outlinePainter);
+
+        int fakInner2 = fakInner+fakInner/2;
+        left2 = new Path();
+        left2.moveTo(x + fakInner2, y + fakInner2);
+        left2.lineTo(x + fakInner2 * 2, y + fakInner2);
+        left2.lineTo(x + fakInner2, y + fakInner2 * 2);
+        left2.lineTo(x + fakInner2, y + fakInner2);
+        left2.close();
+        canvas.drawPath(left2, Colors.inlinePainter);
+
+        left = new Path();
+        left.moveTo(x, yy);
+        left.lineTo(x + fak, yy);
+        left.lineTo(x, yy - fak);
+        left.lineTo(x, yy);
+        left.close();
+
+        canvas.drawPath(left, Colors.backPainter);
+
+        left2 = new Path();
+        left2.moveTo(x + fakInner, yy - fakInner);
+        left2.lineTo(x + fakInner * 2, yy - fakInner);
+        left2.lineTo(x + fakInner, yy - fakInner * 2);
+        left2.lineTo(x + fakInner, yy - fakInner);
+        left2.close();
+        canvas.drawPath(left2, Colors.outlinePainter);
+
+        left2 = new Path();
+        left2.moveTo(x + fakInner2, yy - fakInner2);
+        left2.lineTo(x + fakInner2 * 2, yy - fakInner2);
+        left2.lineTo(x + fakInner2, yy - fakInner2 * 2);
+        left2.lineTo(x + fakInner2, yy - fakInner2);
+        left2.close();
+        canvas.drawPath(left2, Colors.inlinePainter);
 
         x = outline.right;
 
@@ -93,6 +135,39 @@ public class GameViewBackNormal extends View {
         right2.close();
         canvas.drawPath(right2, Colors.outlinePainter);
 
+        right2 = new Path();
+        right2.moveTo(x - fakInner2, y + fakInner2);
+        right2.lineTo(x - fakInner2 * 2, y + fakInner2);
+        right2.lineTo(x - fakInner2, y + fakInner2 * 2);
+        right2.lineTo(x - fakInner2, y + fakInner2);
+        right2.close();
+        canvas.drawPath(right2, Colors.inlinePainter);
+
+        right = new Path();
+        right.moveTo(x, yy);
+        right.lineTo(x - fak, yy);
+        right.lineTo(x, yy - fak);
+        right.lineTo(x, yy);
+        right.close();
+
+        canvas.drawPath(right, Colors.backPainter);
+
+        right2 = new Path();
+        right2.moveTo(x - fakInner, yy - fakInner);
+        right2.lineTo(x - fakInner * 2, yy - fakInner);
+        right2.lineTo(x - fakInner, yy - fakInner * 2);
+        right2.lineTo(x - fakInner, yy - fakInner);
+        right2.close();
+        canvas.drawPath(right2, Colors.outlinePainter);
+
+        right2 = new Path();
+        right2.moveTo(x - fakInner2, yy - fakInner2);
+        right2.lineTo(x - fakInner2 * 2, yy - fakInner2);
+        right2.lineTo(x - fakInner2, yy - fakInner2 * 2);
+        right2.lineTo(x - fakInner2, yy - fakInner2);
+        right2.close();
+        canvas.drawPath(right2, Colors.inlinePainter);
+
         x = outline.left;
 
 
@@ -107,6 +182,18 @@ public class GameViewBackNormal extends View {
 
         canvas.drawPath(top, Colors.backPainter);
         canvas.drawPath(top, Colors.backPainterLine);
+
+        Path bottom = new Path();
+
+
+        bottom.moveTo(x + fak * 4, yy);
+        bottom.lineTo(xx - fak * 4, yy);
+        bottom.lineTo((xx - fak * 4) - fak / 2, yy - fak / 2);
+        bottom.lineTo((x + fak * 4) + fak / 2, yy - fak / 2);
+        bottom.lineTo(x + fak * 4, yy);
+
+        canvas.drawPath(bottom, Colors.backPainter);
+        canvas.drawPath(bottom, Colors.backPainterLine);
 
         Path leftDown = new Path();
 
@@ -125,23 +212,23 @@ public class GameViewBackNormal extends View {
 
         rightDown.moveTo(xx, y + fak * 4);
         rightDown.lineTo(xx - fak / 2, (y + fak * 4) + fak / 2);
-        rightDown.lineTo(xx- fak / 2, (yy - fak * 4) - fak / 2);
+        rightDown.lineTo(xx - fak / 2, (yy - fak * 4) - fak / 2);
         rightDown.lineTo(xx, yy - fak * 4);
         rightDown.lineTo(xx, y + fak * 4);
 
         canvas.drawPath(rightDown, Colors.backPainter);
         canvas.drawPath(rightDown, Colors.backPainterLine);
 
-        Rect topInner=new Rect(x+fak*6,y+fak/2,xx-fak*6,y+fak);
+        Rect topInner = new Rect(x + fak * 6, y + fak / 2, xx - fak * 6, y + fak);
         canvas.drawRect(topInner, Colors.topOutlinePainter);
 
-        Rect leftInner=new Rect(x+fak/2,y+fak*6,x+fak,yy-fak*6);
-        canvas.drawRect(leftInner,Colors.topOutlinePainter);
+        Rect leftInner = new Rect(x + fak / 2, y + fak * 6, x + fak, yy - fak * 6);
+        canvas.drawRect(leftInner, Colors.topOutlinePainter);
 
-        Rect rightInner=new Rect(xx-fak,y+fak*6,xx-fak/2,yy-fak*6);
-        canvas.drawRect(rightInner,Colors.topOutlinePainter);
+        Rect rightInner = new Rect(xx - fak, y + fak * 6, xx - fak / 2, yy - fak * 6);
+        canvas.drawRect(rightInner, Colors.topOutlinePainter);
 
-        Rect bottomInner=new Rect(x+fak*6,yy-fak,xx-fak*6,yy-fak/2);
+        Rect bottomInner = new Rect(x + fak * 6, yy - fak, xx - fak * 6, yy - fak / 2);
         canvas.drawRect(bottomInner, Colors.topOutlinePainter);
 
     }

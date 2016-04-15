@@ -12,6 +12,9 @@ public class Colors {
     public static Paint backPainter;
     public static Paint backPainterLine;
 
+    public static int backContentFillColor = Color.argb(200, 0, 0, 0);
+    public static Paint backPainterContent;
+
     public static int outlineFillColor = Color.argb(255, 40, 70, 100);
     public static Paint outlinePainter;
 
@@ -33,6 +36,10 @@ public class Colors {
         backPainter = new Paint();
         backPainter.setColor(backFillColor);
         backPainter.setStyle(Paint.Style.FILL);
+
+        backPainterContent = new Paint();
+        backPainterContent.setColor(backContentFillColor);
+        backPainterContent.setStyle(Paint.Style.FILL);
 
         backPainterLine = new Paint();
         backPainterLine.setColor(backFillColor);
