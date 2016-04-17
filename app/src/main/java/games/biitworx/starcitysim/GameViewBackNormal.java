@@ -32,14 +32,16 @@ public class GameViewBackNormal extends View {
         inlineRect(canvas);
         fillerRect(canvas);
         outlineTriangle(canvas);
-        ArrayList<Rect> menu = makeRects(new Rect(filler.left+inlineFaktor*2,filler.top+inlineFaktor+2,filler.right-inlineFaktor*2,filler.bottom-inlineFaktor*2), 8);
+        ArrayList<Rect> menu = makeRects(new Rect(filler.left + inlineFaktor * 2, filler.top + inlineFaktor + 2, filler.right - inlineFaktor * 2, filler.bottom - inlineFaktor * 2), 6);
 
-
-            for(Rect r : menu){
-
-                canvas.drawRect(r,Colors.backPainterLine);
-
+        boolean space = false;
+        for (Rect r : menu) {
+            if (!space) {
+                canvas.drawRect(r, Colors.outlinePainter2);
+                canvas.drawRect(r, Colors.backPainterLine);
             }
+            space = !space;
+        }
     }
 
     private void outlineRect(Canvas canvas) {
@@ -60,8 +62,69 @@ public class GameViewBackNormal extends View {
 
     private void fillerRect(Canvas canvas) {
         int fak = canvas.getWidth() / inlineFaktor * 2;
-        filler = new Rect(0 + fak, 0 + fak, canvas.getWidth() - fak, getHeight() - fak);
+        filler = new Rect(0 + fak, 0 + fak, canvas.getWidth() - fak, canvas.getHeight() - fak);
+        canvas.drawRect(filler, Colors.backLinePainterContent);
+
+        filler = new Rect(0 + fak, (0 + fak * 3), (0 + (fak)) + fak / 8, (canvas.getHeight() - fak * 3));
+        canvas.drawRect(filler, Colors.outlinePainter2);
+        canvas.drawRect(filler, Colors.backPainterLine);
+
+        filler = new Rect((canvas.getWidth() - (fak)) - fak / 8, (0 + fak * 3), (canvas.getWidth() - (fak)), (canvas.getHeight() - fak * 3));
+        canvas.drawRect(filler, Colors.outlinePainter2);
+        canvas.drawRect(filler, Colors.backPainterLine);
+
+        filler = new Rect(0 + (fak + fak * 2), 0 + fak, canvas.getWidth() - (fak + fak * 2), (0 + fak) + fak / 8);
+        canvas.drawRect(filler, Colors.outlinePainter2);
+        canvas.drawRect(filler, Colors.backPainterLine);
+
+        filler = new Rect(0 + (fak + fak * 2), (canvas.getHeight() - fak) - fak / 8, canvas.getWidth() - (fak + fak * 2), canvas.getHeight() - fak);
+        canvas.drawRect(filler, Colors.outlinePainter2);
+        canvas.drawRect(filler, Colors.backPainterLine);
+
+
+        filler = new Rect(0 + fak + fak / 8, 0 + fak + fak / 8, canvas.getWidth() - (fak + fak / 8), getHeight() - (fak + fak / 8));
+
+
+        canvas.drawRect(filler, Colors.backPainterContentShader);
         canvas.drawRect(filler, Colors.backPainterContent);
+
+
+        int x = filler.left;
+        int y = filler.top;
+        int xx = filler.right;
+        int yy = filler.bottom;
+        Path left = new Path();
+        int fakInner = fak / 8;
+        left.moveTo(x, y);
+        left.lineTo(x + fakInner, y);
+        left.lineTo(x, y + fakInner);
+        left.lineTo(x, y);
+        left.close();
+        canvas.drawPath(left, Colors.backLinePainterContent);
+        Path right = new Path();
+
+        right.moveTo(xx, y);
+        right.lineTo(xx - fakInner, y);
+        right.lineTo(xx, y + fakInner);
+        right.lineTo(xx, y);
+        right.close();
+        canvas.drawPath(right, Colors.backLinePainterContent);
+        Path rightBottom = new Path();
+
+        rightBottom.moveTo(xx, yy);
+        rightBottom.lineTo(xx - fakInner, yy);
+        rightBottom.lineTo(xx, yy - fakInner);
+        rightBottom.lineTo(xx, yy);
+        rightBottom.close();
+        canvas.drawPath(rightBottom, Colors.backLinePainterContent);
+        Path leftBottom = new Path();
+
+        leftBottom.moveTo(x, yy);
+        leftBottom.lineTo(x + fakInner, yy);
+        leftBottom.lineTo(x, yy - fakInner);
+        leftBottom.lineTo(x, yy);
+        leftBottom.close();
+        canvas.drawPath(leftBottom, Colors.backLinePainterContent);
 
     }
 
@@ -281,7 +344,7 @@ public class GameViewBackNormal extends View {
     }
 
 
-    private void drawRectOutline(Canvas canvas, Rect bounds, int color1, int color2,int faktor) {
+    private void drawRectOutline(Canvas canvas, Rect bounds, int color1, int color2, int faktor) {
         int fak = bounds.width() / faktor;
 
         Paint painter1 = new Paint();
@@ -319,13 +382,13 @@ public class GameViewBackNormal extends View {
         p = new Path();
 
         p.moveTo(xx - fak / 4, y);
-        p.lineTo(xx- fak * 2, y);
-        p.lineTo(xx- fak * 2, y + fak / 4);
+        p.lineTo(xx - fak * 2, y);
+        p.lineTo(xx - fak * 2, y + fak / 4);
         xx += fak / 4;
 
-        p.lineTo(xx- fak / 2, y + fak / 4);
-        p.lineTo(xx- fak / 4, y + fak / 2);
-        p.lineTo(xx- fak / 4, (y + fak * 2) + fak / 4);
+        p.lineTo(xx - fak / 2, y + fak / 4);
+        p.lineTo(xx - fak / 4, y + fak / 2);
+        p.lineTo(xx - fak / 4, (y + fak * 2) + fak / 4);
         p.lineTo(xx, (y + fak * 2) + fak / 4);
         p.lineTo(xx, y + fak / 2);
 
@@ -336,15 +399,15 @@ public class GameViewBackNormal extends View {
         p = new Path();
 
         p.moveTo(xx - fak / 4, yy);
-        p.lineTo(xx- fak * 2, yy);
-        p.lineTo(xx- fak * 2, yy- fak / 4);
+        p.lineTo(xx - fak * 2, yy);
+        p.lineTo(xx - fak * 2, yy - fak / 4);
         xx += fak / 4;
 
-        p.lineTo(xx- fak / 2, yy- fak / 4);
-        p.lineTo(xx- fak / 4, yy- fak / 2);
-        p.lineTo(xx- fak / 4, (yy- fak * 2) - fak / 4);
-        p.lineTo(xx, (yy- fak * 2) - fak / 4);
-        p.lineTo(xx, yy- fak / 2);
+        p.lineTo(xx - fak / 2, yy - fak / 4);
+        p.lineTo(xx - fak / 4, yy - fak / 2);
+        p.lineTo(xx - fak / 4, (yy - fak * 2) - fak / 4);
+        p.lineTo(xx, (yy - fak * 2) - fak / 4);
+        p.lineTo(xx, yy - fak / 2);
 
         p.close();
 
@@ -355,27 +418,26 @@ public class GameViewBackNormal extends View {
     private ArrayList<Rect> makeRects(Rect base, int countW) {
         ArrayList<Rect> result = new ArrayList<>();
 
-        int w = base.width() / (countW*2);
+        int w = base.width() / (countW * 2);
         int x = base.left;
-        int y= base.top;
-        boolean space=false;
+        int y = base.top;
+        boolean space = false;
 
-        int w2 = w/4;
-        w+=w-w2;
+        int w2 = w / 4;
+        w += w - w2;
 
-        w+=(w2/countW);
+        w += (w2 / countW);
 
-        for (int i = 0; i < (countW*2)-1; i++) {
-            if(!space){
-                result.add(new Rect(x,y,(x+w),y+w));
-                x+=w;
+        for (int i = 0; i < (countW * 2) - 1; i++) {
+            if (!space) {
+                result.add(new Rect(x, y, (x + w), y + w));
+                x += w;
 
+            } else {
+                result.add(new Rect(x, y, x + w2, y + w));
+                x += w2;
             }
-            else{
-                result.add(new Rect(x,y,x+w2,y+w));
-                x+=w2;
-            }
-            space=!space;
+            space = !space;
         }
         return result;
     }
