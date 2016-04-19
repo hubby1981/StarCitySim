@@ -19,9 +19,13 @@ public class Game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        Colors.shaderBack2 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
         Colors.backPainterContentShader.setStyle(Paint.Style.FILL);
         Colors.backPainterContentShader.setShader(Colors.shaderBack);
+
+        Colors.backPainterContentShader2.setStyle(Paint.Style.FILL);
+        Colors.backPainterContentShader2.setShader(Colors.shaderBack2);
         setContentView(R.layout.activity_game);
 
     }

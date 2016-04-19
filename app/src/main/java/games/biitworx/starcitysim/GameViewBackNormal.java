@@ -17,7 +17,7 @@ public class GameViewBackNormal extends View {
     private Rect outline;
     private Rect inline;
     private Rect filler;
-
+    private final float reduce = 1.6f;
     private int inlineFaktor = 20;
 
     public GameViewBackNormal(Context context, AttributeSet attrs) {
@@ -32,16 +32,27 @@ public class GameViewBackNormal extends View {
         inlineRect(canvas);
         fillerRect(canvas);
         outlineTriangle(canvas);
-        ArrayList<Rect> menu = makeRects(new Rect(filler.left + inlineFaktor * 2, filler.top + inlineFaktor + 2, filler.right - inlineFaktor * 2, filler.bottom - inlineFaktor * 2), 6);
 
-        boolean space = false;
+        int fakW = canvas.getWidth()/inlineFaktor;
+        fakW=(int)(fakW/reduce/2);
+        ArrayList<Rect> menu = makeRects(new Rect(filler.left + fakW, filler.top + fakW, filler.right-fakW/2  , filler.bottom+fakW ), 6);
+
+        /*boolean space = false;
         for (Rect r : menu) {
             if (!space) {
                 canvas.drawRect(r, Colors.outlinePainter2);
                 canvas.drawRect(r, Colors.backPainterLine);
             }
             space = !space;
-        }
+        }*/
+
+        //
+        //canvas.drawRect(RectHelper.combine(menu,0,menu.size()-1), Colors.outlinePainter3);
+        canvas.drawRect(RectHelper.combine(menu,0,menu.size()-1), Colors.backPainterContentShader2);
+        canvas.drawRect(RectHelper.combine(menu,0,menu.size()-1), Colors.outlinePainter2);
+
+
+        canvas.drawRect(RectHelper.combine(menu,0,menu.size()-1), Colors.backPainterLine);
     }
 
     private void outlineRect(Canvas canvas) {
@@ -54,6 +65,7 @@ public class GameViewBackNormal extends View {
 
     private void inlineRect(Canvas canvas) {
         int fak = canvas.getWidth() / inlineFaktor;
+        fak = (int) (fak / reduce);
         inline = new Rect(0 + fak, 0 + fak, canvas.getWidth() - fak, getHeight() - fak);
 
         canvas.drawRect(inline, Colors.inlinePainter);
@@ -62,6 +74,7 @@ public class GameViewBackNormal extends View {
 
     private void fillerRect(Canvas canvas) {
         int fak = canvas.getWidth() / inlineFaktor * 2;
+        fak = (int) (fak / reduce);
         filler = new Rect(0 + fak, 0 + fak, canvas.getWidth() - fak, canvas.getHeight() - fak);
         canvas.drawRect(filler, Colors.backLinePainterContent);
 
@@ -131,6 +144,7 @@ public class GameViewBackNormal extends View {
 
     private void outlineTriangle(Canvas canvas) {
         int fak = canvas.getWidth() / inlineFaktor;
+        fak = (int) (fak / reduce);
         Path left = new Path();
 
         int x = outline.left;
@@ -421,20 +435,21 @@ public class GameViewBackNormal extends View {
         int w = base.width() / (countW * 2);
         int x = base.left;
         int y = base.top;
+        int h = base.height();
         boolean space = false;
 
         int w2 = w / 4;
         w += w - w2;
 
         w += (w2 / countW);
-
+        h -= w2 * 2;
         for (int i = 0; i < (countW * 2) - 1; i++) {
             if (!space) {
-                result.add(new Rect(x, y, (x + w), y + w));
+                result.add(new Rect(x, y, (x + w), y + h));
                 x += w;
 
             } else {
-                result.add(new Rect(x, y, x + w2, y + w));
+                result.add(new Rect(x, y, x + w2, y + h));
                 x += w2;
             }
             space = !space;

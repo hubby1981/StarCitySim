@@ -18,15 +18,18 @@ public class Colors {
     public static int backContentFillColor = Color.argb(175, 0, 0, 0);
     public static Paint backPainterContent;
     public static Paint backPainterContentShader;
+    public static Paint backPainterContentShader2;
 
     public static int outlineFillColor = Color.argb(255, 40, 70, 100);
     public static Paint outlinePainter;
 
 
-    public static int outlineFillColor2 = Color.argb(180, 225, 225, 225);
+    public static int outlineFillColor3= Color.argb(75, 0, 0, 0);
+    public static int outlineFillColor2 = Color.argb(25, 160, 160, 160);
     public static Paint outlinePainter2;
+    public static Paint outlinePainter3;
 
-    public static int inlineFillColor = Color.argb(255, 0, 180, 255);
+    public static int inlineFillColor = Color.argb(255, 0, 130, 255);
     public static Paint inlinePainter;
 
     public static int topOutlineFillColor = Color.argb(128, 90, 220, 250);
@@ -43,6 +46,8 @@ public class Colors {
     public static int color2 = Color.argb(180, 30, 200, 250);
 
     public static BitmapShader shaderBack;
+    public static BitmapShader shaderBack2;
+
 
     static {
         outlinePainter = new Paint();
@@ -52,6 +57,10 @@ public class Colors {
         outlinePainter2 = new Paint();
         outlinePainter2.setColor(outlineFillColor2);
         outlinePainter2.setStyle(Paint.Style.FILL);
+
+        outlinePainter3 = new Paint();
+        outlinePainter3.setColor(outlineFillColor3);
+        outlinePainter3.setStyle(Paint.Style.FILL);
 
         inlinePainter = new Paint();
         inlinePainter.setColor(inlineFillColor);
@@ -66,7 +75,7 @@ public class Colors {
         backPainterContent.setStyle(Paint.Style.FILL);
 
         backPainterContentShader = new Paint();
-
+        backPainterContentShader2 = new Paint();
 
 
         backPainterLine = new Paint();
