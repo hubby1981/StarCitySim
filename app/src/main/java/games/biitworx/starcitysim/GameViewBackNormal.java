@@ -1,12 +1,18 @@
 package games.biitworx.starcitysim;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RadialGradient;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -19,6 +25,8 @@ public class GameViewBackNormal extends View {
     private Rect filler;
     private final float reduce = 1.6f;
     private int inlineFaktor = 20;
+    private Rect content;
+    private Rect contentInner;
 
     public GameViewBackNormal(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -28,31 +36,90 @@ public class GameViewBackNormal extends View {
     @Override
     public void onDraw(Canvas canvas) {
 
+        Colors.outlinePainter3.setShader(new RadialGradient(canvas.getClipBounds().exactCenterX(),
+                canvas.getClipBounds().exactCenterY(), canvas.getWidth() / 2,
+                Color.argb(75, 15, 130, 160), Colors.outlineFillColor3, Shader.TileMode.CLAMP));
+
         outlineRect(canvas);
         inlineRect(canvas);
         fillerRect(canvas);
         outlineTriangle(canvas);
 
-        int fakW = canvas.getWidth()/inlineFaktor;
-        fakW=(int)(fakW/reduce/2);
-        ArrayList<Rect> menu = makeRects(new Rect(filler.left + fakW, filler.top + fakW, filler.right-fakW/2  , filler.bottom+fakW ), 6);
-
-        /*boolean space = false;
-        for (Rect r : menu) {
-            if (!space) {
-                canvas.drawRect(r, Colors.outlinePainter2);
-                canvas.drawRect(r, Colors.backPainterLine);
-            }
-            space = !space;
-        }*/
-
-        //
-        //canvas.drawRect(RectHelper.combine(menu,0,menu.size()-1), Colors.outlinePainter3);
-        canvas.drawRect(RectHelper.combine(menu,0,menu.size()-1), Colors.backPainterContentShader2);
-        canvas.drawRect(RectHelper.combine(menu,0,menu.size()-1), Colors.outlinePainter2);
+        int fakW = canvas.getWidth() / inlineFaktor;
+        fakW = (int) (fakW / reduce / 2);
+        ArrayList<Rect> menu = makeRects(new Rect(filler.left, filler.top, filler.right, filler.bottom + fakW), 6);
 
 
-        canvas.drawRect(RectHelper.combine(menu,0,menu.size()-1), Colors.backPainterLine);
+        content = RectHelper.combine(menu, 0, menu.size() - 1);
+
+
+        canvas.drawRect(content, Colors.backPainterContentShader2);
+
+        canvas.drawRect(content, Colors.outlinePainter3);
+
+        // canvas.drawRect(content, Colors.backPainterLine2);
+
+        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.button);
+        Bitmap b1 = BitmapFactory.decodeResource(getResources(), R.drawable.panel);
+        Bitmap b2 = BitmapFactory.decodeResource(getResources(), R.drawable.panel2);
+
+        content = new Rect(content.left + fakW, content.top + fakW, content.right - fakW, content.bottom - fakW);
+
+        menu = makeRects2(content, 6);
+
+
+        MenuRects.menu =new RectContainer( menu.get(0));
+        MenuRects.icon = new RectContainer( menu.get(10));
+
+        MenuRects.info = new RectContainer( RectHelper.combine(menu, 2, 8));
+
+
+        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()), MenuRects.menu.get(), null);
+        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()), MenuRects.icon.get(), null);
+
+        canvas.drawBitmap(b1, new Rect(0, 0, b1.getWidth(), b1.getHeight()),MenuRects.info.get(), null);
+
+
+        ArrayList<Rect> items = makeRect3(content, menu.get(0).height(), menu.get(1).width(),1);
+
+        menu = makeRects2(items.get(items.size() - 1), 6);
+
+        MenuRects.action1 =new RectContainer( menu.get(0));
+        MenuRects.action2 =new RectContainer( menu.get(2));
+        MenuRects.action3 =new RectContainer( menu.get(4));
+        MenuRects.action4 =new RectContainer( menu.get(6));
+        MenuRects.action5 =new RectContainer( menu.get(8));
+        MenuRects.action6 =new RectContainer( menu.get(10));
+
+        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action1.get(), null);
+        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action2.get(), null);
+        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action3.get(), null);
+        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action4.get(), null);
+        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action5.get(), null);
+        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action6.get(), null);
+
+
+        contentInner = RectHelper.combine(items, 1, items.size() - 2);
+        MenuRects.content = new RectContainer( contentInner);
+        MenuRects.contentInner = new RectContainer( new Rect(contentInner.left+fakW,contentInner.top+fakW,contentInner.right-fakW,contentInner.bottom-fakW));
+
+        canvas.drawBitmap(b2, new Rect(0, 0, b2.getWidth(), b2.getHeight()), MenuRects.content.get(), null);
+
+        items = makeRect3(MenuRects.contentInner.get(),MenuRects.action1.get().height()/2,0,1);
+        Paint font = new Paint();
+
+        font.setColor(Color.argb(255, 255, 255, 255));
+        font.setFakeBoldText(true);
+        font.setAntiAlias(true);
+        int index=1;
+        for(Rect r : items){
+            //canvas.drawRect(r, Colors.backPainterLine2);
+            font.setTextSize((int) (r.height() / 2));
+            canvas.drawText("PANEL "+index,r.left,r.centerY(),font);
+            index++;
+        }
+
+
     }
 
     private void outlineRect(Canvas canvas) {
@@ -68,7 +135,9 @@ public class GameViewBackNormal extends View {
         fak = (int) (fak / reduce);
         inline = new Rect(0 + fak, 0 + fak, canvas.getWidth() - fak, getHeight() - fak);
 
+
         canvas.drawRect(inline, Colors.inlinePainter);
+
 
     }
 
@@ -77,7 +146,7 @@ public class GameViewBackNormal extends View {
         fak = (int) (fak / reduce);
         filler = new Rect(0 + fak, 0 + fak, canvas.getWidth() - fak, canvas.getHeight() - fak);
         canvas.drawRect(filler, Colors.backLinePainterContent);
-
+/*
         filler = new Rect(0 + fak, (0 + fak * 3), (0 + (fak)) + fak / 8, (canvas.getHeight() - fak * 3));
         canvas.drawRect(filler, Colors.outlinePainter2);
         canvas.drawRect(filler, Colors.backPainterLine);
@@ -92,7 +161,7 @@ public class GameViewBackNormal extends View {
 
         filler = new Rect(0 + (fak + fak * 2), (canvas.getHeight() - fak) - fak / 8, canvas.getWidth() - (fak + fak * 2), canvas.getHeight() - fak);
         canvas.drawRect(filler, Colors.outlinePainter2);
-        canvas.drawRect(filler, Colors.backPainterLine);
+        canvas.drawRect(filler, Colors.backPainterLine);*/
 
 
         filler = new Rect(0 + fak + fak / 8, 0 + fak + fak / 8, canvas.getWidth() - (fak + fak / 8), getHeight() - (fak + fak / 8));
@@ -454,6 +523,49 @@ public class GameViewBackNormal extends View {
             }
             space = !space;
         }
+        return result;
+    }
+
+    private ArrayList<Rect> makeRects2(Rect base, int countW) {
+        ArrayList<Rect> result = new ArrayList<>();
+
+        int w = base.width() / (countW * 2);
+        int x = base.left;
+        int y = base.top;
+        int h = base.height();
+        boolean space = false;
+
+        int w2 = w / 4;
+        w += w - w2;
+
+        w += (w2 / countW);
+        h -= w2 * 2;
+        for (int i = 0; i < (countW * 2) - 1; i++) {
+            if (!space) {
+                result.add(new Rect(x, y, (x + w), y + w));
+                x += w;
+
+            } else {
+                result.add(new Rect(x, y, x + w2, y + w));
+                x += w2;
+            }
+            space = !space;
+        }
+        return result;
+    }
+
+    private ArrayList<Rect> makeRect3(Rect base, int height, int space,int more) {
+        ArrayList<Rect> result = new ArrayList<>();
+        int max = base.height() / height;
+        max = ((base.height() - (space * max))) / height;
+
+        int y = base.top;
+
+        for (int x = 0; x < max + more; x++) {
+            result.add(new Rect(base.left, y, base.right, y + height));
+            y += height + space;
+        }
+
         return result;
     }
 

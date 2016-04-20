@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RadialGradient;
 import android.graphics.Shader;
 
 /**
@@ -12,8 +13,11 @@ import android.graphics.Shader;
 public class Colors {
 
     public static int backFillColor = Color.argb(255, 0, 0, 0);
+    public static int foreFillColor = Color.argb(50, 255, 255,255);
+
     public static Paint backPainter;
     public static Paint backPainterLine;
+    public static Paint backPainterLine2;
 
     public static int backContentFillColor = Color.argb(175, 0, 0, 0);
     public static Paint backPainterContent;
@@ -24,29 +28,31 @@ public class Colors {
     public static Paint outlinePainter;
 
 
-    public static int outlineFillColor3= Color.argb(75, 0, 0, 0);
-    public static int outlineFillColor2 = Color.argb(25, 160, 160, 160);
+    public static int outlineFillColor3 = Color.argb(25, 0, 0, 0);
+    public static int outlineFillColor2 = Color.argb(50,0,0,0);
     public static Paint outlinePainter2;
     public static Paint outlinePainter3;
 
-    public static int inlineFillColor = Color.argb(255, 0, 130, 255);
+    public static int inlineFillColor = Color.argb(255, 0, 180, 255);
     public static Paint inlinePainter;
 
     public static int topOutlineFillColor = Color.argb(128, 90, 220, 250);
     public static Paint topOutlinePainter;
 
-    public static int leftOutlineFillColor = Color.argb(180, 160, 220, 250);
+    public static int leftOutlineFillColor = Color.argb(100, 0, 0,200);
     public static Paint leftOutlinePainter;
 
-    public static int backContentLineFillColor = Color.argb(255, 10,200, 255);
+    public static int backContentLineFillColor = Color.argb(255,80,200,220);
     public static Paint backLinePainterContent;
 
 
-    public static int color1 = Color.argb(180, 255,255,255);
+    public static int color1 = Color.argb(180, 255, 255, 255);
     public static int color2 = Color.argb(180, 30, 200, 250);
 
     public static BitmapShader shaderBack;
     public static BitmapShader shaderBack2;
+
+
 
 
     static {
@@ -59,12 +65,17 @@ public class Colors {
         outlinePainter2.setStyle(Paint.Style.FILL);
 
         outlinePainter3 = new Paint();
-        outlinePainter3.setColor(outlineFillColor3);
+
         outlinePainter3.setStyle(Paint.Style.FILL);
+
+        outlinePainter3.setAntiAlias(true);
+
 
         inlinePainter = new Paint();
         inlinePainter.setColor(inlineFillColor);
         inlinePainter.setStyle(Paint.Style.FILL);
+        inlinePainter.setAntiAlias(true);
+
 
         backPainter = new Paint();
         backPainter.setColor(backFillColor);
@@ -77,11 +88,17 @@ public class Colors {
         backPainterContentShader = new Paint();
         backPainterContentShader2 = new Paint();
 
-
+        backPainterContentShader2.setAntiAlias(true);
+        backPainterContentShader.setAntiAlias(true);
         backPainterLine = new Paint();
         backPainterLine.setColor(backFillColor);
         backPainterLine.setStyle(Paint.Style.STROKE);
         backPainterLine.setStrokeWidth(2);
+
+        backPainterLine2 = new Paint();
+        backPainterLine2.setColor(foreFillColor);
+        backPainterLine2.setStyle(Paint.Style.STROKE);
+        backPainterLine2.setStrokeWidth(2);
 
         topOutlinePainter = new Paint();
         topOutlinePainter.setColor(topOutlineFillColor);
