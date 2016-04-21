@@ -36,6 +36,8 @@ public class GameViewBackNormal extends View {
     @Override
     public void onDraw(Canvas canvas) {
 
+
+
         Colors.outlinePainter3.setShader(new RadialGradient(canvas.getClipBounds().exactCenterX(),
                 canvas.getClipBounds().exactCenterY(), canvas.getWidth() / 2,
                 Color.argb(75, 15, 130, 160), Colors.outlineFillColor3, Shader.TileMode.CLAMP));
@@ -74,10 +76,10 @@ public class GameViewBackNormal extends View {
         MenuRects.info = new RectContainer( RectHelper.combine(menu, 2, 8));
 
 
-        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()), MenuRects.menu.get(), null);
-        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()), MenuRects.icon.get(), null);
+       BitmapDrawer.drawImage(b, canvas, MenuRects.menu.get(), null);
+       BitmapDrawer.drawImage(b, canvas, MenuRects.icon.get(), null);
 
-        canvas.drawBitmap(b1, new Rect(0, 0, b1.getWidth(), b1.getHeight()),MenuRects.info.get(), null);
+       BitmapDrawer.drawImage(b1,canvas,MenuRects.info.get(), null);
 
 
         ArrayList<Rect> items = makeRect3(content, menu.get(0).height(), menu.get(1).width(),1);
@@ -91,19 +93,25 @@ public class GameViewBackNormal extends View {
         MenuRects.action5 =new RectContainer( menu.get(8));
         MenuRects.action6 =new RectContainer( menu.get(10));
 
-        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action1.get(), null);
-        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action2.get(), null);
-        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action3.get(), null);
-        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action4.get(), null);
-        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action5.get(), null);
-        canvas.drawBitmap(b, new Rect(0, 0, b.getWidth(), b.getHeight()),MenuRects.action6.get(), null);
+        BitmapDrawer.drawImage(b, canvas, MenuRects.action1.get(), null);
+       BitmapDrawer.drawImage(b, canvas, MenuRects.action2.get(), null);
+       BitmapDrawer.drawImage(b, canvas, MenuRects.action3.get(), null);
+       BitmapDrawer.drawImage(b,    canvas,MenuRects.action4.get(), null);
+       BitmapDrawer.drawImage(b,    canvas,MenuRects.action5.get(), null);
+       BitmapDrawer.drawImage(b,    canvas,MenuRects.action6.get(), null);
 
 
         contentInner = RectHelper.combine(items, 1, items.size() - 2);
-        MenuRects.content = new RectContainer( contentInner);
+        MenuRects.content = new RectContainer( new Rect(contentInner.left,contentInner.top,contentInner.right-menu.get(9).width(),contentInner.bottom));
         MenuRects.contentInner = new RectContainer( new Rect(contentInner.left+fakW,contentInner.top+fakW,contentInner.right-fakW,contentInner.bottom-fakW));
 
-        canvas.drawBitmap(b2, new Rect(0, 0, b2.getWidth(), b2.getHeight()), MenuRects.content.get(), null);
+
+        BitmapDrawer.drawImage(b2,canvas,MenuRects.content.get(), null);
+
+
+
+
+
 
         items = makeRect3(MenuRects.contentInner.get(),MenuRects.action1.get().height()/2,0,1);
         Paint font = new Paint();
