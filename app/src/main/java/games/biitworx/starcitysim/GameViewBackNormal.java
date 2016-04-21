@@ -55,7 +55,7 @@ public class GameViewBackNormal extends View {
         content = RectHelper.combine(menu, 0, menu.size() - 1);
 
 
-        canvas.drawRect(content, Colors.backPainterContentShader2);
+        //canvas.drawRect(content, Colors.backPainterContentShader2);
 
         canvas.drawRect(content, Colors.outlinePainter3);
 
@@ -102,7 +102,10 @@ public class GameViewBackNormal extends View {
 
 
         contentInner = RectHelper.combine(items, 1, items.size() - 2);
-        MenuRects.content = new RectContainer( new Rect(contentInner.left,contentInner.top,contentInner.right-menu.get(9).width(),contentInner.bottom));
+
+        canvas.drawRect(contentInner, Colors.backPainterContentShader2);
+        canvas.drawRect(contentInner, Colors.outlinePainter3);
+        MenuRects.content = new RectContainer( new Rect(contentInner.left,contentInner.top,contentInner.right,contentInner.bottom));
         MenuRects.contentInner = new RectContainer( new Rect(contentInner.left+fakW,contentInner.top+fakW,contentInner.right-fakW,contentInner.bottom-fakW));
 
 

@@ -28,7 +28,7 @@ public class Colors {
     public static Paint outlinePainter;
 
 
-    public static int outlineFillColor3 = Color.argb(25, 0, 0, 0);
+    public static int outlineFillColor3 = Color.argb(75, 0, 0, 0);
     public static int outlineFillColor2 = Color.argb(50,0,0,0);
     public static Paint outlinePainter2;
     public static Paint outlinePainter3;
