@@ -123,6 +123,7 @@ public class GameViewBackNormal extends View {
         font.setFakeBoldText(true);
         font.setAntiAlias(true);
         int index=1;
+        MenuRects.line=new RectContainer(items.get(0));
         for(Rect r : items){
             //canvas.drawRect(r, Colors.backPainterLine2);
             font.setTextSize((int) (r.height() / 2));

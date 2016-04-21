@@ -23,5 +23,5 @@ public class MenuRects {
 
 
 
-
+    public static RectContainer line;
 }

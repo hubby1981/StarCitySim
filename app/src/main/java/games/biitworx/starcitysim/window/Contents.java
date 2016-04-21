@@ -9,6 +9,15 @@ import java.util.ArrayList;
 public class Contents {
     private ArrayList<Content> items=new ArrayList<>();
 
+    public int getMaxLine(){
+
+        int result = 1;
+
+        for(Content c : items){
+            result = c.getLineHeight();
+        }
+        return result;
+    }
 
     public void add(Content content){
         items.add(content);

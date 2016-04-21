@@ -3,6 +3,7 @@ package games.biitworx.starcitysim.window;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.view.Menu;
 
 import games.biitworx.starcitysim.MenuRects;
 
@@ -22,6 +23,15 @@ public abstract class Window {
 
     public void onDraw(Canvas canvas) {
         Rect bounds = MenuRects.contentInner.get();
-        Bitmap content = Bitmap.createBitmap(bounds.right,bounds.bottom, Bitmap.Config.ARGB_4444);
+        int lines =  contents.getMaxLine()* MenuRects.line.get().height();
+
+                int max = canvas.getHeight();
+
+        if(max<lines)
+            max=lines;
+        Bitmap content = Bitmap.createBitmap(bounds.right,max, Bitmap.Config.ARGB_4444);
+
     }
+
+
 }
