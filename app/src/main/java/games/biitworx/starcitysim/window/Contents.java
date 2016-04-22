@@ -1,7 +1,11 @@
 package games.biitworx.starcitysim.window;
 
+import android.graphics.Canvas;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import games.biitworx.starcitysim.MenuRects;
 
 /**
  * Created by marce_000 on 21.04.2016.
@@ -14,12 +18,21 @@ public class Contents {
         int result = 1;
 
         for(Content c : items){
-            result = c.getLineHeight();
+            result += c.getLineHeight();
         }
         return result;
     }
 
     public void add(Content content){
         items.add(content);
+    }
+
+    public void onDraw(Canvas canvas,int scroll){
+        int y= MenuRects.line.get().height();
+
+        for(Content c : items){
+
+                y = c.onDraw(canvas,y,scroll);
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.Menu;
 
+import games.biitworx.starcitysim.Fonts;
 import games.biitworx.starcitysim.MenuRects;
 
 /**
@@ -12,7 +13,7 @@ import games.biitworx.starcitysim.MenuRects;
  */
 public abstract class Window {
 
-    private int scrollPosition = 1;
+    private int scrollPosition = 0;
     private String text = "";
     private Contents contents = new Contents();
 
@@ -21,17 +22,35 @@ public abstract class Window {
         this.text = text;
     }
 
-    public void onDraw(Canvas canvas) {
-        Rect bounds = MenuRects.contentInner.get();
-        int lines =  contents.getMaxLine()* MenuRects.line.get().height();
-
-                int max = canvas.getHeight();
-
-        if(max<lines)
-            max=lines;
-        Bitmap content = Bitmap.createBitmap(bounds.right,max, Bitmap.Config.ARGB_4444);
-
+    public void setScrollPosition(int scrollPosition) {
+        this.scrollPosition = scrollPosition;
     }
 
+    public int getMaxScrollPosition(){
+        return contents.getMaxLine()*MenuRects.line.get().height();
+    }
+
+    public void onDraw(Canvas canvas) {
+        Rect bounds = MenuRects.contentInner.get();
+
+        Bitmap outerContent = Bitmap.createBitmap(bounds.right, bounds.height(), Bitmap.Config.ARGB_4444);
+
+        Canvas canvasOuterContent = new Canvas(outerContent);
+
+        contents.onDraw(canvasOuterContent,scrollPosition);
+
+        canvas.drawBitmap(outerContent, bounds.left, bounds.top, null);
+
+
+        Rect base = MenuRects.info.get();
+        Fonts.FONT.setTextSize((base.height() / 4));
+
+
+        canvas.drawText(text, base.centerX()-(text.length()/2)*Fonts.FONT.getTextSize(), base.centerY(), Fonts.FONT);
+    }
+
+    public Contents getContents() {
+        return contents;
+    }
 
 }

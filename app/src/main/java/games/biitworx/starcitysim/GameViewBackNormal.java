@@ -16,6 +16,9 @@ import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
+import games.biitworx.starcitysim.window.ShipyardWindow;
+import games.biitworx.starcitysim.window.Window;
+
 /**
  * Created by marcel.weissgerber on 15.04.2016.
  */
@@ -27,15 +30,18 @@ public class GameViewBackNormal extends View {
     private int inlineFaktor = 20;
     private Rect content;
     private Rect contentInner;
+    private Window view = new ShipyardWindow();
 
     public GameViewBackNormal(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
+    public Window getWindow() {
+        return view;
+    }
 
     @Override
     public void onDraw(Canvas canvas) {
-
 
 
         Colors.outlinePainter3.setShader(new RadialGradient(canvas.getClipBounds().exactCenterX(),
@@ -61,77 +67,65 @@ public class GameViewBackNormal extends View {
 
         // canvas.drawRect(content, Colors.backPainterLine2);
 
-        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.button);
-        Bitmap b1 = BitmapFactory.decodeResource(getResources(), R.drawable.panel);
-        Bitmap b2 = BitmapFactory.decodeResource(getResources(), R.drawable.panel2);
 
         content = new Rect(content.left + fakW, content.top + fakW, content.right - fakW, content.bottom - fakW);
 
         menu = makeRects2(content, 6);
 
 
-        MenuRects.menu =new RectContainer( menu.get(0));
-        MenuRects.icon = new RectContainer( menu.get(10));
+        MenuRects.menu = new RectContainer(menu.get(0));
+        MenuRects.icon = new RectContainer(menu.get(10));
 
-        MenuRects.info = new RectContainer( RectHelper.combine(menu, 2, 8));
-
-
-       BitmapDrawer.drawImage(b, canvas, MenuRects.menu.get(), null);
-       BitmapDrawer.drawImage(b, canvas, MenuRects.icon.get(), null);
-
-       BitmapDrawer.drawImage(b1,canvas,MenuRects.info.get(), null);
+        MenuRects.info = new RectContainer(RectHelper.combine(menu, 2, 8));
 
 
-        ArrayList<Rect> items = makeRect3(content, menu.get(0).height(), menu.get(1).width(),1);
+        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.menu.get(), null);
+        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.icon.get(), null);
+
+        BitmapDrawer.drawImage(Game.IMG2, canvas, MenuRects.info.get(), null);
+
+
+        ArrayList<Rect> items = makeRect3(content, menu.get(0).height(), menu.get(1).width(), 1);
 
         menu = makeRects2(items.get(items.size() - 1), 6);
 
-        MenuRects.action1 =new RectContainer( menu.get(0));
-        MenuRects.action2 =new RectContainer( menu.get(2));
-        MenuRects.action3 =new RectContainer( menu.get(4));
-        MenuRects.action4 =new RectContainer( menu.get(6));
-        MenuRects.action5 =new RectContainer( menu.get(8));
-        MenuRects.action6 =new RectContainer( menu.get(10));
+        MenuRects.action1 = new RectContainer(menu.get(0));
+        MenuRects.action2 = new RectContainer(menu.get(2));
+        MenuRects.action3 = new RectContainer(menu.get(4));
+        MenuRects.action4 = new RectContainer(menu.get(6));
+        MenuRects.action5 = new RectContainer(menu.get(8));
+        MenuRects.action6 = new RectContainer(menu.get(10));
 
-        BitmapDrawer.drawImage(b, canvas, MenuRects.action1.get(), null);
-       BitmapDrawer.drawImage(b, canvas, MenuRects.action2.get(), null);
-       BitmapDrawer.drawImage(b, canvas, MenuRects.action3.get(), null);
-       BitmapDrawer.drawImage(b,    canvas,MenuRects.action4.get(), null);
-       BitmapDrawer.drawImage(b,    canvas,MenuRects.action5.get(), null);
-       BitmapDrawer.drawImage(b,    canvas,MenuRects.action6.get(), null);
+        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action1.get(), null);
+        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action2.get(), null);
+        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action3.get(), null);
+        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action4.get(), null);
+        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action5.get(), null);
+        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action6.get(), null);
 
 
         contentInner = RectHelper.combine(items, 1, items.size() - 2);
 
         canvas.drawRect(contentInner, Colors.backPainterContentShader2);
         canvas.drawRect(contentInner, Colors.outlinePainter3);
-        MenuRects.content = new RectContainer( new Rect(contentInner.left,contentInner.top,contentInner.right,contentInner.bottom));
-        MenuRects.contentInner = new RectContainer( new Rect(contentInner.left+fakW,contentInner.top+fakW,contentInner.right-fakW,contentInner.bottom-fakW));
+        MenuRects.content = new RectContainer(new Rect(contentInner.left, contentInner.top, contentInner.right, contentInner.bottom));
+        MenuRects.contentInner = new RectContainer(new Rect(contentInner.left + fakW, contentInner.top + fakW, contentInner.right - fakW, contentInner.bottom - fakW));
 
 
-        BitmapDrawer.drawImage(b2,canvas,MenuRects.content.get(), null);
+        BitmapDrawer.drawImage(Game.IMG3, canvas, MenuRects.content.get(), null);
+
+
+        items = makeRect3(MenuRects.contentInner.get(), MenuRects.action1.get().height() / 2, 0, 1);
+
+        int index = 1;
+        int offsetX = items.get(0).left;
+        int offsetY = items.get(0).top;
+        MenuRects.line = new RectContainer(new Rect(items.get(0).left-offsetX,items.get(0).top-offsetY,items.get(0).right-offsetX,items.get(0).bottom-offsetY));
 
 
 
 
-
-
-        items = makeRect3(MenuRects.contentInner.get(),MenuRects.action1.get().height()/2,0,1);
-        Paint font = new Paint();
-
-        font.setColor(Color.argb(255, 255, 255, 255));
-        font.setFakeBoldText(true);
-        font.setAntiAlias(true);
-        int index=1;
-        MenuRects.line=new RectContainer(items.get(0));
-        for(Rect r : items){
-            //canvas.drawRect(r, Colors.backPainterLine2);
-            font.setTextSize((int) (r.height() / 2));
-            canvas.drawText("PANEL "+index,r.left,r.centerY(),font);
-            index++;
-        }
-
-
+        view.onDraw(canvas);
     }
 
     private void outlineRect(Canvas canvas) {
@@ -566,7 +560,7 @@ public class GameViewBackNormal extends View {
         return result;
     }
 
-    private ArrayList<Rect> makeRect3(Rect base, int height, int space,int more) {
+    private ArrayList<Rect> makeRect3(Rect base, int height, int space, int more) {
         ArrayList<Rect> result = new ArrayList<>();
         int max = base.height() / height;
         max = ((base.height() - (space * max))) / height;
