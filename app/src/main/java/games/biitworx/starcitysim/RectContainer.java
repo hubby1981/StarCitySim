@@ -7,8 +7,14 @@ import android.graphics.Rect;
  */
 public class RectContainer extends Container<Rect> {
     private boolean visible = true;
+    private Runnable action=null;
     public RectContainer(Rect item) {
         super(item);
+    }
+
+    public RectContainer(Rect item,Runnable action) {
+        super(item);
+        this.action = action;
     }
 
     @Override
@@ -22,6 +28,18 @@ public class RectContainer extends Container<Rect> {
     }
     public  boolean isVisible(){
         return visible;
+    }
+
+    public boolean hit(int x,int y){
+        return get().contains(x,y);
+    }
+
+    public Runnable getAction(){
+        return action;
+    }
+
+    public boolean hasAction(){
+        return getAction()!=null;
     }
 
 }

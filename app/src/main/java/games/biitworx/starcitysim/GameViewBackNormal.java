@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
+import games.biitworx.starcitysim.window.MenuWindow;
 import games.biitworx.starcitysim.window.ShipyardWindow;
 import games.biitworx.starcitysim.window.Window;
 
@@ -38,6 +39,11 @@ public class GameViewBackNormal extends View {
 
     public Window getWindow() {
         return view;
+    }
+
+
+    public void changeWindow(Window window) {
+        view = window;
     }
 
     @Override
@@ -73,8 +79,18 @@ public class GameViewBackNormal extends View {
         menu = makeRects2(content, 6);
 
 
-        MenuRects.menu = new RectContainer(menu.get(0));
-        MenuRects.icon = new RectContainer(menu.get(10));
+        MenuRects.menu = new RectContainer(menu.get(0), new Runnable() {
+            @Override
+            public void run() {
+                Game.changeWindow(new MenuWindow());
+            }
+        });
+        MenuRects.icon = new RectContainer(menu.get(10), new Runnable() {
+            @Override
+            public void run() {
+                Game.changeWindow(new ShipyardWindow());
+            }
+        });
 
         MenuRects.info = new RectContainer(RectHelper.combine(menu, 2, 8));
 
@@ -120,9 +136,7 @@ public class GameViewBackNormal extends View {
         int index = 1;
         int offsetX = items.get(0).left;
         int offsetY = items.get(0).top;
-        MenuRects.line = new RectContainer(new Rect(items.get(0).left-offsetX,items.get(0).top-offsetY,items.get(0).right-offsetX,items.get(0).bottom-offsetY));
-
-
+        MenuRects.line = new RectContainer(new Rect(items.get(0).left - offsetX, items.get(0).top - offsetY, items.get(0).right - offsetX, items.get(0).bottom - offsetY));
 
 
         view.onDraw(canvas);

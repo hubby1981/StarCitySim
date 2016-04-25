@@ -15,9 +15,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import games.biitworx.starcitysim.window.Window;
+
 public class Game extends AppCompatActivity {
 
-    private Runnable update;
+    private static Runnable update;
     private int ScrollPosition = 0;
     private int OldY = 0;
     private boolean touch = false;
@@ -25,7 +27,7 @@ public class Game extends AppCompatActivity {
     public static Bitmap IMG1;
     public static Bitmap IMG2;
     public static Bitmap IMG3;
-    private GameViewBackNormal view;
+    private static GameViewBackNormal view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +62,18 @@ public class Game extends AppCompatActivity {
         };
     }
 
+    public static void changeWindow(Window window){
+        if(view!=null){
+           view.changeWindow(window);
+        }
+        update.run();
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
             OldY = (int) event.getY();
             touch = true;
         }
@@ -72,7 +82,7 @@ public class Game extends AppCompatActivity {
             int scroller = ((int) event.getY()) - OldY;
             int newScroller = ScrollPosition;
 
-            newScroller -= scroller / 6;
+            newScroller -= scroller / 8;
             if (newScroller < 0)
                 newScroller = 0;
             touch = true;
@@ -89,6 +99,7 @@ public class Game extends AppCompatActivity {
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
             touch = false;
+            MenuRects.testHit((int)event.getX(),(int)event.getY()-(MenuRects.icon.get().top));
         }
 
         return true;
