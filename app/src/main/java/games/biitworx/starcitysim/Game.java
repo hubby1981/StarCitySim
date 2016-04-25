@@ -20,7 +20,7 @@ import games.biitworx.starcitysim.window.Window;
 public class Game extends AppCompatActivity {
 
     private static Runnable update;
-    private int ScrollPosition = 0;
+    private static int ScrollPosition = 0;
     private int OldY = 0;
     private boolean touch = false;
 
@@ -28,6 +28,8 @@ public class Game extends AppCompatActivity {
     public static Bitmap IMG2;
     public static Bitmap IMG3;
     private static GameViewBackNormal view;
+    public static Bitmap MENU;
+    public static Bitmap SHIPYARD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class Game extends AppCompatActivity {
         IMG1 = BitmapFactory.decodeResource(getResources(), R.drawable.button);
         IMG2 = BitmapFactory.decodeResource(getResources(), R.drawable.panel);
         IMG3 = BitmapFactory.decodeResource(getResources(), R.drawable.panel2);
+        MENU = BitmapFactory.decodeResource(getResources(), R.drawable.menu);
+        SHIPYARD = BitmapFactory.decodeResource(getResources(), R.drawable.shipyard);
 
         Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Colors.shaderBack2 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
@@ -48,6 +52,8 @@ public class Game extends AppCompatActivity {
         Colors.backPainterContentShader2.setShader(Colors.shaderBack2);
         setContentView(R.layout.activity_game);
         view = (GameViewBackNormal) findViewById(R.id.gameback);
+        ScrollPosition = view.getWindow().getScrollPosition();
+
         update = new Runnable() {
             @Override
             public void run() {
@@ -65,6 +71,8 @@ public class Game extends AppCompatActivity {
     public static void changeWindow(Window window){
         if(view!=null){
            view.changeWindow(window);
+            ScrollPosition = view.getWindow().getScrollPosition();
+
         }
         update.run();
     }
