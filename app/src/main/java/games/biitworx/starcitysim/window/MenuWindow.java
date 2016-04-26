@@ -17,6 +17,9 @@ public class MenuWindow extends Window {
         getContents().add(new MenuItemContent(Game.SYSTEMS, Game.SYSTEMSBACK, "SYSTEMS", "Environment", "4", Color.argb(175, 30, 90, 150)));
         getContents().add(new MenuItemContent(Game.RELATIONS, Game.RELATIONSBACK, "RELATIONS", "Diplomacy", "12 | 4 | 2", Color.argb(175, 30, 90, 150)));
 
+        getContents().add(new MenuItemContent(Game.LAB, Game.LABBACK, "LABS", "Science", "3 / 4", Color.argb(175, 30, 90, 150)));
+        getContents().add(new MenuItemContent(Game.SETTLE, Game.SETTLEBACK, "SETTLEMENT", "Science", "1 / 1", Color.argb(175, 30, 90, 150)));
+
 
     }
 }

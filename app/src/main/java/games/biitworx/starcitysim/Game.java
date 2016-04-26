@@ -40,6 +40,10 @@ public class Game extends AppCompatActivity {
 
     public static Bitmap RELATIONS;
     public static Bitmap RELATIONSBACK;
+    public static Bitmap LAB;
+    public static Bitmap LABBACK;
+    public static Bitmap SETTLE;
+    public static Bitmap SETTLEBACK;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,10 @@ public class Game extends AppCompatActivity {
         SYSTEMSBACK = BitmapFactory.decodeResource(getResources(), R.drawable.systemsback);
         RELATIONS = BitmapFactory.decodeResource(getResources(), R.drawable.relations);
         RELATIONSBACK = BitmapFactory.decodeResource(getResources(), R.drawable.relationsback);
+        LAB = BitmapFactory.decodeResource(getResources(), R.drawable.lab);
+        LABBACK = BitmapFactory.decodeResource(getResources(), R.drawable.labback);
+        SETTLE = BitmapFactory.decodeResource(getResources(), R.drawable.lab);
+        SETTLEBACK = BitmapFactory.decodeResource(getResources(), R.drawable.settleback);
         Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Colors.shaderBack2 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
