@@ -61,7 +61,7 @@ public class GameViewBackNormal extends View {
 
         int fakW = canvas.getWidth() / inlineFaktor;
         fakW = (int) (fakW / reduce / 2);
-        ArrayList<Rect> menu = makeRects(new Rect(filler.left, filler.top, filler.right, filler.bottom + fakW), 6);
+        ArrayList<Rect> menu = RectHelper.makeRects(new Rect(filler.left, filler.top, filler.right, filler.bottom + fakW), 6);
 
 
         content = RectHelper.combine(menu, 0, menu.size() - 1);
@@ -76,7 +76,7 @@ public class GameViewBackNormal extends View {
 
         content = new Rect(content.left + fakW, content.top + fakW, content.right - fakW, content.bottom - fakW);
 
-        menu = makeRects2(content, 6);
+        menu = RectHelper.makeRects2(content, 6);
 
 
         MenuRects.menu = new RectContainer(menu.get(0), new Runnable() {
@@ -103,9 +103,9 @@ public class GameViewBackNormal extends View {
         BitmapDrawer.drawImage(Game.MENU, canvas, MenuRects.menu.get(), null);
         BitmapDrawer.drawImage(Game.SHIPYARD, canvas, MenuRects.icon.get(), null);
 
-        ArrayList<Rect> items = makeRect3(content, menu.get(0).height(), menu.get(1).width(), 1);
+        ArrayList<Rect> items = RectHelper.makeRect3(content, menu.get(0).height(), menu.get(1).width(), 1);
 
-        menu = makeRects2(items.get(items.size() - 1), 6);
+        menu = RectHelper.makeRects2(items.get(items.size() - 1), 6);
 
         MenuRects.action1 = new RectContainer(menu.get(0));
         MenuRects.action2 = new RectContainer(menu.get(2));
@@ -133,7 +133,7 @@ public class GameViewBackNormal extends View {
         BitmapDrawer.drawImage(Game.IMG3, canvas, MenuRects.content.get(), null);
 
 
-        items = makeRect3(MenuRects.contentInner.get(), MenuRects.action1.get().height() / 2, 0, 1);
+        items = RectHelper.makeRect3(MenuRects.contentInner.get(), MenuRects.action1.get().height() / 2, 0, 1);
 
         int index = 1;
         int offsetX = items.get(0).left;
@@ -520,76 +520,6 @@ public class GameViewBackNormal extends View {
     }
 
 
-    private ArrayList<Rect> makeRects(Rect base, int countW) {
-        ArrayList<Rect> result = new ArrayList<>();
-
-        int w = base.width() / (countW * 2);
-        int x = base.left;
-        int y = base.top;
-        int h = base.height();
-        boolean space = false;
-
-        int w2 = w / 4;
-        w += w - w2;
-
-        w += (w2 / countW);
-        h -= w2 * 2;
-        for (int i = 0; i < (countW * 2) - 1; i++) {
-            if (!space) {
-                result.add(new Rect(x, y, (x + w), y + h));
-                x += w;
-
-            } else {
-                result.add(new Rect(x, y, x + w2, y + h));
-                x += w2;
-            }
-            space = !space;
-        }
-        return result;
-    }
-
-    private ArrayList<Rect> makeRects2(Rect base, int countW) {
-        ArrayList<Rect> result = new ArrayList<>();
-
-        int w = base.width() / (countW * 2);
-        int x = base.left;
-        int y = base.top;
-        int h = base.height();
-        boolean space = false;
-
-        int w2 = w / 4;
-        w += w - w2;
-
-        w += (w2 / countW);
-        h -= w2 * 2;
-        for (int i = 0; i < (countW * 2) - 1; i++) {
-            if (!space) {
-                result.add(new Rect(x, y, (x + w), y + w));
-                x += w;
-
-            } else {
-                result.add(new Rect(x, y, x + w2, y + w));
-                x += w2;
-            }
-            space = !space;
-        }
-        return result;
-    }
-
-    private ArrayList<Rect> makeRect3(Rect base, int height, int space, int more) {
-        ArrayList<Rect> result = new ArrayList<>();
-        int max = base.height() / height;
-        max = ((base.height() - (space * max))) / height;
-
-        int y = base.top;
-
-        for (int x = 0; x < max + more; x++) {
-            result.add(new Rect(base.left, y, base.right, y + height));
-            y += height + space;
-        }
-
-        return result;
-    }
 
 
 }

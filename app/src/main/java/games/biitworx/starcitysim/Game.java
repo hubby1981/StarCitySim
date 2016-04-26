@@ -30,7 +30,16 @@ public class Game extends AppCompatActivity {
     private static GameViewBackNormal view;
     public static Bitmap MENU;
     public static Bitmap SHIPYARD;
+    public static Bitmap SHIPYARDBACK;
 
+    public static Bitmap BANKING;
+    public static Bitmap BANKINGBACK;
+
+    public static Bitmap SYSTEMS;
+    public static Bitmap SYSTEMSBACK;
+
+    public static Bitmap RELATIONS;
+    public static Bitmap RELATIONSBACK;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +50,13 @@ public class Game extends AppCompatActivity {
         IMG3 = BitmapFactory.decodeResource(getResources(), R.drawable.panel2);
         MENU = BitmapFactory.decodeResource(getResources(), R.drawable.menu);
         SHIPYARD = BitmapFactory.decodeResource(getResources(), R.drawable.shipyard);
-
+        SHIPYARDBACK = BitmapFactory.decodeResource(getResources(), R.drawable.shipyardback);
+        BANKING = BitmapFactory.decodeResource(getResources(), R.drawable.banking);
+        BANKINGBACK = BitmapFactory.decodeResource(getResources(), R.drawable.bankingback);
+        SYSTEMS = BitmapFactory.decodeResource(getResources(), R.drawable.systems);
+        SYSTEMSBACK = BitmapFactory.decodeResource(getResources(), R.drawable.systemsback);
+        RELATIONS = BitmapFactory.decodeResource(getResources(), R.drawable.relations);
+        RELATIONSBACK = BitmapFactory.decodeResource(getResources(), R.drawable.relationsback);
         Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Colors.shaderBack2 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 

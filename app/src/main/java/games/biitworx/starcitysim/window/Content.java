@@ -25,7 +25,7 @@ public abstract class Content {
 
     public int onDraw(Canvas canvas, int yPos, int scroll) {
         Rect base = MenuRects.line.get();
-        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + base.height());
+        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + base.height()*lineHeight);
         click = new Rect(content.left, content.top - base.height(), content.right, content.bottom - base.height());
         onDrawEx(canvas);
         return yPos + getContentRect().height();
