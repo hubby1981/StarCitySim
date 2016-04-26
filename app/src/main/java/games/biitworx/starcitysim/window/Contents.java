@@ -35,4 +35,8 @@ public class Contents {
                 y = c.onDraw(canvas,y,scroll);
         }
     }
+
+    public ArrayList<Content> getItems(){
+        return items;
+    }
 }

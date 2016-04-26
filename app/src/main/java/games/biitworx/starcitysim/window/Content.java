@@ -12,6 +12,7 @@ public abstract class Content {
     private int lineHeight = 1;
     private Rect content;
     private Rect click;
+    private Runnable action=null;
 
     public Content() {
 
@@ -19,6 +20,25 @@ public abstract class Content {
 
     public Content(int lineHeight) {
         this.lineHeight = lineHeight;
+    }
+
+    public boolean hasAction(){
+        return action!=null;
+    }
+
+    public boolean isHit(int x,int y){
+        if(getContentRect()==null)return false;
+
+        System.out.println("check hit "+getContentRect().toString()+" "+y);
+        return getContentRect().contains(x,y);
+    }
+
+    public void setAction(Runnable action){
+        this.action = action;
+    }
+
+    public Runnable getAction(){
+        return action;
     }
 
     public abstract void onDrawEx(Canvas canvas);

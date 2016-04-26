@@ -1,5 +1,6 @@
 package games.biitworx.starcitysim;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -23,48 +24,26 @@ public class Game extends AppCompatActivity {
     private static int ScrollPosition = 0;
     private int OldY = 0;
     private boolean touch = false;
+    private boolean scrolled = false;
 
     public static Bitmap IMG1;
     public static Bitmap IMG2;
     public static Bitmap IMG3;
     private static GameViewBackNormal view;
-    public static Bitmap MENU;
-    public static Bitmap SHIPYARD;
-    public static Bitmap SHIPYARDBACK;
 
-    public static Bitmap BANKING;
-    public static Bitmap BANKINGBACK;
 
-    public static Bitmap SYSTEMS;
-    public static Bitmap SYSTEMSBACK;
+    public static Resources res;
 
-    public static Bitmap RELATIONS;
-    public static Bitmap RELATIONSBACK;
-    public static Bitmap LAB;
-    public static Bitmap LABBACK;
-    public static Bitmap SETTLE;
-    public static Bitmap SETTLEBACK;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        res = getResources();
         IMG1 = BitmapFactory.decodeResource(getResources(), R.drawable.button);
         IMG2 = BitmapFactory.decodeResource(getResources(), R.drawable.panel);
         IMG3 = BitmapFactory.decodeResource(getResources(), R.drawable.panel2);
-        MENU = BitmapFactory.decodeResource(getResources(), R.drawable.menu);
-        SHIPYARD = BitmapFactory.decodeResource(getResources(), R.drawable.shipyard);
-        SHIPYARDBACK = BitmapFactory.decodeResource(getResources(), R.drawable.shipyardback);
-        BANKING = BitmapFactory.decodeResource(getResources(), R.drawable.banking);
-        BANKINGBACK = BitmapFactory.decodeResource(getResources(), R.drawable.bankingback);
-        SYSTEMS = BitmapFactory.decodeResource(getResources(), R.drawable.systems);
-        SYSTEMSBACK = BitmapFactory.decodeResource(getResources(), R.drawable.systemsback);
-        RELATIONS = BitmapFactory.decodeResource(getResources(), R.drawable.relations);
-        RELATIONSBACK = BitmapFactory.decodeResource(getResources(), R.drawable.relationsback);
-        LAB = BitmapFactory.decodeResource(getResources(), R.drawable.lab);
-        LABBACK = BitmapFactory.decodeResource(getResources(), R.drawable.labback);
-        SETTLE = BitmapFactory.decodeResource(getResources(), R.drawable.lab);
-        SETTLEBACK = BitmapFactory.decodeResource(getResources(), R.drawable.settleback);
+
+
         Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Colors.shaderBack2 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
@@ -91,9 +70,10 @@ public class Game extends AppCompatActivity {
         };
     }
 
-    public static void changeWindow(Window window){
-        if(view!=null){
-           view.changeWindow(window);
+
+    public static void changeWindow(Window window) {
+        if (view != null) {
+            view.changeWindow(window);
             ScrollPosition = view.getWindow().getScrollPosition();
 
         }
@@ -112,7 +92,8 @@ public class Game extends AppCompatActivity {
         if (event.getAction() == MotionEvent.ACTION_MOVE && touch) {
             int scroller = ((int) event.getY()) - OldY;
             int newScroller = ScrollPosition;
-
+            if (scroller > 10)
+                scrolled = true;
             newScroller -= scroller / 8;
             if (newScroller < 0)
                 newScroller = 0;
@@ -130,7 +111,14 @@ public class Game extends AppCompatActivity {
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
             touch = false;
-            MenuRects.testHit((int)event.getX(),(int)event.getY()-(MenuRects.icon.get().top));
+            if (!scrolled) {
+                MenuRects.testHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top));
+
+                if (view != null && view.getWindow() != null) {
+                    view.getWindow().checkHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top * 4));
+                }
+            }
+            scrolled = !scrolled;
         }
 
         return true;

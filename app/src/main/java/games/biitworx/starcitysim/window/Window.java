@@ -57,4 +57,12 @@ public abstract class Window {
         return contents;
     }
 
+    public void checkHit(int x,int y){
+        for(Content c : contents.getItems()){
+            if(c.hasAction()&&c.isHit(x,y)){
+                c.getAction().run();
+            }
+        }
+    }
+
 }

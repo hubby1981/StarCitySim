@@ -100,8 +100,8 @@ public class GameViewBackNormal extends View {
 
         BitmapDrawer.drawImage(Game.IMG2, canvas, MenuRects.info.get(), null);
 
-        BitmapDrawer.drawImage(Game.MENU, canvas, MenuRects.menu.get(), null);
-        BitmapDrawer.drawImage(Game.SHIPYARD, canvas, MenuRects.icon.get(), null);
+        BitmapDrawer.drawImage(B.get(R.drawable.menu), canvas, MenuRects.menu.get(), null);
+        BitmapDrawer.drawImage(B.get(R.drawable.shipyard), canvas, MenuRects.icon.get(), null);
 
         ArrayList<Rect> items = RectHelper.makeRect3(content, menu.get(0).height(), menu.get(1).width(), 1);
 
