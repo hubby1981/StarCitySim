@@ -16,7 +16,7 @@ public class ScienceWindow extends Window {
     public ScienceWindow() {
         super("Science");
 
-        getContents().add(new TextContent("Select a action you want to performe"));
+        getContents().add(new TextContent("Select a action you want to perform"));
 
         getContents().add(new MenuItemContent(B.get(R.drawable.lab),  B.get( R.drawable.labback), "LABS", "Science", "3 / 4", Color.argb(175, 30, 90, 150)));
         getContents().add(new MenuItemContent(B.get(R.drawable.lab),  B.get( R.drawable.settleback), "SETTLEMENT", "Science", "1 / 1", Color.argb(175, 30, 90, 150)));

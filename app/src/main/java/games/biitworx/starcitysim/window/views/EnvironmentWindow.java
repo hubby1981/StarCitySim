@@ -16,7 +16,7 @@ public class EnvironmentWindow extends Window {
     public EnvironmentWindow() {
         super("Environment");
 
-        getContents().add(new TextContent("Select a action you want to perform."));
+        getContents().add(new TextContent("Select a action you want to perform"));
         getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.infoback), "INFORMATIONS", "Environment", "",Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override

@@ -56,12 +56,12 @@ public class MenuItemContent extends Content {
 
 
         canvas.drawRect(innerContent, filler);
-        BitmapDrawer.drawImage(back, canvas, new Rect(innerContent.right - (int)(innerContent.height() * 2.2), innerContent.top, innerContent.right, innerContent.bottom), null);
+        BitmapDrawer.drawImage(back, canvas, new Rect(innerContent.right - (int)(innerContent.width()/2), innerContent.top, innerContent.right, innerContent.bottom), null,false);
 
 
         ArrayList<Rect> rects = RectHelper.makeRects2(innerContent, 6);
         if(icon!=null)
-            BitmapDrawer.drawImage(icon,canvas,new Rect(rects.get(0).left,rects.get(0).top+rects.get(0).height()/4,rects.get(0).right,rects.get(0).bottom+rects.get(0).height()/4),null);
+            BitmapDrawer.drawImage(icon,canvas,new Rect(rects.get(0).left,rects.get(0).top+rects.get(0).height()/4,rects.get(0).right,rects.get(0).bottom+rects.get(0).height()/4),null,false);
 
         Rect text = RectHelper.combine(rects,1,3);
         Fonts.FONT.setTextSize((getContentRect().height() / 5));
@@ -70,9 +70,9 @@ public class MenuItemContent extends Content {
 
 
         canvas.drawText(primary, (float) rects.get(1).left, rects.get(1).centerY(), Fonts.FONT);
-        Fonts.FONT.setTextSize((getContentRect().height() / 6));
-        canvas.drawText(secondary, (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.2), Fonts.FONT);
-        canvas.drawText(info, (float) rects.get(1).left, rects.get(1).centerY()+(float)(Fonts.FONT.getTextSize()*2.4), Fonts.FONT);
+        Fonts.FONT.setTextSize((getContentRect().height() / 10));
+        canvas.drawText(secondary, (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
+        canvas.drawText(info, (float) rects.get(1).left, rects.get(1).centerY()+(float)(Fonts.FONT.getTextSize()*3.2), Fonts.FONT);
 
         //canvas.drawText(secondary+" ["+info+"]",(float)rects.get(2).left,rects.get(2).centerY(),Fonts.FONT);
         //canvas.drawText(info,(float)rects.get(3).left,rects.get(3).centerY(),Fonts.FONT);

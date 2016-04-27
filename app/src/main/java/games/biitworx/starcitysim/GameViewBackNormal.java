@@ -92,13 +92,13 @@ public class GameViewBackNormal extends View {
         MenuRects.info = new RectContainer(RectHelper.combine(menu, 2, 8));
 
 
-        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.menu.get(), null);
-        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.icon.get(), null);
+        BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.menu.get(), null,true);
+        BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.icon.get(), null,true);
 
-        BitmapDrawer.drawImage(Game.IMG2, canvas, MenuRects.info.get(), null);
+        BitmapDrawer.drawImage(B.get(R.drawable.panel), canvas, MenuRects.info.get(), null,true);
 
-        BitmapDrawer.drawImage(B.get(R.drawable.menu), canvas, MenuRects.menu.get(), null);
-        BitmapDrawer.drawImage(B.get(R.drawable.shipyard), canvas, MenuRects.icon.get(), null);
+        BitmapDrawer.drawImage(B.get(R.drawable.menu), canvas, MenuRects.menu.get(), null,true);
+        BitmapDrawer.drawImage(B.get(R.drawable.shipyard), canvas, MenuRects.icon.get(), null,true);
 
         ArrayList<Rect> items = RectHelper.makeRect3(content, menu.get(0).height(), menu.get(1).width(), 1);
 
@@ -111,12 +111,12 @@ public class GameViewBackNormal extends View {
         MenuRects.action5 = new RectContainer(menu.get(8));
         MenuRects.action6 = new RectContainer(menu.get(10));
 
-        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action1.get(), null);
-        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action2.get(), null);
-        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action3.get(), null);
-        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action4.get(), null);
-        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action5.get(), null);
-        BitmapDrawer.drawImage(Game.IMG1, canvas, MenuRects.action6.get(), null);
+        BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.action1.get(), null,true);
+        BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.action2.get(), null,true);
+        BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.action3.get(), null,true);
+        BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.action4.get(), null,true);
+        BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.action5.get(), null,true);
+        BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.action6.get(), null,true);
 
 
         contentInner = RectHelper.combine(items, 1, items.size() - 2);
@@ -127,7 +127,7 @@ public class GameViewBackNormal extends View {
         MenuRects.contentInner = new RectContainer(new Rect(contentInner.left + fakW, contentInner.top + fakW, contentInner.right - fakW, contentInner.bottom - fakW));
 
 
-        BitmapDrawer.drawImage(Game.IMG3, canvas, MenuRects.content.get(), null);
+        BitmapDrawer.drawImage(B.get(R.drawable.panel2), canvas, MenuRects.content.get(), null,true);
 
 
         items = RectHelper.makeRect3(MenuRects.contentInner.get(), MenuRects.action1.get().height() / 2, 0, 1);
@@ -137,7 +137,11 @@ public class GameViewBackNormal extends View {
         int offsetY = items.get(0).top;
         MenuRects.line = new RectContainer(new Rect(items.get(0).left - offsetX, items.get(0).top - offsetY, items.get(0).right - offsetX, items.get(0).bottom - offsetY));
 
-
+        if(view!=null){
+            view.scroller=false;
+           if( view.getMaxScrollPosition() - MenuRects.content.get().height()>0)
+               view.scroller=true;
+        }
         view.onDraw(canvas);
     }
 

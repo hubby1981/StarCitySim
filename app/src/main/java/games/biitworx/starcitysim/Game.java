@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,9 +27,7 @@ public class Game extends AppCompatActivity {
     private boolean touch = false;
     private boolean scrolled = false;
 
-    public static Bitmap IMG1;
-    public static Bitmap IMG2;
-    public static Bitmap IMG3;
+
     private static GameViewBackNormal view;
 
 
@@ -39,9 +38,7 @@ public class Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         res = getResources();
-        IMG1 = BitmapFactory.decodeResource(getResources(), R.drawable.button);
-        IMG2 = BitmapFactory.decodeResource(getResources(), R.drawable.panel);
-        IMG3 = BitmapFactory.decodeResource(getResources(), R.drawable.panel2);
+
 
 
         Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
@@ -52,6 +49,8 @@ public class Game extends AppCompatActivity {
 
         Colors.backPainterContentShader2.setStyle(Paint.Style.FILL);
         Colors.backPainterContentShader2.setShader(Colors.shaderBack2);
+
+        Fonts.FONT.setTypeface(Typeface.createFromAsset(getAssets(), "venus.ttf"));
         setContentView(R.layout.activity_game);
         view = (GameViewBackNormal) findViewById(R.id.gameback);
         ScrollPosition = view.getWindow().getScrollPosition();
@@ -103,11 +102,17 @@ public class Game extends AppCompatActivity {
                 if (view != null && view.getWindow() != null && newScroller != 0) {
                     int max = view.getWindow().getMaxScrollPosition() - MenuRects.content.get().height();
                     max += MenuRects.line.get().height();
+                    view.getWindow().down=true;
                     if (newScroller < max) {
+
                         scrolled = true;
                         ScrollPosition = newScroller;
                         update.run();
 
+                    }
+                    else{
+                        view.getWindow().down = false;
+                        update.run();
                     }
                 }
             }

@@ -16,7 +16,7 @@ public class DiplomacyWindow extends Window {
     public DiplomacyWindow() {
         super("Diplomacy");
 
-        getContents().add(new TextContent("Select a action you want to performe"));
+        getContents().add(new TextContent("Select a action you want to perform"));
 
         getContents().add(new MenuItemContent(B.get(R.drawable.relations),  B.get( R.drawable.relationsback), "RELATIONS", "Diplomacy", "12 | 4 | 2", Color.argb(175, 30, 90, 150)));
 

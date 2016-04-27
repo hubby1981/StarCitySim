@@ -16,7 +16,7 @@ public class ProductionWindow extends Window {
     public ProductionWindow() {
         super("Production");
 
-        getContents().add(new TextContent("Select a action you want to performe"));
+        getContents().add(new TextContent("Select a action you want to perform"));
         getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.shipyardback), "SHIPYARD", "Production", "10 / 20", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override

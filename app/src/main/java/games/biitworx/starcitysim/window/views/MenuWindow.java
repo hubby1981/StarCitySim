@@ -15,7 +15,7 @@ import games.biitworx.starcitysim.window.Window;
 public class MenuWindow extends Window {
     public MenuWindow() {
         super("Menu");
-        getContents().add(new TextContent("Select a action you want to performe"));
+        getContents().add(new TextContent("Select a action you want to perform"));
         getContents().add(new MenuItemContent(B.get(R.drawable.menu), B.get( R.drawable.bankingback),"Environment","Check & Manage your race","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override

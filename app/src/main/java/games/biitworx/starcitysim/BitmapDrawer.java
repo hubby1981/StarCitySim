@@ -11,8 +11,12 @@ import android.graphics.Rect;
 public class BitmapDrawer {
 
 
-    public static void drawImage(Bitmap bitmap,Canvas canvas,Rect rect,Paint painter){
+    public static void drawImage(Bitmap bitmap,Canvas canvas,Rect rect,Paint painter,boolean recycle){
 
         canvas.drawBitmap(bitmap,new Rect(0,0,bitmap.getWidth(),bitmap.getHeight()),rect,painter);
+       /* if(recycle) {
+            bitmap.recycle();
+            bitmap = null;
+        }*/
     }
 }
