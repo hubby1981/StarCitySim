@@ -56,7 +56,7 @@ public class MenuItemContent extends Content {
 
 
         canvas.drawRect(innerContent, filler);
-        BitmapDrawer.drawImage(back, canvas, new Rect(innerContent.right - (int)(innerContent.width()/2), innerContent.top, innerContent.right, innerContent.bottom), null,false);
+        BitmapDrawer.drawImage(back, canvas, new Rect(innerContent.right - (int)(innerContent.width()/1.75), innerContent.top, innerContent.right, innerContent.bottom), null,false);
 
 
         ArrayList<Rect> rects = RectHelper.makeRects2(innerContent, 6);
@@ -66,8 +66,12 @@ public class MenuItemContent extends Content {
         Rect text = RectHelper.combine(rects,1,3);
 
         if(icon==null){
-            //rects = RectHelper.makeRects2(innerContent, 12);
-            //text = RectHelper.combine(rects,1,8);
+            rects = RectHelper.makeRects2(innerContent, 20);
+            text = RectHelper.combine(rects, 1, 14);
+
+            Rect rc1 = new Rect(rects.get(0).left,innerContent.top,rects.get(0).left+rects.get(0).width()/4,innerContent.bottom);
+
+
         }
         Fonts.FONT.setTextSize((getContentRect().height() / 6));
 
@@ -77,7 +81,9 @@ public class MenuItemContent extends Content {
         canvas.drawText(primary, (float) rects.get(1).left, rects.get(1).centerY(), Fonts.FONT);
         Fonts.FONT.setTextSize((getContentRect().height() / 9));
         canvas.drawText(secondary, (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
-        canvas.drawText(info, (float) rects.get(1).left, rects.get(1).centerY()+(float)(Fonts.FONT.getTextSize()*3.2), Fonts.FONT);
+        Fonts.FONT.setTextSize((getContentRect().height() / 8));
+
+        canvas.drawText(info, (float) rects.get(1).left, rects.get(1).centerY()+(float)(Fonts.FONT.getTextSize()*4.2), Fonts.FONT);
 
         //canvas.drawText(secondary+" ["+info+"]",(float)rects.get(2).left,rects.get(2).centerY(),Fonts.FONT);
         //canvas.drawText(info,(float)rects.get(3).left,rects.get(3).centerY(),Fonts.FONT);

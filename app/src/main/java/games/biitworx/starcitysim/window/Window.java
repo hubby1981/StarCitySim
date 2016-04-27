@@ -57,20 +57,20 @@ public abstract class Window {
         Fonts.FONT.setTextSize((base.height() / 4));
 
 
-        canvas.drawText(text, base.left+base.width()/10, base.centerY()-Fonts.FONT.getTextSize()/2, Fonts.FONT);
-
+        canvas.drawText(text, base.left+base.width()/20, base.centerY()-Fonts.FONT.getTextSize()/2, Fonts.FONT);
+int w2=5;
         if (scroller && down) {
 
             Bitmap b = B.get(R.drawable.down);
-            int w =30;
-            Rect rc = new Rect(bounds.right - w, bounds.bottom - w, bounds.right, bounds.bottom);
+            int w =25;
+            Rect rc = new Rect(bounds.right-w2 , bounds.bottom - w, (bounds.right+w)-w2, bounds.bottom);
             BitmapDrawer.drawImage(b, canvas, rc, null,true);
 
         }
         if(scroller && scrollPosition>20){
             Bitmap b = B.get(R.drawable.up);
-            int w =30;
-            Rect rc = new Rect(bounds.right - w, bounds.top , bounds.right, bounds.top+w);
+            int w =25;
+            Rect rc = new Rect(bounds.right-w2, bounds.top , (bounds.right+w)-w2, bounds.top+w);
             BitmapDrawer.drawImage(b, canvas, rc, null,true);
         }
     }

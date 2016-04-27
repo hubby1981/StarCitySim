@@ -17,7 +17,7 @@ public class ProductionWindow extends Window {
         super("Production");
 
 
-        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.shipyardback), "SHIPYARD", "Building moveable ships", "10 / 20", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(B.get2(R.drawable.shipyard), B.get(R.drawable.shipyardback), "SHIPYARD", "Building moveable ships", "10 / 20", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {

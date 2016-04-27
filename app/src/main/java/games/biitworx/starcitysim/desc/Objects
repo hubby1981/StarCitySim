@@ -1,7 +1,7 @@
 Game Menu
 
 
-1 = Mainmenu
+1 = Mainmenu x
 1.1 = Informations x
 1.1.1 = Race Base Info
 1.1.2 = Credits
@@ -23,8 +23,8 @@ Game Menu
 1.12 = Exploration x
 1.13 = Settlement x
 1.14 = History and Help x
-1.15 = Fleet
-1.16 = DNA
+1.15 = Fleet x
+1.16 = DNA x
 
 
 A = Environment

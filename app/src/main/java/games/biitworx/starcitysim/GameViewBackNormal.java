@@ -91,14 +91,21 @@ public class GameViewBackNormal extends View {
 
         MenuRects.info = new RectContainer(RectHelper.combine(menu, 2, 8));
 
-
+/*
         BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.menu.get(), null,true);
         BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.icon.get(), null,true);
 
         BitmapDrawer.drawImage(B.get(R.drawable.panel), canvas, MenuRects.info.get(), null,true);
+*/
+
+
+        canvas.drawRect(MenuRects.menu.get(), Colors.backPainterLine2);
+        canvas.drawRect(MenuRects.icon.get(),Colors.backPainterLine2);
+        canvas.drawRect(MenuRects.info.get(),Colors.backPainterLine2);
+
 
         BitmapDrawer.drawImage(B.get(R.drawable.menu), canvas, MenuRects.menu.get(), null,true);
-        BitmapDrawer.drawImage(B.get(R.drawable.race_human), canvas, MenuRects.icon.get(), null,true,10);
+        BitmapDrawer.drawImage(B.get(R.drawable.race_human), canvas, MenuRects.icon.get(), null,true,30);
 
         ArrayList<Rect> items = RectHelper.makeRect3(content, menu.get(0).height(), menu.get(1).width(), 1);
 
@@ -121,7 +128,13 @@ public class GameViewBackNormal extends View {
 */
 
         MenuRects.notification = new RectContainer(items.get(items.size() - 1));
-        BitmapDrawer.drawImage(B.get(R.drawable.panel3), canvas, MenuRects.notification.get(), null,true);
+       // BitmapDrawer.drawImage(B.get(R.drawable.panel3), canvas, MenuRects.notification.get(), null,true);
+
+
+
+
+
+        canvas.drawRect(MenuRects.notification.get(),Colors.backPainterLine2);
 
         contentInner = RectHelper.combine(items, 1, items.size() - 2);
 
@@ -131,8 +144,9 @@ public class GameViewBackNormal extends View {
         MenuRects.contentInner = new RectContainer(new Rect(contentInner.left + fakW, contentInner.top + fakW, contentInner.right - fakW, contentInner.bottom - fakW));
 
 
-        BitmapDrawer.drawImage(B.get(R.drawable.panel2), canvas, MenuRects.content.get(), null,true);
+       // BitmapDrawer.drawImage(B.get(R.drawable.panel2), canvas, MenuRects.content.get(), null,true);
 
+        canvas.drawRect(MenuRects.content.get(), Colors.backPainterLine2);
 
         items = RectHelper.makeRect3(MenuRects.contentInner.get(), MenuRects.action1.get().height() / 2, 0, 1);
 
