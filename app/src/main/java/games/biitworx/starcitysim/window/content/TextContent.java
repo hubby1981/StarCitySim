@@ -1,13 +1,9 @@
-package games.biitworx.starcitysim.window;
+package games.biitworx.starcitysim.window.content;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 
-import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Fonts;
-import games.biitworx.starcitysim.MenuRects;
+import games.biitworx.starcitysim.window.content.Content;
 
 /**
  * Created by marcel.weissgerber on 22.04.2016.

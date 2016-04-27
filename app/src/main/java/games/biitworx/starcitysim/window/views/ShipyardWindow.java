@@ -1,4 +1,7 @@
-package games.biitworx.starcitysim.window;
+package games.biitworx.starcitysim.window.views;
+
+import games.biitworx.starcitysim.window.content.TextContent;
+import games.biitworx.starcitysim.window.Window;
 
 /**
  * Created by marcel.weissgerber on 22.04.2016.

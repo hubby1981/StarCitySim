@@ -2,10 +2,10 @@ package games.biitworx.starcitysim.window;
 
 import android.graphics.Canvas;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import games.biitworx.starcitysim.MenuRects;
+import games.biitworx.starcitysim.window.content.Content;
 
 /**
  * Created by marce_000 on 21.04.2016.

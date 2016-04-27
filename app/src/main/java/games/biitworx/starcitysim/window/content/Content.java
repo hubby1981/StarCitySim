@@ -1,4 +1,4 @@
-package games.biitworx.starcitysim.window;
+package games.biitworx.starcitysim.window.content;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;

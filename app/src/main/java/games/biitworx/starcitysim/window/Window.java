@@ -3,10 +3,10 @@ package games.biitworx.starcitysim.window;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.view.Menu;
 
 import games.biitworx.starcitysim.Fonts;
 import games.biitworx.starcitysim.MenuRects;
+import games.biitworx.starcitysim.window.content.Content;
 
 /**
  * Created by marce_000 on 21.04.2016.

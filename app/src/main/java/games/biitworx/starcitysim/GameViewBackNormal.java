@@ -1,8 +1,6 @@
 package games.biitworx.starcitysim;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,12 +10,11 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
-import games.biitworx.starcitysim.window.MenuWindow;
-import games.biitworx.starcitysim.window.ShipyardWindow;
+import games.biitworx.starcitysim.window.views.MenuWindow;
+import games.biitworx.starcitysim.window.views.ShipyardWindow;
 import games.biitworx.starcitysim.window.Window;
 
 /**
@@ -31,7 +28,7 @@ public class GameViewBackNormal extends View {
     private int inlineFaktor = 20;
     private Rect content;
     private Rect contentInner;
-    private Window view = new ShipyardWindow();
+    private Window view = new MenuWindow();
 
     public GameViewBackNormal(Context context, AttributeSet attrs) {
         super(context, attrs);

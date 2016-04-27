@@ -84,7 +84,11 @@ public class Game extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event) {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            MenuRects.testHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top));
 
+            if (view != null && view.getWindow() != null) {
+                view.getWindow().checkHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top * 4));
+            }
             OldY = (int) event.getY();
             touch = true;
         }
@@ -92,8 +96,8 @@ public class Game extends AppCompatActivity {
         if (event.getAction() == MotionEvent.ACTION_MOVE && touch) {
             int scroller = ((int) event.getY()) - OldY;
             int newScroller = ScrollPosition;
-            if (scroller > 10)
-                scrolled = true;
+
+
             newScroller -= scroller / 8;
             if (newScroller < 0)
                 newScroller = 0;
@@ -105,19 +109,14 @@ public class Game extends AppCompatActivity {
                 if (newScroller < max) {
                     ScrollPosition = newScroller;
                     update.run();
+
                 }
             }
         }
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
             touch = false;
-            if (!scrolled) {
-                MenuRects.testHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top));
 
-                if (view != null && view.getWindow() != null) {
-                    view.getWindow().checkHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top * 4));
-                }
-            }
             scrolled = !scrolled;
         }
 

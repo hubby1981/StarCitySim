@@ -1,4 +1,4 @@
-package games.biitworx.starcitysim.window;
+package games.biitworx.starcitysim.window.content;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -14,6 +14,7 @@ import games.biitworx.starcitysim.BitmapDrawer;
 import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Fonts;
 import games.biitworx.starcitysim.RectHelper;
+import games.biitworx.starcitysim.window.content.Content;
 
 /**
  * Created by marcel.weissgerber on 26.04.2016.
@@ -59,7 +60,8 @@ public class MenuItemContent extends Content {
 
 
         ArrayList<Rect> rects = RectHelper.makeRects2(innerContent, 6);
-        BitmapDrawer.drawImage(icon,canvas,rects.get(0),null);
+        if(icon!=null)
+            BitmapDrawer.drawImage(icon,canvas,new Rect(rects.get(0).left,rects.get(0).top+rects.get(0).height()/4,rects.get(0).right,rects.get(0).bottom+rects.get(0).height()/4),null);
 
         Rect text = RectHelper.combine(rects,1,3);
         Fonts.FONT.setTextSize((getContentRect().height() / 5));
