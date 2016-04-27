@@ -98,7 +98,7 @@ public class GameViewBackNormal extends View {
         BitmapDrawer.drawImage(B.get(R.drawable.panel), canvas, MenuRects.info.get(), null,true);
 
         BitmapDrawer.drawImage(B.get(R.drawable.menu), canvas, MenuRects.menu.get(), null,true);
-        BitmapDrawer.drawImage(B.get(R.drawable.shipyard), canvas, MenuRects.icon.get(), null,true);
+        BitmapDrawer.drawImage(B.get(R.drawable.race_human), canvas, MenuRects.icon.get(), null,true,10);
 
         ArrayList<Rect> items = RectHelper.makeRect3(content, menu.get(0).height(), menu.get(1).width(), 1);
 
@@ -110,7 +110,7 @@ public class GameViewBackNormal extends View {
         MenuRects.action4 = new RectContainer(menu.get(6));
         MenuRects.action5 = new RectContainer(menu.get(8));
         MenuRects.action6 = new RectContainer(menu.get(10));
-
+/*
         BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.action1.get(), null,true);
         BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.action2.get(), null,true);
         BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.action3.get(), null,true);
@@ -118,6 +118,10 @@ public class GameViewBackNormal extends View {
         BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.action5.get(), null,true);
         BitmapDrawer.drawImage(B.get(R.drawable.button), canvas, MenuRects.action6.get(), null,true);
 
+*/
+
+        MenuRects.notification = new RectContainer(items.get(items.size() - 1));
+        BitmapDrawer.drawImage(B.get(R.drawable.panel3), canvas, MenuRects.notification.get(), null,true);
 
         contentInner = RectHelper.combine(items, 1, items.size() - 2);
 

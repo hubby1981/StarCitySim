@@ -18,9 +18,16 @@ public class ScienceWindow extends Window {
 
 
 
-        getContents().add(new MenuItemContent(B.get(R.drawable.lab),  B.get( R.drawable.labback), "LABS", "Science", "3 / 4", Color.argb(175, 30, 90, 150)));
-        getContents().add(new MenuItemContent(B.get(R.drawable.lab),  B.get( R.drawable.settleback), "SETTLEMENT", "Science", "1 / 1", Color.argb(175, 30, 90, 150)));
-        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard),  B.get( R.drawable.exploreback), "EXPLORATION", "Science", "1 / 1",Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(B.get(R.drawable.lab), B.get(R.drawable.labback), "LABS", "Research new methods", "3 / 4", Color.argb(175, 30, 90, 150)));
+        getContents().add(new MenuItemContent(B.get(R.drawable.lab),  B.get( R.drawable.settleback), "SETTLEMENT", "Research more options", "1 / 1", Color.argb(175, 30, 90, 150)));
+        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard),  B.get( R.drawable.exploreback), "EXPLORATION", "Research more options", "1 / 1",Color.argb(175, 30, 90, 150),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Game.changeWindow(new ShipyardWindow());
+                    }
+                }));
+        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard),  B.get( R.drawable.dnaback), "DNA", "Research race abilities", "1 / 1",Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {

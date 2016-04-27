@@ -23,6 +23,7 @@ public class MenuRects {
 
 
     public static RectContainer line;
+    public static RectContainer notification;
 
 
     public static void testHit(int x, int y) {

@@ -57,7 +57,7 @@ public abstract class Window {
         Fonts.FONT.setTextSize((base.height() / 4));
 
 
-        canvas.drawText(text, base.centerX() - (text.length() / 2) * Fonts.FONT.getTextSize(), base.centerY(), Fonts.FONT);
+        canvas.drawText(text, base.left+base.width()/10, base.centerY()-Fonts.FONT.getTextSize()/2, Fonts.FONT);
 
         if (scroller && down) {
 
@@ -67,7 +67,7 @@ public abstract class Window {
             BitmapDrawer.drawImage(b, canvas, rc, null,true);
 
         }
-        if(scroller && scrollPosition>50){
+        if(scroller && scrollPosition>20){
             Bitmap b = B.get(R.drawable.up);
             int w =30;
             Rect rc = new Rect(bounds.right - w, bounds.top , bounds.right, bounds.top+w);
