@@ -64,13 +64,18 @@ public class MenuItemContent extends Content {
             BitmapDrawer.drawImage(icon,canvas,new Rect(rects.get(0).left,rects.get(0).top+rects.get(0).height()/4,rects.get(0).right,rects.get(0).bottom+rects.get(0).height()/4),null,false);
 
         Rect text = RectHelper.combine(rects,1,3);
-        Fonts.FONT.setTextSize((getContentRect().height() / 5));
+
+        if(icon==null){
+            //rects = RectHelper.makeRects2(innerContent, 12);
+            //text = RectHelper.combine(rects,1,8);
+        }
+        Fonts.FONT.setTextSize((getContentRect().height() / 6));
 
         rects = RectHelper.makeRect3(text,(int)Fonts.FONT.getTextSize(),2,1);
 
 
         canvas.drawText(primary, (float) rects.get(1).left, rects.get(1).centerY(), Fonts.FONT);
-        Fonts.FONT.setTextSize((getContentRect().height() / 10));
+        Fonts.FONT.setTextSize((getContentRect().height() / 9));
         canvas.drawText(secondary, (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
         canvas.drawText(info, (float) rects.get(1).left, rects.get(1).centerY()+(float)(Fonts.FONT.getTextSize()*3.2), Fonts.FONT);
 

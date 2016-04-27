@@ -16,11 +16,18 @@ public class ScienceWindow extends Window {
     public ScienceWindow() {
         super("Science");
 
-        getContents().add(new TextContent("Select a action you want to perform"));
+
 
         getContents().add(new MenuItemContent(B.get(R.drawable.lab),  B.get( R.drawable.labback), "LABS", "Science", "3 / 4", Color.argb(175, 30, 90, 150)));
         getContents().add(new MenuItemContent(B.get(R.drawable.lab),  B.get( R.drawable.settleback), "SETTLEMENT", "Science", "1 / 1", Color.argb(175, 30, 90, 150)));
-        getContents().add(new MenuItemContent(B.get(R.drawable.menu), B.get( R.drawable.systemsback),"Menu","","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard),  B.get( R.drawable.exploreback), "EXPLORATION", "Science", "1 / 1",Color.argb(175, 30, 90, 150),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Game.changeWindow(new ShipyardWindow());
+                    }
+                }));
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.systemsback),"Menu","Open the main menu","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {

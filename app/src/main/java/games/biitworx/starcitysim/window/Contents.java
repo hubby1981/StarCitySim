@@ -28,7 +28,7 @@ public class Contents {
     }
 
     public void onDraw(Canvas canvas,int scroll){
-        int y= MenuRects.line.get().height();
+        int y= MenuRects.line.get().height()/2;
 
         for(Content c : items){
 

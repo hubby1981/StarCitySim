@@ -16,7 +16,7 @@ public class ProductionWindow extends Window {
     public ProductionWindow() {
         super("Production");
 
-        getContents().add(new TextContent("Select a action you want to perform"));
+
         getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.shipyardback), "SHIPYARD", "Production", "10 / 20", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
@@ -24,7 +24,7 @@ public class ProductionWindow extends Window {
                         Game.changeWindow(new ShipyardWindow());
                     }
                 }));
-        getContents().add(new MenuItemContent(B.get(R.drawable.menu), B.get( R.drawable.systemsback),"Menu","","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.systemsback),"Menu","Open the main menu","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {

@@ -15,33 +15,39 @@ import games.biitworx.starcitysim.window.Window;
 public class MenuWindow extends Window {
     public MenuWindow() {
         super("Menu");
-        getContents().add(new TextContent("Select a action you want to perform"));
-        getContents().add(new MenuItemContent(B.get(R.drawable.menu), B.get( R.drawable.bankingback),"Environment","Check & Manage your race","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),"Environment","Check & Manage your race","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
                         Game.changeWindow(new EnvironmentWindow());
                     }
                 }));
-        getContents().add(new MenuItemContent(B.get(R.drawable.menu), B.get( R.drawable.shipyardback),"Production","Build several objects","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.shipyardback),"Production","Build several objects","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
                         Game.changeWindow(new ProductionWindow());
                     }
                 }));
-        getContents().add(new MenuItemContent(B.get(R.drawable.menu), B.get( R.drawable.relationsback),"Diplomacy","Relations to other races","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.relationsback),"Diplomacy","Relations to other races","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
                         Game.changeWindow(new DiplomacyWindow());
                     }
                 }));
-        getContents().add(new MenuItemContent(B.get(R.drawable.menu), B.get( R.drawable.labback),"Science","Research & Develop","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.labback),"Science","Research & Develop","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
                         Game.changeWindow(new ScienceWindow());
+                    }
+                }));
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.operationback),"Operation","Fleet and tasks","", Color.argb(175, 30, 90, 150),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Game.changeWindow(new OperationWindow());
                     }
                 }));
     }
