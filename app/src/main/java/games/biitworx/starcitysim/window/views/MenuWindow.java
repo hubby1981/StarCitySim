@@ -36,7 +36,7 @@ public class MenuWindow extends Window {
                         Game.changeWindow(new DiplomacyWindow());
                     }
                 }));
-        getContents().add(new MenuItemContent(null, B.get( R.drawable.labback),"Science","Research & Develop","2 items", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.labback),"Science","Research & Develop","4 items", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {

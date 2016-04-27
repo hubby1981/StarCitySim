@@ -23,7 +23,7 @@ public class OperationWindow extends Window {
                     }
                 }));
 
-        getContents().add(new MenuItemContent(B.get(R.drawable.systems), B.get(R.drawable.warback), "FLEET", "Ships and positions", "4", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(B.get(R.drawable.systems), B.get(R.drawable.fleetback), "FLEET", "Ships and positions", "4", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
@@ -59,7 +59,7 @@ public class OperationWindow extends Window {
                         Game.changeWindow(new ShipyardWindow());
                     }
                 }));
-        getContents().add(new MenuItemContent(null, B.get( R.drawable.systemsback),"Menu","Open the main menu","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),"Menu","Open the main menu","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {

@@ -21,7 +21,7 @@ public class DiplomacyWindow extends Window {
         getContents().add(new MenuItemContent(B.get(R.drawable.relations),  B.get( R.drawable.relationsback), "RELATIONS", "Relations to other races", "12 | 4 | 2", Color.argb(175, 30, 90, 150)));
 
         getContents().add(new MenuItemContent(B.get(R.drawable.shipyard),  B.get( R.drawable.warback), "WAR", "War with other races", "1 / 1", Color.argb(175, 30, 90, 150)));
-        getContents().add(new MenuItemContent(null, B.get( R.drawable.systemsback),"Menu","Open the main menu","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),"Menu","Open the main menu","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {

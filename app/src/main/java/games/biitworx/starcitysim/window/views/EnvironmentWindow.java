@@ -67,7 +67,7 @@ public class EnvironmentWindow extends Window {
 
 
         getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.historyback), "HISTORY", "Important race events", "", Color.argb(175, 30, 90, 150)));
-        getContents().add(new MenuItemContent(null, B.get( R.drawable.systemsback),"Menu","Open the main menu","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),"Menu","Open the main menu","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
