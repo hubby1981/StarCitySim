@@ -17,17 +17,65 @@ public class EnvironmentWindow extends Window {
         super("Environment");
 
         getContents().add(new TextContent("Select a action you want to perform."));
-        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.infoback), "INFORMATIONS", "Environment", "", Color.argb(175, 30, 90, 150)));
-        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.skillback), "SKILL TREE", "Environment", "", Color.argb(175, 30, 90, 150)));
-        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.techback), "TECH TREE", "Environment", "", Color.argb(175, 30, 90, 150)));
+        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.infoback), "INFORMATIONS", "Environment", "",Color.argb(175, 30, 90, 150),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Game.changeWindow(new ShipyardWindow());
+                    }
+                }));
+        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.skillback), "SKILL TREE", "Environment", "",Color.argb(175, 30, 90, 150),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Game.changeWindow(new ShipyardWindow());
+                    }
+                }));
+        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.techback), "TECH TREE", "Environment", "",Color.argb(175, 30, 90, 150),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Game.changeWindow(new ShipyardWindow());
+                    }
+                }));
 
-        getContents().add(new MenuItemContent(B.get(R.drawable.banking), B.get(R.drawable.bankingback), "BANKING", "Environment", "494.223 crd", Color.argb(175, 30, 90, 150)));
+        getContents().add(new MenuItemContent(B.get(R.drawable.banking), B.get(R.drawable.bankingback), "BANKING", "Environment", "494.223 crd",Color.argb(175, 30, 90, 150),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Game.changeWindow(new ShipyardWindow());
+                    }
+                }));
 
-        getContents().add(new MenuItemContent(B.get(R.drawable.systems),  B.get( R.drawable.systemsback), "SYSTEMS", "Environment", "4", Color.argb(175, 30, 90, 150)));
+        getContents().add(new MenuItemContent(B.get(R.drawable.systems),  B.get( R.drawable.systemsback), "SYSTEMS", "Environment", "4",Color.argb(175, 30, 90, 150),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Game.changeWindow(new ShipyardWindow());
+                    }
+                }));
 
-        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard),  B.get( R.drawable.logback), "LOG", "Environment", "3 / 4", Color.argb(175, 30, 90, 150)));
-        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard),  B.get( R.drawable.taskback), "TASK", "Environment", "1 / 1", Color.argb(175, 30, 90, 150)));
-        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard),  B.get( R.drawable.exploreback), "EXPLORATION", "Environment", "1 / 1", Color.argb(175, 30, 90, 150)));
+        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard),  B.get( R.drawable.logback), "LOG", "Environment", "3 / 4",Color.argb(175, 30, 90, 150),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Game.changeWindow(new ShipyardWindow());
+                    }
+                }));
+        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard),  B.get( R.drawable.taskback), "TASK", "Environment", "1 / 1",Color.argb(175, 30, 90, 150),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Game.changeWindow(new ShipyardWindow());
+                    }
+                }));
+        getContents().add(new MenuItemContent(B.get(R.drawable.shipyard),  B.get( R.drawable.exploreback), "EXPLORATION", "Environment", "1 / 1",Color.argb(175, 30, 90, 150),
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Game.changeWindow(new ShipyardWindow());
+                    }
+                }));
 
         getContents().add(new MenuItemContent(B.get(R.drawable.shipyard), B.get(R.drawable.historyback), "HISTORY", "Environment", "", Color.argb(175, 30, 90, 150)));
         getContents().add(new MenuItemContent(B.get(R.drawable.menu), B.get( R.drawable.systemsback),"Menu","","", Color.argb(175, 30, 90, 150),

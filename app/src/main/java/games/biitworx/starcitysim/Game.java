@@ -84,40 +84,47 @@ public class Game extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event) {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            MenuRects.testHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top));
-
-            if (view != null && view.getWindow() != null) {
-                view.getWindow().checkHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top * 4));
-            }
+            scrolled = false;
             OldY = (int) event.getY();
             touch = true;
         }
 
         if (event.getAction() == MotionEvent.ACTION_MOVE && touch) {
             int scroller = ((int) event.getY()) - OldY;
-            int newScroller = ScrollPosition;
+            if (scroller > 10 || scroller < -10) {
+                int newScroller = ScrollPosition;
 
 
-            newScroller -= scroller / 8;
-            if (newScroller < 0)
-                newScroller = 0;
-            touch = true;
+                newScroller -= scroller / 8;
+                if (newScroller < 0)
+                    newScroller = 0;
+                touch = true;
 
-            if (view != null && view.getWindow() != null) {
-                int max = view.getWindow().getMaxScrollPosition() - MenuRects.content.get().height();
-                max += MenuRects.line.get().height();
-                if (newScroller < max) {
-                    ScrollPosition = newScroller;
-                    update.run();
+                if (view != null && view.getWindow() != null && newScroller != 0) {
+                    int max = view.getWindow().getMaxScrollPosition() - MenuRects.content.get().height();
+                    max += MenuRects.line.get().height();
+                    if (newScroller < max) {
+                        scrolled = true;
+                        ScrollPosition = newScroller;
+                        update.run();
 
+                    }
                 }
             }
+
         }
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
             touch = false;
 
-            scrolled = !scrolled;
+            if (!scrolled) {
+                MenuRects.testHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top));
+
+                if (view != null && view.getWindow() != null) {
+                    view.getWindow().checkHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top * 4));
+                }
+            }
+            scrolled = false;
         }
 
         return true;
