@@ -101,6 +101,23 @@ public class GameViewBackNormal extends View {
 
         canvas.drawRect(MenuRects.menu.get(), Colors.backPainterLine2);
         canvas.drawRect(MenuRects.icon.get(),Colors.backPainterLine2);
+
+        ArrayList<Rect> infos = RectHelper.makeRect3(new Rect(MenuRects.info.get().right-MenuRects.info.get().width()/25,MenuRects.info.get().top,MenuRects.info.get().right,MenuRects.info.get().bottom),MenuRects.info.get().height()/16,0,0);
+int ii=0;
+        for(Rect r:infos)
+        {
+            ii++;
+            if(ii<Game.counter) {
+                canvas.drawRect(r, Colors.backPainterContent);
+            }
+            else
+            {
+                canvas.drawRect(r, Colors.outlinePainter);
+
+            }
+            canvas.drawRect(r,Colors.backPainterLine2);
+        }
+
         canvas.drawRect(MenuRects.info.get(),Colors.backPainterLine2);
 
 

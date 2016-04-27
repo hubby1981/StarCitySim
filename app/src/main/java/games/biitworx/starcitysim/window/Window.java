@@ -9,6 +9,7 @@ import games.biitworx.starcitysim.B;
 import games.biitworx.starcitysim.BitmapDrawer;
 import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Fonts;
+import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.MenuRects;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.window.content.Content;
@@ -55,9 +56,9 @@ public abstract class Window {
 
         Rect base = MenuRects.info.get();
         Fonts.FONT.setTextSize((base.height() / 4));
-
-
-        canvas.drawText(text, base.left+base.width()/20, base.centerY()-Fonts.FONT.getTextSize()/2, Fonts.FONT);
+        String time = Game.YEAR+"."+Game.MONTH+"."+Game.DAY;
+        canvas.drawText(time, base.left + base.width() / 20, base.centerY() - Fonts.FONT.getTextSize(), Fonts.FONT);
+        canvas.drawText(text, base.left+base.width()/20, base.centerY()+Fonts.FONT.getTextSize(), Fonts.FONT);
 int w2=5;
         if (scroller && down) {
 

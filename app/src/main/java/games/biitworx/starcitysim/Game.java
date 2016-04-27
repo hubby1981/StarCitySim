@@ -17,11 +17,16 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import games.biitworx.starcitysim.window.Window;
 
 public class Game extends AppCompatActivity {
 
     private static Runnable update;
+    private static Runnable timer;
+
     private static int ScrollPosition = 0;
     private int OldY = 0;
     private boolean touch = false;
@@ -32,13 +37,16 @@ public class Game extends AppCompatActivity {
 
 
     public static Resources res;
+    public static int counter = 16;
 
+    public static int DAY=1;
+    public static int MONTH=1;
+    public static int YEAR=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         res = getResources();
-
 
 
         Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
@@ -55,6 +63,7 @@ public class Game extends AppCompatActivity {
         view = (GameViewBackNormal) findViewById(R.id.gameback);
         ScrollPosition = view.getWindow().getScrollPosition();
 
+
         update = new Runnable() {
             @Override
             public void run() {
@@ -67,8 +76,48 @@ public class Game extends AppCompatActivity {
                 }
             }
         };
+
+        timer = new Runnable() {
+            @Override
+            public void run() {
+                int  speed=18000;
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        counter--;
+                        if (counter== 0) {
+                            counter = 16;
+                            DAY++;
+                        }
+                        if(DAY==20){
+                            DAY=1;
+                            MONTH++;
+                        }
+                        if(MONTH==10){
+                            YEAR++;
+                            MONTH=1;
+                        }
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                update();
+                            }
+                        });
+                    }
+                }, speed,speed);
+            }
+        };
+        timer.run();
+        runOnUiThread(update);
+
+
     }
 
+    public void update() {
+        update.run();
+    }
 
     public static void changeWindow(Window window) {
         if (view != null) {
@@ -102,15 +151,14 @@ public class Game extends AppCompatActivity {
                 if (view != null && view.getWindow() != null && newScroller != 0) {
                     int max = view.getWindow().getMaxScrollPosition() - MenuRects.content.get().height();
                     max += MenuRects.line.get().height();
-                    view.getWindow().down=true;
+                    view.getWindow().down = true;
                     if (newScroller < max) {
 
                         scrolled = true;
                         ScrollPosition = newScroller;
                         update.run();
 
-                    }
-                    else{
+                    } else {
                         view.getWindow().down = false;
                         update.run();
                     }
