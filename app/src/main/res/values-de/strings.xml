@@ -18,4 +18,56 @@
     <string name="window_environment_tech_title">Technologie</string>
     <string name="window_environment_trading_title">Handel</string>
 
+    <string name="window_production_shipyard_title">Schiffswerft</string>
+    <string name="window_diplomacy_relations_title">Beziehungen</string>
+    <string name="window_diplomacy_war_title">Krieg</string>
+    <string name="window_science_labs_title">Forschung</string>
+    <string name="window_science_settle_title">Besiedlung</string>
+    <string name="window_science_explore_title">Erforschung</string>
+    <string name="window_science_dna_title">DNA</string>
+
+    <string name="window_operations_systems_title">Systeme</string>
+    <string name="window_operations_fleet_title">Flotte</string>
+    <string name="window_operations_log_title">Ereignisse</string>
+    <string name="window_operations_task_title">Aufgaben</string>
+    <string name="window_operations_explore_title">Erforschung</string>
+    <string name="window_operations_settle_title">Besiedlung</string>
+
+
+    <string name="window_menu_desc">Öffnet das Hauptmenü</string>
+    <string name="window_environment_desc">Verwalten deiner Rasse</string>
+    <string name="window_operation_desc">Verwalten von Flotten / Aufgaben </string>
+    <string name="window_production_desc">Erbauen von Schiffen und Stationen</string>
+    <string name="window_diplomacy_desc">Beziehungen zu Rassen</string>
+    <string name="window_science_desc">Entwicklung neuer Gegenstände</string>
+
+
+    <string name="window_environment_banking_desc">Verwalten deiner Geldmittel </string>
+    <string name="window_environment_history_desc">Wichtige Ereignisse deiner Rasse</string>
+    <string name="window_environment_information_desc">Basis Rassen Informationen</string>
+    <string name="window_environment_mining_desc">Abbau von Mineralien</string>
+    <string name="window_environment_skill_desc">Entwicklung neuer Fähigkeiten</string>
+    <string name="window_environment_tech_desc">Entwicklung neuer Technologien</string>
+    <string name="window_environment_trading_desc">Handel von Gütern mit anderen</string>
+
+
+    <string name="window_production_shipyard_desc">Erbauen von Raumschiffen</string>
+    <string name="window_diplomacy_relations_desc">Beziehungen zu anderen</string>
+    <string name="window_diplomacy_war_desc">Krieg mit anderen</string>
+    <string name="window_science_labs_desc">Erforschung neuer Gegenstände</string>
+    <string name="window_science_settle_desc">Erforschung neuer Siedlungsoptionen</string>
+    <string name="window_science_explore_desc">Erforschung neuer Optionen</string>
+    <string name="window_science_dna_desc">Erforschung neuer Rassenfähigkeiten</string>
+
+
+    <string name="window_operations_systems_desc">Alle Systeme im Besitz</string>
+    <string name="window_operations_fleet_desc">Raumschiffe und Stationen</string>
+    <string name="window_operations_log_desc">Übersicht der letzten Operationen</string>
+    <string name="window_operations_task_desc">Übersicht der nächsten Ziele</string>
+    <string name="window_operations_explore_desc">Erforschung neuer Systeme</string>
+    <string name="window_operations_settle_desc">Besiedlung der erforschten Systeme</string>
+
+    <string name="item_count"> aktion</string>
+    <string name="items_count"> aktionen</string>
+
 </resources>

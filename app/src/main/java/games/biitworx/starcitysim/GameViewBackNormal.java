@@ -14,7 +14,7 @@ import android.view.View;
 import java.util.ArrayList;
 
 import games.biitworx.starcitysim.window.views.MenuWindow;
-import games.biitworx.starcitysim.window.views.ShipyardWindow;
+import games.biitworx.starcitysim.window.views.production.ShipyardWindow;
 import games.biitworx.starcitysim.window.Window;
 
 /**

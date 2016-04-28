@@ -18,4 +18,58 @@
     <string name="window_environment_tech_title">Tech Tree</string>
     <string name="window_environment_trading_title">Trading</string>
 
+
+    <string name="window_production_shipyard_title">Shipyard</string>
+    <string name="window_diplomacy_relations_title">Relations</string>
+    <string name="window_diplomacy_war_title">War</string>
+    <string name="window_science_labs_title">Labs</string>
+    <string name="window_science_settle_title">Settlement</string>
+    <string name="window_science_explore_title">Exploration</string>
+    <string name="window_science_dna_title">DNA</string>
+
+
+    <string name="window_operations_systems_title">Systems</string>
+    <string name="window_operations_fleet_title">Fleet</string>
+    <string name="window_operations_log_title">Log</string>
+    <string name="window_operations_task_title">Task</string>
+    <string name="window_operations_explore_title">Exploration</string>
+    <string name="window_operations_settle_title">Settlement</string>
+
+
+    <string name="window_menu_desc">Open the main Menu</string>
+    <string name="window_environment_desc">Check and manage your race</string>
+    <string name="window_operation_desc">Fleet and Task Control</string>
+    <string name="window_production_desc">Build ships and stations</string>
+    <string name="window_diplomacy_desc">Relations with other races</string>
+    <string name="window_science_desc">Research new items</string>
+
+
+    <string name="window_environment_banking_desc">Manage your credits</string>
+    <string name="window_environment_history_desc">Important race events log</string>
+    <string name="window_environment_information_desc">Base race information</string>
+    <string name="window_environment_mining_desc">Farming minerals</string>
+    <string name="window_environment_skill_desc">Develop Race Skills</string>
+    <string name="window_environment_tech_desc">Develop Race technology</string>
+    <string name="window_environment_trading_desc">Trade goods with others</string>
+
+
+    <string name="window_production_shipyard_desc">Build movable ships</string>
+    <string name="window_diplomacy_relations_desc">Relations to other races</string>
+    <string name="window_diplomacy_war_desc">War with other races</string>
+    <string name="window_science_labs_desc">Research new items</string>
+    <string name="window_science_settle_desc">Research more options</string>
+    <string name="window_science_explore_desc">Research more options</string>
+    <string name="window_science_dna_desc">Research race abilities</string>
+
+
+    <string name="window_operations_systems_desc">All Flagged systems</string>
+    <string name="window_operations_fleet_desc">Ships and stations</string>
+    <string name="window_operations_log_desc">Last operation results</string>
+    <string name="window_operations_task_desc">Next mission steps</string>
+    <string name="window_operations_explore_desc">Explore new systems</string>
+    <string name="window_operations_settle_desc">Settle in explored systems</string>
+
+    <string name="item_count"> item</string>
+    <string name="items_count"> items</string>
+
 </resources>

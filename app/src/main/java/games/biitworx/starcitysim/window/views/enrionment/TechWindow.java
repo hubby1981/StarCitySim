@@ -16,7 +16,7 @@ import games.biitworx.starcitysim.window.views.EnvironmentWindow;
 public class TechWindow extends Window {
     public TechWindow() {
         super(T.get(R.string.window_environment_tech_title));
-        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),"Check & Manage your race","7 items", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
