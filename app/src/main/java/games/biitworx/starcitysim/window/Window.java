@@ -59,19 +59,20 @@ public abstract class Window {
         String time = Game.YEAR+"."+Game.MONTH+"."+Game.DAY;
         canvas.drawText(time, base.left + base.width() / 20, base.centerY() - Fonts.FONT.getTextSize(), Fonts.FONT);
         canvas.drawText(text, base.left+base.width()/20, base.centerY()+Fonts.FONT.getTextSize(), Fonts.FONT);
-int w2=5;
+
+        int w =MenuRects.content.get().right-bounds.right;
+int w2 = w/10;
         if (scroller && down) {
 
             Bitmap b = B.get(R.drawable.down);
-            int w =25;
-            Rect rc = new Rect(bounds.right-w2 , bounds.bottom - w, (bounds.right+w)-w2, bounds.bottom);
+            Rect rc = new Rect((MenuRects.content.get().right-w)-w2, (MenuRects.content.get().bottom - w)-w2, (MenuRects.content.get().right)-w2, MenuRects.content.get().bottom-w2);
             BitmapDrawer.drawImage(b, canvas, rc, null,true);
 
         }
         if(scroller && scrollPosition>20){
             Bitmap b = B.get(R.drawable.up);
-            int w =25;
-            Rect rc = new Rect(bounds.right-w2, bounds.top , (bounds.right+w)-w2, bounds.top+w);
+
+            Rect rc = new Rect((MenuRects.content.get().right-w)-w2, MenuRects.content.get().top+w2 ,  (MenuRects.content.get().right)-w2, (MenuRects.content.get().top+w)+w2);
             BitmapDrawer.drawImage(b, canvas, rc, null,true);
         }
     }

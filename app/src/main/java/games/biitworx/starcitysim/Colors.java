@@ -3,6 +3,7 @@ package games.biitworx.starcitysim;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
@@ -13,11 +14,12 @@ import android.graphics.Shader;
 public class Colors {
 
     public static int backFillColor = Color.argb(255, 0, 0, 0);
-    public static int foreFillColor = Color.argb(50, 255, 255,255);
+    public static int foreFillColor = Color.argb(75, 255, 255,255);
 
     public static Paint backPainter;
     public static Paint backPainterLine;
     public static Paint backPainterLine2;
+    public static Paint backPainterLine3;
 
     public static int backContentFillColor = Color.argb(175, 0, 0, 0);
     public static Paint backPainterContent;
@@ -98,7 +100,15 @@ public class Colors {
         backPainterLine2 = new Paint();
         backPainterLine2.setColor(foreFillColor);
         backPainterLine2.setStyle(Paint.Style.STROKE);
-        backPainterLine2.setStrokeWidth(2);
+        backPainterLine2.setStrokeWidth(1);
+        backPainterLine2.setAntiAlias(true);
+        //backPainterLine2.setPathEffect(new DashPathEffect(new float[]{2f,2f,2f},2f));
+
+        backPainterLine3 = new Paint();
+        backPainterLine3.setColor(foreFillColor);
+        backPainterLine3.setStyle(Paint.Style.STROKE);
+        backPainterLine3.setStrokeWidth(1);
+        //backPainterLine3.setPathEffect(new DashPathEffect(new float[]{4f, 4f, 4f}, 4f));
 
         topOutlinePainter = new Paint();
         topOutlinePainter.setColor(topOutlineFillColor);
