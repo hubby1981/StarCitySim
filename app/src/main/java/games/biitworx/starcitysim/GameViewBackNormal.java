@@ -82,7 +82,13 @@ public class GameViewBackNormal extends View {
                 Game.changeWindow(new MenuWindow());
             }
         });
-        MenuRects.icon = new RectContainer(menu.get(10), new Runnable() {
+
+
+        Rect ri = menu.get(10);
+        ri.right=filler.right-menu.get(9).width();
+
+
+        MenuRects.icon = new RectContainer(ri, new Runnable() {
             @Override
             public void run() {
                 Game.changeWindow(new ShipyardWindow());
