@@ -88,15 +88,17 @@ public class Game extends AppCompatActivity {
                         if (counter== 0) {
                             counter = 16;
                             DAY++;
+
+                            if(DAY==20){
+                                DAY=1;
+                                MONTH++;
+                            }
+                            if(MONTH==10){
+                                YEAR++;
+                                MONTH=1;
+                            }
                         }
-                        if(DAY==20){
-                            DAY=1;
-                            MONTH++;
-                        }
-                        if(MONTH==10){
-                            YEAR++;
-                            MONTH=1;
-                        }
+
 
                         runOnUiThread(new Runnable() {
                             @Override

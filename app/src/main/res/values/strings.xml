@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">StarCitySim</string>
     <string name="action_settings">Settings</string>
+
+      <string name="window_menu_title">Menu</string>
+    <string name="window_environment_title">Environment</string>
+    <string name="window_operation_title">Operation</string>
+    <string name="window_production_title">Production</string>
+    <string name="window_diplomacy_title">Diplomacy</string>
+    <string name="window_science_title">Science</string>
+
+
+    <string name="window_environment_banking_title">Banking</string>
+    <string name="window_environment_history_title">History</string>
+    <string name="window_environment_information_title">Informations</string>
+    <string name="window_environment_mining_title">Mining</string>
+    <string name="window_environment_skill_title">Skill Tree</string>
+    <string name="window_environment_tech_title">Tech Tree</string>
+    <string name="window_environment_trading_title">Trading</string>
+
 </resources>

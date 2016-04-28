@@ -5,6 +5,7 @@ import android.graphics.Color;
 import games.biitworx.starcitysim.B;
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
+import games.biitworx.starcitysim.T;
 import games.biitworx.starcitysim.window.Window;
 import games.biitworx.starcitysim.window.content.MenuItemContent;
 import games.biitworx.starcitysim.window.views.enrionment.BankingWindow;
@@ -20,10 +21,10 @@ import games.biitworx.starcitysim.window.views.enrionment.TradingWindow;
  */
 public class EnvironmentWindow extends Window {
     public EnvironmentWindow() {
-        super("Environment");
+        super(T.get(R.string.window_environment_title));
 
 
-        getContents().add(new MenuItemContent(B.get2(R.drawable.info), B.get(R.drawable.infoback), "INFORMATIONS", "All race informations", "", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get(R.drawable.infoback), T.get(R.string.window_environment_information_title), "All race informations", "", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
@@ -32,7 +33,7 @@ public class EnvironmentWindow extends Window {
                 }));
 
 
-        getContents().add(new MenuItemContent(B.get2(R.drawable.banking), B.get(R.drawable.bankingback), "BANKING", "Bank balance & credit line", "494.223 crd",Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get(R.drawable.bankingback),T.get(R.string.window_environment_banking_title), "Bank balance & credit line", "494.223 crd",Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
@@ -40,7 +41,7 @@ public class EnvironmentWindow extends Window {
                     }
                 }));
 
-        getContents().add(new MenuItemContent(B.get2(R.drawable.trading), B.get( R.drawable.tradingback),"Trading","Trade goods & minerals","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.tradingback),T.get(R.string.window_environment_trading_title),"Trade goods & minerals","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
@@ -48,7 +49,7 @@ public class EnvironmentWindow extends Window {
                     }
                 }));
 
-        getContents().add(new MenuItemContent(B.get2(R.drawable.mining), B.get( R.drawable.miningback),"Mining","Extract & farming minerals","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.miningback),T.get(R.string.window_environment_mining_title),"Extract & farming minerals","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
@@ -56,14 +57,14 @@ public class EnvironmentWindow extends Window {
                     }
                 }));
 
-        getContents().add(new MenuItemContent(B.get2(R.drawable.skill), B.get(R.drawable.skillback), "SKILL TREE", "Develop  race skills", "55 Points",Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get(R.drawable.skillback), T.get(R.string.window_environment_skill_title), "Develop  race skills", "55 Points",Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
                         Game.changeWindow(new SkillWindow());
                     }
                 }));
-        getContents().add(new MenuItemContent(B.get2(R.drawable.tech), B.get(R.drawable.techback), "TECH TREE", "Develop race technology", "100 Points",Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get(R.drawable.techback), T.get(R.string.window_environment_tech_title), "Develop race technology", "100 Points",Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
@@ -72,14 +73,14 @@ public class EnvironmentWindow extends Window {
                 }));
 
 
-        getContents().add(new MenuItemContent(B.get2(R.drawable.history), B.get(R.drawable.historyback), "HISTORY", "Important race events", "",Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get(R.drawable.historyback),T.get(R.string.window_environment_history_title), "Important race events", "",Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {
                         Game.changeWindow(new HistoryWindow());
                     }
                 }));
-        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),"Menu","Open the main menu","", Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),T.get(R.string.window_menu_title),"Open the main menu","", Color.argb(175, 30, 90, 150),
                 new Runnable() {
                     @Override
                     public void run() {

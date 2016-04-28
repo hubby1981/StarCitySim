@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="window_menu_title">Menu</string>
+    <string name="window_environment_title">Umgebung</string>
+    <string name="window_operation_title">Operation</string>
+    <string name="window_production_title">Produktion</string>
+    <string name="window_diplomacy_title">Diplomatie</string>
+    <string name="window_science_title">Wissenschaft</string>
+
+
+    <string name="window_environment_banking_title">Banking</string>
+    <string name="window_environment_history_title">Geschichte</string>
+    <string name="window_environment_information_title">Informationen</string>
+    <string name="window_environment_mining_title">Abbau</string>
+    <string name="window_environment_skill_title">Fähigkeiten</string>
+    <string name="window_environment_tech_title">Technologie</string>
+    <string name="window_environment_trading_title">Handel</string>
+
+</resources>
