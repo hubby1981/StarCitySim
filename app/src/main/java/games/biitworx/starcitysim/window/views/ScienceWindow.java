@@ -3,6 +3,7 @@ package games.biitworx.starcitysim.window.views;
 import android.graphics.Color;
 
 import games.biitworx.starcitysim.B;
+import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.T;
@@ -20,23 +21,23 @@ public class ScienceWindow extends Window {
 
 
 
-        getContents().add(new MenuItemContent(null, B.get(R.drawable.labback), T.get(R.string.window_science_labs_title), T.get(R.string.window_science_labs_desc), MenuCounter.scienceCounter.labs, Color.argb(175, 30, 90, 150)));
-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.settleback), T.get(R.string.window_science_settle_title), T.get(R.string.window_science_settle_desc), MenuCounter.scienceCounter.settle, Color.argb(175, 30, 90, 150)));
-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.exploreback), T.get(R.string.window_science_explore_title), T.get(R.string.window_science_explore_desc), MenuCounter.scienceCounter.explore,Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get(R.drawable.labback), T.get(R.string.window_science_labs_title), T.get(R.string.window_science_labs_desc), MenuCounter.scienceCounter.labs, Colors.back001));
+        getContents().add(new MenuItemContent(null,  B.get( R.drawable.settleback), T.get(R.string.window_science_settle_title), T.get(R.string.window_science_settle_desc), MenuCounter.scienceCounter.settle, Colors.back001));
+        getContents().add(new MenuItemContent(null,  B.get( R.drawable.exploreback), T.get(R.string.window_science_explore_title), T.get(R.string.window_science_explore_desc), MenuCounter.scienceCounter.explore,Colors.back001,
                 new Runnable() {
                     @Override
                     public void run() {
                         Game.changeWindow(new ShipyardWindow());
                     }
                 }));
-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.dnaback), T.get(R.string.window_science_dna_title), T.get(R.string.window_science_dna_desc), MenuCounter.scienceCounter.dna,Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null,  B.get( R.drawable.dnaback), T.get(R.string.window_science_dna_title), T.get(R.string.window_science_dna_desc), MenuCounter.scienceCounter.dna,Colors.back001,
                 new Runnable() {
                     @Override
                     public void run() {
                         Game.changeWindow(new ShipyardWindow());
                     }
                 }));
-        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Color.argb(175, 30, 90, 150),
+        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,
                 new Runnable() {
                     @Override
                     public void run() {

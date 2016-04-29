@@ -14,8 +14,8 @@ import android.graphics.Shader;
 public class Colors {
 
     public static int backFillColor = Color.argb(255, 0, 0, 0);
-    public static int foreFillColor = Color.argb(75, 255, 255,255);
-
+    public static int foreFillColor = Color.argb(75, 255, 255, 255);
+    public static int back001 = Color.argb(190, 20, 80, 120);
     public static Paint backPainter;
     public static Paint backPainterLine;
     public static Paint backPainterLine2;
@@ -31,7 +31,7 @@ public class Colors {
 
 
     public static int outlineFillColor3 = Color.argb(75, 0, 0, 0);
-    public static int outlineFillColor2 = Color.argb(50,0,0,0);
+    public static int outlineFillColor2 = Color.argb(50, 0, 0, 0);
     public static Paint outlinePainter2;
     public static Paint outlinePainter3;
 
@@ -41,10 +41,10 @@ public class Colors {
     public static int topOutlineFillColor = Color.argb(128, 90, 220, 250);
     public static Paint topOutlinePainter;
 
-    public static int leftOutlineFillColor = Color.argb(100, 0, 0,200);
+    public static int leftOutlineFillColor = Color.argb(100, 0, 0, 200);
     public static Paint leftOutlinePainter;
 
-    public static int backContentLineFillColor = Color.argb(255,80,200,220);
+    public static int backContentLineFillColor = Color.argb(255, 80, 200, 220);
     public static Paint backLinePainterContent;
 
 
@@ -53,8 +53,6 @@ public class Colors {
 
     public static BitmapShader shaderBack;
     public static BitmapShader shaderBack2;
-
-
 
 
     static {
