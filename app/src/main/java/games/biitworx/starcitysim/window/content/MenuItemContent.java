@@ -81,7 +81,7 @@ public class MenuItemContent extends Content {
         }
         Fonts.FONT.setTextSize((getContentRect().height() / 6));
 
-        rects = RectHelper.makeRect3(text, (int) Fonts.FONT.getTextSize(), 2, 1);
+        rects = RectHelper.makeRect3(text, (int) Fonts.FONT.getTextSize(), 2, 2);
 
 
         canvas.drawText(primary, (float) rects.get(1).left, rects.get(1).centerY(), Fonts.FONT);

@@ -35,13 +35,13 @@ public class Colors {
     public static Paint outlinePainter2;
     public static Paint outlinePainter3;
 
-    public static int inlineFillColor = Color.argb(255, 0, 180, 255);
+    public static int inlineFillColor = Color.argb(255, 0,100,130);
     public static Paint inlinePainter;
 
-    public static int topOutlineFillColor = Color.argb(128, 90, 220, 250);
+    public static int topOutlineFillColor = Color.argb(128,  80, 200, 220);
     public static Paint topOutlinePainter;
 
-    public static int leftOutlineFillColor = Color.argb(100, 0, 0, 200);
+    public static int leftOutlineFillColor = Color.argb(100,  80, 200, 220);
     public static Paint leftOutlinePainter;
 
     public static int backContentLineFillColor = Color.argb(255, 80, 200, 220);
@@ -103,9 +103,9 @@ public class Colors {
         //backPainterLine2.setPathEffect(new DashPathEffect(new float[]{2f,2f,2f},2f));
 
         backPainterLine3 = new Paint();
-        backPainterLine3.setColor(foreFillColor);
+        backPainterLine3.setColor(inlineFillColor);
         backPainterLine3.setStyle(Paint.Style.STROKE);
-        backPainterLine3.setStrokeWidth(1);
+        backPainterLine3.setStrokeWidth(2);
         //backPainterLine3.setPathEffect(new DashPathEffect(new float[]{4f, 4f, 4f}, 4f));
 
         topOutlinePainter = new Paint();

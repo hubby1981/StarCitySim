@@ -1,21 +1,14 @@
 package games.biitworx.starcitysim;
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -111,7 +104,7 @@ public class Game extends AppCompatActivity {
                 }, speed,speed);
             }
         };
-        timer.run();
+        //timer.run();
         runOnUiThread(update);
 
 
@@ -151,7 +144,7 @@ public class Game extends AppCompatActivity {
                 touch = true;
 
                 if (view != null && view.getWindow() != null && newScroller != 0) {
-                    int max = view.getWindow().getMaxScrollPosition() - MenuRects.content.get().height();
+                    int max = view.getWindow().getMaxScrollPosition() - MenuRects.contentInner.get().height();
                     max += MenuRects.line.get().height();
                     view.getWindow().down = true;
                     if (newScroller < max) {
@@ -173,10 +166,10 @@ public class Game extends AppCompatActivity {
             touch = false;
 
             if (!scrolled) {
-                MenuRects.testHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top));
+                //MenuRects.testHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top));
 
-                if (view != null && view.getWindow() != null) {
-                    view.getWindow().checkHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top * 4));
+                if (view != null && view.getWindow() != null && MenuRects.contentInner.get().contains((int)event.getX(),(int)event.getY())) {
+                    view.getWindow().checkHit((int) event.getX(), (int) event.getY() - (int)(MenuRects.icon.get().height()*1.5));
                 }
             }
             scrolled = false;
