@@ -1,6 +1,11 @@
 package games.biitworx.starcitysim;
 
+import android.graphics.Canvas;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Shader;
 
 import java.util.ArrayList;
 
@@ -11,6 +16,27 @@ public class RectHelper {
 
     public static Rect combine(ArrayList<Rect> rects, int start,int end){
         return new Rect(rects.get(start).left,rects.get(start).top,rects.get(end).right,rects.get(end).bottom);
+    }
+
+    public static void drawRectGradient(Rect rc,int color1,int color2,Canvas canvas){
+
+
+        RectF rc1 = new RectF(rc.left,rc.top,rc.right-rc.width()/2,rc.bottom);
+        RectF rc2 = new RectF(rc.left+rc.width()/2,rc.top,rc.right,rc.bottom);
+
+        LinearGradient gr1 = new LinearGradient(rc1.left,rc1.centerY(),rc1.right-rc.width()/8,rc1.centerY(),color1,color2, Shader.TileMode.CLAMP);
+        LinearGradient gr2 = new LinearGradient(rc2.left+rc.width()/8,rc2.centerY(),rc2.right,rc2.centerY(),color2,color1, Shader.TileMode.CLAMP);
+
+
+        Paint p = new Paint();
+        p.setAntiAlias(true);
+        p.setShader(gr1);
+
+        canvas.drawRect(rc1, p);
+        p.setShader(gr2);
+
+        canvas.drawRect(rc2,p);
+
     }
 
     public static ArrayList<Rect> makeRects(Rect base, int countW) {

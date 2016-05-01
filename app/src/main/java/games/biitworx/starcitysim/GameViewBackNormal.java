@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.Shader;
@@ -39,18 +40,27 @@ public class GameViewBackNormal extends View {
     @Override
     public void onDraw(Canvas canvas) {
 
+        Paint backer = new Paint();
+
+        backer.setAntiAlias(true);
+        backer .setStyle(Paint.Style.FILL);
+        backer.setColor(Color.argb(100, 30, 60, 60));
+
         Colors.outlinePainter3.setShader(new RadialGradient(canvas.getClipBounds().exactCenterX(),
                 canvas.getClipBounds().exactCenterY(), canvas.getWidth() / 2,
-                Color.argb(100, 15, 130, 160), Colors.outlineFillColor3, Shader.TileMode.CLAMP));
+                Color.argb(200, 15, 130, 160), Colors.outlineFillColor3, Shader.TileMode.CLAMP));
         Rect content = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
         Rect topper = new Rect(content.left, content.top, content.right, content.height() / 10);
         Rect botter = new Rect(content.left, content.bottom - content.height() / 10, content.right, content.bottom);
 
-        Bitmap border = B.get(R.drawable.border);
 
 
-        Rect borderRect = new Rect(topper.left, topper.bottom, topper.right, topper.bottom + 3);
-        Rect borderRect2 = new Rect(botter.left, botter.top - 3, botter.right, botter.top);
+        canvas.drawRect(content,backer);
+        canvas.drawRect(content,Colors.backPainterContentShader);
+
+
+        Rect borderRect = new Rect(topper.left, topper.bottom, topper.right, topper.bottom + 2);
+        Rect borderRect2 = new Rect(botter.left, botter.top - 2, botter.right, botter.top);
 
 
 
@@ -62,12 +72,12 @@ public class GameViewBackNormal extends View {
         MenuRects.line = new RectContainer(new Rect(liner.left, liner.top, liner.right, (int) (liner.height() / 1.9)));
 
 
-        canvas.drawRect(new Rect(content.left, topper.bottom, content.right, botter.top), Colors.backPainterContentShader);
+        //canvas.drawRect(new Rect(content.left, topper.bottom, content.right, botter.top), Colors.backPainterContentShader);
         canvas.drawRect(new Rect(content.left, topper.bottom, content.right, botter.top), Colors.backPainterContent);
 
         canvas.drawRect(new Rect(content.left, topper.bottom, content.right, botter.top), Colors.backPainterContentShader2);
         canvas.drawRect(new Rect(content.left, topper.bottom, content.right, botter.top), Colors.outlinePainter3);
-        canvas.drawRect(new Rect(content.left, topper.bottom, content.right, botter.top), Colors.backPainterLine2);
+        //canvas.drawRect(new Rect(content.left, topper.bottom, content.right, botter.top), Colors.backPainterLine2);
 
 
         MenuRects.icon = new RectContainer(topper);
@@ -75,15 +85,19 @@ public class GameViewBackNormal extends View {
         MenuRects.info = new RectContainer(topper);
         if (view != null) {
             view.scroller = false;
-            if (view.getMaxScrollPosition() - MenuRects.content.get().height() > 0)
+            if (view.getMaxScrollPosition() - MenuRects.contentInner.get().height() > 0)
                 view.scroller = true;
         }
         view.onDraw(canvas);
 
-        BitmapDrawer.drawImage(border, canvas, borderRect, null, true);
-        BitmapDrawer.drawImage(border, canvas, borderRect2, null, true);
-        BitmapDrawer.drawImage(border, canvas, new Rect(borderRect.left,borderRect.top-MenuRects.info.get().height()/2,borderRect.right,borderRect.bottom-MenuRects.info.get().height()/2), null, true);
+int color2=Color.argb(255, 0, 100, 130);
+        RectHelper.drawRectGradient(borderRect,Color.argb(255,0,0,0),color2,canvas);
+        RectHelper.drawRectGradient(borderRect2,Color.argb(255,0,0,0),color2,canvas);
+        RectHelper.drawRectGradient(new Rect(borderRect.left,borderRect.top-MenuRects.info.get().height()/2,borderRect.right,borderRect.bottom-MenuRects.info.get().height()/2),Color.argb(255,0,0,0),color2,canvas);
+
         canvas.drawRect(content, Colors.backPainterLine3);
+
+
 
     }
 }

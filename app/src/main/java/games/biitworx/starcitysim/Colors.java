@@ -13,7 +13,7 @@ import android.graphics.Shader;
  */
 public class Colors {
 
-    public static int backFillColor = Color.argb(255, 0, 0, 0);
+    public static int backFillColor = Color.argb(255, 0, 100,130);
     public static int foreFillColor = Color.argb(75, 255, 255, 255);
     public static int back001 = Color.argb(190, 20, 80, 120);
     public static Paint backPainter;
@@ -93,7 +93,7 @@ public class Colors {
         backPainterLine = new Paint();
         backPainterLine.setColor(backFillColor);
         backPainterLine.setStyle(Paint.Style.STROKE);
-        backPainterLine.setStrokeWidth(2);
+        backPainterLine.setStrokeWidth(1);
 
         backPainterLine2 = new Paint();
         backPainterLine2.setColor(foreFillColor);

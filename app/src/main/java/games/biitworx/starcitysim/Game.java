@@ -33,8 +33,8 @@ public class Game extends AppCompatActivity {
     public static int counter = 16;
 
     public static int DAY=1;
-    public static int MONTH=1;
-    public static int YEAR=1;
+    public static int MONTH=12;
+    public static int YEAR=29391;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class Game extends AppCompatActivity {
         res = getResources();
 
 
-        Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader2), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Colors.shaderBack2 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
         Colors.backPainterContentShader.setStyle(Paint.Style.FILL);
