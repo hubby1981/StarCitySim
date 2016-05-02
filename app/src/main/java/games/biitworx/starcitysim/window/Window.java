@@ -70,16 +70,16 @@ public abstract class Window {
         Fonts.FONT.setTextSize((base.height() / 7));
         String time = Game.YEAR + "" + Game.MONTH + "." + Game.DAY;
         canvas.drawText(time, base.centerX() - (Fonts.FONT.getTextSize() * time.length() / 3), (int) (base.centerY() - Fonts.FONT.getTextSize() ), Fonts.FONT);
-        Fonts.FONT.setTextSize((base.height() / 5));
+        Fonts.FONT.setTextSize((base.height() / 4));
 
         canvas.drawText(text, base.centerX() - (Fonts.FONT.getTextSize() * text.length() / 2), base.centerY() + (int) (Fonts.FONT.getTextSize() * 1.5), Fonts.FONT);
 
 
         if(MenuRects.notification!=null && MenuRects.notification.get()!=null && getHint().length()>0){
             Rect base2 = MenuRects.notification.get();
-            Fonts.FONT.setTextSize((base.height() / 7));
+            Fonts.FONT.setTextSize((base.height() / 8));
 
-            canvas.drawText(hint, base2.left+base2.height()/8, (int) (base2.top + Fonts.FONT.getTextSize() *1.5), Fonts.FONT);
+            canvas.drawText(hint, base2.centerX()-(int)((Fonts.FONT.getTextSize()*hint.length())/2), (int) (base2.top + Fonts.FONT.getTextSize() *2), Fonts.FONT);
 
         }
 
