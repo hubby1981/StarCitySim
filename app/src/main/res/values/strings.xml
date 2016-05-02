@@ -72,4 +72,7 @@
     <string name="item_count"> item</string>
     <string name="items_count"> items</string>
 
+
+    <string name="window_menu_hint">Touch one of the items to perform a action.</string>
+
 </resources>

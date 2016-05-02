@@ -60,9 +60,12 @@ public class MenuItemContent extends Content {
         filler2.setColor(color);
         filler.setShader(new LinearGradient((float) innerContent.left, (float) innerContent.top, (float) innerContent.right, (float) innerContent.top, color, Color.argb(150, 0, 0, 0), Shader.TileMode.REPEAT));
 
+
+        canvas.drawRect(innerContent, Colors.backPainterContentShader3);
+
         canvas.drawRect(innerContent, filler);
 
-        BitmapDrawer.drawImage(back, canvas, new Rect(innerContent.right - (int) (innerContent.width() / 1.75), innerContent.top, innerContent.right, innerContent.bottom), null, false);
+        BitmapDrawer.drawImage(back, canvas, new Rect(innerContent.right - (int) (innerContent.width() / 2.5), innerContent.top, innerContent.right, innerContent.bottom), null, false);
 
 
         ArrayList<Rect> rects = RectHelper.makeRects2(innerContent, 6);

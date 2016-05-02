@@ -1,0 +1,569 @@
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/production/ShipyardWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/production/ShipyardWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/production/ShipyardWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -16,8 +17,8 @@
+  */
+ public class ShipyardWindow extends Window {
+     public ShipyardWindow() {
+-        super("Shipyard");
+-        getContents().add(new MenuItemContent(null, B.get(R.drawable.shipyardback), T.get(R.string.window_production_title), T.get(R.string.window_production_desc), "", Color.argb(175, 30, 90, 150),
++        super(T.get(R.string.window_production_shipyard_title));
++        getContents().add(new MenuItemContent(null, B.get(R.drawable.shipyardback), T.get(R.string.window_production_title), T.get(R.string.window_production_desc), "", Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/BankingWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/BankingWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/BankingWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -16,7 +17,7 @@
+ public class BankingWindow extends Window {
+     public BankingWindow() {
+         super(T.get(R.string.window_environment_banking_title));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback), T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback), T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+\ No newline at end of file
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/ScienceWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/ScienceWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/ScienceWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -20,23 +21,23 @@
+ 
+ 
+ 
+-        getContents().add(new MenuItemContent(null, B.get(R.drawable.labback), T.get(R.string.window_science_labs_title), T.get(R.string.window_science_labs_desc), MenuCounter.scienceCounter.labs, Color.argb(175, 30, 90, 150)));
+-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.settleback), T.get(R.string.window_science_settle_title), T.get(R.string.window_science_settle_desc), MenuCounter.scienceCounter.settle, Color.argb(175, 30, 90, 150)));
+-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.exploreback), T.get(R.string.window_science_explore_title), T.get(R.string.window_science_explore_desc), MenuCounter.scienceCounter.explore,Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get(R.drawable.labback), T.get(R.string.window_science_labs_title), T.get(R.string.window_science_labs_desc), MenuCounter.scienceCounter.labs, Colors.back001));
++        getContents().add(new MenuItemContent(null,  B.get( R.drawable.settleback), T.get(R.string.window_science_settle_title), T.get(R.string.window_science_settle_desc), MenuCounter.scienceCounter.settle, Colors.back001));
++        getContents().add(new MenuItemContent(null,  B.get( R.drawable.exploreback), T.get(R.string.window_science_explore_title), T.get(R.string.window_science_explore_desc), MenuCounter.scienceCounter.explore,Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new ShipyardWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.dnaback), T.get(R.string.window_science_dna_title), T.get(R.string.window_science_dna_desc), MenuCounter.scienceCounter.dna,Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null,  B.get( R.drawable.dnaback), T.get(R.string.window_science_dna_title), T.get(R.string.window_science_dna_desc), MenuCounter.scienceCounter.dna,Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new ShipyardWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/MenuWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/MenuWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/MenuWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -17,35 +18,35 @@
+ public class MenuWindow extends Window {
+     public MenuWindow() {
+         super(T.get(R.string.window_menu_title));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc), MenuCounter.environment.concat(" ").concat(T.get(R.string.items_count)), Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc), MenuCounter.environment.concat(" ").concat(T.get(R.string.items_count)),  Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new EnvironmentWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.shipyardback),T.get(R.string.window_production_title),T.get(R.string.window_production_desc),MenuCounter.production.concat(" ").concat(T.get(R.string.item_count)), Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.shipyardback),T.get(R.string.window_production_title),T.get(R.string.window_production_desc),MenuCounter.production.concat(" ").concat(T.get(R.string.item_count)), Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new ProductionWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.relationsback),T.get(R.string.window_diplomacy_title),T.get(R.string.window_diplomacy_desc),MenuCounter.diplomacy.concat(" ").concat(T.get(R.string.items_count)), Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.relationsback),T.get(R.string.window_diplomacy_title),T.get(R.string.window_diplomacy_desc),MenuCounter.diplomacy.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new DiplomacyWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.labback),T.get(R.string.window_science_title),T.get(R.string.window_science_desc),MenuCounter.science.concat(" ").concat(T.get(R.string.items_count)), Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.labback),T.get(R.string.window_science_title),T.get(R.string.window_science_desc),MenuCounter.science.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new ScienceWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.operationback),T.get(R.string.window_operation_title),T.get(R.string.window_operation_desc),MenuCounter.operation.concat(" ").concat(T.get(R.string.items_count)), Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.operationback),T.get(R.string.window_operation_title),T.get(R.string.window_operation_desc),MenuCounter.operation.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/SkillWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/SkillWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/SkillWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -16,7 +17,7 @@
+ public class SkillWindow extends Window {
+     public SkillWindow() {
+         super(T.get(R.string.window_environment_skill_title));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+\ No newline at end of file
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/HistoryWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/HistoryWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/HistoryWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -16,7 +17,7 @@
+ public class HistoryWindow extends Window {
+     public HistoryWindow() {
+         super(T.get(R.string.window_environment_history_title));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+\ No newline at end of file
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/TradingWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/TradingWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/TradingWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -16,7 +17,7 @@
+ public class TradingWindow extends Window {
+     public TradingWindow() {
+         super(T.get(R.string.window_environment_trading_title));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback), T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback), T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+\ No newline at end of file
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/ProductionWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/ProductionWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/ProductionWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -19,14 +20,14 @@
+         super(T.get(R.string.window_production_title));
+ 
+ 
+-        getContents().add(new MenuItemContent(null, B.get(R.drawable.shipyardback),T.get(R.string.window_production_shipyard_title), T.get(R.string.window_production_shipyard_desc), MenuCounter.productionCounter.shipyard, Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get(R.drawable.shipyardback),T.get(R.string.window_production_shipyard_title), T.get(R.string.window_production_shipyard_desc), MenuCounter.productionCounter.shipyard, Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new ShipyardWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback), T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback), T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)),Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/OperationWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/OperationWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/OperationWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -18,7 +19,7 @@
+     public OperationWindow() {
+         super(T.get(R.string.window_operation_title));
+ 
+-        getContents().add(new MenuItemContent(null, B.get(R.drawable.systemsback), T.get(R.string.window_operations_systems_title), T.get(R.string.window_operations_systems_desc), MenuCounter.operationCounter.systems, Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get(R.drawable.systemsback), T.get(R.string.window_operations_systems_title), T.get(R.string.window_operations_systems_desc), MenuCounter.operationCounter.systems, Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+@@ -26,7 +27,7 @@
+                     }
+                 }));
+ 
+-        getContents().add(new MenuItemContent(null, B.get(R.drawable.fleetback), T.get(R.string.window_operations_fleet_title), T.get(R.string.window_operations_fleet_desc),MenuCounter.operationCounter.fleet, Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get(R.drawable.fleetback), T.get(R.string.window_operations_fleet_title), T.get(R.string.window_operations_fleet_desc),MenuCounter.operationCounter.fleet, Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+@@ -34,35 +35,35 @@
+                     }
+                 }));
+ 
+-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.logback), T.get(R.string.window_operations_log_title), T.get(R.string.window_operations_log_desc),MenuCounter.operationCounter.log,Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null,  B.get( R.drawable.logback), T.get(R.string.window_operations_log_title), T.get(R.string.window_operations_log_desc),MenuCounter.operationCounter.log,Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new ShipyardWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.taskback), T.get(R.string.window_operations_task_title),T.get(R.string.window_operations_task_desc), MenuCounter.operationCounter.task,Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null,  B.get( R.drawable.taskback), T.get(R.string.window_operations_task_title),T.get(R.string.window_operations_task_desc), MenuCounter.operationCounter.task,Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new ShipyardWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.exploreback), T.get(R.string.window_operations_explore_title), T.get(R.string.window_operations_explore_desc), MenuCounter.operationCounter.explore,Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null,  B.get( R.drawable.exploreback), T.get(R.string.window_operations_explore_title), T.get(R.string.window_operations_explore_desc), MenuCounter.operationCounter.explore,Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new ShipyardWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.settleback),T.get(R.string.window_operations_settle_title), T.get(R.string.window_operations_settle_desc), MenuCounter.operationCounter.settle,Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null,  B.get( R.drawable.settleback),T.get(R.string.window_operations_settle_title), T.get(R.string.window_operations_settle_desc), MenuCounter.operationCounter.settle,Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new ShipyardWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/EnvironmentWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/EnvironmentWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/EnvironmentWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -25,7 +26,7 @@
+         super(T.get(R.string.window_environment_title));
+ 
+ 
+-        getContents().add(new MenuItemContent(null, B.get(R.drawable.infoback), T.get(R.string.window_environment_information_title), T.get(R.string.window_environment_information_desc), MenuCounter.environmentCounter.information, Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get(R.drawable.infoback), T.get(R.string.window_environment_information_title), T.get(R.string.window_environment_information_desc), MenuCounter.environmentCounter.information, Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+@@ -34,7 +35,7 @@
+                 }));
+ 
+ 
+-        getContents().add(new MenuItemContent(null, B.get(R.drawable.bankingback),T.get(R.string.window_environment_banking_title),T.get(R.string.window_environment_banking_desc), MenuCounter.environmentCounter.banking,Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get(R.drawable.bankingback),T.get(R.string.window_environment_banking_title),T.get(R.string.window_environment_banking_desc), MenuCounter.environmentCounter.banking, Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+@@ -42,7 +43,7 @@
+                     }
+                 }));
+ 
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.tradingback),T.get(R.string.window_environment_trading_title),T.get(R.string.window_environment_trading_desc),MenuCounter.environmentCounter.trading, Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.tradingback),T.get(R.string.window_environment_trading_title),T.get(R.string.window_environment_trading_desc),MenuCounter.environmentCounter.trading, Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+@@ -50,7 +51,7 @@
+                     }
+                 }));
+ 
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.miningback),T.get(R.string.window_environment_mining_title),T.get(R.string.window_environment_mining_desc),MenuCounter.environmentCounter.mining, Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.miningback),T.get(R.string.window_environment_mining_title),T.get(R.string.window_environment_mining_desc),MenuCounter.environmentCounter.mining, Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+@@ -58,14 +59,14 @@
+                     }
+                 }));
+ 
+-        getContents().add(new MenuItemContent(null, B.get(R.drawable.skillback), T.get(R.string.window_environment_skill_title), T.get(R.string.window_environment_skill_desc), MenuCounter.environmentCounter.skill,Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get(R.drawable.skillback), T.get(R.string.window_environment_skill_title), T.get(R.string.window_environment_skill_desc), MenuCounter.environmentCounter.skill, Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new SkillWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null, B.get(R.drawable.techback), T.get(R.string.window_environment_tech_title), T.get(R.string.window_environment_tech_desc), MenuCounter.environmentCounter.tech,Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get(R.drawable.techback), T.get(R.string.window_environment_tech_title), T.get(R.string.window_environment_tech_desc), MenuCounter.environmentCounter.tech, Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+@@ -74,14 +75,14 @@
+                 }));
+ 
+ 
+-        getContents().add(new MenuItemContent(null, B.get(R.drawable.historyback),T.get(R.string.window_environment_history_title), T.get(R.string.window_environment_history_desc), MenuCounter.environmentCounter.history,Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get(R.drawable.historyback),T.get(R.string.window_environment_history_title), T.get(R.string.window_environment_history_desc), MenuCounter.environmentCounter.history, Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+                         Game.changeWindow(new HistoryWindow());
+                     }
+                 }));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+Index: app/src/main/java/games/biitworx/starcitysim/Colors.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/Colors.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/Colors.java	(revision )
+@@ -14,8 +14,8 @@
+ public class Colors {
+ 
+     public static int backFillColor = Color.argb(255, 0, 0, 0);
+-    public static int foreFillColor = Color.argb(75, 255, 255,255);
++    public static int foreFillColor = Color.argb(75, 255, 255, 255);
+-
++    public static int back001 = Color.argb(190, 20, 70, 130);
+     public static Paint backPainter;
+     public static Paint backPainterLine;
+     public static Paint backPainterLine2;
+@@ -31,7 +31,7 @@
+ 
+ 
+     public static int outlineFillColor3 = Color.argb(75, 0, 0, 0);
+-    public static int outlineFillColor2 = Color.argb(50,0,0,0);
++    public static int outlineFillColor2 = Color.argb(50, 0, 0, 0);
+     public static Paint outlinePainter2;
+     public static Paint outlinePainter3;
+ 
+@@ -41,10 +41,10 @@
+     public static int topOutlineFillColor = Color.argb(128, 90, 220, 250);
+     public static Paint topOutlinePainter;
+ 
+-    public static int leftOutlineFillColor = Color.argb(100, 0, 0,200);
++    public static int leftOutlineFillColor = Color.argb(100, 0, 0, 200);
+     public static Paint leftOutlinePainter;
+ 
+-    public static int backContentLineFillColor = Color.argb(255,80,200,220);
++    public static int backContentLineFillColor = Color.argb(255, 80, 200, 220);
+     public static Paint backLinePainterContent;
+ 
+ 
+@@ -53,8 +53,6 @@
+ 
+     public static BitmapShader shaderBack;
+     public static BitmapShader shaderBack2;
+-
+-
+ 
+ 
+     static {
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/TechWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/TechWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/TechWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -16,7 +17,7 @@
+ public class TechWindow extends Window {
+     public TechWindow() {
+         super(T.get(R.string.window_environment_tech_title));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+\ No newline at end of file
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/InformationWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/InformationWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/InformationWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -16,7 +17,7 @@
+ public class InformationWindow extends Window {
+     public InformationWindow() {
+         super(T.get(R.string.window_environment_information_title));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback), T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback), T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/MiningWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/MiningWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/enrionment/MiningWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -16,7 +17,7 @@
+ public class MiningWindow extends Window {
+     public MiningWindow() {
+         super(T.get(R.string.window_environment_mining_title));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc),"7 items", Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {
+\ No newline at end of file
+Index: app/src/main/java/games/biitworx/starcitysim/window/views/DiplomacyWindow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/games/biitworx/starcitysim/window/views/DiplomacyWindow.java	(date 1461866772000)
++++ app/src/main/java/games/biitworx/starcitysim/window/views/DiplomacyWindow.java	(revision )
+@@ -3,6 +3,7 @@
+ import android.graphics.Color;
+ 
+ import games.biitworx.starcitysim.B;
++import games.biitworx.starcitysim.Colors;
+ import games.biitworx.starcitysim.Game;
+ import games.biitworx.starcitysim.R;
+ import games.biitworx.starcitysim.T;
+@@ -20,10 +21,10 @@
+ 
+         //getContents().add(new TextContent("Select a action you want to perform"));
+ 
+-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.relationsback), T.get(R.string.window_diplomacy_relations_title), T.get(R.string.window_diplomacy_relations_desc), MenuCounter.diplomacyCounter.relations, Color.argb(175, 30, 90, 150)));
++        getContents().add(new MenuItemContent(null,  B.get( R.drawable.relationsback), T.get(R.string.window_diplomacy_relations_title), T.get(R.string.window_diplomacy_relations_desc), MenuCounter.diplomacyCounter.relations, Colors.back001));
+ 
+-        getContents().add(new MenuItemContent(null,  B.get( R.drawable.warback), T.get(R.string.window_diplomacy_war_title), T.get(R.string.window_diplomacy_war_desc), MenuCounter.diplomacyCounter.war, Color.argb(175, 30, 90, 150)));
+-        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback), T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc),MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Color.argb(175, 30, 90, 150),
++        getContents().add(new MenuItemContent(null,  B.get( R.drawable.warback), T.get(R.string.window_diplomacy_war_title), T.get(R.string.window_diplomacy_war_desc), MenuCounter.diplomacyCounter.war, Colors.back001));
++        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback), T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc),MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,
+                 new Runnable() {
+                     @Override
+                     public void run() {

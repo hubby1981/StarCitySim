@@ -70,4 +70,7 @@
     <string name="item_count"> aktion</string>
     <string name="items_count"> aktionen</string>
 
+
+    <string name="window_menu_hint">Zum ausführen die Aktion berühren.</string>
+
 </resources>

@@ -11,12 +11,6 @@ public class MenuRects {
     public static RectContainer icon;
     public static RectContainer info;
 
-    public static RectContainer action1;
-    public static RectContainer action2;
-    public static RectContainer action3;
-    public static RectContainer action4;
-    public static RectContainer action5;
-    public static RectContainer action6;
 
     public static RectContainer content;
     public static RectContainer contentInner;

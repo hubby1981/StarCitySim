@@ -110,4 +110,16 @@ public class RectHelper {
         return result;
     }
 
+    public static ArrayList<Rect> makeRect4(Rect base,int height){
+        ArrayList<Rect> result = new ArrayList<>();
+        int max = base.height()/height*2;
+        int y=base.top;
+        for(int x=0;x<max;x++){
+            y+=1;
+            result.add(new Rect(base.left,y,base.right,y+1));
+            y+=1;
+        }
+        return result;
+    }
+
 }

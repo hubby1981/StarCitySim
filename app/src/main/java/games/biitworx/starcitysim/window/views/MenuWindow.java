@@ -17,7 +17,7 @@ import games.biitworx.starcitysim.window.Window;
  */
 public class MenuWindow extends Window {
     public MenuWindow() {
-        super(T.get(R.string.window_menu_title));
+        super(T.get(R.string.window_menu_title),T.get(R.string.window_menu_hint));
         getContents().add(new MenuItemContent(null, B.get( R.drawable.bankingback),T.get(R.string.window_environment_title),T.get(R.string.window_environment_desc), MenuCounter.environment.concat(" ").concat(T.get(R.string.items_count)),  Colors.back001,
                 new Runnable() {
                     @Override

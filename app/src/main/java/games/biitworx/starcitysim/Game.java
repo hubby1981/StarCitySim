@@ -44,12 +44,16 @@ public class Game extends AppCompatActivity {
 
         Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader2), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Colors.shaderBack2 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        Colors.shaderBack3 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader3), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
         Colors.backPainterContentShader.setStyle(Paint.Style.FILL);
         Colors.backPainterContentShader.setShader(Colors.shaderBack);
 
         Colors.backPainterContentShader2.setStyle(Paint.Style.FILL);
         Colors.backPainterContentShader2.setShader(Colors.shaderBack2);
+
+        Colors.backPainterContentShader3.setStyle(Paint.Style.FILL);
+        Colors.backPainterContentShader3.setShader(Colors.shaderBack3);
 
         Fonts.FONT.setTypeface(Typeface.createFromAsset(getAssets(), "venus.ttf"));
         setContentView(R.layout.activity_game);

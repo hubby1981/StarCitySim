@@ -15,7 +15,7 @@ public class Colors {
 
     public static int backFillColor = Color.argb(255, 0, 100,130);
     public static int foreFillColor = Color.argb(75, 255, 255, 255);
-    public static int back001 = Color.argb(190, 20, 80, 120);
+    public static int back001 = Color.argb(128, 15,130,160);
     public static Paint backPainter;
     public static Paint backPainterLine;
     public static Paint backPainterLine2;
@@ -25,7 +25,7 @@ public class Colors {
     public static Paint backPainterContent;
     public static Paint backPainterContentShader;
     public static Paint backPainterContentShader2;
-
+    public static Paint backPainterContentShader3;
     public static int outlineFillColor = Color.argb(255, 40, 70, 100);
     public static Paint outlinePainter;
 
@@ -54,6 +54,7 @@ public class Colors {
     public static BitmapShader shaderBack;
     public static BitmapShader shaderBack2;
 
+    public static BitmapShader shaderBack3;
 
     static {
         outlinePainter = new Paint();
@@ -87,9 +88,14 @@ public class Colors {
 
         backPainterContentShader = new Paint();
         backPainterContentShader2 = new Paint();
+        backPainterContentShader3= new Paint();
 
         backPainterContentShader2.setAntiAlias(true);
         backPainterContentShader.setAntiAlias(true);
+
+        backPainterContentShader3.setAntiAlias(true);
+
+
         backPainterLine = new Paint();
         backPainterLine.setColor(backFillColor);
         backPainterLine.setStyle(Paint.Style.STROKE);
