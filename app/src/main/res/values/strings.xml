@@ -75,4 +75,11 @@
 
     <string name="window_menu_hint">Touch one of the items to perform a action.</string>
 
+
+    <string name="content_banking_add_slot">Buy Slot</string>
+    <string name="window_environment_banking_item0_title">Main Slot</string>
+    <string name="window_environment_banking_item0_description">Mainslot for credits</string>
+    <string name="window_environment_banking_item1_title">Slot A</string>
+    <string name="window_environment_banking_item1_description">depot for saving credits</string>
+
 </resources>

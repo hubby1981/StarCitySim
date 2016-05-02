@@ -73,4 +73,11 @@
 
     <string name="window_menu_hint">Zum ausführen die Aktion berühren.</string>
 
+
+    <string name="content_banking_add_slot">Slot kaufen</string>
+
+    <string name="window_environment_banking_item0_title">Hauptslot</string>
+    <string name="window_environment_banking_item0_description">Hauptslot für Geld</string>
+    <string name="window_environment_banking_item1_title">Slot A</string>
+    <string name="window_environment_banking_item1_description">Depot für zur sicheren Verwahrung</string>
 </resources>

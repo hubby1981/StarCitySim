@@ -13,7 +13,7 @@ public abstract class Content {
     private Rect content;
     private Rect click;
     private Runnable action=null;
-
+    protected int seed = 10;
     public Content() {
 
     }
@@ -57,6 +57,11 @@ public abstract class Content {
 
     public Rect getContentRect() {
         return content;
+    }
+
+    public Rect getInnerRect(){
+        return new Rect(getContentRect().left+seed, getContentRect().top+seed , getContentRect().right-seed , getContentRect().bottom-seed);
+
     }
 
     public Rect getClickRect() {

@@ -28,7 +28,7 @@ public class Contents {
     }
 
     public void onDraw(Canvas canvas,int scroll){
-        int y=20;
+        int y=0;
 
         for(Content c : items){
 

@@ -16,6 +16,8 @@ public class Colors {
     public static int backFillColor = Color.argb(255, 0, 100,130);
     public static int foreFillColor = Color.argb(75, 255, 255, 255);
     public static int back001 = Color.argb(128, 15,130,160);
+    public static int back002 = Color.argb(100, 0, 100, 130); // Backcolor header or button
+    public static int back003 = Color.argb(255, 0, 100, 130); //Forline color header
     public static Paint backPainter;
     public static Paint backPainterLine;
     public static Paint backPainterLine2;

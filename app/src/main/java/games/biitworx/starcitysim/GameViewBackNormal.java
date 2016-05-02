@@ -63,8 +63,8 @@ public class GameViewBackNormal extends View {
         canvas.drawRect(botter, Colors.backPainterContentShader3);
 
 
-        Rect borderRect = new Rect(topper.left, topper.bottom, topper.right, topper.bottom + 2);
-        Rect borderRect2 = new Rect(botter.left, botter.top - 2, botter.right, botter.top);
+        Rect borderRect = new Rect(topper.left, topper.bottom, topper.right, topper.bottom + 3);
+        Rect borderRect2 = new Rect(botter.left, botter.top - 3, botter.right, botter.top);
 
 
         MenuRects.content = new RectContainer(content);
@@ -104,14 +104,14 @@ public class GameViewBackNormal extends View {
         int color2 = Color.argb(255, 0, 100, 130);
 
         MenuRects.icon = new RectContainer(topper);
-        int color3 = Color.argb(100, 0, 100, 130);
+        int color3 = Color.argb(50, 0, 100, 130);
 
 
 
         MenuRects.info = new RectContainer(topper);
         Rect borderRect3 = new Rect(borderRect.left, borderRect.top - MenuRects.info.get().height() / 2, borderRect.right, borderRect.bottom - MenuRects.info.get().height() / 2);
         Rect texter = new Rect(borderRect3.left, borderRect3.top, borderRect3.right, borderRect.top);
-        RectHelper.drawRectGradient(texter, Color.argb(100, 0, 0, 0), color3, canvas);
+        RectHelper.drawRectGradient(texter, Color.argb(50, 0, 0, 0), color3, canvas);
 
         if (view != null) {
             view.scroller = false;

@@ -28,7 +28,7 @@ public class MenuItemContent extends Content {
     private Bitmap icon;
     private Bitmap back;
 
-    private int seed = 10;
+
 
     public MenuItemContent(Bitmap icon, Bitmap back, String primary, String secondary, String info, int color) {
         this(icon, back, primary, secondary, info, color, null);
@@ -48,8 +48,7 @@ public class MenuItemContent extends Content {
     @Override
     public void onDrawEx(Canvas canvas) {
 
-        Rect innerContent = new Rect(getContentRect().left + seed, getContentRect().top + seed, getContentRect().right - seed, getContentRect().bottom - seed);
-
+        Rect innerContent = getInnerRect();
         Paint filler = new Paint();
 
         filler.setStyle(Paint.Style.FILL);
@@ -65,7 +64,7 @@ public class MenuItemContent extends Content {
 
 
 
-        BitmapDrawer.drawImage(back, canvas, new Rect(innerContent.right - (int) (innerContent.width() / 2.5), innerContent.top, innerContent.right, innerContent.bottom), null, false);
+        BitmapDrawer.drawImage(back, canvas, new Rect(innerContent.right - (int) (innerContent.width() / 2), innerContent.top, innerContent.right, innerContent.bottom), null, false);
 
 
         ArrayList<Rect> rects = RectHelper.makeRects2(innerContent, 6);
