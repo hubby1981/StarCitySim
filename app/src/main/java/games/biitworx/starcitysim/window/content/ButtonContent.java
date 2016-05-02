@@ -28,11 +28,11 @@ public class ButtonContent extends Content {
     public void onDrawEx(Canvas canvas) {
         Rect innerContent = getInnerRect();
 
-        RectHelper.drawRectGradient(innerContent, Color.argb(255, 0, 0, 0), Colors.back002, canvas);
+        RectHelper.drawRectGradient(innerContent, Color.argb(128, 0, 0, 0), Colors.back002, canvas);
 
-        Rect topper = new Rect(innerContent.left, innerContent.top, innerContent.right, innerContent.top + 1);
+        Rect topper = new Rect(innerContent.left, innerContent.top, innerContent.right, innerContent.top + 2);
         RectHelper.drawRectGradient(topper, Color.argb(255, 0, 0, 0), Colors.back003, canvas);
-        Rect botter = new Rect(innerContent.left, innerContent.bottom, innerContent.right, innerContent.bottom + 1);
+        Rect botter = new Rect(innerContent.left, innerContent.bottom, innerContent.right, innerContent.bottom + 2);
         RectHelper.drawRectGradient(botter, Color.argb(255, 0, 0, 0), Colors.back003, canvas);
 
         Fonts.FONT.setTextSize(innerContent.height() / (2 * getLineHeight()));
