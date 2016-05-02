@@ -49,7 +49,7 @@ public class GameViewBackNormal extends View {
         backer.setColor(Color.argb(100, 30, 60, 60));
         RadialGradient shader1 = new RadialGradient(canvas.getClipBounds().exactCenterX(),
                 canvas.getClipBounds().exactCenterY(),(int)( canvas.getWidth() / 1.05),
-                Color.argb(128, 15, 130, 160), Color.argb(100, 30, 60, 60), Shader.TileMode.CLAMP);
+                Color.argb(75, 15, 130, 160), Color.argb(100, 30, 60, 60), Shader.TileMode.CLAMP);
 
         Colors.outlinePainter3.setShader(shader1);
         Rect content = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -104,14 +104,14 @@ public class GameViewBackNormal extends View {
         int color2 = Color.argb(255, 0, 100, 130);
 
         MenuRects.icon = new RectContainer(topper);
-        int color3 = Color.argb(75, 0, 100, 130);
+        int color3 = Color.argb(100, 0, 100, 130);
 
 
 
         MenuRects.info = new RectContainer(topper);
         Rect borderRect3 = new Rect(borderRect.left, borderRect.top - MenuRects.info.get().height() / 2, borderRect.right, borderRect.bottom - MenuRects.info.get().height() / 2);
         Rect texter = new Rect(borderRect3.left, borderRect3.top, borderRect3.right, borderRect.top);
-        RectHelper.drawRectGradient(texter, Color.argb(150, 0, 0, 0), color3, canvas);
+        RectHelper.drawRectGradient(texter, Color.argb(100, 0, 0, 0), color3, canvas);
 
         if (view != null) {
             view.scroller = false;
