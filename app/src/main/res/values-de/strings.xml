@@ -2,7 +2,7 @@
 <resources>
 
 
-    <string name="window_menu_title">Menu</string>
+    <string name="window_menu_title">Hauptmenü</string>
     <string name="window_environment_title">Umgebung</string>
     <string name="window_operation_title">Operation</string>
     <string name="window_production_title">Produktion</string>
