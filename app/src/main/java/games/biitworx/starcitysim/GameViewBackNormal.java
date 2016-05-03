@@ -124,7 +124,7 @@ public class GameViewBackNormal extends View {
         int color2 = Color.argb(255, 0, 100, 130);
 
         MenuRects.icon = new RectContainer(topper);
-        int color3 = Color.argb(35, 0, 100, 130);
+        int color3 = Color.argb(50, 0, 100, 130);
 
 
         MenuRects.info = new RectContainer(topper);
