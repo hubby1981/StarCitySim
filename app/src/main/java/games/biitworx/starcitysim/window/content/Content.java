@@ -11,6 +11,8 @@ import games.biitworx.starcitysim.MenuRects;
 public abstract class Content {
     protected int lineHeight = 1;
     private Rect content;
+    private Rect full;
+
     private Rect click;
     private Runnable action=null;
     protected int seed = 10;
@@ -46,9 +48,11 @@ public abstract class Content {
     public int onDraw(Canvas canvas, int yPos, int scroll) {
         Rect base = MenuRects.line.get();
         content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + base.height()*lineHeight);
+        full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + base.height()*getLineHeight());
+
         click = new Rect(content.left, content.top - base.height(), content.right, content.bottom - base.height());
         onDrawEx(canvas);
-        return yPos + getContentRect().height();
+        return yPos + (base.height()*getLineHeight());
     }
 
     public int getLineHeight() {
@@ -58,12 +62,17 @@ public abstract class Content {
     public Rect getContentRect() {
         return content;
     }
-
+    public Rect getFullRect() {
+        return full;
+    }
     public Rect getInnerRect(){
         return new Rect(getContentRect().left+seed, getContentRect().top+seed , getContentRect().right-seed , getContentRect().bottom-seed);
 
     }
+    public Rect getInnerFullRect(){
+        return new Rect(getFullRect().left+seed, getFullRect().top+seed , getFullRect().right-seed , getFullRect().bottom-seed);
 
+    }
     public Rect getClickRect() {
         return content;
     }

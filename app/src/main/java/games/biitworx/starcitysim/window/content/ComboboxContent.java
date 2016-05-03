@@ -106,13 +106,11 @@ public class ComboboxContent extends Content {
         canvas.drawText(secondary, (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
 
 
+        canvas.drawRect(getInnerFullRect(), Colors.backPainterLine2);
         canvas.drawRect(innerContent, Colors.backPainterLine2);
 
 
-        if(show){
 
-
-        }
 
     }
 }
