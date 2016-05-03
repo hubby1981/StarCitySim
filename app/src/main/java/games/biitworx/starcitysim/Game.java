@@ -80,15 +80,12 @@ public class Game extends AppCompatActivity {
         timer = new Runnable() {
             @Override
             public void run() {
-                int  speed=50;
+                int  speed=75;
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
 
-                        MenuWatcher.move();
-                        MenuWatcher.move2();
-                        MenuWatcher.move3();
-                        MenuWatcher.move4();
+                        MenuWatcher.pulse();
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

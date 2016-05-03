@@ -5,14 +5,14 @@ package games.biitworx.starcitysim;
  */
 public class MenuWatcher {
 
-    public static int START_MENU_0 = 0;
-    public static int END_MENU_0 = 240;
+    public static int START_MENU_0 = 180;
+    public static int END_MENU_0 = 360;
     public static int MAX_MENU_0 = 360;
     public static int MIN_MENU_0 = 0;
     public static int DIR_MENU_0 = 0;
 
-    public static int START_MENU_1 = 160;
-    public static int END_MENU_1 = 245;
+    public static int START_MENU_1 = 90;
+    public static int END_MENU_1 = 270;
     public static int MAX_MENU_1 = 360;
     public static int MIN_MENU_1 = 0;
     public static int DIR_MENU_1 = 0;
@@ -29,6 +29,30 @@ public class MenuWatcher {
     public static int MIN_MENU_3 = 0;
     public static int DIR_MENU_3 = 0;
 
+    public static int ALPHA=175;
+    public static int ALPHA_DIR=0;
+
+    public static void pulse(){
+        if(ALPHA_DIR==0) {
+            if (ALPHA >= 80 && ALPHA < 220) {
+                ALPHA += 10;
+            }
+            else
+            {
+                ALPHA_DIR=1;
+            }
+        }else
+        {
+            if (ALPHA > 80 && ALPHA <= 220) {
+                ALPHA -= 10;
+            }
+            else
+            {
+                ALPHA_DIR=0;
+            }
+        }
+
+    }
 
     public static void move() {
 

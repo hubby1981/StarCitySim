@@ -79,7 +79,7 @@ public abstract class Window {
             Rect base2 = MenuRects.notification.get();
             Fonts.FONT.setTextSize((base.height() / 8));
 
-            canvas.drawText(hint, base2.centerX()-(int)((Fonts.FONT.getTextSize()*hint.length())/2), (int) (base2.top + Fonts.FONT.getTextSize() *2), Fonts.FONT);
+            canvas.drawText(hint, base2.centerX()-(int)((Fonts.FONT.getTextSize()*hint.length())/2), (int) (base2.top + Fonts.FONT.getTextSize() *1.5), Fonts.FONT);
 
         }
 

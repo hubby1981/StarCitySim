@@ -134,31 +134,33 @@ public class GameViewBackNormal extends View {
         y+=botter.height()/8;
         RadialGradient shader5 = new RadialGradient(x,
                 y, (int) (botter.height() / 3.5f),
-                Color.argb(100, 15, 130, 160),Color.argb(50,0,0,0), Shader.TileMode.CLAMP);
+                Color.argb(MenuWatcher.ALPHA, 15, 130, 100),Color.argb(75,0,0,0), Shader.TileMode.CLAMP);
         Colors.outlinePainter3.setShader(shader5);
 
 
-
+        canvas.drawArc(x - botter.height() / 3.25f, y - botter.height() / 3.25f, x + botter.height() / 3.25f, y + botter.height() / 3.25f, 0, 360, true, Colors.outlinePainter3);
+        canvas.drawArc(x - botter.height() / 3.25f, y - botter.height() / 3.25f, x + botter.height() / 3.25f, y + botter.height() / 3.25f, 0, 360, true, Colors.backPainterLine3);
         canvas.drawArc(x - botter.height() / 3.5f, y - botter.height() / 3.5f, x + botter.height() / 3.5f, y + botter.height() / 3.5f, 0, 360, true, Colors.outlinePainter3);
-        canvas.drawArc(x - botter.height() / 3.5f, y - botter.height() / 3.5f, x + botter.height() / 3.5f, y + botter.height() / 3.5f, 0, 360, true, Colors.backPainterLine2);
+        canvas.drawArc(x - botter.height() / 3.5f, y - botter.height() / 3.5f, x + botter.height() / 3.5f, y + botter.height() / 3.5f, 0, 360, true, Colors.backPainterLine3);
 
+        Colors.outlinePainter2.setColor(Color.argb(255, 15, 90, 70));
 
-
-        canvas.drawArc(x - botter.height() / 6.5f, y - botter.height() / 6.5f, x + botter.height() / 6.5f, y + botter.height() / 6.5f, MenuWatcher.START_MENU_0, MenuWatcher.END_MENU_0, true, Colors.outlinePainter3);
+        canvas.drawArc(x - botter.height() / 6.5f, y - botter.height() / 6.5f, x + botter.height() / 6.5f, y + botter.height() / 6.5f, MenuWatcher.START_MENU_0, MenuWatcher.END_MENU_0, true, Colors.outlinePainter2);
 
         canvas.drawArc(x - botter.height() / 6.5f, y - botter.height() / 6.5f, x + botter.height() / 6.5f, y + botter.height() / 6.5f,MenuWatcher.START_MENU_0, MenuWatcher.END_MENU_0, true, Colors.backPainterLine2);
 
 
-        canvas.drawArc(x - botter.height() / 12.5f, y - botter.height() / 12.5f, x + botter.height() / 12.5f, y + botter.height() / 12.5f, MenuWatcher.START_MENU_1, MenuWatcher.END_MENU_1, true, Colors.outlinePainter3);
+        canvas.drawArc(x - botter.height() / 12.5f, y - botter.height() / 12.5f, x + botter.height() / 12.5f, y + botter.height() / 12.5f, MenuWatcher.START_MENU_1, MenuWatcher.END_MENU_1, true, Colors.outlinePainter2);
 
         canvas.drawArc(x - botter.height() / 12.5f, y - botter.height() /12.5f, x + botter.height() / 12.5f, y + botter.height() / 12.5f, MenuWatcher.START_MENU_1, MenuWatcher.END_MENU_1, true, Colors.backPainterLine2);
 
-        canvas.drawArc(x - botter.height() / 8.5f, y - botter.height() / 8.5f, x + botter.height() / 8.5f, y + botter.height() / 8.5f, MenuWatcher.START_MENU_2, MenuWatcher.END_MENU_2, true, Colors.outlinePainter3);
+        canvas.drawArc(x - botter.height() / 8.5f, y - botter.height() / 8.5f, x + botter.height() / 8.5f, y + botter.height() / 8.5f, MenuWatcher.START_MENU_2, MenuWatcher.END_MENU_2, true, Colors.outlinePainter2);
 
         canvas.drawArc(x - botter.height() / 8.5f, y - botter.height() / 8.5f, x + botter.height() / 8.5f, y + botter.height() / 8.5f,MenuWatcher.START_MENU_2, MenuWatcher.END_MENU_2, true, Colors.backPainterLine2);
 
-        canvas.drawArc(x - botter.height() /15.5f, y - botter.height() /15.5f, x + botter.height() / 15.5f, y + botter.height() /15.5f, MenuWatcher.START_MENU_3, MenuWatcher.END_MENU_3, true, Colors.outlinePainter3);
+        canvas.drawArc(x - botter.height() /15.5f, y - botter.height() /15.5f, x + botter.height() / 15.5f, y + botter.height() /15.5f, MenuWatcher.START_MENU_3, MenuWatcher.END_MENU_3, true, Colors.outlinePainter2);
 
         canvas.drawArc(x - botter.height() /15.5f, y - botter.height() /15.5f, x + botter.height() / 15.5f, y + botter.height() /15.5f, MenuWatcher.START_MENU_3, MenuWatcher.END_MENU_3, true, Colors.backPainterLine2);
+
     }
 }
