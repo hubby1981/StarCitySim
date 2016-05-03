@@ -106,7 +106,7 @@ public class Colors {
         backPainterLine2 = new Paint();
         backPainterLine2.setColor(foreFillColor);
         backPainterLine2.setStyle(Paint.Style.STROKE);
-        backPainterLine2.setStrokeWidth(1);
+        backPainterLine2.setStrokeWidth(2);
         backPainterLine2.setAntiAlias(true);
         //backPainterLine2.setPathEffect(new DashPathEffect(new float[]{2f,2f,2f},2f));
 

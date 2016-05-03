@@ -77,26 +77,14 @@ public class Game extends AppCompatActivity {
         timer = new Runnable() {
             @Override
             public void run() {
-                int  speed=18000;
+                int  speed=10;
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        counter--;
-                        if (counter== 0) {
-                            counter = 16;
-                            DAY++;
-
-                            if(DAY==20){
-                                DAY=1;
-                                MONTH++;
-                            }
-                            if(MONTH==10){
-                                YEAR++;
-                                MONTH=1;
-                            }
-                        }
-
-
+                        MenuWatcher.move();
+                        MenuWatcher.move2();
+                        MenuWatcher.move3();
+                        MenuWatcher.move4();
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
