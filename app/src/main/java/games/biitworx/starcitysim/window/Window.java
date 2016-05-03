@@ -23,7 +23,7 @@ public abstract class Window {
     private int scrollPosition = 0;
     private String text = "";
     private String hint = "";
-
+private Window overlayWindow;
 
     private Contents contents = new Contents();
     public boolean scroller = false;
@@ -36,6 +36,14 @@ public abstract class Window {
     public Window(String text, String hint) {
         this.text = text;
         this.hint = hint;
+    }
+
+    public void setOverlayWindow(Window overlayWindow){
+        this.overlayWindow = overlayWindow;
+    }
+
+    public Window getOverlayWindow(){
+        return overlayWindow;
     }
 
     private String getHint(){

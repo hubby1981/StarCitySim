@@ -39,7 +39,8 @@ public class GameViewBackNormal extends View {
     }
 
     public Window getOverlayWindow() {
-        return overlay;
+        if(view==null)return overlay;
+        return view.getOverlayWindow()!=null?view.getOverlayWindow(): overlay;
     }
 
     public void changeWindow(Window window) {
@@ -126,7 +127,6 @@ public class GameViewBackNormal extends View {
         int color3 = Color.argb(35, 0, 100, 130);
 
 
-
         MenuRects.info = new RectContainer(topper);
         Rect borderRect3 = new Rect(borderRect.left, borderRect.top - MenuRects.info.get().height() / 2, borderRect.right, borderRect.bottom - MenuRects.info.get().height() / 2);
         Rect texter = new Rect(borderRect3.left, borderRect3.top, borderRect3.right, borderRect.top);
@@ -138,7 +138,7 @@ public class GameViewBackNormal extends View {
                     view.scroller = true;
             }
             if (view != null)
-                view.onDraw(canvas,true);
+                view.onDraw(canvas, true);
         } else {
             if (overlay != null) {
                 overlay.scroller = false;
@@ -147,15 +147,20 @@ public class GameViewBackNormal extends View {
             }
 
             if (view != null)
-                view.onDraw(canvas,false);
+                view.onDraw(canvas, false);
             canvas.drawRect(MenuRects.contentInner.get(), Colors.backPainterContent);
 
             Colors.outlinePainter3.setShader(shader1);
             canvas.drawRect(MenuRects.contentInner.get(), Colors.outlinePainter3);
             canvas.drawRect(MenuRects.contentInner.get(), Colors.backPainterContentShader3);
+            if (view != null && view.getOverlayWindow() != null) {
+                if (view.getOverlayWindow() != null)
+                    view.getOverlayWindow().onDraw(canvas, true);
+            } else {
+                if (overlay != null)
+                    overlay.onDraw(canvas, true);
+            }
 
-            if (overlay != null)
-                overlay.onDraw(canvas,true);
         }
 
         RectHelper.drawRectGradient(borderRect, Color.argb(255, 0, 0, 0), color2, canvas);
@@ -173,8 +178,8 @@ public class GameViewBackNormal extends View {
         y += botter.height() / 8;
         int color4 = Color.argb(MenuWatcher.ALPHA, 15, 100, 130);
 
-        if(showOverlay)
-            color4=Color.argb(MenuWatcher.ALPHA, 15, 130, 100);
+        if (showOverlay)
+            color4 = Color.argb(MenuWatcher.ALPHA, 15, 130, 100);
         RadialGradient shader5 = new RadialGradient(x,
                 y, (int) (botter.height() / 3.5f),
                 color4, Color.argb(75, 0, 0, 0), Shader.TileMode.CLAMP);
@@ -203,22 +208,22 @@ public class GameViewBackNormal extends View {
         if (showOverlay)
             Colors.outlinePainter2.setColor(Color.argb(255, 15, 90, 70));
 
-        canvas.drawArc(x - botter.height() / 6.5f, y - botter.height() / 6.5f, x + botter.height() / 6.5f, y + botter.height() / 6.5f, MenuWatcher.START_MENU_0, !showOverlay?MenuWatcher.END_MENU_0:MenuWatcher.END_MENU_1, true, Colors.outlinePainter2);
+        canvas.drawArc(x - botter.height() / 6.5f, y - botter.height() / 6.5f, x + botter.height() / 6.5f, y + botter.height() / 6.5f, MenuWatcher.START_MENU_0, !showOverlay ? MenuWatcher.END_MENU_0 : MenuWatcher.END_MENU_1, true, Colors.outlinePainter2);
 
-        canvas.drawArc(x - botter.height() / 6.5f, y - botter.height() / 6.5f, x + botter.height() / 6.5f, y + botter.height() / 6.5f, MenuWatcher.START_MENU_0, !showOverlay?MenuWatcher.END_MENU_0:MenuWatcher.END_MENU_1, true, Colors.backPainterLine2);
+        canvas.drawArc(x - botter.height() / 6.5f, y - botter.height() / 6.5f, x + botter.height() / 6.5f, y + botter.height() / 6.5f, MenuWatcher.START_MENU_0, !showOverlay ? MenuWatcher.END_MENU_0 : MenuWatcher.END_MENU_1, true, Colors.backPainterLine2);
 
 
-        canvas.drawArc(x - botter.height() / 12.5f, y - botter.height() / 12.5f, x + botter.height() / 12.5f, y + botter.height() / 12.5f, MenuWatcher.START_MENU_1, !showOverlay?MenuWatcher.END_MENU_1:MenuWatcher.END_MENU_0, true, Colors.outlinePainter2);
+        canvas.drawArc(x - botter.height() / 12.5f, y - botter.height() / 12.5f, x + botter.height() / 12.5f, y + botter.height() / 12.5f, MenuWatcher.START_MENU_1, !showOverlay ? MenuWatcher.END_MENU_1 : MenuWatcher.END_MENU_0, true, Colors.outlinePainter2);
 
-        canvas.drawArc(x - botter.height() / 12.5f, y - botter.height() / 12.5f, x + botter.height() / 12.5f, y + botter.height() / 12.5f, MenuWatcher.START_MENU_1, !showOverlay?MenuWatcher.END_MENU_1:MenuWatcher.END_MENU_0, true, Colors.backPainterLine2);
+        canvas.drawArc(x - botter.height() / 12.5f, y - botter.height() / 12.5f, x + botter.height() / 12.5f, y + botter.height() / 12.5f, MenuWatcher.START_MENU_1, !showOverlay ? MenuWatcher.END_MENU_1 : MenuWatcher.END_MENU_0, true, Colors.backPainterLine2);
 
-        canvas.drawArc(x - botter.height() / 8.5f, y - botter.height() / 8.5f, x + botter.height() / 8.5f, y + botter.height() / 8.5f, MenuWatcher.START_MENU_2, !showOverlay?MenuWatcher.END_MENU_2:MenuWatcher.END_MENU_3, true, Colors.outlinePainter2);
+        canvas.drawArc(x - botter.height() / 8.5f, y - botter.height() / 8.5f, x + botter.height() / 8.5f, y + botter.height() / 8.5f, MenuWatcher.START_MENU_2, !showOverlay ? MenuWatcher.END_MENU_2 : MenuWatcher.END_MENU_3, true, Colors.outlinePainter2);
 
-        canvas.drawArc(x - botter.height() / 8.5f, y - botter.height() / 8.5f, x + botter.height() / 8.5f, y + botter.height() / 8.5f, MenuWatcher.START_MENU_2, !showOverlay?MenuWatcher.END_MENU_2:MenuWatcher.END_MENU_3, true, Colors.backPainterLine2);
+        canvas.drawArc(x - botter.height() / 8.5f, y - botter.height() / 8.5f, x + botter.height() / 8.5f, y + botter.height() / 8.5f, MenuWatcher.START_MENU_2, !showOverlay ? MenuWatcher.END_MENU_2 : MenuWatcher.END_MENU_3, true, Colors.backPainterLine2);
 
-        canvas.drawArc(x - botter.height() / 15.5f, y - botter.height() / 15.5f, x + botter.height() / 15.5f, y + botter.height() / 15.5f, MenuWatcher.START_MENU_3, !showOverlay?MenuWatcher.END_MENU_3:MenuWatcher.END_MENU_2, true, Colors.outlinePainter2);
+        canvas.drawArc(x - botter.height() / 15.5f, y - botter.height() / 15.5f, x + botter.height() / 15.5f, y + botter.height() / 15.5f, MenuWatcher.START_MENU_3, !showOverlay ? MenuWatcher.END_MENU_3 : MenuWatcher.END_MENU_2, true, Colors.outlinePainter2);
 
-        canvas.drawArc(x - botter.height() / 15.5f, y - botter.height() / 15.5f, x + botter.height() / 15.5f, y + botter.height() / 15.5f, MenuWatcher.START_MENU_3, !showOverlay?MenuWatcher.END_MENU_3:MenuWatcher.END_MENU_2, true, Colors.backPainterLine2);
+        canvas.drawArc(x - botter.height() / 15.5f, y - botter.height() / 15.5f, x + botter.height() / 15.5f, y + botter.height() / 15.5f, MenuWatcher.START_MENU_3, !showOverlay ? MenuWatcher.END_MENU_3 : MenuWatcher.END_MENU_2, true, Colors.backPainterLine2);
 
     }
 }

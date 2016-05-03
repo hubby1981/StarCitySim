@@ -21,7 +21,7 @@ import games.biitworx.starcitysim.window.views.MenuWindow;
 public class BankingWindow extends Window {
     public BankingWindow() {
         super(T.get(R.string.window_environment_banking_title));
-
+        setOverlayWindow(new BankingOverlayWindow());
         getContents().add(new MenuItemContent(null, B.get(R.drawable.bankingback), T.get(R.string.window_environment_banking_item0_title), T.get(R.string.window_environment_banking_item0_description), "", Colors.back001,
                 new Runnable() {
                     @Override
@@ -36,10 +36,10 @@ public class BankingWindow extends Window {
 
                     }
                 }));
-        getContents().add(new SpacerContent(1,true));
+        getContents().add(new SpacerContent(1, true));
 
         getContents().add(new ButtonContent(T.get(R.string.content_banking_add_slot)));
-        getContents().add(new SpacerContent(1,true));
+        getContents().add(new SpacerContent(1, true));
 
         getContents().add(new MenuItemContent(null, B.get(R.drawable.bankingback), T.get(R.string.window_environment_title), T.get(R.string.window_environment_desc), MenuCounter.environment.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,
                 new Runnable() {
@@ -48,7 +48,7 @@ public class BankingWindow extends Window {
                         Game.changeWindow(new EnvironmentWindow());
                     }
                 }));
-        getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback),T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,
+        getContents().add(new MenuItemContent(null, B.get(R.drawable.menuback), T.get(R.string.window_menu_title), T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,
                 new Runnable() {
                     @Override
                     public void run() {
