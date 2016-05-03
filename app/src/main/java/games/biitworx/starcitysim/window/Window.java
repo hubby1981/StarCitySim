@@ -54,7 +54,7 @@ public abstract class Window {
         return contents.getMaxLine() * (MenuRects.line.get().height());
     }
 
-    public void onDraw(Canvas canvas) {
+    public void onDraw(Canvas canvas,boolean sc) {
         Rect bounds = MenuRects.contentInner.get();
 
         Bitmap outerContent = Bitmap.createBitmap(bounds.right, bounds.height(), Bitmap.Config.ARGB_4444);
@@ -69,34 +69,35 @@ public abstract class Window {
         Rect base = MenuRects.info.get();
         Fonts.FONT.setTextSize((base.height() / 7));
         String time = Game.YEAR + "" + Game.MONTH + "." + Game.DAY;
-        canvas.drawText(time, base.centerX() - (Fonts.FONT.getTextSize() * time.length() / 3), (int) (base.centerY() - Fonts.FONT.getTextSize() ), Fonts.FONT);
+        canvas.drawText(time, base.centerX() - (Fonts.FONT.getTextSize() * time.length() / 3), (int) (base.centerY() - Fonts.FONT.getTextSize()), Fonts.FONT);
         Fonts.FONT.setTextSize((base.height() / 4));
 
         canvas.drawText(text, base.centerX() - (Fonts.FONT.getTextSize() * text.length() / 2), base.centerY() + (int) (Fonts.FONT.getTextSize() * 1.5), Fonts.FONT);
 
 
-        if(MenuRects.notification!=null && MenuRects.notification.get()!=null && getHint().length()>0){
+        if (MenuRects.notification != null && MenuRects.notification.get() != null && getHint().length() > 0) {
             Rect base2 = MenuRects.notification.get();
             Fonts.FONT.setTextSize((base.height() / 8));
 
-            canvas.drawText(hint, base2.centerX()-(int)((Fonts.FONT.getTextSize()*hint.length())/2), (int) (base2.top + Fonts.FONT.getTextSize() *1.5), Fonts.FONT);
+            canvas.drawText(hint, base2.centerX() - (int) ((Fonts.FONT.getTextSize() * hint.length()) / 2), (int) (base2.top + Fonts.FONT.getTextSize() * 1.5), Fonts.FONT);
 
         }
+        if (sc) {
+            int w = MenuRects.content.get().right - bounds.right;
+            int w2 = w / 10;
+            if (scroller && down) {
 
-        int w = MenuRects.content.get().right - bounds.right;
-        int w2 = w / 10;
-        if (scroller && down) {
+                Bitmap b = B.get(R.drawable.down);
+                Rect rc = new Rect((MenuRects.content.get().right - w) - w2, (MenuRects.contentInner.get().bottom - w) - w2, (MenuRects.content.get().right) - w2, MenuRects.contentInner.get().bottom - w2);
+                BitmapDrawer.drawImage(b, canvas, rc, null, true);
 
-            Bitmap b = B.get(R.drawable.down);
-            Rect rc = new Rect((MenuRects.content.get().right - w) - w2, (MenuRects.contentInner.get().bottom - w) - w2, (MenuRects.content.get().right) - w2, MenuRects.contentInner.get().bottom - w2);
-            BitmapDrawer.drawImage(b, canvas, rc, null, true);
+            }
+            if (scroller && scrollPosition > 20) {
+                Bitmap b = B.get(R.drawable.up);
 
-        }
-        if (scroller && scrollPosition > 20) {
-            Bitmap b = B.get(R.drawable.up);
-
-            Rect rc = new Rect((MenuRects.content.get().right - w) - w2, MenuRects.contentInner.get().top + w2, (MenuRects.content.get().right) - w2, (MenuRects.contentInner.get().top + w) + w2);
-            BitmapDrawer.drawImage(b, canvas, rc, null, true);
+                Rect rc = new Rect((MenuRects.content.get().right - w) - w2, MenuRects.contentInner.get().top + w2, (MenuRects.content.get().right) - w2, (MenuRects.contentInner.get().top + w) + w2);
+                BitmapDrawer.drawImage(b, canvas, rc, null, true);
+            }
         }
     }
 

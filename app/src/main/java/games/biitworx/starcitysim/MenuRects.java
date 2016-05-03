@@ -23,7 +23,6 @@ public class MenuRects {
     public static void testHit(int x, int y) {
         if (menu.hit(x, y) && menu.hasAction())
             menu.getAction().run();
-        else if (icon.hit(x, y) && icon.hasAction())
-            icon.getAction().run();
+
     }
 }

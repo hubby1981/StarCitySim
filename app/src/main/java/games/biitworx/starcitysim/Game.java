@@ -33,11 +33,12 @@ public class Game extends AppCompatActivity {
     public static Resources res;
     public static int counter = 16;
 
-    public static int DAY=1;
-    public static int MONTH=12;
-    public static int YEAR=29391;
+    public static int DAY = 1;
+    public static int MONTH = 12;
+    public static int YEAR = 29391;
 
-    public static int count=2;
+    public static int count = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,12 +68,15 @@ public class Game extends AppCompatActivity {
         update = new Runnable() {
             @Override
             public void run() {
+                if (view != null) {
+                    Window wnd = !view.getOverlaySetting() ? view.getWindow() : view.getOverlayWindow();
 
-                if (view != null && view.getWindow() != null) {
+                    if (wnd != null) {
 
-                    view.getWindow().setScrollPosition(ScrollPosition);
+                        wnd.setScrollPosition(ScrollPosition);
 
-                    view.invalidate();
+                        view.invalidate();
+                    }
                 }
             }
         };
@@ -80,7 +84,7 @@ public class Game extends AppCompatActivity {
         timer = new Runnable() {
             @Override
             public void run() {
-                int  speed=75;
+                int speed = 75;
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -94,7 +98,7 @@ public class Game extends AppCompatActivity {
                             }
                         });
                     }
-                }, speed,speed);
+                }, speed, speed);
             }
         };
         //timer.run();
@@ -107,11 +111,25 @@ public class Game extends AppCompatActivity {
         update.run();
     }
 
+    public static void updateEx() {
+        update.run();
+    }
+
     public static void changeWindow(Window window) {
         if (view != null) {
             view.changeWindow(window);
             ScrollPosition = view.getWindow().getScrollPosition();
+            view.setOverlaySetting(false);
 
+        }
+        update.run();
+    }
+
+    public static void changeOverlayWindow(Window window) {
+        if (view != null) {
+            view.changeOverlayWindow(window);
+            ScrollPosition = view.getWindow().getScrollPosition();
+            view.setOverlaySetting(true);
         }
         update.run();
     }
@@ -135,35 +153,44 @@ public class Game extends AppCompatActivity {
                 if (newScroller < 0)
                     newScroller = 0;
                 touch = true;
+                if (view != null) {
+                    Window wnd =  !view.getOverlaySetting()? view.getWindow():view.getOverlayWindow();
 
-                if (view != null && view.getWindow() != null && newScroller != 0) {
-                    int max = view.getWindow().getMaxScrollPosition() - MenuRects.contentInner.get().height();
-                    max += MenuRects.line.get().height();
-                    view.getWindow().down = true;
-                    if (newScroller < max) {
+                    if (wnd != null && newScroller != 0) {
+                        int max = wnd.getMaxScrollPosition() - MenuRects.contentInner.get().height();
+                        max += MenuRects.line.get().height();
+                        wnd.down = true;
+                        if (newScroller < max) {
 
-                        scrolled = true;
-                        ScrollPosition = newScroller;
-                        update.run();
+                            scrolled = true;
+                            ScrollPosition = newScroller;
+                            update.run();
 
-                    } else {
-                        view.getWindow().down = false;
-                        update.run();
+                        } else {
+                            wnd.down = false;
+                            update.run();
+                        }
                     }
                 }
             }
-
         }
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
             touch = false;
 
             if (!scrolled) {
-                //MenuRects.testHit((int) event.getX(), (int) event.getY() - (MenuRects.icon.get().top));
+                int yy=(int) event.getY() - (int) (MenuRects.menu.get().height()/2);
+                MenuRects.testHit((int) event.getX(), yy);
 
-                if (view != null && view.getWindow() != null && MenuRects.contentInner.get().contains((int)event.getX(),(int)event.getY())) {
-                    view.getWindow().checkHit((int) event.getX(), (int) event.getY() - (int)(MenuRects.icon.get().height()*1.5));
+                if(view!=null){
+                    if (view.getOverlaySetting()&& view.getOverlayWindow() != null && MenuRects.contentInner.get().contains((int) event.getX(), (int) event.getY())) {
+                        view.getOverlayWindow().checkHit((int) event.getX(), (int) event.getY() - (int) (MenuRects.icon.get().height() * 1.5));
+                    }
+                    else if ( !view.getOverlaySetting()&&view.getWindow() != null && MenuRects.contentInner.get().contains((int) event.getX(), (int) event.getY())) {
+                        view.getWindow().checkHit((int) event.getX(), (int) event.getY() - (int) (MenuRects.icon.get().height() * 1.5));
+                    }
                 }
+
             }
             scrolled = false;
         }
