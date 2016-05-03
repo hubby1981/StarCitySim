@@ -71,8 +71,8 @@
     <string name="items_count"> aktionen</string>
 
 
-    <string name="window_menu_hint">Zum ausführen die Aktion berühren.</string>
-
+    <string name="window_menu_hint">Zum ausführen eine der Aktionen berühren.</string>
+    <string name="window_environment_banking_hint">Um Kontostände einzusehen Slot anklicken.</string>
 
     <string name="content_banking_add_slot">Slot kaufen</string>
 
@@ -90,6 +90,8 @@
     <string name="overlay_menu_help">Anleitung</string>
 
     <string name="settings_window_title">Einstellungen</string>
+
+    <string name="overlay_hint"></string> //zeigt text in notification an wenn kein hint existiert
 
 
 </resources>

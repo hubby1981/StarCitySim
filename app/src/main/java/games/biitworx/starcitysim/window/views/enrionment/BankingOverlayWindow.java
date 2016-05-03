@@ -13,7 +13,7 @@ import games.biitworx.starcitysim.window.views.MenuWindow;
  */
 public class BankingOverlayWindow extends Window {
     public BankingOverlayWindow() {
-        super("");
+        super("",T.get(R.string.window_menu_hint));
         getContents().add(new SpacerContent(2));
         getContents().add(new ButtonContent(T.get(R.string.content_banking_add_slot)));
         getContents().add(new SpacerContent(1));

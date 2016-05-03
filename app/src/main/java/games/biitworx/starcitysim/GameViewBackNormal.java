@@ -199,10 +199,10 @@ public class GameViewBackNormal extends View {
 
 
         canvas.drawArc(x - botter.height() / 3.25f, y - botter.height() / 3.25f, x + botter.height() / 3.25f, y + botter.height() / 3.25f, 0, 360, true, Colors.outlinePainter3);
-        canvas.drawArc(x - botter.height() / 3.25f, y - botter.height() / 3.25f, x + botter.height() / 3.25f, y + botter.height() / 3.25f, 0, 360, true, Colors.backPainterLine3);
+        canvas.drawArc(x - botter.height() / 3.25f, y - botter.height() / 3.25f, x + botter.height() / 3.25f, y + botter.height() / 3.25f, 0, 360, true, showOverlay? Colors.backPainterLine2:Colors.backPainterLine3);
 
         canvas.drawArc(x - botter.height() / 3.5f, y - botter.height() / 3.5f, x + botter.height() / 3.5f, y + botter.height() / 3.5f, 0, 360, true, Colors.outlinePainter3);
-        canvas.drawArc(x - botter.height() / 3.5f, y - botter.height() / 3.5f, x + botter.height() / 3.5f, y + botter.height() / 3.5f, 0, 360, true, Colors.backPainterLine3);
+        canvas.drawArc(x - botter.height() / 3.5f, y - botter.height() / 3.5f, x + botter.height() / 3.5f, y + botter.height() / 3.5f, 0, 360, true, showOverlay? Colors.backPainterLine2:Colors.backPainterLine3);
 
         Colors.outlinePainter2.setColor(Color.argb(255, 15, 70, 90));
         if (showOverlay)

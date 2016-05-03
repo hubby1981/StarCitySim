@@ -13,6 +13,7 @@ import games.biitworx.starcitysim.Fonts;
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.MenuRects;
 import games.biitworx.starcitysim.R;
+import games.biitworx.starcitysim.T;
 import games.biitworx.starcitysim.window.content.Content;
 
 /**
@@ -23,7 +24,7 @@ public abstract class Window {
     private int scrollPosition = 0;
     private String text = "";
     private String hint = "";
-private Window overlayWindow;
+    private Window overlayWindow;
 
     private Contents contents = new Contents();
     public boolean scroller = false;
@@ -38,15 +39,15 @@ private Window overlayWindow;
         this.hint = hint;
     }
 
-    public void setOverlayWindow(Window overlayWindow){
+    public void setOverlayWindow(Window overlayWindow) {
         this.overlayWindow = overlayWindow;
     }
 
-    public Window getOverlayWindow(){
+    public Window getOverlayWindow() {
         return overlayWindow;
     }
 
-    private String getHint(){
+    private String getHint() {
         return hint;
     }
 
@@ -62,7 +63,7 @@ private Window overlayWindow;
         return contents.getMaxLine() * (MenuRects.line.get().height());
     }
 
-    public void onDraw(Canvas canvas,boolean sc) {
+    public void onDraw(Canvas canvas, boolean sc) {
         Rect bounds = MenuRects.contentInner.get();
 
         Bitmap outerContent = Bitmap.createBitmap(bounds.right, bounds.height(), Bitmap.Config.ARGB_4444);
@@ -82,12 +83,14 @@ private Window overlayWindow;
 
         canvas.drawText(text, base.centerX() - (Fonts.FONT.getTextSize() * text.length() / 2), base.centerY() + (int) (Fonts.FONT.getTextSize() * 1.5), Fonts.FONT);
 
-
-        if (MenuRects.notification != null && MenuRects.notification.get() != null && getHint().length() > 0) {
+        String hint = getHint();
+        if(hint.length()==0)
+            hint = T.get(R.string.overlay_hint  );
+        if (MenuRects.notification != null && MenuRects.notification.get() != null && hint.length() > 0 && sc) {
             Rect base2 = MenuRects.notification.get();
             Fonts.FONT.setTextSize((base.height() / 8));
 
-            canvas.drawText(hint, base2.centerX() - (int) ((Fonts.FONT.getTextSize() * hint.length()) / 2), (int) (base2.top + Fonts.FONT.getTextSize() * 1.5), Fonts.FONT);
+            canvas.drawText(hint, base2.centerX() - (int) ((Fonts.FONT.getTextSize() * hint.length()) / 2.25), (int) (base2.top + Fonts.FONT.getTextSize() * 1.5), Fonts.FONT);
 
         }
         if (sc) {

@@ -28,7 +28,7 @@ public class ProductionWindow extends Window {
                         Game.changeWindow(new ShipyardWindow());
                     }
                 }));
-        getContents().add(new SpacerContent(1,true));
+
         getContents().add(new MenuItemContent(null, B.get( R.drawable.menuback), T.get(R.string.window_menu_title),T.get(R.string.window_menu_desc), MenuCounter.menu.concat(" ").concat(T.get(R.string.items_count)),Colors.back001,
                 new Runnable() {
                     @Override

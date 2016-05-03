@@ -74,7 +74,7 @@
 
 
     <string name="window_menu_hint">Touch one of the items to perform a action.</string>
-
+    <string name="window_environment_banking_hint">Too see credit amoutn click on s slot.</string>
 
     <string name="content_banking_add_slot">Buy Slot</string>
     <string name="window_environment_banking_item0_title">Main Slot</string>
@@ -92,5 +92,8 @@
     <string name="overlay_menu_help">Tutorial</string>
 
     <string name="settings_window_title">Settings</string>
+
+
+    <string name="overlay_hint"></string>
 
 </resources>

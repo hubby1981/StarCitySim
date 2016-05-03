@@ -22,7 +22,7 @@ public class MenuOverlayWindow extends Window {
                 new Runnable() {
                     @Override
                     public void run() {
-                        Game.changeWindow(new MenuWindow());
+                        Game.changeWindow(new SettingsWindow());
                     }
                 }));
 
@@ -31,7 +31,7 @@ public class MenuOverlayWindow extends Window {
                 new Runnable() {
                     @Override
                     public void run() {
-                        Game.changeWindow(new SettingsWindow());
+                        Game.changeWindow(new MenuWindow());
                     }
                 }));
         getContents().add(new ButtonContent(T.get(R.string.overlay_menu_shop),
