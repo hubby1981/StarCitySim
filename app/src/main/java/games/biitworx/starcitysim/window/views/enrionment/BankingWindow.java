@@ -2,6 +2,8 @@ package games.biitworx.starcitysim.window.views.enrionment;
 
 import android.graphics.Color;
 
+import java.util.ArrayList;
+
 import games.biitworx.starcitysim.B;
 import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Game;
@@ -10,8 +12,11 @@ import games.biitworx.starcitysim.T;
 import games.biitworx.starcitysim.window.Window;
 import games.biitworx.starcitysim.window.basic.MenuCounter;
 import games.biitworx.starcitysim.window.content.ButtonContent;
+import games.biitworx.starcitysim.window.content.ComboboxContent;
+import games.biitworx.starcitysim.window.content.Content;
 import games.biitworx.starcitysim.window.content.MenuItemContent;
 import games.biitworx.starcitysim.window.content.SpacerContent;
+import games.biitworx.starcitysim.window.content.TextContent;
 import games.biitworx.starcitysim.window.views.EnvironmentWindow;
 import games.biitworx.starcitysim.window.views.MenuWindow;
 
@@ -20,7 +25,7 @@ import games.biitworx.starcitysim.window.views.MenuWindow;
  */
 public class BankingWindow extends Window {
     public BankingWindow() {
-        super(T.get(R.string.window_environment_banking_title),T.get(R.string.window_environment_banking_hint));
+        super(T.get(R.string.window_environment_banking_title), T.get(R.string.window_environment_banking_hint));
         setOverlayWindow(new BankingOverlayWindow());
         getContents().add(new MenuItemContent(null, B.get(R.drawable.bankingback), T.get(R.string.window_environment_banking_item0_title), T.get(R.string.window_environment_banking_item0_description), "", Colors.back001,
                 new Runnable() {
@@ -37,7 +42,12 @@ public class BankingWindow extends Window {
                     }
                 }));
 
+        ArrayList<Content> list = new ArrayList<>();
+        list.add(new TextContent("Value 1"));
+        list.add(new TextContent("Value 2"));
+        list.add(new TextContent("Value 3"));
 
+        getContents().add(new ComboboxContent(T.get(R.string.content_banking_selection),T.get(R.string.content_banking_add_slot),Colors.back001,list));
         getContents().add(new ButtonContent(T.get(R.string.content_banking_add_slot)));
         getContents().add(new SpacerContent(1));
 

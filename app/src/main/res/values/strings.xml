@@ -96,4 +96,7 @@
 
     <string name="overlay_hint"></string>
 
+
+    <string name="content_banking_selection">Select a option</string>
+
 </resources>

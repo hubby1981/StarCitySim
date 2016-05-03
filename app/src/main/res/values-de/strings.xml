@@ -92,6 +92,7 @@
     <string name="settings_window_title">Einstellungen</string>
 
     <string name="overlay_hint"></string> //zeigt text in notification an wenn kein hint existiert
+    <string name="content_banking_selection">Optionsauswahl</string>
 
 
 </resources>

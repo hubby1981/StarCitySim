@@ -9,7 +9,7 @@ import games.biitworx.starcitysim.MenuRects;
  * Created by marce_000 on 21.04.2016.
  */
 public abstract class Content {
-    private int lineHeight = 1;
+    protected int lineHeight = 1;
     private Rect content;
     private Rect click;
     private Runnable action=null;
