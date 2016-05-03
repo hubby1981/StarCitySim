@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -35,6 +36,8 @@ public class Game extends AppCompatActivity {
     public static int DAY=1;
     public static int MONTH=12;
     public static int YEAR=29391;
+
+    public static int count=2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,10 +80,11 @@ public class Game extends AppCompatActivity {
         timer = new Runnable() {
             @Override
             public void run() {
-                int  speed=10;
+                int  speed=50;
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
+
                         MenuWatcher.move();
                         MenuWatcher.move2();
                         MenuWatcher.move3();
