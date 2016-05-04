@@ -188,12 +188,19 @@ public class GameViewBackNormal extends View {
         MenuRects.menu = new RectContainer(botter, new Runnable() {
             @Override
             public void run() {
+                Window wnd = view;
                 if (!showOverlay) {
                     showOverlay = true;
+                    wnd = view!=null?view.getOverlayWindow()!=null?view.getOverlayWindow():overlay:overlay;
+
+
                 } else {
                     showOverlay = false;
+
+
                 }
-                Game.updateEx();
+
+                Game.updateEx(wnd.getScrollPosition());
             }
         });
 

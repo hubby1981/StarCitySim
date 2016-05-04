@@ -111,7 +111,9 @@ public class Game extends AppCompatActivity {
         update.run();
     }
 
-    public static void updateEx() {
+    public static void updateEx(int scrollPosition) {
+        if(scrollPosition!=-1)
+            ScrollPosition = scrollPosition;
         update.run();
     }
 

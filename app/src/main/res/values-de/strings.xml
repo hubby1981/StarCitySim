@@ -93,6 +93,10 @@
 
     <string name="overlay_hint"></string> //zeigt text in notification an wenn kein hint existiert
     <string name="content_banking_selection">Optionsauswahl</string>
+    <string name="content_banking_selection_value0">Guthaben</string>
+    <string name="content_banking_selection_value1">Transaktionen</string>
+    <string name="content_banking_selection_value2">Mineralien</string>
 
+    <string name="selection_default">bitte auswählen</string>
 
 </resources>

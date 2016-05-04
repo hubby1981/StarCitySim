@@ -43,6 +43,10 @@ public abstract class Content {
         return action;
     }
 
+    public void checkHit(int x, int y) {
+
+    }
+
     public abstract void onDrawEx(Canvas canvas);
 
     public int onDraw(Canvas canvas, int yPos, int scroll) {
@@ -52,6 +56,7 @@ public abstract class Content {
 
         click = new Rect(content.left, content.top - base.height(), content.right, content.bottom - base.height());
         onDrawEx(canvas);
+        onDrawContents(yPos + (base.height()*lineHeight),scroll);
         return yPos + (base.height()*getLineHeight());
     }
 
@@ -75,5 +80,23 @@ public abstract class Content {
     }
     public Rect getClickRect() {
         return content;
+    }
+
+    public int onDrawInner(int yPos,int scroll){
+        Rect base = MenuRects.line.get();
+        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + base.height()*lineHeight);
+        full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + base.height()*getLineHeight());
+
+        click = new Rect(content.left, content.top - base.height(), content.right, content.bottom - base.height());
+        return yPos + (base.height()*lineHeight);
+
+    }
+
+    protected void onDrawContents(int yPos,int scroll){
+
+    }
+
+    public String getValue(){
+        return "";
     }
 }

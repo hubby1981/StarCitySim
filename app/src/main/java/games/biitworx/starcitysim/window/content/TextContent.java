@@ -20,9 +20,14 @@ public class TextContent extends Content {
 
     @Override
     public void onDrawEx(Canvas canvas) {
-        Fonts.FONT.setTextSize((getContentRect().height() / 3));
+        Fonts.FONT.setTextSize((getInnerRect().height() / 2));
 
-        canvas.drawText(text,0,getContentRect().top,Fonts.FONT);
+        canvas.drawText(text,getInnerRect().left+getInnerRect().height(),getInnerRect().centerY(),Fonts.FONT);
 
+    }
+
+    @Override
+    public String getValue(){
+        return text;
     }
 }

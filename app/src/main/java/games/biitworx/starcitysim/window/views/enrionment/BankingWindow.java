@@ -19,6 +19,7 @@ import games.biitworx.starcitysim.window.content.SpacerContent;
 import games.biitworx.starcitysim.window.content.TextContent;
 import games.biitworx.starcitysim.window.views.EnvironmentWindow;
 import games.biitworx.starcitysim.window.views.MenuWindow;
+import games.biitworx.starcitysim.window.views.production.ShipyardWindow;
 
 /**
  * Created by marce_000 on 27.04.2016.
@@ -43,12 +44,19 @@ public class BankingWindow extends Window {
                 }));
 
         ArrayList<Content> list = new ArrayList<>();
-        list.add(new TextContent("Value 1"));
-        list.add(new TextContent("Value 2"));
-        list.add(new TextContent("Value 3"));
+        list.add(new SpacerContent(1));
+        list.add(new TextContent(T.get(R.string.content_banking_selection_value0)));
+        list.add(new TextContent(T.get(R.string.content_banking_selection_value1)));
+        list.add(new TextContent(T.get(R.string.content_banking_selection_value2)));
+        list.add(new SpacerContent(1));
 
-        getContents().add(new ComboboxContent(T.get(R.string.content_banking_selection),T.get(R.string.content_banking_add_slot),Colors.back001,list));
-        getContents().add(new ButtonContent(T.get(R.string.content_banking_add_slot)));
+        getContents().add(new ComboboxContent(T.get(R.string.content_banking_selection),"",Colors.back001,list));
+        getContents().add(new ButtonContent(T.get(R.string.content_banking_add_slot), new Runnable() {
+            @Override
+            public void run() {
+                Game.changeWindow(new ShipyardWindow());
+            }
+        }));
         getContents().add(new SpacerContent(1));
 
         getContents().add(new MenuItemContent(null, B.get(R.drawable.bankingback), T.get(R.string.window_environment_title), T.get(R.string.window_environment_desc), MenuCounter.environment.concat(" ").concat(T.get(R.string.items_count)), Colors.back001,

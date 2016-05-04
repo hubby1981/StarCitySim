@@ -15,7 +15,9 @@ import games.biitworx.starcitysim.BitmapDrawer;
 import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Fonts;
 import games.biitworx.starcitysim.Game;
+import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.RectHelper;
+import games.biitworx.starcitysim.T;
 
 /**
  * Created by marcel.weissgerber on 26.04.2016.
@@ -26,17 +28,23 @@ public class ComboboxContent extends Content {
     private String secondary;
     private boolean show = false;
     private List<Content> contents = new ArrayList<>();
+    private static String value= T.get(R.string.selection_default);
 
     public ComboboxContent(String primary, String secondary, int color, List<Content> contents) {
         this(primary, secondary, color, null, contents);
+    }
+
+    @Override
+    public String getValue(){
+        return value;
     }
 
     public ComboboxContent(String primary, String secondary, int color, Runnable action, List<Content> contents) {
         super(2);
         if (contents == null) {
             this.contents = new ArrayList<>();
-        }else{
-            this.contents=contents;
+        } else {
+            this.contents = contents;
         }
 
         this.primary = primary;
@@ -48,22 +56,33 @@ public class ComboboxContent extends Content {
                 @Override
                 public void run() {
                     show = !show;
-                    Game.updateEx();
+                    Game.updateEx(-1);
                 }
             };
         }
+
+        for (final Content c: contents)
+        if(c!=null)
+            c.setAction(new Runnable() {
+                @Override
+                public void run() {
+                    value=c.getValue();
+                    show = !show;
+                    Game.updateEx(-1);
+                }
+            });
         setAction(action);
     }
 
     @Override
     public int getLineHeight() {
-        return show ? super.getLineHeight() +getContentsLineHeight() : super.getLineHeight();
+        return show ? super.getLineHeight() + getContentsLineHeight() : super.getLineHeight();
     }
 
-    private int getContentsLineHeight(){
-        int result =0;
-        for(Content c : contents)
-            result+=c.getLineHeight();
+    private int getContentsLineHeight() {
+        int result = 0;
+        for (Content c : contents)
+            result += c.getLineHeight();
         return result;
     }
 
@@ -102,15 +121,36 @@ public class ComboboxContent extends Content {
 
 
         canvas.drawText(primary, (float) rects.get(1).left, rects.get(1).centerY(), Fonts.FONT);
-        Fonts.FONT.setTextSize((getContentRect().height() / 9));
-        canvas.drawText(secondary, (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
+        Fonts.FONT.setTextSize((getContentRect().height() / 7));
+        canvas.drawText(getValue(), (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
 
 
         canvas.drawRect(getInnerFullRect(), Colors.backPainterLine2);
         canvas.drawRect(innerContent, Colors.backPainterLine2);
 
+        if (show) {
+
+            for (Content c : contents)
+                c.onDrawEx(canvas);
+        }
 
 
+    }
 
+    @Override
+    protected void onDrawContents(int yPos,int scroll){
+        for(Content c : contents){
+            if(c!=null)
+                yPos = c.onDrawInner(yPos,scroll);
+        }
+    }
+
+    @Override
+    public void checkHit(int x,int y){
+        for (Content c : contents) {
+            if (c.hasAction() && c.isHit(x, y)) {
+                c.getAction().run();
+            }
+        }
     }
 }

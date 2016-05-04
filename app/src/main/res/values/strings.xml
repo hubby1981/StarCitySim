@@ -98,5 +98,10 @@
 
 
     <string name="content_banking_selection">Select a option</string>
+    <string name="content_banking_selection_value0">Credits</string>
+    <string name="content_banking_selection_value1">Transactions</string>
+    <string name="content_banking_selection_value2">Minerals</string>
+
+    <string name="selection_default">nothing selected</string>
 
 </resources>
