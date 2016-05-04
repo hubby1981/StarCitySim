@@ -68,7 +68,7 @@ public class ComboboxContent extends Content {
                 public void run() {
                     value=c.getValue();
                     show = !show;
-                    Game.updateEx(-1);
+                    Game.updateEx(0);
                 }
             });
         setAction(action);
