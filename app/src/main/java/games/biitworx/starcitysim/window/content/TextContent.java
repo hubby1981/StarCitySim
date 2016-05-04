@@ -12,7 +12,7 @@ public class TextContent extends Content {
     private String text="";
 
     public TextContent(String text){
-        super();
+        super(2);
         this.text = text;
 
     }
@@ -20,9 +20,9 @@ public class TextContent extends Content {
 
     @Override
     public void onDrawEx(Canvas canvas) {
-        Fonts.FONT.setTextSize((getInnerRect().height() / 2));
+        Fonts.FONT.setTextSize((getInnerRect().height() / 4));
 
-        canvas.drawText(text,getInnerRect().left+(float)(getInnerRect().height()*1.5),getInnerRect().centerY(),Fonts.FONT);
+        canvas.drawText(text,getInnerRect().left+(float)(getInnerRect().height()/1.5),getInnerRect().centerY(),Fonts.FONT);
 
     }
 
