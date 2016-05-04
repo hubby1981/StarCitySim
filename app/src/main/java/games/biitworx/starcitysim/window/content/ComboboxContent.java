@@ -57,7 +57,7 @@ public class ComboboxContent extends Content {
                 @Override
                 public void run() {
                     show = !show;
-                    Game.updateEx(-1);
+                    Game.updateEx(0);
                 }
             };
         }

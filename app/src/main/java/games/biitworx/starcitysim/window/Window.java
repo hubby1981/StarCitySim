@@ -66,7 +66,7 @@ public abstract class Window {
     public void onDraw(Canvas canvas, boolean sc) {
         Rect bounds = MenuRects.contentInner.get();
 
-        Bitmap outerContent = Bitmap.createBitmap(bounds.right, bounds.height(), Bitmap.Config.ARGB_4444);
+        Bitmap outerContent = Bitmap.createBitmap(bounds.right, bounds.height(), Bitmap.Config.ARGB_8888);
 
         Canvas canvasOuterContent = new Canvas(outerContent);
 
