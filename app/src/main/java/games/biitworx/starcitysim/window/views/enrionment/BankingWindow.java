@@ -44,11 +44,11 @@ public class BankingWindow extends Window {
                 }));
 
         ArrayList<Content> list = new ArrayList<>();
-        list.add(new SpacerContent(1));
+
         list.add(new TextContent(T.get(R.string.content_banking_selection_value0)));
         list.add(new TextContent(T.get(R.string.content_banking_selection_value1)));
         list.add(new TextContent(T.get(R.string.content_banking_selection_value2)));
-        list.add(new SpacerContent(1));
+
 
         getContents().add(new ComboboxContent(T.get(R.string.content_banking_selection),"",Colors.back001,list));
         getContents().add(new ButtonContent(T.get(R.string.content_banking_add_slot), new Runnable() {
