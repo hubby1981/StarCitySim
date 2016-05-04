@@ -90,6 +90,7 @@
     <string name="overlay_menu_rate">Rate StarCity</string>
     <string name="overlay_menu_shop">Shop</string>
     <string name="overlay_menu_help">Tutorial</string>
+    <string name="overlay_menu_back">Back</string>
 
     <string name="settings_window_title">Settings</string>
 

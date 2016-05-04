@@ -112,29 +112,23 @@ public class Game extends AppCompatActivity {
     }
 
     public static void updateEx(int scrollPosition) {
-        if(scrollPosition!=-1)
+        if (scrollPosition != -1)
             ScrollPosition = scrollPosition;
         update.run();
     }
 
     public static void changeWindow(Window window) {
         if (view != null) {
-            view.changeWindow(window);
-            ScrollPosition = view.getWindow().getScrollPosition();
+            if (window != null) {
+                view.changeWindow(W.get(window));
+                ScrollPosition = view.getWindow().getScrollPosition();
+            }
             view.setOverlaySetting(false);
 
         }
         update.run();
     }
 
-    public static void changeOverlayWindow(Window window) {
-        if (view != null) {
-            view.changeOverlayWindow(window);
-            ScrollPosition = view.getWindow().getScrollPosition();
-            view.setOverlaySetting(true);
-        }
-        update.run();
-    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -156,7 +150,7 @@ public class Game extends AppCompatActivity {
                     newScroller = 0;
                 touch = true;
                 if (view != null) {
-                    Window wnd =  !view.getOverlaySetting()? view.getWindow():view.getOverlayWindow();
+                    Window wnd = !view.getOverlaySetting() ? view.getWindow() : view.getOverlayWindow();
 
                     if (wnd != null && newScroller != 0) {
                         int max = wnd.getMaxScrollPosition() - MenuRects.contentInner.get().height();
@@ -181,14 +175,13 @@ public class Game extends AppCompatActivity {
             touch = false;
 
             if (!scrolled) {
-                int yy=(int) event.getY() - (int) (MenuRects.menu.get().height()/2);
+                int yy = (int) event.getY() - (int) (MenuRects.menu.get().height() / 2);
                 MenuRects.testHit((int) event.getX(), yy);
 
-                if(view!=null){
-                    if (view.getOverlaySetting()&& view.getOverlayWindow() != null && MenuRects.contentInner.get().contains((int) event.getX(), (int) event.getY())) {
+                if (view != null) {
+                    if (view.getOverlaySetting() && view.getOverlayWindow() != null && MenuRects.contentInner.get().contains((int) event.getX(), (int) event.getY())) {
                         view.getOverlayWindow().checkHit((int) event.getX(), (int) event.getY() - (int) (MenuRects.icon.get().height() * 1.5));
-                    }
-                    else if ( !view.getOverlaySetting()&&view.getWindow() != null && MenuRects.contentInner.get().contains((int) event.getX(), (int) event.getY())) {
+                    } else if (!view.getOverlaySetting() && view.getWindow() != null && MenuRects.contentInner.get().contains((int) event.getX(), (int) event.getY())) {
                         view.getWindow().checkHit((int) event.getX(), (int) event.getY() - (int) (MenuRects.icon.get().height() * 1.5));
                     }
                 }

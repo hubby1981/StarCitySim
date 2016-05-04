@@ -22,7 +22,7 @@ public class TextContent extends Content {
     public void onDrawEx(Canvas canvas) {
         Fonts.FONT.setTextSize((getInnerRect().height() / 2));
 
-        canvas.drawText(text,getInnerRect().left+getInnerRect().height(),getInnerRect().centerY(),Fonts.FONT);
+        canvas.drawText(text,getInnerRect().left+(float)(getInnerRect().height()*1.5),getInnerRect().centerY(),Fonts.FONT);
 
     }
 

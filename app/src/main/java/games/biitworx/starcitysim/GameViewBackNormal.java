@@ -25,13 +25,17 @@ public class GameViewBackNormal extends View {
         super(context);
     }
 
-    private Window view = new MenuWindow();
-    private Window overlay = new MenuOverlayWindow();
+    private Window view;
+    private Window overlay;
 
     private boolean showOverlay = false;
 
     public GameViewBackNormal(Context context, AttributeSet attrs) {
         super(context, attrs);
+        view = new MenuWindow();
+        overlay = new MenuOverlayWindow();
+
+        W.addLast(view);
     }
 
     public Window getWindow() {

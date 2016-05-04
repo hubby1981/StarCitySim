@@ -55,8 +55,9 @@ public abstract class Content {
         full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + base.height()*getLineHeight());
 
         click = new Rect(content.left, content.top - base.height(), content.right, content.bottom - base.height());
-        onDrawEx(canvas);
         onDrawContents(yPos + (base.height()*lineHeight),scroll);
+        onDrawEx(canvas);
+
         return yPos + (base.height()*getLineHeight());
     }
 

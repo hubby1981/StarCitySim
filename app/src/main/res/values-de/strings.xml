@@ -88,6 +88,7 @@
     <string name="overlay_menu_rate">StarCity bewerten</string>
     <string name="overlay_menu_shop">Shop</string>
     <string name="overlay_menu_help">Anleitung</string>
+    <string name="overlay_menu_back">Zurück</string>
 
     <string name="settings_window_title">Einstellungen</string>
 

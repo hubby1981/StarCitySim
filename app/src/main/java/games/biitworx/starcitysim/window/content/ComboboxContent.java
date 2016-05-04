@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.Shader;
 
@@ -28,7 +29,7 @@ public class ComboboxContent extends Content {
     private String secondary;
     private boolean show = false;
     private List<Content> contents = new ArrayList<>();
-    private static String value= T.get(R.string.selection_default);
+    private String value= T.get(R.string.selection_default);
 
     public ComboboxContent(String primary, String secondary, int color, List<Content> contents) {
         this(primary, secondary, color, null, contents);
@@ -114,8 +115,23 @@ public class ComboboxContent extends Content {
 
         Rect rc1 = new Rect(rects.get(0).left, innerContent.top, rects.get(0).left + rects.get(0).width() / 4, innerContent.bottom);
 
+        Rect rc2 = RectHelper.combine(rects,37,38);
 
-        Fonts.FONT.setTextSize((getContentRect().height() / 5));
+        Path p = new Path();
+
+        int yy= rc2.centerY()+rc2.height()/4;
+        p.moveTo(rc2.centerX()-rc2.width()/2,yy);
+        p.lineTo(rc2.centerX() + rc2.width() / 2, yy);
+        p.lineTo(rc2.centerX(), yy + (int)(rc2.height()/1.25));
+
+        p.lineTo(rc2.centerX() - rc2.width() / 2,yy);
+        p.close();
+        canvas.drawPath(p, Colors.topOutlinePainter);
+        if(!show)
+            canvas.drawPath(p, Colors.backPainterContent);
+        canvas.drawPath(p, Colors.backPainterLine2);
+
+        Fonts.FONT.setTextSize((getContentRect().height() / 4));
 
         rects = RectHelper.makeRect3(text, (int) Fonts.FONT.getTextSize(), 2, 2);
 
@@ -139,6 +155,7 @@ public class ComboboxContent extends Content {
 
     @Override
     protected void onDrawContents(int yPos,int scroll){
+
         for(Content c : contents){
             if(c!=null)
                 yPos = c.onDrawInner(yPos,scroll);
