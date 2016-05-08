@@ -18,7 +18,7 @@ import games.biitworx.starcitysim.window.Window;
 
 public class Game extends AppCompatActivity {
 
-    private static Runnable update;
+    public static Runnable update;
     private static Runnable timer;
 
     private static int ScrollPosition = 0;
@@ -38,6 +38,7 @@ public class Game extends AppCompatActivity {
     public static int YEAR = 29391;
 
     public static int count = 2;
+    public static Runnable notifyAction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +118,27 @@ public class Game extends AppCompatActivity {
         update.run();
     }
 
+    public static void setNotifyAction() {
+        if (notifyAction != null) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    notifyAction.run();
+                    notifyAction = null;
+                }
+            }).run();
+
+
+        }
+    }
+
     public static void changeWindow(Window window) {
+
         if (view != null) {
             if (window != null) {
                 view.changeWindow(W.get(window));

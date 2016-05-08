@@ -163,11 +163,13 @@ public class ComboboxContent extends Content {
     }
 
     @Override
-    public void checkHit(int x,int y){
+    public boolean checkHit(int x,int y){
         for (Content c : contents) {
             if (c.hasAction() && c.isHit(x, y)) {
                 c.getAction().run();
+                return true;
             }
         }
+        return false;
     }
 }

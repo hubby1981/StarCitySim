@@ -116,14 +116,17 @@ public abstract class Window {
         return contents;
     }
 
-    public void checkHit(int x, int y) {
+    public boolean checkHit(int x, int y) {
+        boolean ret = false;
         for (Content c : contents.getItems()) {
             if (c.hasAction() && c.isHit(x, y)) {
                 c.getAction().run();
+               ret= true;
             }else{
-                c.checkHit(x,y);
+                ret = c.checkHit(x,y);
             }
         }
+        return ret;
     }
 
 }
