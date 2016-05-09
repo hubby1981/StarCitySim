@@ -96,7 +96,7 @@ public class GameViewBackNormal extends View {
         MenuRects.contentInner = new RectContainer(new Rect(content.left + (content.width() / 50) / 4, topper.bottom, content.right - content.width() / 50, botter.top));
 
         Rect liner = new Rect(topper.left + w, topper.top + w, topper.right - content.width() / 50, topper.bottom - w);
-        MenuRects.line = new RectContainer(new Rect(liner.left, liner.top, liner.right, (int) (liner.height() / 2)));
+        MenuRects.line = new RectContainer(new Rect(liner.left, liner.top, liner.right, (int) (liner.height() / 1.85)));
 
 
         canvas.drawRect(new Rect(content.left, topper.bottom, content.right, botter.top), Colors.backPainterContent);

@@ -39,7 +39,7 @@ public class Game extends AppCompatActivity {
     public static int DAY = 1;
     public static int MONTH = 9;
     public static int YEAR = 29391;
-
+    public static int COUNT = 59;
     public static int count = 2;
     public static Runnable notifyAction;
 
@@ -104,12 +104,25 @@ public class Game extends AppCompatActivity {
             }
         };
 
+        final Runnable run2 = new Runnable() {
+            @Override
+            public void run() {
+                COUNT--;
+                if(count==0){
+                    COUNT=59;
+                    runOnUiThread(run);
+                }
+            }
+        };
+
         new Timer(true).scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                runOnUiThread(run);
+                runOnUiThread(run2);
+
+                runOnUiThread(update);
             }
-        }, 60000*5, 60000*5);
+        },5000, 5000);
 
 
         timer = new Runnable() {

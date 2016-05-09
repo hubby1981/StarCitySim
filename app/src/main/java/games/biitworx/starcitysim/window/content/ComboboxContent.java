@@ -76,7 +76,7 @@ public class ComboboxContent extends Content {
     }
 
     @Override
-    public int getLineHeight() {
+    public float getLineHeight() {
         return show ? super.getLineHeight() + getContentsLineHeight() : super.getLineHeight();
     }
 
@@ -129,7 +129,7 @@ public class ComboboxContent extends Content {
         canvas.drawPath(p, Colors.topOutlinePainter);
         if (!show)
             canvas.drawPath(p, Colors.backPainterContent);
-        canvas.drawPath(p, show ? Colors.backPainterLine2 : Colors.backPainterLine3);
+        canvas.drawPath(p, !show ? Colors.backPainterLine2 : Colors.backPainterLine3);
 
         Fonts.FONT.setTextSize((getContentRect().height() / 3));
 

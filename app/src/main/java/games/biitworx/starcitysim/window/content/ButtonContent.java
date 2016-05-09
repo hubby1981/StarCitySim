@@ -20,7 +20,7 @@ public class ButtonContent extends Content {
     }
 
     public ButtonContent(String text, Runnable action) {
-        super(2);
+        super(1.75f);
         this.text = text;
         setAction(action);
     }
@@ -28,6 +28,8 @@ public class ButtonContent extends Content {
     @Override
     public void onDrawEx(Canvas canvas) {
         Rect innerContent = getInnerRect();
+        int si = innerContent.width()/8;
+        innerContent = new Rect(innerContent.left+si,innerContent.top,innerContent.right-si,innerContent.bottom);
 
         Path pp = new Path();
         int w = innerContent.width() / 20;
@@ -67,7 +69,7 @@ int a=5;
 
         Fonts.FONT.setTextSize(innerContent.height() / (getLineHeight()*1.4f));
         float size = Fonts.FONT.measureText(text);
-        canvas.drawText(text, innerContent.centerX() -size/2, innerContent.centerY(), Fonts.FONT);
+        canvas.drawText(text, innerContent.centerX() -size/2, innerContent.centerY()+Fonts.FONT.getTextSize()/2, Fonts.FONT);
         //canvas.drawRect(innerContent, Colors.backPainterLine2);
 
 

@@ -69,8 +69,8 @@
     <string name="window_operations_explore_desc">Explore new systems</string>
     <string name="window_operations_settle_desc">Settle in explored systems</string>
 
-    <string name="item_count"> item</string>
-    <string name="items_count"> items</string>
+    <string name="item_count"> action</string>
+    <string name="items_count"> actions</string>
 
 
     <string name="window_menu_hint">Touch one of the items to perform a action.</string>

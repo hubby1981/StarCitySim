@@ -2,6 +2,7 @@ package games.biitworx.starcitysim.window;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.view.Menu;
@@ -77,12 +78,16 @@ public abstract class Window {
 
         Rect base = MenuRects.info.get();
         Fonts.FONT.setTextSize((base.height() / 5));
-        String time = Game.YEAR + "" + Game.MONTH + "." + Game.DAY;
+        String time = Game.YEAR + "." + Game.MONTH + "." + Game.DAY+"."+Game.COUNT;
         float size = Fonts.FONT.measureText(time);
         canvas.drawText(time, base.centerX() - size/2, (int) (base.centerY() - Fonts.FONT.getTextSize()), Fonts.FONT);
+
         Fonts.FONT.setTextSize((base.height() / 3));
         size = Fonts.FONT.measureText(text);
-        canvas.drawText(text, base.centerX() - size/2, base.centerY() + (int) (Fonts.FONT.getTextSize() * 1.15), Fonts.FONT);
+
+
+        canvas.drawText(text, base.centerX() - size / 2, base.centerY() + (int) (Fonts.FONT.getTextSize() * 1.15), Fonts.FONT);
+
 
         String hint = getHint();
         if (hint.length() == 0)

@@ -15,7 +15,8 @@ public class Fonts {
            FONT = new Paint();
 
            FONT.setColor(Color.argb(255, 255, 255, 255));
-           FONT.setFakeBoldText(true);
+
+
            FONT.setAntiAlias(true);
        }
     }

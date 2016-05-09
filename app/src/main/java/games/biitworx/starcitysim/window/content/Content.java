@@ -9,7 +9,7 @@ import games.biitworx.starcitysim.MenuRects;
  * Created by marce_000 on 21.04.2016.
  */
 public abstract class Content {
-    protected int lineHeight = 1;
+    protected float lineHeight = 1;
     private Rect content;
     private Rect full;
 
@@ -22,7 +22,7 @@ public abstract class Content {
 
     }
 
-    public Content(int lineHeight) {
+    public Content(float lineHeight) {
         this.lineHeight = lineHeight;
     }
 
@@ -55,17 +55,17 @@ return false;
 
     public int onDraw(Canvas canvas, int yPos, int scroll) {
         Rect base = MenuRects.line.get();
-        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + base.height() * lineHeight);
-        full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + base.height() * getLineHeight());
+        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) +(int) (base.height() * lineHeight));
+        full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + (int)(base.height() * getLineHeight()));
 
         click = new Rect(content.left, content.top - base.height(), content.right, content.bottom - base.height());
-        onDrawContents(yPos + (base.height() * lineHeight), scroll);
+        onDrawContents(yPos + (int)(base.height() * lineHeight), scroll);
         onDrawEx(canvas);
 
-        return yPos + (base.height() * getLineHeight());
+        return yPos + (int)(base.height() * getLineHeight());
     }
 
-    public int getLineHeight() {
+    public float getLineHeight() {
         return lineHeight;
     }
 
@@ -93,11 +93,11 @@ return false;
 
     public int onDrawInner(int yPos, int scroll) {
         Rect base = MenuRects.line.get();
-        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + base.height() * lineHeight);
-        full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + base.height() * getLineHeight());
+        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + (int)(base.height() * lineHeight));
+        full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) +(int)( base.height() * getLineHeight()));
 
         click = new Rect(content.left, content.top - base.height(), content.right, content.bottom - base.height());
-        return yPos + (base.height() * lineHeight);
+        return yPos +(int) (base.height() * lineHeight);
 
     }
 

@@ -63,7 +63,7 @@ public class MenuItemContent extends Content {
         canvas.drawRect(innerContent, filler);
 
 
-        BitmapDrawer.drawImage(back, canvas, new Rect(innerContent.right - (int) (innerContent.width() / 2.15), innerContent.top, innerContent.right, innerContent.bottom), null, false);
+        BitmapDrawer.drawImage(back, canvas, new Rect(innerContent.right - (int) (innerContent.height() *2.5), innerContent.top, innerContent.right, innerContent.bottom), null, false);
 
 
         ArrayList<Rect> rects = RectHelper.makeRects2(innerContent, 6);
@@ -126,7 +126,9 @@ public class MenuItemContent extends Content {
         canvas.drawPath(corner, filler2);
         canvas.drawPath(corner, Colors.backPainterLine2);
 */
+
         canvas.drawRect(innerContent, Colors.backPainterLine2);
+
 
     }
 }

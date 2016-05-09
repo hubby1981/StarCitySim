@@ -67,8 +67,8 @@
     <string name="window_operations_explore_desc">Erforschung neuer Systeme</string>
     <string name="window_operations_settle_desc">Besiedlung der erforschten Systeme</string>
 
-    <string name="item_count"> aktion</string>
-    <string name="items_count"> aktionen</string>
+    <string name="item_count"> Aktion</string>
+    <string name="items_count"> Aktionen</string>
 
 
     <string name="window_menu_hint">Zum ausführen eine der Aktionen berühren.</string>
