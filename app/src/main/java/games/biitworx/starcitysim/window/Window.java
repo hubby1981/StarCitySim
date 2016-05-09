@@ -76,21 +76,22 @@ public abstract class Window {
 
 
         Rect base = MenuRects.info.get();
-        Fonts.FONT.setTextSize((base.height() / 7));
+        Fonts.FONT.setTextSize((base.height() / 5));
         String time = Game.YEAR + "" + Game.MONTH + "." + Game.DAY;
-        canvas.drawText(time, base.centerX() - (Fonts.FONT.getTextSize() * time.length() / 3), (int) (base.centerY() - Fonts.FONT.getTextSize()), Fonts.FONT);
-        Fonts.FONT.setTextSize((base.height() / 4));
-
-        canvas.drawText(text, base.centerX() - (Fonts.FONT.getTextSize() * text.length() / 2), base.centerY() + (int) (Fonts.FONT.getTextSize() * 1.5), Fonts.FONT);
+        float size = Fonts.FONT.measureText(time);
+        canvas.drawText(time, base.centerX() - size/2, (int) (base.centerY() - Fonts.FONT.getTextSize()), Fonts.FONT);
+        Fonts.FONT.setTextSize((base.height() / 3));
+        size = Fonts.FONT.measureText(text);
+        canvas.drawText(text, base.centerX() - size/2, base.centerY() + (int) (Fonts.FONT.getTextSize() * 1.15), Fonts.FONT);
 
         String hint = getHint();
-        if(hint.length()==0)
-            hint = T.get(R.string.overlay_hint  );
+        if (hint.length() == 0)
+            hint = T.get(R.string.overlay_hint);
         if (MenuRects.notification != null && MenuRects.notification.get() != null && hint.length() > 0 && sc) {
             Rect base2 = MenuRects.notification.get();
-            Fonts.FONT.setTextSize((base.height() / 8));
-
-            canvas.drawText(hint, base2.centerX() - (int) ((Fonts.FONT.getTextSize() * hint.length()) / 2.25), (int) (base2.top + Fonts.FONT.getTextSize() * 1.5), Fonts.FONT);
+            Fonts.FONT.setTextSize((base.height() / 6));
+            size = Fonts.FONT.measureText(hint);
+            canvas.drawText(hint, base2.centerX() - size/2, (int) (base2.top + Fonts.FONT.getTextSize() * 1), Fonts.FONT);
 
         }
         if (sc) {
@@ -121,9 +122,9 @@ public abstract class Window {
         for (Content c : contents.getItems()) {
             if (c.hasAction() && c.isHit(x, y)) {
                 c.getAction().run();
-               ret= true;
-            }else{
-                ret = c.checkHit(x,y);
+                ret = true;
+            } else {
+                ret = c.checkHit(x, y);
             }
         }
         return ret;

@@ -13,6 +13,9 @@ import android.view.MotionEvent;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import games.biitworx.starcitysim.window.Window;
 
@@ -34,7 +37,7 @@ public class Game extends AppCompatActivity {
     public static int counter = 16;
 
     public static int DAY = 1;
-    public static int MONTH = 12;
+    public static int MONTH = 9;
     public static int YEAR = 29391;
 
     public static int count = 2;
@@ -59,8 +62,8 @@ public class Game extends AppCompatActivity {
 
         Colors.backPainterContentShader3.setStyle(Paint.Style.FILL);
         Colors.backPainterContentShader3.setShader(Colors.shaderBack3);
-
-        Fonts.FONT.setTypeface(Typeface.createFromAsset(getAssets(), "venus.ttf"));
+//Typeface.createFromAsset(getAssets(), "venus.ttf")
+        Fonts.FONT.setTypeface(Typeface.MONOSPACE);
         setContentView(R.layout.activity_game);
         view = (GameViewBackNormal) findViewById(R.id.gameback);
         ScrollPosition = view.getWindow().getScrollPosition();
@@ -81,6 +84,33 @@ public class Game extends AppCompatActivity {
                 }
             }
         };
+
+        ScheduledExecutorService sh = Executors.newScheduledThreadPool(1);
+
+        final Runnable run = new Runnable() {
+            @Override
+            public void run() {
+                DAY++;
+                if (DAY == 21) {
+                    DAY = 1;
+                    MONTH++;
+                }
+
+                if (MONTH == 11) {
+                    MONTH = 1;
+                    YEAR++;
+                }
+                update.run();
+            }
+        };
+
+        new Timer(true).scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(run);
+            }
+        }, 60000*5, 60000*5);
+
 
         timer = new Runnable() {
             @Override

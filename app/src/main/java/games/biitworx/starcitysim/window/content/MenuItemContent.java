@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.Shader;
+import android.graphics.Typeface;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,6 @@ public class MenuItemContent extends Content {
     private String info;
     private Bitmap icon;
     private Bitmap back;
-
 
 
     public MenuItemContent(Bitmap icon, Bitmap back, String primary, String secondary, String info, int color) {
@@ -63,7 +63,6 @@ public class MenuItemContent extends Content {
         canvas.drawRect(innerContent, filler);
 
 
-
         BitmapDrawer.drawImage(back, canvas, new Rect(innerContent.right - (int) (innerContent.width() / 2.15), innerContent.top, innerContent.right, innerContent.bottom), null, false);
 
 
@@ -81,17 +80,21 @@ public class MenuItemContent extends Content {
 
 
         }
-        Fonts.FONT.setTextSize((getContentRect().height() / 6));
+        Fonts.FONT.setTextSize((getContentRect().height() / 4.5f));
 
         rects = RectHelper.makeRect3(text, (int) Fonts.FONT.getTextSize(), 2, 2);
 
+        int hh = getContentRect().height() / 10;
+        canvas.drawText(primary, (float) rects.get(1).left, rects.get(1).centerY() -hh, Fonts.FONT);
 
-        canvas.drawText(primary, (float) rects.get(1).left, rects.get(1).centerY(), Fonts.FONT);
-        Fonts.FONT.setTextSize((getContentRect().height() / 9));
-        canvas.drawText(secondary, (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
-        Fonts.FONT.setTextSize((getContentRect().height() / 8));
+        Fonts.FONT.setTextSize((getContentRect().height() / 7));
 
-        canvas.drawText(info, (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 4.2), Fonts.FONT);
+        canvas.drawText(secondary, (float) rects.get(1).left+hh, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
+        Fonts.FONT.setTextSize((getContentRect().height() / 6));
+
+        canvas.drawText(info, (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 2.5), Fonts.FONT);
+
+
 
         //canvas.drawText(secondary+" ["+info+"]",(float)rects.get(2).left,rects.get(2).centerY(),Fonts.FONT);
         //canvas.drawText(info,(float)rects.get(3).left,rects.get(3).centerY(),Fonts.FONT);

@@ -40,7 +40,11 @@ public class ButtonContent extends Content {
         pp.lineTo(innerContent.left, innerContent.bottom - w);
         pp.close();
 
-        innerContent = new Rect(innerContent.left+6,innerContent.top+6,innerContent.right-6,innerContent.bottom-6);
+        Colors.outlinePainter.setColor(Color.argb(100,0,0,0));
+        canvas.drawPath(pp, Colors.outlinePainter);
+int a=5;
+
+        innerContent = new Rect(innerContent.left+a,innerContent.top+a,innerContent.right-a,innerContent.bottom-a);
         Path pp2 = new Path();
 
         pp2.moveTo(innerContent.left, innerContent.top);
@@ -52,18 +56,18 @@ public class ButtonContent extends Content {
         pp2.lineTo(innerContent.left, innerContent.bottom - w);
         pp2.close();
         //RectHelper.drawRectGradient(innerContent, Color.argb(128, 0, 0, 0), Colors.back002, canvas);
-        RectHelper.drawPathGradient(pp,innerContent, Color.argb(50, 0, 0, 0), Colors.back002, canvas);
+        RectHelper.drawPathGradient(pp,innerContent, Color.argb(100, 0, 0, 0), Colors.back002, canvas);
 
         innerContent = new Rect(innerContent.left+w,innerContent.top,innerContent.right-w,innerContent.bottom);
 
-        Rect topper = new Rect(innerContent.left, innerContent.top, innerContent.right, innerContent.top + 2);
+        Rect topper = new Rect(innerContent.left, innerContent.top-a, innerContent.right, innerContent.top);
         RectHelper.drawRectGradient(topper, Color.argb(255, 0, 0, 0), Colors.back003, canvas);
-        Rect botter = new Rect(innerContent.left, innerContent.bottom, innerContent.right, innerContent.bottom + 2);
+        Rect botter = new Rect(innerContent.left, innerContent.bottom, innerContent.right, innerContent.bottom+a );
         RectHelper.drawRectGradient(botter, Color.argb(255, 0, 0, 0), Colors.back003, canvas);
 
-        Fonts.FONT.setTextSize(innerContent.height() / (2 * getLineHeight()));
-
-        canvas.drawText(text, innerContent.centerX() - (Fonts.FONT.getTextSize() * text.length() / 2), innerContent.centerY(), Fonts.FONT);
+        Fonts.FONT.setTextSize(innerContent.height() / (getLineHeight()*1.4f));
+        float size = Fonts.FONT.measureText(text);
+        canvas.drawText(text, innerContent.centerX() -size/2, innerContent.centerY(), Fonts.FONT);
         //canvas.drawRect(innerContent, Colors.backPainterLine2);
 
 

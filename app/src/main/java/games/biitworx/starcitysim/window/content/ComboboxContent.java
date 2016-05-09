@@ -29,14 +29,14 @@ public class ComboboxContent extends Content {
     private String secondary;
     private boolean show = false;
     private List<Content> contents = new ArrayList<>();
-    private String value= T.get(R.string.selection_default);
+    private String value = T.get(R.string.selection_default);
 
     public ComboboxContent(String primary, String secondary, int color, List<Content> contents) {
         this(primary, secondary, color, null, contents);
     }
 
     @Override
-    public String getValue(){
+    public String getValue() {
         return value;
     }
 
@@ -62,16 +62,16 @@ public class ComboboxContent extends Content {
             };
         }
 
-        for (final Content c: contents)
-        if(c!=null)
-            c.setAction(new Runnable() {
-                @Override
-                public void run() {
-                    value=c.getValue();
-                    show = !show;
-                    Game.updateEx(0);
-                }
-            });
+        for (final Content c : contents)
+            if (c != null)
+                c.setAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        value = c.getValue();
+                        show = !show;
+                        Game.updateEx(0);
+                    }
+                });
         setAction(action);
     }
 
@@ -115,34 +115,36 @@ public class ComboboxContent extends Content {
 
         Rect rc1 = new Rect(rects.get(0).left, innerContent.top, rects.get(0).left + rects.get(0).width() / 4, innerContent.bottom);
 
-        Rect rc2 = RectHelper.combine(rects,37,38);
+        Rect rc2 = RectHelper.combine(rects, 37, 38);
 
         Path p = new Path();
 
-        int yy= rc2.centerY()+rc2.height()/4;
-        p.moveTo(rc2.centerX()-rc2.width()/2,yy);
+        int yy = rc2.centerY() + rc2.height() / 4;
+        p.moveTo(rc2.centerX() - rc2.width() / 2, yy);
         p.lineTo(rc2.centerX() + rc2.width() / 2, yy);
-        p.lineTo(rc2.centerX(), yy + (int)(rc2.height()/1.25));
+        p.lineTo(rc2.centerX(), yy + (int) (rc2.height() / 1.25));
 
-        p.lineTo(rc2.centerX() - rc2.width() / 2,yy);
+        p.lineTo(rc2.centerX() - rc2.width() / 2, yy);
         p.close();
         canvas.drawPath(p, Colors.topOutlinePainter);
-        if(!show)
+        if (!show)
             canvas.drawPath(p, Colors.backPainterContent);
-        canvas.drawPath(p, Colors.backPainterLine2);
+        canvas.drawPath(p, show ? Colors.backPainterLine2 : Colors.backPainterLine3);
 
-        Fonts.FONT.setTextSize((getContentRect().height() / 4));
+        Fonts.FONT.setTextSize((getContentRect().height() / 3));
 
         rects = RectHelper.makeRect3(text, (int) Fonts.FONT.getTextSize(), 2, 2);
 
+        int hh = getContentRect().height() / 10;
+        canvas.drawText(primary, (float) rects.get(1).left, rects.get(1).centerY() - hh, Fonts.FONT);
+        Fonts.FONT.setTextSize((getContentRect().height() / 5));
+        canvas.drawText(getValue(), (float) rects.get(1).left + hh, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
 
-        canvas.drawText(primary, (float) rects.get(1).left, rects.get(1).centerY(), Fonts.FONT);
-        Fonts.FONT.setTextSize((getContentRect().height() / 7));
-        canvas.drawText(getValue(), (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
-
-
-        canvas.drawRect(getInnerFullRect(), Colors.backPainterLine2);
-        canvas.drawRect(innerContent, Colors.backPainterLine2);
+        if (show) {
+            canvas.drawRect(getInnerFullRect(), Colors.backPainterLine3);
+            canvas.drawLine(innerContent.left, innerContent.bottom, innerContent.right, innerContent.bottom, Colors.backPainterLine3);
+        } else
+            canvas.drawRect(innerContent, Colors.backPainterLine2);
 
         if (show) {
 
@@ -154,16 +156,16 @@ public class ComboboxContent extends Content {
     }
 
     @Override
-    protected void onDrawContents(int yPos,int scroll){
+    protected void onDrawContents(int yPos, int scroll) {
 
-        for(Content c : contents){
-            if(c!=null)
-                yPos = c.onDrawInner(yPos,scroll);
+        for (Content c : contents) {
+            if (c != null)
+                yPos = c.onDrawInner(yPos, scroll);
         }
     }
 
     @Override
-    public boolean checkHit(int x,int y){
+    public boolean checkHit(int x, int y) {
         for (Content c : contents) {
             if (c.hasAction() && c.isHit(x, y)) {
                 c.getAction().run();
