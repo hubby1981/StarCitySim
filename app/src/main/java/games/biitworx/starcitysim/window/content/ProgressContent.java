@@ -34,7 +34,7 @@ public class ProgressContent extends Content {
         Rect botter = new Rect(innerContent.left, innerContent.bottom, innerContent.right, innerContent.bottom + a);
         RectHelper.drawRectGradient(botter, Color.argb(255, 0, 0, 0), Colors.back003, canvas);
 
-        Fonts.FONT.setTextSize(innerContent.height() / (getLineHeight() * 1.8f));
+        Fonts.FONT.setTextSize(innerContent.height() / (getLineHeight(false) * 1.8f));
         float size = Fonts.FONT.measureText(value + " %");
         canvas.drawText(value + " %", innerContent.centerX() - size / 2, innerContent.centerY() + Fonts.FONT.getTextSize() / 2, Fonts.FONT);
 

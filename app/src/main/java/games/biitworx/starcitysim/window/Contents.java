@@ -18,7 +18,7 @@ public class Contents {
         int result = 1;
 
         for(Content c : items){
-            result += c.getLineHeight();
+            result += c.getLineHeight(true);
         }
         return result;
     }

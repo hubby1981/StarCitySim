@@ -20,31 +20,32 @@ public class BankingMainSlotWindow extends Window {
         super(T.get(R.string.window_environment_banking_item0_title));
         getContents().add(new SpacerContent(1));
         getContents().add(new TextContent("", -1, 0.1f, 1f, true));
-        getContents().add(new TextContent(T.get(R.string.window_environment_banking_item0_window_header)));
+        getContents().add(new TextContent(T.get(R.string.window_environment_banking_item0_window_header)).centered(true));
         getContents().add(new TextContent("", -1, 0.2f, 1f, true));
-        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
+        getContents().add(new TextContent("Alter Saldo: + 28.384.229 mil. crd", Color.argb(200, 50, 200, 50), 1f, 1.75f));
         getContents().add(new TextContent("", -1, 0.2f, 1f, true));
-        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
+
+        for (int x = 1; x < 10; x++) {
+            getContents().add(new TextContent("", -1, 0.2f, 1f, true));
+            getContents().add(new TextContent("29391.7."+x+" # Überweisung Galaktische Bank", -1, 0.85f, 2f));
+            getContents().add(new TextContent(" + 3.454.322", Color.argb(200, 50, 200, 50), 1f, 1.75f));
+            getContents().add(new TextContent("", -1, 0.2f, 1f, true));
+            getContents().add(new TextContent("29391.7."+x+" # Überweisung Galaktische Bank", -1, 0.85f, 2f));
+            getContents().add(new TextContent(" + 3.454.322", Color.argb(200, 50, 200, 50), 1f, 1.75f));
+
+            getContents().add(new TextContent("", -1, 0.2f, 1f, true));
+            getContents().add(new TextContent("29391.7."+x+" # Überweisung Galaktische Bank", -1, 0.85f, 2f));
+
+            getContents().add(new TextContent(" + 3.454.322", Color.argb(200, 50, 200, 50), 1f, 1.75f));
+
+            getContents().add(new TextContent("", -1, 0.1f, 1f, true));
+            getContents().add(new TextContent("29391.8."+x+" # Forschung / Entwicklung Budget", -1, 0.85f, 2f));
+
+            getContents().add(new TextContent(" - 212.221", Color.argb(200, 200, 50, 50), 1f, 1.75f));
+        }
         getContents().add(new TextContent("", -1, 0.2f, 1f, true));
-        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
-        getContents().add(new TextContent("",-1,0.1f,1f,true));
-        getContents().add(new TextContent(" - 212.221", Color.argb(200,200,50,50),1f,1.5f));
-        getContents().add(new TextContent("",-1,0.2f,1f,true));
-        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
-        getContents().add(new TextContent("",-1,0.1f,1f,true));
-        getContents().add(new TextContent(" - 212.221", Color.argb(200,200,50,50),1f,1.5f));
         getContents().add(new TextContent("", -1, 0.2f, 1f, true));
-        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
-        getContents().add(new TextContent("", -1, 0.2f, 1f, true));
-        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
-        getContents().add(new TextContent("", -1, 0.2f, 1f, true));
-        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
-        getContents().add(new TextContent("",-1,0.1f,1f,true));
-        getContents().add(new TextContent(" - 212.221", Color.argb(200,200,50,50),1f,1.5f));
-        getContents().add(new TextContent("",-1,0.2f,1f,true));
-        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
-        getContents().add(new TextContent("",-1,0.1f,1f,true));
-        getContents().add(new TextContent(" - 212.221", Color.argb(200,200,50,50),1f,1.5f));
+        getContents().add(new TextContent("Neuer Saldo: + 31.321.000 mil. crd", Color.argb(200, 50, 200, 50), 1f, 1.75f));
 
         getContents().add(new SpacerContent(2));
         getContents().add(new ButtonContent(T.get(R.string.content_banking_transaction_send), new Runnable() {
@@ -60,5 +61,6 @@ public class BankingMainSlotWindow extends Window {
                 Game.changeWindow(new BankingWindow());
             }
         }));
+        getContents().add(new SpacerContent(getContents().getItems().size() / 3));
     }
 }

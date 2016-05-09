@@ -69,7 +69,7 @@ public class ButtonContent extends Content {
         Rect botter = new Rect(innerContent.left, innerContent.bottom, innerContent.right, innerContent.bottom + a);
         RectHelper.drawRectGradient(botter, Color.argb(255, 0, 0, 0), Colors.back003, canvas);
 
-        Fonts.FONT.setTextSize(innerContent.height() / (getLineHeight() * 1.4f));
+        Fonts.FONT.setTextSize(innerContent.height() / (getLineHeight(false) * 1.4f));
         float size = Fonts.FONT.measureText(text);
         canvas.drawText(text, innerContent.centerX() - size / 2, innerContent.centerY() + Fonts.FONT.getTextSize() / 2, Fonts.FONT);
         //canvas.drawRect(innerContent, Colors.backPainterLine2);

@@ -48,25 +48,26 @@ public abstract class Content {
     }
 
     public boolean checkHit(int x, int y) {
-return false;
+        return false;
     }
 
     public abstract void onDrawEx(Canvas canvas);
 
     public int onDraw(Canvas canvas, int yPos, int scroll) {
         Rect base = MenuRects.line.get();
-        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) +(int) (base.height() * lineHeight));
-        full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + (int)(base.height() * getLineHeight()));
+        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + (int) (base.height() * lineHeight));
+        full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + (int) (base.height() * getLineHeight(false)));
 
         click = new Rect(content.left, content.top - base.height(), content.right, content.bottom - base.height());
-        onDrawContents(yPos + (int)(base.height() * lineHeight), scroll);
+        onDrawContents(yPos + (int) (base.height() * lineHeight), scroll);
         onDrawEx(canvas);
 
-        return yPos + (int)(base.height() * getLineHeight());
+        return yPos + (int) (base.height() * getLineHeight(false));
     }
 
-    public float getLineHeight() {
-        return lineHeight;
+    public float getLineHeight(boolean extrude) {
+        extrude = false;
+        return extrude ? lineHeight < 1 ? 1f : lineHeight : lineHeight;
     }
 
     public Rect getContentRect() {
@@ -93,11 +94,11 @@ return false;
 
     public int onDrawInner(int yPos, int scroll) {
         Rect base = MenuRects.line.get();
-        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + (int)(base.height() * lineHeight));
-        full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) +(int)( base.height() * getLineHeight()));
+        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + (int) (base.height() * lineHeight));
+        full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + (int) (base.height() * getLineHeight(false)));
 
         click = new Rect(content.left, content.top - base.height(), content.right, content.bottom - base.height());
-        return yPos +(int) (base.height() * lineHeight);
+        return yPos + (int) (base.height() * lineHeight);
 
     }
 

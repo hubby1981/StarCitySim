@@ -76,14 +76,14 @@ public class ComboboxContent extends Content {
     }
 
     @Override
-    public float getLineHeight() {
-        return show ? super.getLineHeight() + getContentsLineHeight() : super.getLineHeight();
+    public float getLineHeight(boolean extrude) {
+        return show ? super.getLineHeight(extrude) + getContentsLineHeight() : super.getLineHeight(false);
     }
 
     private int getContentsLineHeight() {
         int result = 0;
         for (Content c : contents)
-            result += c.getLineHeight();
+            result += c.getLineHeight(false);
         return result;
     }
 
