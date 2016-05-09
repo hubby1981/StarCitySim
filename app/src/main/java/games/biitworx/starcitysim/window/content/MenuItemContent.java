@@ -80,7 +80,7 @@ public class MenuItemContent extends Content {
 
 
         }
-        Fonts.FONT.setTextSize((getContentRect().height() / 4.5f));
+        Fonts.FONT.setTextSize((getContentRect().height() / 4.85f));
 
         rects = RectHelper.makeRect3(text, (int) Fonts.FONT.getTextSize(), 2, 2);
 

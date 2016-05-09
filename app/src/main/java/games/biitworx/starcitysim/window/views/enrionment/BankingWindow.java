@@ -19,6 +19,7 @@ import games.biitworx.starcitysim.window.content.SpacerContent;
 import games.biitworx.starcitysim.window.content.TextContent;
 import games.biitworx.starcitysim.window.views.EnvironmentWindow;
 import games.biitworx.starcitysim.window.views.MenuWindow;
+import games.biitworx.starcitysim.window.views.enrionment.banking.BankingMainSlotWindow;
 import games.biitworx.starcitysim.window.views.production.ShipyardWindow;
 
 /**
@@ -32,7 +33,7 @@ public class BankingWindow extends Window {
                 new Runnable() {
                     @Override
                     public void run() {
-
+                        Game.changeWindow(new BankingMainSlotWindow());
                     }
                 }));
         getContents().add(new MenuItemContent(null, B.get(R.drawable.bankingback), T.get(R.string.window_environment_banking_item1_title), T.get(R.string.window_environment_banking_item1_description), "", Colors.back001,

@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
@@ -39,7 +40,22 @@ public class RectHelper {
         canvas.drawRect(rc2,p);
 
     }
+    public static void drawRectGradient2(Rect rc,int color1,int color2,Canvas canvas){
 
+
+        RectF rc1 = new RectF(rc.left,rc.top,rc.right,rc.bottom);
+
+
+        LinearGradient gr1 = new LinearGradient(rc1.left,rc1.centerY(),rc1.right,rc1.centerY(),color1,color2, Shader.TileMode.CLAMP);
+
+        Paint p = new Paint();
+        p.setAntiAlias(true);
+        p.setShader(gr1);
+
+        canvas.drawRect(rc1, p);
+
+
+    }
     public static void drawPathGradient(Path p1,Rect rc,int color1,int color2,Canvas canvas){
 
 
@@ -49,15 +65,17 @@ public class RectHelper {
         LinearGradient gr1 = new LinearGradient(rc1.left,rc1.centerY(),rc1.right-rc.width()/8,rc1.centerY(),color1,color2, Shader.TileMode.CLAMP);
         LinearGradient gr2 = new LinearGradient(rc2.left+rc.width()/8,rc2.centerY(),rc2.right,rc2.centerY(),color2,color1, Shader.TileMode.CLAMP);
 
+        RadialGradient gr3 = new RadialGradient(rc.exactCenterX(),rc.exactCenterY(),rc.width()/1.5f,color1,color2, Shader.TileMode.CLAMP);
 
         Paint p = new Paint();
+        p.setStyle(Paint.Style.FILL);
         p.setAntiAlias(true);
-        p.setShader(gr1);
+        p.setShader(gr3);
 
         canvas.drawPath(p1, p);
         p.setShader(gr2);
 
-        canvas.drawPath(p1,p);
+        //canvas.drawPath(p1,p);
 
     }
 

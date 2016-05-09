@@ -28,8 +28,8 @@ public class ButtonContent extends Content {
     @Override
     public void onDrawEx(Canvas canvas) {
         Rect innerContent = getInnerRect();
-        int si = innerContent.width()/8;
-        innerContent = new Rect(innerContent.left+si,innerContent.top,innerContent.right-si,innerContent.bottom);
+        int si = innerContent.width() / 8;
+        innerContent = new Rect(innerContent.left + si, innerContent.top, innerContent.right - si, innerContent.bottom);
 
         Path pp = new Path();
         int w = innerContent.width() / 20;
@@ -42,11 +42,11 @@ public class ButtonContent extends Content {
         pp.lineTo(innerContent.left, innerContent.bottom - w);
         pp.close();
 
-        Colors.outlinePainter.setColor(Color.argb(100,0,0,0));
+        Colors.outlinePainter.setColor(Color.argb(100, 0, 0, 0));
         canvas.drawPath(pp, Colors.outlinePainter);
-int a=5;
+        int a = 5;
 
-        innerContent = new Rect(innerContent.left+a,innerContent.top+a,innerContent.right-a,innerContent.bottom-a);
+        innerContent = new Rect(innerContent.left + a, innerContent.top + a, innerContent.right - a, innerContent.bottom - a);
         Path pp2 = new Path();
 
         pp2.moveTo(innerContent.left, innerContent.top);
@@ -58,23 +58,25 @@ int a=5;
         pp2.lineTo(innerContent.left, innerContent.bottom - w);
         pp2.close();
         //RectHelper.drawRectGradient(innerContent, Color.argb(128, 0, 0, 0), Colors.back002, canvas);
-        RectHelper.drawPathGradient(pp,innerContent, Color.argb(100, 0, 0, 0), Colors.back002, canvas);
+        RectHelper.drawPathGradient(pp2, innerContent, Colors.back002, Color.argb(200, 0, 0, 0), canvas);
 
-        innerContent = new Rect(innerContent.left+w,innerContent.top,innerContent.right-w,innerContent.bottom);
+        canvas.drawPath(pp2, Colors.backPainterContentShader3);
 
-        Rect topper = new Rect(innerContent.left, innerContent.top-a, innerContent.right, innerContent.top);
+        innerContent = new Rect(innerContent.left + w, innerContent.top, innerContent.right - w, innerContent.bottom);
+
+        Rect topper = new Rect(innerContent.left, innerContent.top - a, innerContent.right, innerContent.top);
         RectHelper.drawRectGradient(topper, Color.argb(255, 0, 0, 0), Colors.back003, canvas);
-        Rect botter = new Rect(innerContent.left, innerContent.bottom, innerContent.right, innerContent.bottom+a );
+        Rect botter = new Rect(innerContent.left, innerContent.bottom, innerContent.right, innerContent.bottom + a);
         RectHelper.drawRectGradient(botter, Color.argb(255, 0, 0, 0), Colors.back003, canvas);
 
-        Fonts.FONT.setTextSize(innerContent.height() / (getLineHeight()*1.4f));
+        Fonts.FONT.setTextSize(innerContent.height() / (getLineHeight() * 1.4f));
         float size = Fonts.FONT.measureText(text);
-        canvas.drawText(text, innerContent.centerX() -size/2, innerContent.centerY()+Fonts.FONT.getTextSize()/2, Fonts.FONT);
+        canvas.drawText(text, innerContent.centerX() - size / 2, innerContent.centerY() + Fonts.FONT.getTextSize() / 2, Fonts.FONT);
         //canvas.drawRect(innerContent, Colors.backPainterLine2);
 
 
-        canvas.drawPath(pp2, Colors.backPainterLine3);
-        canvas.drawPath(pp, Colors.backPainterLine3);
+        canvas.drawPath(pp2, Colors.backPainterLine2);
+        canvas.drawPath(pp, Colors.backPainterLine2);
 
     }
 }

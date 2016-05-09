@@ -15,11 +15,11 @@ boolean line = false;
     public SpacerContent(){
         this(1);
     }
-    public SpacerContent(int space){
+    public SpacerContent(float space){
         this(space, false);
     }
 
-    public SpacerContent(int space,boolean line){
+    public SpacerContent(float space,boolean line){
         super(space);
         this.line = line;
     }

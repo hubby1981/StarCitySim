@@ -108,10 +108,11 @@ public class Game extends AppCompatActivity {
             @Override
             public void run() {
                 COUNT--;
-                if(count==0){
+                if(COUNT==0){
                     COUNT=59;
                     runOnUiThread(run);
                 }
+                runOnUiThread(update);
             }
         };
 
@@ -120,7 +121,7 @@ public class Game extends AppCompatActivity {
             public void run() {
                 runOnUiThread(run2);
 
-                runOnUiThread(update);
+
             }
         },5000, 5000);
 

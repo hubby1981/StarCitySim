@@ -82,6 +82,11 @@
     <string name="window_environment_banking_item1_title">Slot A</string>
     <string name="window_environment_banking_item1_description">depot for saving credits</string>
 
+    <string name="content_banking_transaction_send">Send Credits</string>
+
+
+    <string name="window_environment_banking_item0_window_header">Overview transactions</string>
+
 
     <string name="overlay_menu_save">Save</string>
     <string name="overlay_menu_main">Back to menu</string>

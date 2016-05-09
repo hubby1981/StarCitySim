@@ -80,6 +80,9 @@
     <string name="window_environment_banking_item0_description">Hauptslot für Geld</string>
     <string name="window_environment_banking_item1_title">Slot A</string>
     <string name="window_environment_banking_item1_description">Depot für zur sicheren Verwahrung</string>
+    <string name="content_banking_transaction_send">Sende Credits</string>
+
+    <string name="window_environment_banking_item0_window_header">Übersicht Transaktionen</string>
 
     <string name="overlay_menu_save">Speichern</string>
     <string name="overlay_menu_main">Zurück zum Hauptmenü</string>
