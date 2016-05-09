@@ -17,10 +17,30 @@ import games.biitworx.starcitysim.window.views.production.ShipyardWindow;
  */
 public class BankingMainSlotWindow extends Window {
     public BankingMainSlotWindow() {
-        super( T.get(R.string.window_environment_banking_item0_title));
+        super(T.get(R.string.window_environment_banking_item0_title));
         getContents().add(new SpacerContent(1));
-        getContents().add(new TextContent("",-1,0.1f,1f,true));
+        getContents().add(new TextContent("", -1, 0.1f, 1f, true));
         getContents().add(new TextContent(T.get(R.string.window_environment_banking_item0_window_header)));
+        getContents().add(new TextContent("", -1, 0.2f, 1f, true));
+        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
+        getContents().add(new TextContent("", -1, 0.2f, 1f, true));
+        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
+        getContents().add(new TextContent("", -1, 0.2f, 1f, true));
+        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
+        getContents().add(new TextContent("",-1,0.1f,1f,true));
+        getContents().add(new TextContent(" - 212.221", Color.argb(200,200,50,50),1f,1.5f));
+        getContents().add(new TextContent("",-1,0.2f,1f,true));
+        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
+        getContents().add(new TextContent("",-1,0.1f,1f,true));
+        getContents().add(new TextContent(" - 212.221", Color.argb(200,200,50,50),1f,1.5f));
+        getContents().add(new TextContent("", -1, 0.2f, 1f, true));
+        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
+        getContents().add(new TextContent("", -1, 0.2f, 1f, true));
+        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
+        getContents().add(new TextContent("", -1, 0.2f, 1f, true));
+        getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
+        getContents().add(new TextContent("",-1,0.1f,1f,true));
+        getContents().add(new TextContent(" - 212.221", Color.argb(200,200,50,50),1f,1.5f));
         getContents().add(new TextContent("",-1,0.2f,1f,true));
         getContents().add(new TextContent(" + 3.454.322", Color.argb(200,50,200,50),1f,1.5f));
         getContents().add(new TextContent("",-1,0.1f,1f,true));
