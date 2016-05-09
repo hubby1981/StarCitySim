@@ -12,38 +12,55 @@ import games.biitworx.starcitysim.window.content.Content;
 public class TextContent extends Content {
     private String text = "";
     private boolean line = false;
-    private float size=3f;
+    private float size = 3f;
+    private int color = -1;
 
     public TextContent(String text) {
-        this(text, 2f);
+        this(text,-1, 2f);
 
 
     }
 
-    public TextContent(String text, float size) {
-        this(text,size,3f);
+    public TextContent(String text, int color) {
+        this(text,color, 2f);
+
+
     }
 
-    public TextContent(String text, float size,float height) {
-        this(text,size,height,false);
+    public TextContent(String text, int color, float size) {
+        this(text,color, size, 3f);
     }
 
-    public TextContent(String text,float size,float height, boolean line) {
+    public TextContent(String text, int color, float size, float height) {
+        this(text,color, size, height, false);
+    }
+
+    public TextContent(String text, int color, float size, float height, boolean line) {
         super(size);
         this.text = text;
         this.line = line;
-        this.size=height;
+        this.size = height;
+        this.color = color;
     }
 
     @Override
     public void onDrawEx(Canvas canvas) {
         Fonts.FONT.setTextSize((getInnerRect().height() / size));
 
-        if(line)
-            canvas.drawLine(getInnerRect().left,getInnerRect().top+getInnerRect().height()/2,getInnerRect().right,getInnerRect().top+getInnerRect().height()/2, Colors.backPainterLine2);
+        if (line)
+            canvas.drawLine(getInnerRect().left, getInnerRect().top + getInnerRect().height() / 2, getInnerRect().right, getInnerRect().top + getInnerRect().height() / 2, Colors.backPainterLine2);
+        int old = Fonts.FONT.getColor();
+        if(color!=-1){
 
+
+            Fonts.FONT.setColor(color);
+        }
         canvas.drawText(text, getInnerRect().left + (float) (getInnerRect().height() / 1.5), getInnerRect().centerY(), Fonts.FONT);
 
+
+        if(color!=-1){
+            Fonts.FONT.setColor(old);
+        }
     }
 
     @Override
