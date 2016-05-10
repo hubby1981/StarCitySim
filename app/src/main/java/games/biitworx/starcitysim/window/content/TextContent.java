@@ -15,6 +15,7 @@ public class TextContent extends Content {
     private float size = 3f;
     private int color = -1;
     public boolean center = false;
+    public int padding=0;
 
     public TextContent(String text) {
         this(text, -1, 2f);
@@ -50,6 +51,15 @@ public class TextContent extends Content {
         return this;
     }
 
+    public TextContent text(String text){
+        this.text = text;
+        return this;
+    }
+    public TextContent padding(int padding){
+        this.padding = padding;
+        return this;
+    }
+
     @Override
     public void onDrawEx(Canvas canvas) {
         Fonts.FONT.setTextSize((getInnerRect().height() / size));
@@ -63,8 +73,9 @@ public class TextContent extends Content {
             Fonts.FONT.setColor(color);
         }
         float si = Fonts.FONT.measureText(text);
+        int p = padding>0?getInnerRect().width()/padding:0;
         if (!center)
-            canvas.drawText(text, getInnerRect().left + (float) (getInnerRect().height() / 1.5), getInnerRect().centerY(), Fonts.FONT);
+            canvas.drawText(text, getInnerRect().left + (float) (getInnerRect().height() / 1.5)+p, getInnerRect().centerY(), Fonts.FONT);
         else
             canvas.drawText(text, getInnerRect().centerX()-si/2 ,getInnerRect().centerY(), Fonts.FONT);
 

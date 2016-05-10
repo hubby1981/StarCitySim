@@ -103,4 +103,7 @@
 
     <string name="selection_default">bitte auswählen</string>
 
+
+    <string name="content_race_name_header">Rassen Name:</string>
+    <string name="content_race_name_button">Vorschlag Rassen Name</string>
 </resources>

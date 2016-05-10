@@ -110,4 +110,10 @@
 
     <string name="selection_default">nothing selected</string>
 
+
+
+    <string name="content_race_name_header">Race Name:</string>
+    <string name="content_race_name_button">Change race name</string>
+    <string name="content_system_name_header">System Name:</string>
+    <string name="content_sun_name_header">Sun Name:</string>
 </resources>
