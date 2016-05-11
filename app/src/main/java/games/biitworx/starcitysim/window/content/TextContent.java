@@ -65,7 +65,7 @@ public class TextContent extends Content {
         Fonts.FONT.setTextSize((getInnerRect().height() / size));
 
         if (line)
-            canvas.drawLine(getInnerRect().left, getInnerRect().top + getInnerRect().height() / 2, getInnerRect().right, getInnerRect().top + getInnerRect().height() / 2, Colors.backPainterLine2);
+            canvas.drawLine(getInnerRect().left, getInnerRect().top + getInnerRect().height() / 2, getInnerRect().right, getInnerRect().top + getInnerRect().height() / 2, Colors.backPainterLine);
         int old = Fonts.FONT.getColor();
         if (color != -1) {
 

@@ -8,8 +8,7 @@ import java.util.ArrayList;
  */
 public class NameGenerator {
 
-    public ArrayList<String> syllables; //{"sa","me","nu","ga","ri","ol","wo","su","so","li","lu","xa","uq","ok","ai","lo","du","mi","ku","pu","pi","we","ch","ku","gi","yu","yi","ya","ud","am","im","om","hu","hi","zu","za"};
-
+    public ArrayList<String> syllables;
 
     public ArrayList<String> getSyllables() {
         ArrayList<String> result = new ArrayList<>();

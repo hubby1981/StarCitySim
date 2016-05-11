@@ -221,20 +221,20 @@ public class GameViewBackNormal extends View {
 
         canvas.drawArc(x - botter.height() / 6.5f, y - botter.height() / 6.5f, x + botter.height() / 6.5f, y + botter.height() / 6.5f, MenuWatcher.START_MENU_0, !showOverlay ? MenuWatcher.END_MENU_0 : MenuWatcher.END_MENU_1, true, Colors.outlinePainter2);
 
-        canvas.drawArc(x - botter.height() / 6.5f, y - botter.height() / 6.5f, x + botter.height() / 6.5f, y + botter.height() / 6.5f, MenuWatcher.START_MENU_0, !showOverlay ? MenuWatcher.END_MENU_0 : MenuWatcher.END_MENU_1, true, Colors.backPainterLine2);
+        canvas.drawArc(x - botter.height() / 6.5f, y - botter.height() / 6.5f, x + botter.height() / 6.5f, y + botter.height() / 6.5f, MenuWatcher.START_MENU_0, !showOverlay ? MenuWatcher.END_MENU_0 : MenuWatcher.END_MENU_1, true, Colors.backPainterLine4);
 
 
         canvas.drawArc(x - botter.height() / 12.5f, y - botter.height() / 12.5f, x + botter.height() / 12.5f, y + botter.height() / 12.5f, MenuWatcher.START_MENU_1, !showOverlay ? MenuWatcher.END_MENU_1 : MenuWatcher.END_MENU_0, true, Colors.outlinePainter2);
 
-        canvas.drawArc(x - botter.height() / 12.5f, y - botter.height() / 12.5f, x + botter.height() / 12.5f, y + botter.height() / 12.5f, MenuWatcher.START_MENU_1, !showOverlay ? MenuWatcher.END_MENU_1 : MenuWatcher.END_MENU_0, true, Colors.backPainterLine2);
+        canvas.drawArc(x - botter.height() / 12.5f, y - botter.height() / 12.5f, x + botter.height() / 12.5f, y + botter.height() / 12.5f, MenuWatcher.START_MENU_1, !showOverlay ? MenuWatcher.END_MENU_1 : MenuWatcher.END_MENU_0, true, Colors.backPainterLine4);
 
         canvas.drawArc(x - botter.height() / 8.5f, y - botter.height() / 8.5f, x + botter.height() / 8.5f, y + botter.height() / 8.5f, MenuWatcher.START_MENU_2, !showOverlay ? MenuWatcher.END_MENU_2 : MenuWatcher.END_MENU_3, true, Colors.outlinePainter2);
 
-        canvas.drawArc(x - botter.height() / 8.5f, y - botter.height() / 8.5f, x + botter.height() / 8.5f, y + botter.height() / 8.5f, MenuWatcher.START_MENU_2, !showOverlay ? MenuWatcher.END_MENU_2 : MenuWatcher.END_MENU_3, true, Colors.backPainterLine2);
+        canvas.drawArc(x - botter.height() / 8.5f, y - botter.height() / 8.5f, x + botter.height() / 8.5f, y + botter.height() / 8.5f, MenuWatcher.START_MENU_2, !showOverlay ? MenuWatcher.END_MENU_2 : MenuWatcher.END_MENU_3, true, Colors.backPainterLine4);
 
         canvas.drawArc(x - botter.height() / 15.5f, y - botter.height() / 15.5f, x + botter.height() / 15.5f, y + botter.height() / 15.5f, MenuWatcher.START_MENU_3, !showOverlay ? MenuWatcher.END_MENU_3 : MenuWatcher.END_MENU_2, true, Colors.outlinePainter2);
 
-        canvas.drawArc(x - botter.height() / 15.5f, y - botter.height() / 15.5f, x + botter.height() / 15.5f, y + botter.height() / 15.5f, MenuWatcher.START_MENU_3, !showOverlay ? MenuWatcher.END_MENU_3 : MenuWatcher.END_MENU_2, true, Colors.backPainterLine2);
+        canvas.drawArc(x - botter.height() / 15.5f, y - botter.height() / 15.5f, x + botter.height() / 15.5f, y + botter.height() / 15.5f, MenuWatcher.START_MENU_3, !showOverlay ? MenuWatcher.END_MENU_3 : MenuWatcher.END_MENU_2, true, Colors.backPainterLine4);
 
         Game.setNotifyAction();
     }

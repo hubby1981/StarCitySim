@@ -23,6 +23,7 @@ public class Colors {
     public static Paint backPainterLine;
     public static Paint backPainterLine2;
     public static Paint backPainterLine3;
+    public static Paint backPainterLine4;
 
     public static int backContentFillColor = Color.argb(175, 0, 0, 0);
     public static Paint backPainterContent;
@@ -100,16 +101,25 @@ public class Colors {
 
 
         backPainterLine = new Paint();
-        backPainterLine.setColor(backFillColor);
+        backPainterLine.setColor(foreFillColor);
         backPainterLine.setStyle(Paint.Style.STROKE);
-        backPainterLine.setStrokeWidth(1);
+        backPainterLine.setStrokeWidth(4);
+        backPainterLine.setAntiAlias(true);
+        backPainterLine.setPathEffect(new DashPathEffect(new float[]{8f, 8f, 8f}, 8f));
+
+        backPainterLine4 = new Paint();
+        backPainterLine4.setColor(foreFillColor);
+        backPainterLine4.setStyle(Paint.Style.STROKE);
+        backPainterLine4.setStrokeWidth(2);
+        backPainterLine4.setAntiAlias(true);
+        backPainterLine4.setPathEffect(new DashPathEffect(new float[]{4f, 4f, 4f}, 4f));
 
         backPainterLine2 = new Paint();
         backPainterLine2.setColor(foreFillColor);
         backPainterLine2.setStyle(Paint.Style.STROKE);
         backPainterLine2.setStrokeWidth(2);
         backPainterLine2.setAntiAlias(true);
-        //backPainterLine2.setPathEffect(new DashPathEffect(new float[]{2f,2f,2f},2f));
+        //backPainterLine2.setPathEffect(new DashPathEffect(new float[]{8f,8f,8f},8f));
 
         backPainterLine3 = new Paint();
         backPainterLine3.setColor(inlineFillColor);
