@@ -24,7 +24,7 @@ public class Game extends AppCompatActivity {
     public static Runnable update;
     private static Runnable timer;
 
-    private static int ScrollPosition = 0;
+    public static int ScrollPosition = 0;
     private int OldY = 0;
     private boolean touch = false;
     private boolean scrolled = false;

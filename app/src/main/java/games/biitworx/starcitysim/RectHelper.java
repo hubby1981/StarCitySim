@@ -107,6 +107,22 @@ public class RectHelper {
         return result;
     }
 
+    public static ArrayList<Rect> makeRectsEx(Rect base, int countW) {
+        ArrayList<Rect> result = new ArrayList<>();
+
+        int w = base.width() / (countW );
+        int x = base.left;
+        int y = base.top;
+        int h = base.height();
+
+
+        for(int index =0;index<countW;index++){
+            result.add(new Rect(x,y,x+w,y+h));
+            x+=w;
+        }
+        return result;
+    }
+
     public static ArrayList<Rect> makeRects2(Rect base, int countW) {
         ArrayList<Rect> result = new ArrayList<>();
 

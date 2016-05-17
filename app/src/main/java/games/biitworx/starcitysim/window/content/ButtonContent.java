@@ -15,6 +15,8 @@ import games.biitworx.starcitysim.RectHelper;
 public class ButtonContent extends Content {
     public String text;
 
+    private int seed=20;
+
     public ButtonContent(String text) {
         this(text, null);
     }
@@ -25,6 +27,11 @@ public class ButtonContent extends Content {
         setAction(action);
     }
 
+    public ButtonContent seed(int seed){
+        this.seed = seed;
+        return this;
+    }
+
     @Override
     public void onDrawEx(Canvas canvas) {
         Rect innerContent = getInnerRect();
@@ -32,7 +39,7 @@ public class ButtonContent extends Content {
         innerContent = new Rect(innerContent.left + si, innerContent.top, innerContent.right - si, innerContent.bottom);
 
         Path pp = new Path();
-        int w = innerContent.width() / 20;
+        int w = innerContent.width() / seed;
         pp.moveTo(innerContent.left, innerContent.top);
         pp.lineTo(innerContent.right - w, innerContent.top);
         pp.lineTo(innerContent.right, innerContent.top + w);

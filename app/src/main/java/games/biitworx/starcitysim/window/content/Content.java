@@ -74,6 +74,10 @@ public abstract class Content {
         return content;
     }
 
+    public void setContentRect(Rect content){
+        this.content = content;
+    }
+
     public Rect getFullRect() {
         return full;
     }
@@ -93,14 +97,32 @@ public abstract class Content {
     }
 
     public int onDrawInner(int yPos, int scroll) {
+    return onDrawInner(yPos,scroll,0,0,0,0);
+
+    }
+
+    public int onDrawInner(int yPos, int scroll,int left,int right,int top,int bottom) {
         Rect base = MenuRects.line.get();
-        content = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + (int) (base.height() * lineHeight));
-        full = new Rect(base.left, yPos - scroll, base.right, (yPos - scroll) + (int) (base.height() * getLineHeight(false)));
+        if(left<=0)
+            left=base.left;
+        if(right<=0)
+            right=base.right;
+        if(top<=0)
+            top= yPos - scroll;
+        if(bottom<=0)
+            bottom=(yPos - scroll) + (int) (base.height() * lineHeight);
+
+        content = new Rect(left, top,right, bottom);
+
+        if(bottom<=0)
+            bottom=(yPos - scroll) + (int) (base.height() * getLineHeight(false));
+        full = new Rect(left, top, right,bottom);
 
         click = new Rect(content.left, content.top - base.height(), content.right, content.bottom - base.height());
         return yPos + (int) (base.height() * lineHeight);
 
     }
+
 
     protected void onDrawContents(int yPos, int scroll) {
 

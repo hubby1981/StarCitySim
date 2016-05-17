@@ -26,25 +26,25 @@ public class BankingMainSlotWindow extends Window {
         getContents().add(new TextContent("", -1, 0.2f, 1f, true));
 
         for (int x = 1; x < 10; x++) {
-            getContents().add(new TextContent("", -1, 0.2f, 1f, true));
-            getContents().add(new TextContent("29391.7."+x+" # Überweisung Galaktische Bank", -1, 0.85f, 2f));
+
+            getContents().add(new TextContent("29391.7."+x+" # Überweisung Galaktische Bank", -1, 1, 2f));
             getContents().add(new TextContent(" + 3.454.322", Color.argb(200, 50, 200, 50), 1f, 1.75f));
             getContents().add(new TextContent("", -1, 0.2f, 1f, true));
-            getContents().add(new TextContent("29391.7."+x+" # Überweisung Galaktische Bank", -1, 0.85f, 2f));
+            getContents().add(new TextContent("29391.7."+x+" # Überweisung Galaktische Bank", -1, 1, 2f));
             getContents().add(new TextContent(" + 3.454.322", Color.argb(200, 50, 200, 50), 1f, 1.75f));
 
             getContents().add(new TextContent("", -1, 0.2f, 1f, true));
-            getContents().add(new TextContent("29391.7."+x+" # Überweisung Galaktische Bank", -1, 0.85f, 2f));
+            getContents().add(new TextContent("29391.7."+x+" # Überweisung Galaktische Bank", -1, 1, 2f));
 
             getContents().add(new TextContent(" + 3.454.322", Color.argb(200, 50, 200, 50), 1f, 1.75f));
 
             getContents().add(new TextContent("", -1, 0.1f, 1f, true));
-            getContents().add(new TextContent("29391.8."+x+" # Forschung / Entwicklung Budget", -1, 0.85f, 2f));
+            getContents().add(new TextContent("29391.8."+x+" # Forschung / Entwicklung Budget", -1, 1, 2f));
 
             getContents().add(new TextContent(" - 212.221", Color.argb(200, 200, 50, 50), 1f, 1.75f));
         }
         getContents().add(new TextContent("", -1, 0.2f, 1f, true));
-        getContents().add(new TextContent("", -1, 0.2f, 1f, true));
+
         getContents().add(new TextContent("Neuer Saldo: + 31.321.000 mil. crd", Color.argb(200, 50, 200, 50), 1f, 1.75f));
 
         getContents().add(new SpacerContent(2));
