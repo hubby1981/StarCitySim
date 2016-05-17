@@ -76,9 +76,15 @@ public class GameViewBackNormal extends View {
                 Color.argb(75, 15, 130, 160), Color.argb(100, 30, 60, 60), Shader.TileMode.CLAMP);
 
         Colors.outlinePainter3.setShader(shader1);
+
+
         Rect content = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
-        Rect topper = new Rect(content.left, content.top, content.right, content.height() / 10);
-        Rect botter = new Rect(content.left, content.bottom - content.height() / 10, content.right, content.bottom);
+        int seed=10;
+        int wi = content.height()>content.width()?content.height()/seed:(int)(content.width()/(int)seed*0.85f);
+
+
+        Rect topper = new Rect(content.left, content.top, content.right, wi);
+        Rect botter = new Rect(content.left, content.bottom - wi, content.right, content.bottom);
 
         MenuRects.notification = new RectContainer(botter);
 
