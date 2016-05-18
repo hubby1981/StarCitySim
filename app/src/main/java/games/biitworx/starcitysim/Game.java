@@ -43,6 +43,8 @@ public class Game extends AppCompatActivity {
     public static int count = 2;
     public static Runnable notifyAction;
 
+    public static boolean PORTRAIT=true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,20 @@ public class Game extends AppCompatActivity {
         Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader2), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Colors.shaderBack2 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Colors.shaderBack3 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader3), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+
+
+        Colors.rock001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.rock001), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.rock002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.rock002), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.rock003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.rock003), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.rock004 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.rock004), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.rock005 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.rock005), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+
+        Colors.ice001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice001), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.ice002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice002), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.ice003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice003), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.ice004 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice004), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.ice005 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice005), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+
 
         Colors.backPainterContentShader.setStyle(Paint.Style.FILL);
         Colors.backPainterContentShader.setShader(Colors.shaderBack);
@@ -108,8 +124,8 @@ public class Game extends AppCompatActivity {
             @Override
             public void run() {
                 COUNT--;
-                if(COUNT==0){
-                    COUNT=59;
+                if (COUNT == 0) {
+                    COUNT = 59;
                     runOnUiThread(run);
                 }
                 runOnUiThread(update);
@@ -123,7 +139,7 @@ public class Game extends AppCompatActivity {
 
 
             }
-        },5000, 5000);
+        }, 5000, 5000);
 
 
         timer = new Runnable() {

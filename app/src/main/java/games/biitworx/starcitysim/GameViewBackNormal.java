@@ -43,8 +43,8 @@ public class GameViewBackNormal extends View {
     }
 
     public Window getOverlayWindow() {
-        if(view==null)return overlay;
-        return view.getOverlayWindow()!=null?view.getOverlayWindow(): overlay;
+        if (view == null) return overlay;
+        return view.getOverlayWindow() != null ? view.getOverlayWindow() : overlay;
     }
 
     public void changeWindow(Window window) {
@@ -79,8 +79,17 @@ public class GameViewBackNormal extends View {
 
 
         Rect content = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
-        int seed=10;
-        int wi = content.height()>content.width()?content.height()/seed:(int)(content.width()/(int)seed*0.85f);
+
+        boolean old = Game.PORTRAIT;
+
+        Game.PORTRAIT = canvas.getWidth() < canvas.getHeight();
+
+        if (old != Game.PORTRAIT) {
+
+        }
+
+        int seed = 10;
+        int wi = content.height() > content.width() ? content.height() / seed : (int) (content.width() / (int) seed * 0.85f);
 
 
         Rect topper = new Rect(content.left, content.top, content.right, wi);
@@ -201,7 +210,7 @@ public class GameViewBackNormal extends View {
                 Window wnd = view;
                 if (!showOverlay) {
                     showOverlay = true;
-                    wnd = view!=null?view.getOverlayWindow()!=null?view.getOverlayWindow():overlay:overlay;
+                    wnd = view != null ? view.getOverlayWindow() != null ? view.getOverlayWindow() : overlay : overlay;
 
 
                 } else {
@@ -216,10 +225,10 @@ public class GameViewBackNormal extends View {
 
 
         canvas.drawArc(x - botter.height() / 3.25f, y - botter.height() / 3.25f, x + botter.height() / 3.25f, y + botter.height() / 3.25f, 0, 360, true, Colors.outlinePainter3);
-        canvas.drawArc(x - botter.height() / 3.25f, y - botter.height() / 3.25f, x + botter.height() / 3.25f, y + botter.height() / 3.25f, 0, 360, true, showOverlay? Colors.backPainterLine2:Colors.backPainterLine3);
+        canvas.drawArc(x - botter.height() / 3.25f, y - botter.height() / 3.25f, x + botter.height() / 3.25f, y + botter.height() / 3.25f, 0, 360, true, showOverlay ? Colors.backPainterLine2 : Colors.backPainterLine3);
 
         canvas.drawArc(x - botter.height() / 3.5f, y - botter.height() / 3.5f, x + botter.height() / 3.5f, y + botter.height() / 3.5f, 0, 360, true, Colors.outlinePainter3);
-        canvas.drawArc(x - botter.height() / 3.5f, y - botter.height() / 3.5f, x + botter.height() / 3.5f, y + botter.height() / 3.5f, 0, 360, true, showOverlay? Colors.backPainterLine2:Colors.backPainterLine3);
+        canvas.drawArc(x - botter.height() / 3.5f, y - botter.height() / 3.5f, x + botter.height() / 3.5f, y + botter.height() / 3.5f, 0, 360, true, showOverlay ? Colors.backPainterLine2 : Colors.backPainterLine3);
 
         Colors.outlinePainter2.setColor(Color.argb(255, 15, 70, 90));
         if (showOverlay)

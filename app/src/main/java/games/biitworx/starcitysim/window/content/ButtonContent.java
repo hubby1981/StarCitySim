@@ -7,6 +7,7 @@ import android.graphics.Rect;
 
 import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Fonts;
+import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.RectHelper;
 
 /**
@@ -34,12 +35,19 @@ public class ButtonContent extends Content {
 
     @Override
     public void onDrawEx(Canvas canvas) {
+
+        int seed2=seed;
+        if(!Game.PORTRAIT)
+            seed2*=2;
         Rect innerContent = getInnerRect();
         int si = innerContent.width() / 8;
         innerContent = new Rect(innerContent.left + si, innerContent.top, innerContent.right - si, innerContent.bottom);
 
         Path pp = new Path();
-        int w = innerContent.width() / seed;
+
+
+
+        int w = innerContent.width() / seed2;
         pp.moveTo(innerContent.left, innerContent.top);
         pp.lineTo(innerContent.right - w, innerContent.top);
         pp.lineTo(innerContent.right, innerContent.top + w);

@@ -15,11 +15,28 @@ public class NameGenerator {
         ArrayList<String> result = new ArrayList<>();
         for (int x = 97; x <= 122; x++) {
             for (int xx = 97; xx <= 122; xx++) {
+                String value = "";
                 if (isNormalLetter(x) && x != xx && !isNormalLetter(xx)) {
-                    result.add(Character.toString((char) x) + Character.toString((char) xx));
+                    value = Character.toString((char) x) + Character.toString((char) xx);
+                    result.add(value);
+
                 }
                 if (!isNormalLetter(x) && x != xx && isNormalLetter(xx)) {
-                    result.add(Character.toString((char) x) + Character.toString((char) xx));
+                    value = Character.toString((char) x) + Character.toString((char) xx);
+                    result.add(value);
+
+                }
+
+                int u = RandomRange.getRandom(1, 5);
+                if (u == 2) {
+                    value += Character.toString((char) getNumber(97, 122, x));
+                    result.add(value);
+
+                }
+                if (u == 3) {
+                    value += Character.toString((char) getNumber(97, 122, xx)) + Character.toString((char) getNumber(97, 122, x));
+                    result.add(value);
+
                 }
             }
         }
@@ -32,7 +49,7 @@ public class NameGenerator {
     }
 
     public String getRaceName() {
-        return getName(RandomRange.getRandom(2,3), RandomRange.getRandom(3,5));
+        return getName(RandomRange.getRandom(2, 3), RandomRange.getRandom(3, 5));
     }
 
     public String getSystemName() {
@@ -56,9 +73,9 @@ public class NameGenerator {
             last = getNumber(0, syllables.size() - 1, last);
             int sub = RandomRange.getRandom(1, 15);
             int a = RandomRange.getRandom(0, len - 1);
-            sub = max <=2 ? 0 : sub;
+            sub = max <= 2 ? 0 : sub;
 
-            result += x == a && sub > 9 &&x+1<len ? syllables.get(last) + "'" : syllables.get(last);
+            result += x == a && sub > 9 && x + 1 < len ? syllables.get(last) + "'" : syllables.get(last);
         }
 
         String f = result.substring(0, 1);

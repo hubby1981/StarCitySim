@@ -48,6 +48,17 @@ public class ShipyardWindow extends Window {
         getContents().add(new TextContent("", -1, 0.2f, 2f, true));
 
 
+        getContents().add(new ButtonContent(T.get(R.string.content_race_name_button), new Runnable() {
+            @Override
+            public void run() {
+                text.text(new NameGenerator().getRaceName());
+                text2.text(new NameGenerator().getSystemName());
+
+                text3.text(new NameGenerator().getSunName());
+                Game.ScrollPosition = 0;
+                Game.update.run();
+            }
+        }));
         VirtualLineContents lineContents = new VirtualLineContents();
         lineContents.getContents().add(new ButtonContent("Yes", new Runnable() {
             @Override
@@ -87,18 +98,8 @@ public class ShipyardWindow extends Window {
 
         }
 
-        getContents().add(new SpacerContent(1));
-        getContents().add(new ButtonContent(T.get(R.string.content_race_name_button), new Runnable() {
-            @Override
-            public void run() {
-                text.text(new NameGenerator().getRaceName());
-                text2.text(new NameGenerator().getSystemName());
 
-                text3.text(new NameGenerator().getSunName());
-                Game.ScrollPosition = 0;
-                Game.update.run();
-            }
-        }));
+
 
         getContents().add(new SpacerContent(10));
 

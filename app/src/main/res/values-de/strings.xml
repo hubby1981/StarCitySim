@@ -3,6 +3,7 @@
 
 
     <string name="window_menu_title">Hauptmenü</string>
+    <string name="window_game_setup_title">Spiel konfigurieren</string>
     <string name="window_environment_title">Umgebung</string>
     <string name="window_operation_title">Operation</string>
     <string name="window_production_title">Produktion</string>
@@ -106,4 +107,12 @@
 
     <string name="content_race_name_header">Rassen Name:</string>
     <string name="content_race_name_button">Vorschlag Rassen Name</string>
+
+    <string name="content_planet_mass">MASSE</string>
+    <string name="content_planet_radius">RADIUS</string>
+    <string name="content_planet_surface">OBERFLÄCHE</string>
+    <string name="content_planet_atmosphere">ATMOSPHÄRE</string>
+    <string name="content_planet_suface_ROCK">Stein</string>
+    <string name="content_planet_suface_ICE">Eis</string>
+    <string name="content_planet_suface_ICE_ROCK">Eis / Stein</string>
 </resources>
