@@ -79,6 +79,7 @@ public class GameViewBackNormal extends View {
 
 
         Rect content = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
+
         int seed=10;
         int wi = content.height()>content.width()?content.height()/seed:(int)(content.width()/(int)seed*0.85f);
 
@@ -99,7 +100,7 @@ public class GameViewBackNormal extends View {
 
         MenuRects.content = new RectContainer(content);
         int w = 10;
-        MenuRects.contentInner = new RectContainer(new Rect(content.left + (content.width() / 50) / 4, topper.bottom, content.right - content.width() / 50, botter.top));
+        MenuRects.contentInner = new RectContainer(new Rect(content.left + (content.width() / 50) / 4, topper.bottom+10, content.right - content.width() / 50, botter.top-10));
 
         Rect liner = new Rect(topper.left + w, topper.top + w, topper.right - content.width() / 50, topper.bottom - w);
         MenuRects.line = new RectContainer(new Rect(liner.left, liner.top, liner.right, (int) (liner.height() / 1.85)));
