@@ -55,8 +55,9 @@ public class Game extends AppCompatActivity {
         Colors.shaderBack3 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader3), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
 
-        Colors.gas001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas001), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.gas002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas002), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.gas001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas001), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        Colors.gas002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas002), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        Colors.gas003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas003), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
 
 

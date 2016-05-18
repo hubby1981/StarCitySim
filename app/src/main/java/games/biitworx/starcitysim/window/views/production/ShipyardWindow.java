@@ -25,10 +25,11 @@ import games.biitworx.starcitysim.window.views.enrionment.banking.BankingMainSlo
 public class ShipyardWindow extends Window {
     public ShipyardWindow() {
         super(T.get(R.string.window_production_shipyard_title));
-        getContents().add(new PlanetsContent(Colors.gas001));
+        getContents().add(new PlanetsContent(R.drawable.gas001));
         getContents().add(new TextContent("", -1, 0.2f, 2f, true));
-        getContents().add(new PlanetsContent(Colors.gas002));
-
+        getContents().add(new PlanetsContent(R.drawable.gas002));
+        getContents().add(new TextContent("", -1, 0.2f, 2f, true));
+        getContents().add(new PlanetsContent(R.drawable.gas003));
         getContents().add(new MenuItemContent(null, B.get(R.drawable.shipyardback), T.get(R.string.window_production_title), T.get(R.string.window_production_desc), "", Colors.back001,
                 new Runnable() {
                     @Override
