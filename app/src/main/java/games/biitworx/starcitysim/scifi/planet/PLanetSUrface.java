@@ -6,5 +6,6 @@ package games.biitworx.starcitysim.scifi.planet;
 public enum PlanetSurface {
     ICE,
     ROCK,
-    ICE_ROCK
+    ICE_ROCK,
+    GAS
 }

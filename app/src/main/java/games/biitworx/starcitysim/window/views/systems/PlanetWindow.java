@@ -32,9 +32,14 @@ public class PlanetWindow extends Window {
         table.getContents().add(new TextContent("" + (planet.getRadius() * PlanetConst.METER) / 2));
         getContents().add(table);
         table = new VirtualLineContents();
+        table.getContents().add(new TextContent("TEMP"));
+        table.getContents().add(new TextContent("" + planet.getTemprature()));
+        getContents().add(table);
+        table = new VirtualLineContents();
         table.getContents().add(new TextContent(T.get(R.string.content_planet_surface)));
         int id = R.string.content_planet_suface_ROCK;
 
+        if (planet.getSurface() == PlanetSurface.GAS) id = R.string.content_planet_suface_GAS;
         if (planet.getSurface() == PlanetSurface.ICE) id = R.string.content_planet_suface_ICE;
         if (planet.getSurface() == PlanetSurface.ICE_ROCK)
             id = R.string.content_planet_suface_ICE_ROCK;

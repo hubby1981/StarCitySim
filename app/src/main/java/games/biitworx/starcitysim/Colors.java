@@ -81,7 +81,17 @@ public class Colors {
     public static BitmapShader gas004;
     public static BitmapShader gas005;
 
+    public static BitmapShader water001;
+    public static BitmapShader water002;
+    public static BitmapShader water003;
+    public static BitmapShader water004;
+    public static BitmapShader water005;
 
+    public static BitmapShader gras001;
+    public static BitmapShader gras002;
+    public static BitmapShader gras003;
+    public static BitmapShader gras004;
+    public static BitmapShader gras005;
     static {
         outlinePainter = new Paint();
         outlinePainter.setColor(outlineFillColor);

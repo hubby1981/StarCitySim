@@ -115,4 +115,6 @@
     <string name="content_planet_suface_ROCK">Stein</string>
     <string name="content_planet_suface_ICE">Eis</string>
     <string name="content_planet_suface_ICE_ROCK">Eis / Stein</string>
+    <string name="content_planet_suface_GAS">Gas</string>
+
 </resources>

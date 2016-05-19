@@ -126,5 +126,5 @@
     <string name="content_planet_suface_ROCK">Rock</string>
     <string name="content_planet_suface_ICE">Ice</string>
     <string name="content_planet_suface_ICE_ROCK">Ice / Rock</string>
-
+    <string name="content_planet_suface_GAS">Gas</string>
 </resources>

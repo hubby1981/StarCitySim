@@ -2,6 +2,7 @@ package games.biitworx.starcitysim.window.content;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -37,7 +38,7 @@ public class PlanetContent extends Content {
 
         Path p = new Path();
         Rect rc = rects.get(2);
-        p.addCircle(rc.exactCenterX(), rc.exactCenterY(), (rc.height() /3), Path.Direction.CW);
+        p.addCircle(rc.exactCenterX(), rc.exactCenterY(), (rc.height() / 3), Path.Direction.CW);
         int col = planet.getSurfaceColor();
         Paint painter = new Paint();
         painter.setAntiAlias(true);
@@ -47,32 +48,95 @@ public class PlanetContent extends Content {
         canvas.drawPath(p, painter);
 
 
+        if (planet.getSurface() == PlanetSurface.ROCK && planet.getShaderSurfaceA() < 6) {
+            painter.setShader(getShaderRock(planet.getShaderSurfaceA()));
+            canvas.drawPath(p, painter);
 
-        if(planet.getSurface()== PlanetSurface.ROCK && planet.getShader()<6){
-            painter.setShader(getShaderRock(planet.getShader()));
+        } else if (planet.getSurface() == PlanetSurface.ICE && planet.getShaderSurfaceA() < 6) {
+            painter.setShader(getShaderIce(planet.getShaderSurfaceA()));
             canvas.drawPath(p, painter);
 
         }
-        else  if(planet.getSurface()== PlanetSurface.ICE && planet.getShader()<6){
-            painter.setShader(getShaderIce(planet.getShader()));
+        else if (planet.getSurface() == PlanetSurface.GAS && planet.getShaderSurfaceA() < 6) {
+            painter.setShader(getShaderGas(planet.getShaderSurfaceA()));
+            canvas.drawPath(p, painter);
+
+        }else if (planet.getSurface() == PlanetSurface.ICE_ROCK && planet.getShaderSurfaceA() < 6) {
+            painter.setShader(getShaderRock(planet.getShaderSurfaceA()));
+            canvas.drawPath(p, painter);
+            painter.setShader(getShaderIce(planet.getShaderSurfaceA()));
             canvas.drawPath(p, painter);
 
         }
-        else  if(planet.getSurface()== PlanetSurface.ICE_ROCK && planet.getShader()<6){
-            painter.setShader(getShaderRock(planet.getShader()));
+
+        if (planet.getSurface() == PlanetSurface.ROCK && planet.getShaderSurfaceB() < 6) {
+            painter.setShader(getShaderRock(planet.getShaderSurfaceB()));
             canvas.drawPath(p, painter);
-            painter.setShader(getShaderIce(planet.getShader()));
+
+        } else if (planet.getSurface() == PlanetSurface.ICE && planet.getShaderSurfaceB() < 6) {
+            painter.setShader(getShaderIce(planet.getShaderSurfaceB()));
+            canvas.drawPath(p, painter);
+
+        } else if (planet.getSurface() == PlanetSurface.GAS && planet.getShaderSurfaceB() < 6) {
+            painter.setShader(getShaderGas(planet.getShaderSurfaceB()));
+            canvas.drawPath(p, painter);
+
+        }    else if (planet.getSurface() == PlanetSurface.ICE_ROCK && planet.getShaderSurfaceB() < 6) {
+            painter.setShader(getShaderRock(planet.getShaderSurfaceB()));
+            canvas.drawPath(p, painter);
+            painter.setShader(getShaderIce(planet.getShaderSurfaceB()));
             canvas.drawPath(p, painter);
 
         }
 
-        painter.setShadowLayer(20, 0, 0, col);
-        painter.setShader(null);
-        painter.setColor(Color.argb(25, 0, 0, 0));
+        if (planet.getSurface() == PlanetSurface.ROCK && planet.getShaderSurfaceC() < 6) {
+            painter.setShader(getShaderRock(planet.getShaderSurfaceC()));
+            canvas.drawPath(p, painter);
+
+        } else if (planet.getSurface() == PlanetSurface.ICE && planet.getShaderSurfaceC() < 6) {
+            painter.setShader(getShaderIce(planet.getShaderSurfaceC()));
+            canvas.drawPath(p, painter);
+
+        } else if (planet.getSurface() == PlanetSurface.GAS && planet.getShaderSurfaceC() < 6) {
+            painter.setShader(getShaderGas(planet.getShaderSurfaceC()));
+            canvas.drawPath(p, painter);
+
+        }    else if (planet.getSurface() == PlanetSurface.ICE_ROCK && planet.getShaderSurfaceC() < 6) {
+            painter.setShader(getShaderRock(planet.getShaderSurfaceC()));
+            canvas.drawPath(p, painter);
+            painter.setShader(getShaderIce(planet.getShaderSurfaceC()));
+            canvas.drawPath(p, painter);
+
+        }
+
+        if (planet.getSurface() == PlanetSurface.ROCK && planet.getShaderSurfaceD() < 6) {
+            painter.setShader(getShaderWater(planet.getShaderSurfaceD()));
+            canvas.drawPath(p, painter);
+
+        }else if (planet.getSurface() == PlanetSurface.ICE_ROCK && planet.getShaderSurfaceD() < 6) {
+            painter.setShader(getShaderWater(planet.getShaderSurfaceD()));
+            canvas.drawPath(p, painter);
+
+        }
+
+        if (planet.getSurface() == PlanetSurface.ROCK && planet.getShaderSurfaceE() < 6) {
+            painter.setShader(getShaderGras(planet.getShaderSurfaceE()));
+            canvas.drawPath(p, painter);
+
+        }
+        LinearGradient grad = new LinearGradient((rc.left), rc.bottom, rc.right, rc.top, Color.argb(255, 0, 0, 0), Color.argb(50, 0, 0, 0), Shader.TileMode.CLAMP);
+        painter.setShader(grad);
+
         canvas.drawPath(p, painter);
-        Colors.backPainterLine2.setStrokeWidth(5);
+        canvas.drawPath(p, painter);
+
+
+        painter.setShader(null);
+
+
+        Colors.backPainterLine2.setStrokeWidth(0);
         Colors.backPainterLine2.setStyle(Paint.Style.FILL_AND_STROKE);
-        Colors.backPainterLine2.setShadowLayer(rc.width() / 4, 0, 0, col);
+        Colors.backPainterLine2.setShadowLayer(10*planet.getAtmosphereThickness(), 5, 5, col);
         canvas.drawPath(p, Colors.backPainterLine2);
         Colors.backPainterLine2.setStrokeWidth(2);
         Colors.backPainterLine2.setShadowLayer(0, 0, 0, Colors.backPainterLine2.getColor());
@@ -95,6 +159,54 @@ public class PlanetContent extends Content {
         if (id == 5)
             return Colors.rock005;
         return Colors.rock001;
+    }
+    public Shader getShaderGas(int id) {
+
+
+        if (id == 1)
+            return Colors.gas001;
+        if (id == 2)
+            return Colors.gas002;
+        if (id == 3)
+            return Colors.gas003;
+        if (id == 4)
+            return Colors.gas004;
+        if (id == 5)
+            return Colors.gas005;
+        return Colors.gas001;
+    }
+
+
+    public Shader getShaderWater(int id) {
+
+
+        if (id == 1)
+            return Colors.water001;
+        if (id == 2)
+            return Colors.water002;
+        if (id == 3)
+            return Colors.water003;
+        if (id == 4)
+            return Colors.water004;
+        if (id == 5)
+            return Colors.water005;
+        return Colors.water001;
+    }
+
+    public Shader getShaderGras(int id) {
+
+
+        if (id == 1)
+            return Colors.gras001;
+        if (id == 2)
+            return Colors.gras002;
+        if (id == 3)
+            return Colors.gras003;
+        if (id == 4)
+            return Colors.gras004;
+        if (id == 5)
+            return Colors.gras005;
+        return Colors.gras001;
     }
 
     public Shader getShaderIce(int id) {

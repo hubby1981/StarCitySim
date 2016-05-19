@@ -69,11 +69,24 @@ public class Game extends AppCompatActivity {
         Colors.ice004 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice004), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
         Colors.ice005 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice005), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
 
+        Colors.water001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.water001), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.water002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.water002), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.water003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.water003), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.water004 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.water004), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.water005 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.water005), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
 
+        Colors.gras001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gras001), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.gras002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gras002), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.gras003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gras003), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.gras004 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gras004), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.gras005 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gras005), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
 
-        Colors.gas001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas001), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-        Colors.gas002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas002), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-        Colors.gas003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas003), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        Colors.gas001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas001), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.gas002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas002), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.gas003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas003), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.gas004 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas004), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+        Colors.gas005 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas005), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
+
 
 
 
