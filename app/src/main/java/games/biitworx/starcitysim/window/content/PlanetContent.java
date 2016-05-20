@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
@@ -11,6 +12,7 @@ import android.graphics.Region;
 import android.graphics.Shader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import games.biitworx.starcitysim.B;
 import games.biitworx.starcitysim.BitmapDrawer;
@@ -20,6 +22,7 @@ import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.RectHelper;
 import games.biitworx.starcitysim.T;
 import games.biitworx.starcitysim.scifi.PlanetConst;
+import games.biitworx.starcitysim.scifi.RandomRange;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 import games.biitworx.starcitysim.scifi.planet.rock.RockPlanetTerrain;
@@ -30,6 +33,10 @@ import games.biitworx.starcitysim.scifi.planet.rock.RockPlanetTerrain;
 public class PlanetContent extends Content {
     private PlanetData planet;
     private boolean clickable = false;
+    public float degree = 0;
+    public float degree2 = 0;
+
+    public List<Scene> scenes = new ArrayList<>();
 
     public PlanetContent(PlanetData planet) {
         super(3);
@@ -55,6 +62,21 @@ public class PlanetContent extends Content {
 
     @Override
     public void onDrawEx(Canvas canvas) {
+        if (scenes.size() == 0) {
+            scenes.add(new Scene());
+        }
+        if (!clickable) {
+            for (Scene s : scenes) {
+                s.pos += 5;
+            }
+            if (scenes.size() == 1) {
+                Scene s = new Scene();
+                s.pos = (0 - getInnerFullRect().width()) + scenes.get(0).pos;
+                scenes.add(s);
+            }
+
+
+        }
         if (clickable) {
             Rect innerContent = getInnerRect();
             Paint filler = new Paint();
@@ -98,17 +120,17 @@ public class PlanetContent extends Content {
 
 
         makeSurface(canvas, circle, circle2, circler, planet.getShaderSurfaceA());
-       if(planet.getSurface()!=PlanetSurface.SUN) {
-           makeSurfaceEx(canvas, circle, circle2, circler, planet.getShaderSurfaceB());
-           makeSurfaceEx(canvas, circle, circle2, circler, planet.getShaderSurfaceC());
-           makeSurface2(canvas, circle, circle2, circler, planet.getShaderSurfaceD());
-           makeSurface3(canvas, circle, circle2, circler, planet.getShaderSurfaceE());
-       }
+        if (planet.getSurface() != PlanetSurface.SUN) {
+            makeSurfaceEx(canvas, circle, circle2, circler, planet.getShaderSurfaceB());
+            makeSurfaceEx(canvas, circle, circle2, circler, planet.getShaderSurfaceC());
+            makeSurface2(canvas, circle, circle2, circler, planet.getShaderSurfaceD());
+            makeSurface3(canvas, circle, circle2, circler, planet.getShaderSurfaceE());
+        }
 
         Paint light = new Paint();
         light.setStyle(Paint.Style.FILL);
         light.setAntiAlias(true);
-        light.setShader(new LinearGradient((float) (circle.centerX() - circle.width() / 8), circle.exactCenterY(), circle.right - circle.width() / (clickable ? 8 : 4), circle.exactCenterY(), Color.argb(clickable ? 150 : 200, 0, 0, 0), Color.argb(0, 0, 0, 0), Shader.TileMode.CLAMP));
+        light.setShader(new LinearGradient((float) (circle.centerX() - circle.width() / 8), circle.exactCenterY(), circle.right - circle.width() / (clickable ? 8 : 4), circle.exactCenterY(), Color.argb(clickable ? 185 : 200, 0, 0, 0), Color.argb(0, 0, 0, 0), Shader.TileMode.CLAMP));
         canvas.drawPath(p, light);
 
         if (clickable) {
@@ -167,6 +189,7 @@ public class PlanetContent extends Content {
             BitmapDrawer.drawImage(b, canvas, circle, null, true);
         }
     }
+
     private void makeSurfaceEx(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
         int id = 0;
         if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
@@ -331,8 +354,43 @@ public class PlanetContent extends Content {
         Canvas c = new Canvas(result);
         c.drawPath(p, painter);
         c.clipPath(p, Region.Op.INTERSECT);
-        BitmapDrawer.drawImage(bitmap, c, circle, null, true);
+        if (!clickable) {/*
+            Matrix mm = new Matrix();
+            mm.postRotate(degree);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), mm, true);
+            circle = new Rect(circle.left - circle.width() / 4, circle.top - circle.height() / 4, circle.right + circle.width() / 4, circle.bottom + circle.height() / 4);
+        */
 
+
+            int oc = circle.right;
+            if (scenes.size() > 0) {
+                circle = new Rect(circle.left + scenes.get(0).pos, circle.top, circle.right + scenes.get(0).pos, circle.bottom);
+
+                BitmapDrawer.drawImage(bitmap, c, circle, null, true);
+            }
+            if (scenes.size() > 1) {
+                circle = new Rect((circle.left - oc) + scenes.get(1).pos, circle.top, (circle.right - oc) + scenes.get(0).pos, circle.bottom);
+
+                BitmapDrawer.drawImage(bitmap, c, circle, null, true);
+
+                if (scenes.size() == 2) {
+                    if (scenes.get(0).pos >= oc) {
+                        scenes.remove(0);
+                        Scene s = new Scene();
+                        s.pos = (0 - oc) + scenes.get(0).pos;
+                        scenes.add(s);
+                    }
+                }
+            }
+
+        } else {
+            BitmapDrawer.drawImage(bitmap, c, circle, null, true);
+        }
         return result;
+    }
+
+    class Scene {
+        public int pos = 0;
+
     }
 }

@@ -123,7 +123,7 @@ public class Game extends AppCompatActivity {
                 runOnUiThread(update);
             }
         };
-
+int dd=5000;
         new Timer(true).scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -131,8 +131,16 @@ public class Game extends AppCompatActivity {
 
 
             }
-        }, 5000, 5000);
+        }, dd, dd);
 
+        new Timer(true).scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(update);
+
+
+            }
+        }, dd/50, dd/50);
 
         timer = new Runnable() {
             @Override

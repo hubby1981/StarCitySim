@@ -34,7 +34,7 @@ public class PlanetWindow extends Window {
         }));
         int old = sun.getShaderSurfaceA();
         for (int x = 1; x <= max; x++) {
-            final PlanetData p = new PlanetData(new NameGenerator().getPlanetName());
+            final PlanetData p = new PlanetData(name+" "+x);
             if (p.getShaderSurfaceA() == old ) {
                 p.surfaceA(old + 1);
                 old = p.getShaderSurfaceA();
@@ -42,10 +42,14 @@ public class PlanetWindow extends Window {
 
             if (p.getShaderSurfaceB() == old ) {
                 p.surfaceB(old + 1);
+                old = p.getShaderSurfaceB();
+
             }
 
             if (p.getShaderSurfaceC() == old ) {
                 p.surfaceC(old + 1);
+                old = p.getShaderSurfaceA();
+
             }
             if (x <= max / 2 && (p.getSurface() == PlanetSurface.ICE || p.getSurface() == PlanetSurface.ICE_ROCK)) {
                 p.surface(RandomRange.getRandom(1, 3) != 1 ? PlanetSurface.ROCK : PlanetSurface.GAS);

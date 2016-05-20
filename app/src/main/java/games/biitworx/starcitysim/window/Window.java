@@ -127,6 +127,7 @@ public abstract class Window {
         for (Content c : contents.getItems()) {
             if (c.hasAction() && c.isHit(x, y)) {
                 c.getAction().run();
+                c.wasHit=true;
                 ret = true;
             } else {
                 ret = c.checkHit(x, y);

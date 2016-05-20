@@ -31,6 +31,7 @@ public abstract class Content {
     }
 
     public boolean isHit(int x, int y) {
+        wasHit=false;
         if (getContentRect() == null) return false;
 
         System.out.println("check hit " + getContentRect().toString() + " " + y);
@@ -48,6 +49,7 @@ public abstract class Content {
     }
 
     public boolean checkHit(int x, int y) {
+        wasHit=false;
         return false;
     }
 
