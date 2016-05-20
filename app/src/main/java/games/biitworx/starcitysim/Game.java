@@ -43,6 +43,8 @@ public class Game extends AppCompatActivity {
     public static int count = 2;
     public static Runnable notifyAction;
 
+    public static boolean PORTRAIT=true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +57,8 @@ public class Game extends AppCompatActivity {
         Colors.shaderBack3 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader3), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
 
-        Colors.gas001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas001), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-        Colors.gas002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas002), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-        Colors.gas003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas003), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+
+
 
 
 
@@ -115,8 +116,8 @@ public class Game extends AppCompatActivity {
             @Override
             public void run() {
                 COUNT--;
-                if(COUNT==0){
-                    COUNT=59;
+                if (COUNT == 0) {
+                    COUNT = 59;
                     runOnUiThread(run);
                 }
                 runOnUiThread(update);
@@ -130,7 +131,7 @@ public class Game extends AppCompatActivity {
 
 
             }
-        },5000, 5000);
+        }, 5000, 5000);
 
 
         timer = new Runnable() {
@@ -217,7 +218,7 @@ public class Game extends AppCompatActivity {
                 int newScroller = ScrollPosition;
 
 
-                newScroller -= scroller / 8;
+                newScroller -= scroller / 4;
                 if (newScroller < 0)
                     newScroller = 0;
                 touch = true;

@@ -3,6 +3,7 @@
     <string name="action_settings">Settings</string>
 
       <string name="window_menu_title">Menu</string>
+    <string name="window_game_setup_title">Game Setup</string>
     <string name="window_environment_title">Environment</string>
     <string name="window_operation_title">Operation</string>
     <string name="window_production_title">Production</string>
@@ -116,4 +117,18 @@
     <string name="content_race_name_button">Change race name</string>
     <string name="content_system_name_header">System Name:</string>
     <string name="content_sun_name_header">Sun Name:</string>
+
+
+    <string name="content_planet_mass">MASS</string>
+    <string name="content_planet_radius">RADIUS</string>
+    <string name="content_planet_temp">TEMPRATURE</string>
+
+    <string name="content_planet_surface">SURFACE</string>
+    <string name="content_planet_atmosphere">ATMOSPHERE</string>
+    <string name="content_planet_suface_ROCK">Rock</string>
+    <string name="content_planet_suface_ICE">Ice</string>
+    <string name="content_planet_suface_ICE_ROCK">Ice / Rock</string>
+    <string name="content_planet_suface_GAS">Gas</string>
+    <string name="content_planet_suface_SUN">Sun</string>
+
 </resources>

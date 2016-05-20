@@ -6,16 +6,17 @@ import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.T;
 import games.biitworx.starcitysim.scifi.NameGenerator;
+import games.biitworx.starcitysim.scifi.planet.PlanetData;
+import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 import games.biitworx.starcitysim.window.content.ButtonContent;
 import games.biitworx.starcitysim.window.content.MenuItemContent;
-import games.biitworx.starcitysim.window.content.PlanetsContent;
+import games.biitworx.starcitysim.window.content.PlanetContent;
 import games.biitworx.starcitysim.window.content.SpacerContent;
 import games.biitworx.starcitysim.window.content.TextContent;
 import games.biitworx.starcitysim.window.Window;
 import games.biitworx.starcitysim.window.content.VirtualLineContents;
 import games.biitworx.starcitysim.window.views.MenuWindow;
 import games.biitworx.starcitysim.window.views.ProductionWindow;
-import games.biitworx.starcitysim.window.views.SettingsWindow;
 import games.biitworx.starcitysim.window.views.enrionment.BankingWindow;
 import games.biitworx.starcitysim.window.views.enrionment.banking.BankingMainSlotWindow;
 
@@ -25,11 +26,9 @@ import games.biitworx.starcitysim.window.views.enrionment.banking.BankingMainSlo
 public class ShipyardWindow extends Window {
     public ShipyardWindow() {
         super(T.get(R.string.window_production_shipyard_title));
-        getContents().add(new PlanetsContent(R.drawable.gas001));
-        getContents().add(new TextContent("", -1, 0.2f, 2f, true));
-        getContents().add(new PlanetsContent(R.drawable.gas002));
-        getContents().add(new TextContent("", -1, 0.2f, 2f, true));
-        getContents().add(new PlanetsContent(R.drawable.gas003));
+
+        getContents().add(new PlanetContent(new PlanetData(new NameGenerator().getSunName()).surface(PlanetSurface.ROCK)));
+
         getContents().add(new MenuItemContent(null, B.get(R.drawable.shipyardback), T.get(R.string.window_production_title), T.get(R.string.window_production_desc), "", Colors.back001,
                 new Runnable() {
                     @Override
@@ -54,6 +53,17 @@ public class ShipyardWindow extends Window {
         getContents().add(new TextContent("", -1, 0.2f, 2f, true));
 
 
+        getContents().add(new ButtonContent(T.get(R.string.content_race_name_button), new Runnable() {
+            @Override
+            public void run() {
+                text.text(new NameGenerator().getRaceName());
+                text2.text(new NameGenerator().getSystemName());
+
+                text3.text(new NameGenerator().getSunName());
+                Game.ScrollPosition = 0;
+                Game.update.run();
+            }
+        }));
         VirtualLineContents lineContents = new VirtualLineContents();
         lineContents.getContents().add(new ButtonContent("Yes", new Runnable() {
             @Override
@@ -93,18 +103,8 @@ public class ShipyardWindow extends Window {
 
         }
 
-        getContents().add(new SpacerContent(1));
-        getContents().add(new ButtonContent(T.get(R.string.content_race_name_button), new Runnable() {
-            @Override
-            public void run() {
-                text.text(new NameGenerator().getRaceName());
-                text2.text(new NameGenerator().getSystemName());
 
-                text3.text(new NameGenerator().getSunName());
-                Game.ScrollPosition = 0;
-                Game.update.run();
-            }
-        }));
+
 
         getContents().add(new SpacerContent(10));
 

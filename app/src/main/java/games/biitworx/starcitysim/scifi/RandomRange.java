@@ -31,4 +31,11 @@ public final class RandomRange {
         return result;
     }
 
+    public static float getFloat2(float min,float max)
+    {
+        float result = getRandom((int)min,(int)max)+ new Random().nextFloat();
+        while(result>min || result > max)
+            result= getRandom((int)min,(int)max)+new Random().nextFloat();
+        return result;
+    }
 }

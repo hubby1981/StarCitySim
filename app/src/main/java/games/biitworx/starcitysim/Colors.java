@@ -61,13 +61,37 @@ public class Colors {
     public static BitmapShader shaderBack3;
 
 
+
+    public static BitmapShader rock001;
+    public static BitmapShader rock002;
+    public static BitmapShader rock003;
+    public static BitmapShader rock004;
+    public static BitmapShader rock005;
+
+    public static BitmapShader ice001;
+    public static BitmapShader ice002;
+    public static BitmapShader ice003;
+    public static BitmapShader ice004;
+    public static BitmapShader ice005;
+
+
     public static BitmapShader gas001;
     public static BitmapShader gas002;
     public static BitmapShader gas003;
     public static BitmapShader gas004;
     public static BitmapShader gas005;
 
+    public static BitmapShader water001;
+    public static BitmapShader water002;
+    public static BitmapShader water003;
+    public static BitmapShader water004;
+    public static BitmapShader water005;
 
+    public static BitmapShader gras001;
+    public static BitmapShader gras002;
+    public static BitmapShader gras003;
+    public static BitmapShader gras004;
+    public static BitmapShader gras005;
     static {
         outlinePainter = new Paint();
         outlinePainter.setColor(outlineFillColor);
@@ -133,6 +157,8 @@ public class Colors {
         backPainterLine3.setColor(inlineFillColor);
         backPainterLine3.setStyle(Paint.Style.STROKE);
         backPainterLine3.setStrokeWidth(2);
+        backPainterLine3.setAntiAlias(true);
+
         //backPainterLine3.setPathEffect(new DashPathEffect(new float[]{4f, 4f, 4f}, 4f));
 
         topOutlinePainter = new Paint();

@@ -126,11 +126,12 @@ public class ComboboxContent extends Content {
 
         p.lineTo(rc2.centerX() - rc2.width() / 2, yy);
         p.close();
+        /*
         canvas.drawPath(p, Colors.topOutlinePainter);
         if (!show)
             canvas.drawPath(p, Colors.backPainterContent);
         canvas.drawPath(p, !show ? Colors.backPainterLine2 : Colors.backPainterLine3);
-
+*/
         Fonts.FONT.setTextSize((getContentRect().height() / 3));
 
         rects = RectHelper.makeRect3(text, (int) Fonts.FONT.getTextSize(), 2, 2);
@@ -141,8 +142,8 @@ public class ComboboxContent extends Content {
         canvas.drawText(getValue(), (float) rects.get(1).left + hh, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
 
         if (show) {
-            canvas.drawRect(getInnerFullRect(), Colors.backPainterLine3);
-            canvas.drawLine(innerContent.left, innerContent.bottom, innerContent.right, innerContent.bottom, Colors.backPainterLine3);
+            canvas.drawRect(getInnerFullRect(), Colors.backPainterLine2);
+            canvas.drawLine(innerContent.left, innerContent.bottom, innerContent.right, innerContent.bottom, Colors.backPainterLine2);
         } else
             canvas.drawRect(innerContent, Colors.backPainterLine2);
 
