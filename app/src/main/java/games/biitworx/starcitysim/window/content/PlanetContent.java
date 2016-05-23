@@ -124,7 +124,8 @@ public class PlanetContent extends Content {
 
         int oldcol = Colors.backPainterLine2.getColor();
         Colors.backPainterLine2.setColor(Color.argb(230, 0, 0, 0));
-        Colors.backPainterLine2.setStrokeWidth(clickable?2:4);
+        Colors.backPainterLine2.setStrokeWidth(clickable?1:2);
+
         canvas.drawPath(p, Colors.backPainterLine2);
         Colors.backPainterLine2.setColor(oldcol);
         Colors.backPainterLine2.setStrokeWidth(2);
