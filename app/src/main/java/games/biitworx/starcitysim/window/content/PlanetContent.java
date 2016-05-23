@@ -102,21 +102,13 @@ public class PlanetContent extends Content {
         float h = circle.height() / 2.5f;
         p.addCircle(circle.exactCenterX(), circle.exactCenterY(), h, Path.Direction.CCW);
         p.close();
-        int oldcol = Colors.backPainterLine2.getColor();
-        Colors.backPainterLine2.setColor(Color.argb(250, 0, 0, 0));
-        Colors.backPainterLine2.setStrokeWidth(2);
-        canvas.drawPath(p, Colors.backPainterLine2);
-        Colors.backPainterLine2.setColor(oldcol);
-        Colors.backPainterLine2.setStrokeWidth(2);
+
         Paint circler = new Paint();
         circler.setStyle(Paint.Style.FILL);
         circler.setAntiAlias(true);
-        circler.setColor(planet.getSurfaceColor());
-        int th = 10 * (int)planet.getAtmosphereThickness();
-        if (th<10)th=10;
-        if (!clickable)
-            circler.setShadowLayer(th, 0, 0, planet.getSurfaceColor2());
-        canvas.drawPath(p, circler);
+        //circler.setColor(planet.getSurfaceColor());
+
+        //canvas.drawPath(p, circler);
 
 
         makeSurface(canvas, circle, circle2, circler, planet.getShaderSurface());
@@ -129,6 +121,13 @@ public class PlanetContent extends Content {
 
         light.setShader(new RadialGradient(circle.exactCenterX(),circle.exactCenterY(),clickable?circle.width()/3:circle.width()/4, Color.argb(1, 0, 0, 0), Color.argb(clickable ? 210 : 230, 0, 0, 0), Shader.TileMode.CLAMP));
         canvas.drawPath(p, light);
+
+        int oldcol = Colors.backPainterLine2.getColor();
+        Colors.backPainterLine2.setColor(Color.argb(230, 0, 0, 0));
+        Colors.backPainterLine2.setStrokeWidth(clickable?2:4);
+        canvas.drawPath(p, Colors.backPainterLine2);
+        Colors.backPainterLine2.setColor(oldcol);
+        Colors.backPainterLine2.setStrokeWidth(2);
 
         if (clickable) {
 
