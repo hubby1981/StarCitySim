@@ -18,11 +18,8 @@ public class PlanetData extends PlanetCoreData {
     public int surfaceColor;
     public int surfaceColor2;
 
-    private int shaderSurfaceA = RandomRange.getRandom(1, 5);
-    private int shaderSurfaceB = RandomRange.getRandom(1, 8);
-    private int shaderSurfaceC = RandomRange.getRandom(1, 5);
-    private int shaderSurfaceD = RandomRange.getRandom(1, 6);
-    private int shaderSurfaceE = RandomRange.getRandom(1, 7);
+    private int shaderSurface = RandomRange.getRandom(1, 5);
+
     private float temprature;
     private float day;
 
@@ -116,26 +113,26 @@ public class PlanetData extends PlanetCoreData {
             if (temprature < 10000) {
                 surfaceColor = Color.argb(255, RandomRange.getRandom(200, 255), 0, 0);
                 surfaceColor2 = Color.argb(128, RandomRange.getRandom(200, 255), 0, 0);
-                shaderSurfaceA = 1;
+                shaderSurface = 1;
             } else if (temprature < 20000) {
                 surfaceColor = Color.argb(255, RandomRange.getRandom(200, 255), RandomRange.getRandom(200, 255), 0);
                 surfaceColor2 = Color.argb(128, RandomRange.getRandom(200, 255), RandomRange.getRandom(200, 255), 0);
-                shaderSurfaceA = 2;
+                shaderSurface = 2;
 
             } else if (temprature < 30000) {
                 surfaceColor = Color.argb(255, 0, RandomRange.getRandom(200, 255), 0);
                 surfaceColor2 = Color.argb(128, 0, RandomRange.getRandom(200, 255), 0);
-                shaderSurfaceA = 3;
+                shaderSurface = 3;
 
             } else if (temprature < 40000) {
                 surfaceColor = Color.argb(255, RandomRange.getRandom(200, 255), 0, RandomRange.getRandom(200, 255));
                 surfaceColor2 = Color.argb(128, RandomRange.getRandom(200, 255), 0, RandomRange.getRandom(200, 255));
-                shaderSurfaceA = 4;
+                shaderSurface = 4;
 
             } else {
                 surfaceColor = Color.argb(255, 0, 0, RandomRange.getRandom(200, 255));
                 surfaceColor2 = Color.argb(128, 0, 0, RandomRange.getRandom(200, 255));
-                shaderSurfaceA = 5;
+                shaderSurface = 5;
 
             }
 
@@ -179,25 +176,11 @@ public class PlanetData extends PlanetCoreData {
         return name;
     }
 
-    public int getShaderSurfaceA() {
-        return shaderSurfaceA;
+    public int getShaderSurface() {
+        return shaderSurface;
     }
 
-    public int getShaderSurfaceB() {
-        return shaderSurfaceB;
-    }
 
-    public int getShaderSurfaceC() {
-        return shaderSurfaceC;
-    }
-
-    public int getShaderSurfaceD() {
-        return shaderSurfaceD;
-    }
-
-    public int getShaderSurfaceE() {
-        return shaderSurfaceE;
-    }
 
     public float getAtmosphereThickness() {
         return atmosphereThickness;
@@ -213,29 +196,11 @@ public class PlanetData extends PlanetCoreData {
 
 
     public PlanetData surfaceA(int value) {
-        shaderSurfaceA = value;
+        shaderSurface = value;
         return this;
     }
 
-    public PlanetData surfaceB(int value) {
-        shaderSurfaceB = value;
-        return this;
-    }
 
-    public PlanetData surfaceC(int value) {
-        shaderSurfaceC = value;
-        return this;
-    }
-
-    public PlanetData surfaceD(int value) {
-        shaderSurfaceD = value;
-        return this;
-    }
-
-    public PlanetData surfaceE(int value) {
-        shaderSurfaceE = value;
-        return this;
-    }
 
     public PlanetData surface(PlanetSurface surface) {
         this.surface = surface;

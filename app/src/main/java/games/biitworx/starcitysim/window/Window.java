@@ -65,6 +65,7 @@ public abstract class Window {
     }
 
     public void onDraw(Canvas canvas, boolean sc) {
+        Game.LOCKED=true;
         Rect bounds = MenuRects.contentInner.get();
 
         Bitmap outerContent = Bitmap.createBitmap(bounds.right, bounds.height(), Bitmap.Config.ARGB_8888);
@@ -116,6 +117,8 @@ public abstract class Window {
                 BitmapDrawer.drawImage(b, canvas, rc, null, true);
             }
         }
+        Game.LOCKED=false;
+
     }
 
     public Contents getContents() {

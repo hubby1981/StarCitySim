@@ -43,7 +43,9 @@ public class Game extends AppCompatActivity {
     public static int count = 2;
     public static Runnable notifyAction;
 
-    public static boolean PORTRAIT=true;
+    public static boolean PORTRAIT = true;
+    public static boolean ANIMATION = false;
+    public static boolean LOCKED = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +57,6 @@ public class Game extends AppCompatActivity {
         Colors.shaderBack = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader2), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Colors.shaderBack2 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Colors.shaderBack3 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader3), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-
-
-
-
-
 
 
         Colors.backPainterContentShader.setStyle(Paint.Style.FILL);
@@ -86,8 +83,8 @@ public class Game extends AppCompatActivity {
                     if (wnd != null) {
 
                         wnd.setScrollPosition(ScrollPosition);
-
-                        view.invalidate();
+                        if (!LOCKED)
+                            view.invalidate();
                     }
                 }
             }
@@ -118,15 +115,18 @@ public class Game extends AppCompatActivity {
                 COUNT--;
                 if (COUNT == 0) {
                     COUNT = 59;
-                    runOnUiThread(run);
+                    if (!ANIMATION)
+                        runOnUiThread(run);
                 }
-                runOnUiThread(update);
+                if (!ANIMATION && !LOCKED)
+                    runOnUiThread(update);
             }
         };
-int dd=5000;
+        int dd = 5000;
         new Timer(true).scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+
                 runOnUiThread(run2);
 
 
@@ -136,11 +136,12 @@ int dd=5000;
         new Timer(true).scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                runOnUiThread(update);
+                if (ANIMATION && !LOCKED)
+                    runOnUiThread(update);
 
 
             }
-        }, dd/50, dd/50);
+        },0,15);
 
         timer = new Runnable() {
             @Override
@@ -172,6 +173,7 @@ int dd=5000;
         update.run();
     }
 
+
     public static void updateEx(int scrollPosition) {
         if (scrollPosition != -1)
             ScrollPosition = scrollPosition;
@@ -198,7 +200,7 @@ int dd=5000;
     }
 
     public static void changeWindow(Window window) {
-
+        ANIMATION = false;
         if (view != null) {
             if (window != null) {
                 view.changeWindow(W.get(window));

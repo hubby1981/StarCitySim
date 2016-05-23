@@ -4,9 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.Shader;
@@ -18,14 +18,13 @@ import games.biitworx.starcitysim.B;
 import games.biitworx.starcitysim.BitmapDrawer;
 import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Fonts;
+import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.RectHelper;
 import games.biitworx.starcitysim.T;
 import games.biitworx.starcitysim.scifi.PlanetConst;
-import games.biitworx.starcitysim.scifi.RandomRange;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
-import games.biitworx.starcitysim.scifi.planet.rock.RockPlanetTerrain;
 
 /**
  * Created by marcel.weissgerber on 19.05.2016.
@@ -62,18 +61,15 @@ public class PlanetContent extends Content {
 
     @Override
     public void onDrawEx(Canvas canvas) {
+        Game.ANIMATION = false;
         if (scenes.size() == 0) {
             scenes.add(new Scene());
         }
         if (!clickable) {
             for (Scene s : scenes) {
-                s.pos += 5;
+                s.pos -= 20;
             }
-            if (scenes.size() == 1) {
-                Scene s = new Scene();
-                s.pos = (0 - getInnerFullRect().width()) + scenes.get(0).pos;
-                scenes.add(s);
-            }
+
 
 
         }
@@ -91,6 +87,8 @@ public class PlanetContent extends Content {
 
 
             canvas.drawRect(innerContent, filler);
+
+
         }
         Rect circle = getInnerRect();
         ArrayList<Rect> rects = RectHelper.makeRectsEx(circle, 4);
@@ -105,8 +103,8 @@ public class PlanetContent extends Content {
         p.addCircle(circle.exactCenterX(), circle.exactCenterY(), h, Path.Direction.CCW);
         p.close();
         int oldcol = Colors.backPainterLine2.getColor();
-        Colors.backPainterLine2.setColor(planet.surfaceColor);
-        Colors.backPainterLine2.setStrokeWidth(5);
+        Colors.backPainterLine2.setColor(Color.argb(250, 0, 0, 0));
+        Colors.backPainterLine2.setStrokeWidth(2);
         canvas.drawPath(p, Colors.backPainterLine2);
         Colors.backPainterLine2.setColor(oldcol);
         Colors.backPainterLine2.setStrokeWidth(2);
@@ -114,23 +112,22 @@ public class PlanetContent extends Content {
         circler.setStyle(Paint.Style.FILL);
         circler.setAntiAlias(true);
         circler.setColor(planet.getSurfaceColor());
+        int th = 10 * (int)planet.getAtmosphereThickness();
+        if (th<10)th=10;
         if (!clickable)
-            circler.setShadowLayer(10 * planet.getAtmosphereThickness(), 0, 0, planet.getSurfaceColor2());
+            circler.setShadowLayer(th, 0, 0, planet.getSurfaceColor2());
         canvas.drawPath(p, circler);
 
 
-        makeSurface(canvas, circle, circle2, circler, planet.getShaderSurfaceA());
-        if (planet.getSurface() != PlanetSurface.SUN) {
-            makeSurfaceEx(canvas, circle, circle2, circler, planet.getShaderSurfaceB());
-            makeSurfaceEx(canvas, circle, circle2, circler, planet.getShaderSurfaceC());
-            makeSurface2(canvas, circle, circle2, circler, planet.getShaderSurfaceD());
-            makeSurface3(canvas, circle, circle2, circler, planet.getShaderSurfaceE());
-        }
+        makeSurface(canvas, circle, circle2, circler, planet.getShaderSurface());
+
 
         Paint light = new Paint();
         light.setStyle(Paint.Style.FILL);
         light.setAntiAlias(true);
-        light.setShader(new LinearGradient((float) (circle.centerX() - circle.width() / 8), circle.exactCenterY(), circle.right - circle.width() / (clickable ? 8 : 4), circle.exactCenterY(), Color.argb(clickable ? 185 : 200, 0, 0, 0), Color.argb(0, 0, 0, 0), Shader.TileMode.CLAMP));
+
+
+        light.setShader(new RadialGradient(circle.exactCenterX(),circle.exactCenterY(),clickable?circle.width()/3:circle.width()/4, Color.argb(1, 0, 0, 0), Color.argb(clickable ? 210 : 230, 0, 0, 0), Shader.TileMode.CLAMP));
         canvas.drawPath(p, light);
 
         if (clickable) {
@@ -155,6 +152,7 @@ public class PlanetContent extends Content {
 
             canvas.drawRect(getInnerRect(), Colors.backPainterLine2);
         }
+        Game.ANIMATION = true;
 
     }
 
@@ -175,77 +173,10 @@ public class PlanetContent extends Content {
             id = getGasId(surface);
         }
         if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
-            id = getRockId(surface);
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
-            id = getIceId(surface);
-
-        }
-
-        if (id > 0) {
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
-        }
-    }
-
-    private void makeSurfaceEx(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
-        int id = 0;
-        if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
-
-            id = getRockId(surface);
-
-        }
-
-        if (planet.getSurface() == PlanetSurface.ICE && surface < 6) {
-            id = getIceId(surface);
-        }
-        if (planet.getSurface() == PlanetSurface.GAS && surface < 6) {
-            id = getGasId(surface);
-        }
-        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
-            id = getRockId(surface);
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
-            id = getIceId(surface);
-
-        }
-
-        if (id > 0) {
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
-        }
-    }
-
-    private void makeSurface2(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
-        int id = 0;
-        if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
-            id = getWaterId(surface);
-        }
-
-        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
-            id = getWaterId(surface);
-
-        }
-
-        if (id > 0) {
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
-        }
-    }
-
-    private void makeSurface3(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
-        int id = 0;
-        if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
             id = getGrasId(surface);
-        }
+            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
 
-        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
-            id = getGrasId(surface);
+
 
         }
 
@@ -343,8 +274,30 @@ public class PlanetContent extends Content {
         return 0;
     }
 
+    private Bitmap multiplyBitmap(Bitmap bitmap, Rect map) {
+        Bitmap bit = Bitmap.createBitmap(map.width(), map.height(), Bitmap.Config.ARGB_8888);
+
+        Canvas c = new Canvas(bit);
+
+        int xx = map.width() / bitmap.getWidth();
+        int yy = map.height() / bitmap.getHeight();
+
+        for (int x = 0; x <= xx; x++) {
+            for (int y = 0; y <= yy; y++) {
+
+                Bitmap bitmap1 = bitmap;
+
+                c.drawBitmap(bitmap1, x * bitmap.getWidth(), y * bitmap.getHeight(), null);
+            }
+        }
+        return bit;
+    }
 
     private Bitmap drawOnCircle(Rect circle, Bitmap bitmap, Paint painter) {
+/*
+        if (!clickable) {
+            bitmap = multiplyBitmap(bitmap, circle);
+        }*/
 
         Bitmap result = Bitmap.createBitmap(circle.width(), circle.height(), Bitmap.Config.ARGB_8888);
         Path p = new Path();
@@ -354,34 +307,32 @@ public class PlanetContent extends Content {
         Canvas c = new Canvas(result);
         c.drawPath(p, painter);
         c.clipPath(p, Region.Op.INTERSECT);
-        if (!clickable) {/*
-            Matrix mm = new Matrix();
-            mm.postRotate(degree);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), mm, true);
-            circle = new Rect(circle.left - circle.width() / 4, circle.top - circle.height() / 4, circle.right + circle.width() / 4, circle.bottom + circle.height() / 4);
-        */
+        if (!clickable) {
 
+            if (scenes.size() == 1) {
+                Scene s = new Scene();
+                s.pos = scenes.get(0).pos+circle.width();
 
-            int oc = circle.right;
-            if (scenes.size() > 0) {
-                circle = new Rect(circle.left + scenes.get(0).pos, circle.top, circle.right + scenes.get(0).pos, circle.bottom);
-
-                BitmapDrawer.drawImage(bitmap, c, circle, null, true);
+                scenes.add(s);
             }
-            if (scenes.size() > 1) {
-                circle = new Rect((circle.left - oc) + scenes.get(1).pos, circle.top, (circle.right - oc) + scenes.get(0).pos, circle.bottom);
 
-                BitmapDrawer.drawImage(bitmap, c, circle, null, true);
+            if (scenes.size() == 2) {
+                if (scenes.get(0).pos < (0 - circle.width())) {
+                    scenes.remove(0);
+                    Scene s = new Scene();
+                    s.pos = scenes.get(0).pos+circle.width();
 
-                if (scenes.size() == 2) {
-                    if (scenes.get(0).pos >= oc) {
-                        scenes.remove(0);
-                        Scene s = new Scene();
-                        s.pos = (0 - oc) + scenes.get(0).pos;
-                        scenes.add(s);
-                    }
+                    scenes.add(s);
                 }
             }
+
+
+            for (Scene s : scenes) {
+                circle = new Rect((int)s.pos, circle.top, (int)s.pos + circle.width(), circle.bottom);
+
+                BitmapDrawer.drawImage(bitmap, c, circle, null, true);
+            }
+
 
         } else {
             BitmapDrawer.drawImage(bitmap, c, circle, null, true);
@@ -390,7 +341,7 @@ public class PlanetContent extends Content {
     }
 
     class Scene {
-        public int pos = 0;
+        public float pos = 0;
 
     }
 }
