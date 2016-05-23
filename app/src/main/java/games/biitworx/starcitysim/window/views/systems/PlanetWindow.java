@@ -16,6 +16,8 @@ public class PlanetWindow extends Window {
         super(name);
 
 
+ /*
+
         int max = RandomRange.getRandom(2, RandomRange.getRandom(8, 20));
         String sunName = name.length() > 3 ? name.substring(0, RandomRange.getRandom(2, 4)) : name.substring(0, 2);
         final PlanetData sun = new PlanetData(sunName).surface(PlanetSurface.SUN);
@@ -62,7 +64,15 @@ public class PlanetWindow extends Window {
             }));
         }
 
+*/
+       final PlanetData p = new PlanetData("x1");
+        p.surface(PlanetSurface.ROCK).surfaceA(4).surfaceB(0).surfaceC(0).surfaceD(0).surfaceE(0);
 
-
+        getContents().add(new PlanetContent(p, new Runnable() {
+            @Override
+            public void run() {
+                Game.changeWindow(new PlanetDetailWindow(p));
+            }
+        }));
     }
 }

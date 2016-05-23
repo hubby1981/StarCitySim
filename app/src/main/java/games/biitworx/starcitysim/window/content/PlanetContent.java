@@ -18,6 +18,7 @@ import games.biitworx.starcitysim.B;
 import games.biitworx.starcitysim.BitmapDrawer;
 import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Fonts;
+import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.RectHelper;
 import games.biitworx.starcitysim.T;
@@ -62,27 +63,15 @@ public class PlanetContent extends Content {
 
     @Override
     public void onDrawEx(Canvas canvas) {
+        Game.ANIMATION = false;
         if (scenes.size() == 0) {
             scenes.add(new Scene());
         }
         if (!clickable) {
             for (Scene s : scenes) {
-                s.pos += 1;
-            }
-            if (scenes.size() == 1) {
-                Scene s = new Scene();
-                s.pos = (0 - getInnerFullRect().width()) + scenes.get(0).pos;
-                scenes.add(s);
+                s.pos -= 2;
             }
 
-            if (scenes.size() == 2) {
-                if (scenes.get(0).pos >= getInnerFullRect().right) {
-                    scenes.remove(0);
-                    Scene s = new Scene();
-                    s.pos = (0 - getInnerFullRect().width()) ;
-                    scenes.add(s);
-                }
-            }
 
 
         }
@@ -116,7 +105,7 @@ public class PlanetContent extends Content {
         int oldcol = Colors.backPainterLine2.getColor();
         Colors.backPainterLine2.setColor(planet.surfaceColor);
         Colors.backPainterLine2.setStrokeWidth(5);
-        canvas.drawPath(p, Colors.backPainterLine2);
+        //canvas.drawPath(p, Colors.backPainterLine2);
         Colors.backPainterLine2.setColor(oldcol);
         Colors.backPainterLine2.setStrokeWidth(2);
         Paint circler = new Paint();
@@ -130,16 +119,14 @@ public class PlanetContent extends Content {
 
         makeSurface(canvas, circle, circle2, circler, planet.getShaderSurfaceA());
         if (planet.getSurface() != PlanetSurface.SUN) {
-            makeSurfaceEx(canvas, circle, circle2, circler, planet.getShaderSurfaceB());
-            makeSurfaceEx(canvas, circle, circle2, circler, planet.getShaderSurfaceC());
-            makeSurface2(canvas, circle, circle2, circler, planet.getShaderSurfaceD());
+
             makeSurface3(canvas, circle, circle2, circler, planet.getShaderSurfaceE());
         }
 
         Paint light = new Paint();
         light.setStyle(Paint.Style.FILL);
         light.setAntiAlias(true);
-        light.setShader(new LinearGradient((float) (circle.centerX() - circle.width() / 8), circle.exactCenterY(), circle.right - circle.width() / (clickable ? 8 : 4), circle.exactCenterY(), Color.argb(clickable ? 185 : 200, 0, 0, 0), Color.argb(0, 0, 0, 0), Shader.TileMode.CLAMP));
+        light.setShader(new LinearGradient((float) (circle.centerX() - circle.width() / 16), circle.exactCenterY(), circle.right - circle.width() / (clickable ? 8 : 4), circle.exactCenterY(), Color.argb(clickable ? 200 : 230, 0, 0, 0), Color.argb(50, 0, 0, 0), Shader.TileMode.CLAMP));
         canvas.drawPath(p, light);
 
         if (clickable) {
@@ -164,6 +151,7 @@ public class PlanetContent extends Content {
 
             canvas.drawRect(getInnerRect(), Colors.backPainterLine2);
         }
+        Game.ANIMATION = true;
 
     }
 
@@ -363,9 +351,7 @@ public class PlanetContent extends Content {
         for (int x = 0; x <= xx; x++) {
             for (int y = 0; y <= yy; y++) {
 
-                //BitmapDrawer.drawImage(bitmap,c,draw,null,false);
-
-                Bitmap bitmap1=bitmap;
+                Bitmap bitmap1 = bitmap;
 
                 c.drawBitmap(bitmap1, x * bitmap.getWidth(), y * bitmap.getHeight(), null);
             }
@@ -374,10 +360,10 @@ public class PlanetContent extends Content {
     }
 
     private Bitmap drawOnCircle(Rect circle, Bitmap bitmap, Paint painter) {
-
+/*
         if (!clickable) {
             bitmap = multiplyBitmap(bitmap, circle);
-        }
+        }*/
 
         Bitmap result = Bitmap.createBitmap(circle.width(), circle.height(), Bitmap.Config.ARGB_8888);
         Path p = new Path();
@@ -387,27 +373,32 @@ public class PlanetContent extends Content {
         Canvas c = new Canvas(result);
         c.drawPath(p, painter);
         c.clipPath(p, Region.Op.INTERSECT);
-        if (!clickable) {/*
-            Matrix mm = new Matrix();
-            mm.postRotate(degree);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), mm, true);
-            circle = new Rect(circle.left - circle.width() / 4, circle.top - circle.height() / 4, circle.right + circle.width() / 4, circle.bottom + circle.height() / 4);
-        */
+        if (!clickable) {
+
+            if (scenes.size() == 1) {
+                Scene s = new Scene();
+                s.pos = scenes.get(0).pos+circle.width();
+
+                scenes.add(s);
+            }
+
+            if (scenes.size() == 2) {
+                if (scenes.get(0).pos < (0 - circle.width())) {
+                    scenes.remove(0);
+                    Scene s = new Scene();
+                    s.pos = scenes.get(0).pos+circle.width();
+
+                    scenes.add(s);
+                }
+            }
 
 
-            int oc = circle.right;
-            if (scenes.size() > 0) {
-                circle = new Rect(circle.left + scenes.get(0).pos, circle.top, circle.right + scenes.get(0).pos, circle.bottom);
+            for (Scene s : scenes) {
+                circle = new Rect((int)s.pos, circle.top, (int)s.pos + circle.width(), circle.bottom);
 
                 BitmapDrawer.drawImage(bitmap, c, circle, null, true);
             }
-            if (scenes.size() > 1) {
-                circle = new Rect((circle.left - oc) + scenes.get(1).pos, circle.top, (circle.right - oc) + scenes.get(0).pos, circle.bottom);
 
-                BitmapDrawer.drawImage(bitmap, c, circle, null, true);
-
-
-            }
 
         } else {
             BitmapDrawer.drawImage(bitmap, c, circle, null, true);
@@ -416,7 +407,7 @@ public class PlanetContent extends Content {
     }
 
     class Scene {
-        public int pos = 0;
+        public float pos = 0;
 
     }
 }
