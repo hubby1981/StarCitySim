@@ -60,6 +60,10 @@ public class NameGenerator {
         return getName(1, 2);
     }
 
+    public String getPlanetName() {
+        return getName(2,4);
+    }
+
     private String getName(int min, int max) {
         if (syllables == null) syllables = getSyllables();
         max = RandomRange.getRandom(min, max);

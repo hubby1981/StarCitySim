@@ -57,35 +57,7 @@ public class Game extends AppCompatActivity {
         Colors.shaderBack3 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.back_shader3), Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 
 
-        Colors.rock001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.rock001), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.rock002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.rock002), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.rock003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.rock003), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.rock004 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.rock004), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.rock005 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.rock005), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
 
-        Colors.ice001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice001), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.ice002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice002), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.ice003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice003), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.ice004 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice004), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.ice005 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.ice005), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-
-        Colors.water001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.water001), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.water002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.water002), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.water003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.water003), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.water004 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.water004), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.water005 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.water005), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-
-        Colors.gras001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gras001), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.gras002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gras002), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.gras003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gras003), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.gras004 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gras004), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.gras005 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gras005), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-
-        Colors.gas001 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas001), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.gas002 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas002), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.gas003 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas003), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.gas004 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas004), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
-        Colors.gas005 = new BitmapShader(BitmapFactory.decodeResource(getResources(), R.drawable.gas005), Shader.TileMode.MIRROR, Shader.TileMode.MIRROR);
 
 
 
@@ -151,7 +123,7 @@ public class Game extends AppCompatActivity {
                 runOnUiThread(update);
             }
         };
-
+int dd=5000;
         new Timer(true).scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -159,8 +131,16 @@ public class Game extends AppCompatActivity {
 
 
             }
-        }, 5000, 5000);
+        }, dd, dd);
 
+        new Timer(true).scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(update);
+
+
+            }
+        }, dd/50, dd/50);
 
         timer = new Runnable() {
             @Override
@@ -246,7 +226,7 @@ public class Game extends AppCompatActivity {
                 int newScroller = ScrollPosition;
 
 
-                newScroller -= scroller / 8;
+                newScroller -= scroller / 4;
                 if (newScroller < 0)
                     newScroller = 0;
                 touch = true;

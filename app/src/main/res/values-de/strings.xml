@@ -110,11 +110,14 @@
 
     <string name="content_planet_mass">MASSE</string>
     <string name="content_planet_radius">RADIUS</string>
+    <string name="content_planet_temp">TEMPERATUR</string>
+
     <string name="content_planet_surface">OBERFLÄCHE</string>
     <string name="content_planet_atmosphere">ATMOSPHÄRE</string>
     <string name="content_planet_suface_ROCK">Stein</string>
     <string name="content_planet_suface_ICE">Eis</string>
     <string name="content_planet_suface_ICE_ROCK">Eis / Stein</string>
     <string name="content_planet_suface_GAS">Gas</string>
+    <string name="content_planet_suface_SUN">Sonne</string>
 
 </resources>

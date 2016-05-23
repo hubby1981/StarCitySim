@@ -109,7 +109,7 @@ public abstract class Window {
                 BitmapDrawer.drawImage(b, canvas, rc, null, true);
 
             }
-            if (scroller && scrollPosition > 20) {
+            if (scroller && scrollPosition > 0) {
                 Bitmap b = B.get(R.drawable.up);
 
                 Rect rc = new Rect((MenuRects.content.get().right - w) - w2, MenuRects.contentInner.get().top + w2, (MenuRects.content.get().right) - w2, (MenuRects.contentInner.get().top + w) + w2);
@@ -127,6 +127,7 @@ public abstract class Window {
         for (Content c : contents.getItems()) {
             if (c.hasAction() && c.isHit(x, y)) {
                 c.getAction().run();
+                c.wasHit=true;
                 ret = true;
             } else {
                 ret = c.checkHit(x, y);

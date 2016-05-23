@@ -1,8 +1,11 @@
 package games.biitworx.starcitysim.window.views.systems;
 
+import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.T;
+import games.biitworx.starcitysim.scifi.NameGenerator;
 import games.biitworx.starcitysim.scifi.PlanetConst;
+import games.biitworx.starcitysim.scifi.RandomRange;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 import games.biitworx.starcitysim.window.Window;
@@ -19,35 +22,51 @@ public class PlanetWindow extends Window {
     public PlanetWindow(String name) {
         super(name);
 
-        PlanetData planet = new PlanetData(name);
-        getContents().add(new PlanetContent(planet));
-        getContents().add(LineContent.line());
 
-        VirtualLineContents table = new VirtualLineContents();
-        table.getContents().add(new TextContent(T.get(R.string.content_planet_mass)));
-        table.getContents().add(new TextContent("" + planet.getRadius()));
-        getContents().add(table);
-        table = new VirtualLineContents();
-        table.getContents().add(new TextContent(T.get(R.string.content_planet_radius)));
-        table.getContents().add(new TextContent("" + (planet.getRadius() * PlanetConst.METER) / 2));
-        getContents().add(table);
-        table = new VirtualLineContents();
-        table.getContents().add(new TextContent("TEMP"));
-        table.getContents().add(new TextContent("" + planet.getTemprature()));
-        getContents().add(table);
-        table = new VirtualLineContents();
-        table.getContents().add(new TextContent(T.get(R.string.content_planet_surface)));
-        int id = R.string.content_planet_suface_ROCK;
+        int max = RandomRange.getRandom(2, RandomRange.getRandom(8, 20));
+        String sunName = name.length() > 3 ? name.substring(0, RandomRange.getRandom(2, 4)) : name.substring(0, 2);
+        final PlanetData sun = new PlanetData(sunName).surface(PlanetSurface.SUN);
+        getContents().add(new PlanetContent(sun, new Runnable() {
+            @Override
+            public void run() {
+                Game.changeWindow(new PlanetDetailWindow(sun));
+            }
+        }));
+        int old = sun.getShaderSurfaceA();
+        for (int x = 1; x <= max; x++) {
+            final PlanetData p = new PlanetData(name+" "+x);
+            if (p.getShaderSurfaceA() == old ) {
+                p.surfaceA(old + 1);
+                old = p.getShaderSurfaceA();
+            }
 
-        if (planet.getSurface() == PlanetSurface.GAS) id = R.string.content_planet_suface_GAS;
-        if (planet.getSurface() == PlanetSurface.ICE) id = R.string.content_planet_suface_ICE;
-        if (planet.getSurface() == PlanetSurface.ICE_ROCK)
-            id = R.string.content_planet_suface_ICE_ROCK;
+            if (p.getShaderSurfaceB() == old ) {
+                p.surfaceB(old + 1);
+                old = p.getShaderSurfaceB();
 
-        table.getContents().add(new TextContent(T.get(id)));
+            }
 
-        getContents().add(table);
+            if (p.getShaderSurfaceC() == old ) {
+                p.surfaceC(old + 1);
+                old = p.getShaderSurfaceA();
 
+            }
+            if (x <= max / 2 && (p.getSurface() == PlanetSurface.ICE || p.getSurface() == PlanetSurface.ICE_ROCK)) {
+                p.surface(RandomRange.getRandom(1, 3) != 1 ? PlanetSurface.ROCK : PlanetSurface.GAS);
+
+            }
+
+            if (x > max / 2 && (p.getSurface() == PlanetSurface.ROCK || p.getSurface() == PlanetSurface.GAS)) {
+                p.surface(RandomRange.getRandom(1, 2) == 1 ? PlanetSurface.ICE : PlanetSurface.ICE_ROCK);
+            }
+
+            getContents().add(new PlanetContent(p, new Runnable() {
+                @Override
+                public void run() {
+                    Game.changeWindow(new PlanetDetailWindow(p));
+                }
+            }));
+        }
 
     }
 }

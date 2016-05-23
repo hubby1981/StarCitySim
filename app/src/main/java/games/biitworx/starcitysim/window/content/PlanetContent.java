@@ -1,5 +1,6 @@
 package games.biitworx.starcitysim.window.content;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -7,232 +8,389 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.Region;
 import android.graphics.Shader;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import games.biitworx.starcitysim.B;
+import games.biitworx.starcitysim.BitmapDrawer;
 import games.biitworx.starcitysim.Colors;
+import games.biitworx.starcitysim.Fonts;
+import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.RectHelper;
+import games.biitworx.starcitysim.T;
+import games.biitworx.starcitysim.scifi.PlanetConst;
 import games.biitworx.starcitysim.scifi.RandomRange;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
+import games.biitworx.starcitysim.scifi.planet.rock.RockPlanetTerrain;
 
 /**
- * Created by marcel.weissgerber on 18.05.2016.
+ * Created by marcel.weissgerber on 19.05.2016.
  */
 public class PlanetContent extends Content {
-
-    float[] values = new float[10];
     private PlanetData planet;
+    private boolean clickable = false;
+    public float degree = 0;
+    public float degree2 = 0;
+
+    public List<Scene> scenes = new ArrayList<>();
 
     public PlanetContent(PlanetData planet) {
-        super(5);
+        super(3);
         this.planet = planet;
+    }
+
+    public PlanetContent(PlanetData planet, Runnable runnable) {
+        super(3);
+        this.planet = planet;
+        setAction(runnable);
+        clickable = true;
+    }
+
+    public PlanetContent clickable(boolean clickable) {
+        this.clickable = clickable;
+        return this;
+    }
+
+    public PlanetContent height(float height) {
+        this.lineHeight = height;
+        return this;
     }
 
     @Override
     public void onDrawEx(Canvas canvas) {
-        Rect innerContent = getInnerRect();
+        if (scenes.size() == 0) {
+            scenes.add(new Scene());
+        }
+        if (!clickable) {
+            for (Scene s : scenes) {
+                s.pos += 5;
+            }
+            if (scenes.size() == 1) {
+                Scene s = new Scene();
+                s.pos = (0 - getInnerFullRect().width()) + scenes.get(0).pos;
+                scenes.add(s);
+            }
 
-        ArrayList<Rect> rects = RectHelper.makeRectsEx(getInnerFullRect(), 5);
 
+        }
+        if (clickable) {
+            Rect innerContent = getInnerRect();
+            Paint filler = new Paint();
+
+            filler.setStyle(Paint.Style.FILL);
+
+            Paint filler2 = new Paint();
+
+            filler2.setStyle(Paint.Style.FILL);
+            filler2.setColor(Colors.back001);
+            filler.setShader(new LinearGradient((float) innerContent.left, (float) innerContent.top, (float) innerContent.right, (float) innerContent.top, Colors.back001, Color.argb(150, 0, 0, 0), Shader.TileMode.REPEAT));
+
+
+            canvas.drawRect(innerContent, filler);
+        }
+        Rect circle = getInnerRect();
+        ArrayList<Rect> rects = RectHelper.makeRectsEx(circle, 4);
+        if (clickable) {
+
+            circle = rects.get(0);
+
+        }
+        Rect circle2 = new Rect(0, 0, circle.width(), circle.height());
         Path p = new Path();
-        Rect rc = rects.get(2);
-        p.addCircle(rc.exactCenterX(), rc.exactCenterY(), (rc.height() / 3), Path.Direction.CW);
-        int col = planet.getSurfaceColor();
-        Paint painter = new Paint();
-        painter.setAntiAlias(true);
-        painter.setStyle(Paint.Style.FILL);
-        painter.setColor(col);
-
-        canvas.drawPath(p, painter);
-
-
-        if (planet.getSurface() == PlanetSurface.ROCK && planet.getShaderSurfaceA() < 6) {
-            painter.setShader(getShaderRock(planet.getShaderSurfaceA()));
-            canvas.drawPath(p, painter);
-
-        } else if (planet.getSurface() == PlanetSurface.ICE && planet.getShaderSurfaceA() < 6) {
-            painter.setShader(getShaderIce(planet.getShaderSurfaceA()));
-            canvas.drawPath(p, painter);
-
-        }
-        else if (planet.getSurface() == PlanetSurface.GAS && planet.getShaderSurfaceA() < 6) {
-            painter.setShader(getShaderGas(planet.getShaderSurfaceA()));
-            canvas.drawPath(p, painter);
-
-        }else if (planet.getSurface() == PlanetSurface.ICE_ROCK && planet.getShaderSurfaceA() < 6) {
-            painter.setShader(getShaderRock(planet.getShaderSurfaceA()));
-            canvas.drawPath(p, painter);
-            painter.setShader(getShaderIce(planet.getShaderSurfaceA()));
-            canvas.drawPath(p, painter);
-
-        }
-
-        if (planet.getSurface() == PlanetSurface.ROCK && planet.getShaderSurfaceB() < 6) {
-            painter.setShader(getShaderRock(planet.getShaderSurfaceB()));
-            canvas.drawPath(p, painter);
-
-        } else if (planet.getSurface() == PlanetSurface.ICE && planet.getShaderSurfaceB() < 6) {
-            painter.setShader(getShaderIce(planet.getShaderSurfaceB()));
-            canvas.drawPath(p, painter);
-
-        } else if (planet.getSurface() == PlanetSurface.GAS && planet.getShaderSurfaceB() < 6) {
-            painter.setShader(getShaderGas(planet.getShaderSurfaceB()));
-            canvas.drawPath(p, painter);
-
-        }    else if (planet.getSurface() == PlanetSurface.ICE_ROCK && planet.getShaderSurfaceB() < 6) {
-            painter.setShader(getShaderRock(planet.getShaderSurfaceB()));
-            canvas.drawPath(p, painter);
-            painter.setShader(getShaderIce(planet.getShaderSurfaceB()));
-            canvas.drawPath(p, painter);
-
-        }
-
-        if (planet.getSurface() == PlanetSurface.ROCK && planet.getShaderSurfaceC() < 6) {
-            painter.setShader(getShaderRock(planet.getShaderSurfaceC()));
-            canvas.drawPath(p, painter);
-
-        } else if (planet.getSurface() == PlanetSurface.ICE && planet.getShaderSurfaceC() < 6) {
-            painter.setShader(getShaderIce(planet.getShaderSurfaceC()));
-            canvas.drawPath(p, painter);
-
-        } else if (planet.getSurface() == PlanetSurface.GAS && planet.getShaderSurfaceC() < 6) {
-            painter.setShader(getShaderGas(planet.getShaderSurfaceC()));
-            canvas.drawPath(p, painter);
-
-        }    else if (planet.getSurface() == PlanetSurface.ICE_ROCK && planet.getShaderSurfaceC() < 6) {
-            painter.setShader(getShaderRock(planet.getShaderSurfaceC()));
-            canvas.drawPath(p, painter);
-            painter.setShader(getShaderIce(planet.getShaderSurfaceC()));
-            canvas.drawPath(p, painter);
-
-        }
-
-        if (planet.getSurface() == PlanetSurface.ROCK && planet.getShaderSurfaceD() < 6) {
-            painter.setShader(getShaderWater(planet.getShaderSurfaceD()));
-            canvas.drawPath(p, painter);
-
-        }else if (planet.getSurface() == PlanetSurface.ICE_ROCK && planet.getShaderSurfaceD() < 6) {
-            painter.setShader(getShaderWater(planet.getShaderSurfaceD()));
-            canvas.drawPath(p, painter);
-
-        }
-
-        if (planet.getSurface() == PlanetSurface.ROCK && planet.getShaderSurfaceE() < 6) {
-            painter.setShader(getShaderGras(planet.getShaderSurfaceE()));
-            canvas.drawPath(p, painter);
-
-        }
-        LinearGradient grad = new LinearGradient((rc.left), rc.bottom, rc.right, rc.top, Color.argb(255, 0, 0, 0), Color.argb(50, 0, 0, 0), Shader.TileMode.CLAMP);
-        painter.setShader(grad);
-
-        canvas.drawPath(p, painter);
-        canvas.drawPath(p, painter);
-
-
-        painter.setShader(null);
-
-
-        Colors.backPainterLine2.setStrokeWidth(0);
-        Colors.backPainterLine2.setStyle(Paint.Style.FILL_AND_STROKE);
-        Colors.backPainterLine2.setShadowLayer(10*planet.getAtmosphereThickness(), 5, 5, col);
+        float h = circle.height() / 2.5f;
+        p.addCircle(circle.exactCenterX(), circle.exactCenterY(), h, Path.Direction.CCW);
+        p.close();
+        int oldcol = Colors.backPainterLine2.getColor();
+        Colors.backPainterLine2.setColor(planet.surfaceColor);
+        Colors.backPainterLine2.setStrokeWidth(5);
         canvas.drawPath(p, Colors.backPainterLine2);
+        Colors.backPainterLine2.setColor(oldcol);
         Colors.backPainterLine2.setStrokeWidth(2);
-        Colors.backPainterLine2.setShadowLayer(0, 0, 0, Colors.backPainterLine2.getColor());
-        Colors.backPainterLine2.setStyle(Paint.Style.STROKE);
-
-    }
-
-
-    public Shader getShaderRock(int id) {
-
-
-        if (id == 1)
-            return Colors.rock001;
-        if (id == 2)
-            return Colors.rock002;
-        if (id == 3)
-            return Colors.rock003;
-        if (id == 4)
-            return Colors.rock004;
-        if (id == 5)
-            return Colors.rock005;
-        return Colors.rock001;
-    }
-    public Shader getShaderGas(int id) {
+        Paint circler = new Paint();
+        circler.setStyle(Paint.Style.FILL);
+        circler.setAntiAlias(true);
+        circler.setColor(planet.getSurfaceColor());
+        if (!clickable)
+            circler.setShadowLayer(10 * planet.getAtmosphereThickness(), 0, 0, planet.getSurfaceColor2());
+        canvas.drawPath(p, circler);
 
 
-        if (id == 1)
-            return Colors.gas001;
-        if (id == 2)
-            return Colors.gas002;
-        if (id == 3)
-            return Colors.gas003;
-        if (id == 4)
-            return Colors.gas004;
-        if (id == 5)
-            return Colors.gas005;
-        return Colors.gas001;
-    }
-
-
-    public Shader getShaderWater(int id) {
-
-
-        if (id == 1)
-            return Colors.water001;
-        if (id == 2)
-            return Colors.water002;
-        if (id == 3)
-            return Colors.water003;
-        if (id == 4)
-            return Colors.water004;
-        if (id == 5)
-            return Colors.water005;
-        return Colors.water001;
-    }
-
-    public Shader getShaderGras(int id) {
-
-
-        if (id == 1)
-            return Colors.gras001;
-        if (id == 2)
-            return Colors.gras002;
-        if (id == 3)
-            return Colors.gras003;
-        if (id == 4)
-            return Colors.gras004;
-        if (id == 5)
-            return Colors.gras005;
-        return Colors.gras001;
-    }
-
-    public Shader getShaderIce(int id) {
-
-
-        if (id == 1)
-            return Colors.ice001;
-        if (id == 2)
-            return Colors.ice002;
-        if (id == 3)
-            return Colors.ice003;
-        if (id == 4)
-            return Colors.ice004;
-        if (id == 5)
-            return Colors.ice005;
-        return Colors.ice001;
-    }
-
-
-    private Matrix getMatrix() {
-
-        Matrix m = new Matrix();
-
-        for (int x = 0; x < 10; x++) {
-            values[x] = RandomRange.getFloat(0.1f, 1f);
+        makeSurface(canvas, circle, circle2, circler, planet.getShaderSurfaceA());
+        if (planet.getSurface() != PlanetSurface.SUN) {
+            makeSurfaceEx(canvas, circle, circle2, circler, planet.getShaderSurfaceB());
+            makeSurfaceEx(canvas, circle, circle2, circler, planet.getShaderSurfaceC());
+            makeSurface2(canvas, circle, circle2, circler, planet.getShaderSurfaceD());
+            makeSurface3(canvas, circle, circle2, circler, planet.getShaderSurfaceE());
         }
-        return m;
+
+        Paint light = new Paint();
+        light.setStyle(Paint.Style.FILL);
+        light.setAntiAlias(true);
+        light.setShader(new LinearGradient((float) (circle.centerX() - circle.width() / 8), circle.exactCenterY(), circle.right - circle.width() / (clickable ? 8 : 4), circle.exactCenterY(), Color.argb(clickable ? 185 : 200, 0, 0, 0), Color.argb(0, 0, 0, 0), Shader.TileMode.CLAMP));
+        canvas.drawPath(p, light);
+
+        if (clickable) {
+
+            Fonts.FONT.setTextSize((getContentRect().height() / 4.85f));
+
+            rects = RectHelper.makeRect3(rects.get(1), (int) Fonts.FONT.getTextSize(), 2, 2);
+
+            int hh = getContentRect().height() / 10;
+            canvas.drawText(planet.getName(), (float) rects.get(1).left, rects.get(1).centerY() - hh, Fonts.FONT);
+            Fonts.FONT.setTextSize((getContentRect().height() / 7));
+            String surface = planet.getSurface() == PlanetSurface.ICE_ROCK ? T.get(R.string.content_planet_suface_ICE_ROCK) : planet.getSurface() == PlanetSurface.ICE ? T.get(R.string.content_planet_suface_ICE)
+                    : planet.getSurface() == PlanetSurface.GAS ? T.get(R.string.content_planet_suface_GAS) : planet.getSurface() == PlanetSurface.SUN ? T.get(R.string.content_planet_suface_SUN) : T.get(R.string.content_planet_suface_ROCK);
+            canvas.drawText(T.get(R.string.content_planet_surface), (float) rects.get(1).left + hh, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
+            canvas.drawText(surface, (float) rects.get(1).left + hh * 16, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
+
+            canvas.drawText(T.get(R.string.content_planet_radius), (float) rects.get(1).left + hh, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
+            canvas.drawText("" + planet.getRadius() * PlanetConst.METER / 2, (float) rects.get(1).left + hh * 16, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
+
+            canvas.drawText(T.get(R.string.content_planet_temp), (float) rects.get(1).left + hh, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 2.8), Fonts.FONT);
+            canvas.drawText("" + planet.getTemprature(), (float) rects.get(1).left + hh * 16, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 2.8), Fonts.FONT);
+
+            canvas.drawRect(getInnerRect(), Colors.backPainterLine2);
+        }
+
+    }
+
+    private void makeSurface(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
+        int id = 0;
+        if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
+
+            id = getRockId(surface);
+
+        }
+        if (planet.getSurface() == PlanetSurface.SUN && surface < 6) {
+            id = getSunId(surface);
+        }
+        if (planet.getSurface() == PlanetSurface.ICE && surface < 6) {
+            id = getIceId(surface);
+        }
+        if (planet.getSurface() == PlanetSurface.GAS && surface < 6) {
+            id = getGasId(surface);
+        }
+        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
+            id = getRockId(surface);
+            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
+
+            BitmapDrawer.drawImage(b, canvas, circle, null, true);
+            id = getIceId(surface);
+
+        }
+
+        if (id > 0) {
+            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
+
+            BitmapDrawer.drawImage(b, canvas, circle, null, true);
+        }
+    }
+
+    private void makeSurfaceEx(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
+        int id = 0;
+        if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
+
+            id = getRockId(surface);
+
+        }
+
+        if (planet.getSurface() == PlanetSurface.ICE && surface < 6) {
+            id = getIceId(surface);
+        }
+        if (planet.getSurface() == PlanetSurface.GAS && surface < 6) {
+            id = getGasId(surface);
+        }
+        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
+            id = getRockId(surface);
+            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
+
+            BitmapDrawer.drawImage(b, canvas, circle, null, true);
+            id = getIceId(surface);
+
+        }
+
+        if (id > 0) {
+            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
+
+            BitmapDrawer.drawImage(b, canvas, circle, null, true);
+        }
+    }
+
+    private void makeSurface2(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
+        int id = 0;
+        if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
+            id = getWaterId(surface);
+        }
+
+        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
+            id = getWaterId(surface);
+
+        }
+
+        if (id > 0) {
+            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
+
+            BitmapDrawer.drawImage(b, canvas, circle, null, true);
+        }
+    }
+
+    private void makeSurface3(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
+        int id = 0;
+        if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
+            id = getGrasId(surface);
+        }
+
+        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
+            id = getGrasId(surface);
+
+        }
+
+        if (id > 0) {
+            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
+
+            BitmapDrawer.drawImage(b, canvas, circle, null, true);
+        }
+    }
+
+    private int getRockId(int id) {
+        if (id == 2)
+            return R.drawable.rock002;
+        if (id == 3)
+            return R.drawable.rock003;
+        if (id == 4)
+            return R.drawable.rock004;
+        if (id == 5)
+            return R.drawable.rock005;
+        if (id == 1)
+            return R.drawable.rock001;
+        return 0;
+    }
+
+    private int getSunId(int id) {
+        if (id == 2)
+            return R.drawable.sun002;
+        if (id == 3)
+            return R.drawable.sun003;
+        if (id == 4)
+            return R.drawable.sun004;
+        if (id == 5)
+            return R.drawable.sun005;
+        if (id == 1)
+            return R.drawable.sun001;
+        return 0;
+    }
+
+    private int getIceId(int id) {
+        if (id == 2)
+            return R.drawable.ice002;
+        if (id == 3)
+            return R.drawable.ice003;
+        if (id == 4)
+            return R.drawable.ice004;
+        if (id == 5)
+            return R.drawable.ice005;
+        if (id == 1)
+            return R.drawable.ice001;
+        return 0;
+    }
+
+    private int getGasId(int id) {
+        if (id == 2)
+            return R.drawable.gas002;
+        if (id == 3)
+            return R.drawable.gas003;
+        if (id == 4)
+            return R.drawable.gas004;
+        if (id == 5)
+            return R.drawable.gas005;
+
+        if (id == 1)
+            return R.drawable.gas001;
+        return 0;
+    }
+
+    private int getWaterId(int id) {
+        if (id == 2)
+            return R.drawable.water002;
+        if (id == 3)
+            return R.drawable.water003;
+        if (id == 4)
+            return R.drawable.water004;
+        if (id == 5)
+            return R.drawable.water005;
+
+        if (id == 1)
+            return R.drawable.water001;
+        return 0;
+    }
+
+    private int getGrasId(int id) {
+        if (id == 2)
+            return R.drawable.gras002;
+        if (id == 3)
+            return R.drawable.gras003;
+        if (id == 4)
+            return R.drawable.gras004;
+        if (id == 5)
+            return R.drawable.gras005;
+
+        if (id == 1)
+            return R.drawable.gras001;
+        return 0;
+    }
+
+
+    private Bitmap drawOnCircle(Rect circle, Bitmap bitmap, Paint painter) {
+
+        Bitmap result = Bitmap.createBitmap(circle.width(), circle.height(), Bitmap.Config.ARGB_8888);
+        Path p = new Path();
+        p.addCircle(circle.exactCenterX(), circle.exactCenterY(), circle.height() / 2.5f, Path.Direction.CCW);
+        p.close();
+
+        Canvas c = new Canvas(result);
+        c.drawPath(p, painter);
+        c.clipPath(p, Region.Op.INTERSECT);
+        if (!clickable) {/*
+            Matrix mm = new Matrix();
+            mm.postRotate(degree);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), mm, true);
+            circle = new Rect(circle.left - circle.width() / 4, circle.top - circle.height() / 4, circle.right + circle.width() / 4, circle.bottom + circle.height() / 4);
+        */
+
+
+            int oc = circle.right;
+            if (scenes.size() > 0) {
+                circle = new Rect(circle.left + scenes.get(0).pos, circle.top, circle.right + scenes.get(0).pos, circle.bottom);
+
+                BitmapDrawer.drawImage(bitmap, c, circle, null, true);
+            }
+            if (scenes.size() > 1) {
+                circle = new Rect((circle.left - oc) + scenes.get(1).pos, circle.top, (circle.right - oc) + scenes.get(0).pos, circle.bottom);
+
+                BitmapDrawer.drawImage(bitmap, c, circle, null, true);
+
+                if (scenes.size() == 2) {
+                    if (scenes.get(0).pos >= oc) {
+                        scenes.remove(0);
+                        Scene s = new Scene();
+                        s.pos = (0 - oc) + scenes.get(0).pos;
+                        scenes.add(s);
+                    }
+                }
+            }
+
+        } else {
+            BitmapDrawer.drawImage(bitmap, c, circle, null, true);
+        }
+        return result;
+    }
+
+    class Scene {
+        public int pos = 0;
+
     }
 }
