@@ -1,18 +1,11 @@
 package games.biitworx.starcitysim.window.views.systems;
 
 import games.biitworx.starcitysim.Game;
-import games.biitworx.starcitysim.R;
-import games.biitworx.starcitysim.T;
-import games.biitworx.starcitysim.scifi.NameGenerator;
-import games.biitworx.starcitysim.scifi.PlanetConst;
 import games.biitworx.starcitysim.scifi.RandomRange;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 import games.biitworx.starcitysim.window.Window;
-import games.biitworx.starcitysim.window.content.LineContent;
 import games.biitworx.starcitysim.window.content.PlanetContent;
-import games.biitworx.starcitysim.window.content.TextContent;
-import games.biitworx.starcitysim.window.content.VirtualLineContents;
 
 /**
  * Created by marcel.weissgerber on 18.05.2016.
@@ -32,6 +25,7 @@ public class PlanetWindow extends Window {
                 Game.changeWindow(new PlanetDetailWindow(sun));
             }
         }));
+
         int old = sun.getShaderSurfaceA();
         for (int x = 1; x <= max; x++) {
             final PlanetData p = new PlanetData(name+" "+x);
@@ -67,6 +61,8 @@ public class PlanetWindow extends Window {
                 }
             }));
         }
+
+
 
     }
 }

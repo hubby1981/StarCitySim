@@ -67,12 +67,21 @@ public class PlanetContent extends Content {
         }
         if (!clickable) {
             for (Scene s : scenes) {
-                s.pos += 5;
+                s.pos += 1;
             }
             if (scenes.size() == 1) {
                 Scene s = new Scene();
                 s.pos = (0 - getInnerFullRect().width()) + scenes.get(0).pos;
                 scenes.add(s);
+            }
+
+            if (scenes.size() == 2) {
+                if (scenes.get(0).pos >= getInnerFullRect().right) {
+                    scenes.remove(0);
+                    Scene s = new Scene();
+                    s.pos = (0 - getInnerFullRect().width()) ;
+                    scenes.add(s);
+                }
             }
 
 
@@ -343,8 +352,32 @@ public class PlanetContent extends Content {
         return 0;
     }
 
+    private Bitmap multiplyBitmap(Bitmap bitmap, Rect map) {
+        Bitmap bit = Bitmap.createBitmap(map.width(), map.height(), Bitmap.Config.ARGB_8888);
+
+        Canvas c = new Canvas(bit);
+
+        int xx = map.width() / bitmap.getWidth();
+        int yy = map.height() / bitmap.getHeight();
+
+        for (int x = 0; x <= xx; x++) {
+            for (int y = 0; y <= yy; y++) {
+
+                //BitmapDrawer.drawImage(bitmap,c,draw,null,false);
+
+                Bitmap bitmap1=bitmap;
+
+                c.drawBitmap(bitmap1, x * bitmap.getWidth(), y * bitmap.getHeight(), null);
+            }
+        }
+        return bit;
+    }
 
     private Bitmap drawOnCircle(Rect circle, Bitmap bitmap, Paint painter) {
+
+        if (!clickable) {
+            bitmap = multiplyBitmap(bitmap, circle);
+        }
 
         Bitmap result = Bitmap.createBitmap(circle.width(), circle.height(), Bitmap.Config.ARGB_8888);
         Path p = new Path();
@@ -373,14 +406,7 @@ public class PlanetContent extends Content {
 
                 BitmapDrawer.drawImage(bitmap, c, circle, null, true);
 
-                if (scenes.size() == 2) {
-                    if (scenes.get(0).pos >= oc) {
-                        scenes.remove(0);
-                        Scene s = new Scene();
-                        s.pos = (0 - oc) + scenes.get(0).pos;
-                        scenes.add(s);
-                    }
-                }
+
             }
 
         } else {
