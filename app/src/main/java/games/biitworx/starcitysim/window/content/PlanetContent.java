@@ -4,9 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.Shader;
@@ -23,10 +23,8 @@ import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.RectHelper;
 import games.biitworx.starcitysim.T;
 import games.biitworx.starcitysim.scifi.PlanetConst;
-import games.biitworx.starcitysim.scifi.RandomRange;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
-import games.biitworx.starcitysim.scifi.planet.rock.RockPlanetTerrain;
 
 /**
  * Created by marcel.weissgerber on 19.05.2016.
@@ -69,7 +67,7 @@ public class PlanetContent extends Content {
         }
         if (!clickable) {
             for (Scene s : scenes) {
-                s.pos -= 2;
+                s.pos -= 20;
             }
 
 
@@ -89,6 +87,8 @@ public class PlanetContent extends Content {
 
 
             canvas.drawRect(innerContent, filler);
+
+
         }
         Rect circle = getInnerRect();
         ArrayList<Rect> rects = RectHelper.makeRectsEx(circle, 4);
@@ -102,32 +102,33 @@ public class PlanetContent extends Content {
         float h = circle.height() / 2.5f;
         p.addCircle(circle.exactCenterX(), circle.exactCenterY(), h, Path.Direction.CCW);
         p.close();
-        int oldcol = Colors.backPainterLine2.getColor();
-        Colors.backPainterLine2.setColor(planet.surfaceColor);
-        Colors.backPainterLine2.setStrokeWidth(5);
-        //canvas.drawPath(p, Colors.backPainterLine2);
-        Colors.backPainterLine2.setColor(oldcol);
-        Colors.backPainterLine2.setStrokeWidth(2);
+
         Paint circler = new Paint();
         circler.setStyle(Paint.Style.FILL);
         circler.setAntiAlias(true);
-        circler.setColor(planet.getSurfaceColor());
-        if (!clickable)
-            circler.setShadowLayer(10 * planet.getAtmosphereThickness(), 0, 0, planet.getSurfaceColor2());
-        canvas.drawPath(p, circler);
+        //circler.setColor(planet.getSurfaceColor());
+
+        //canvas.drawPath(p, circler);
 
 
-        makeSurface(canvas, circle, circle2, circler, planet.getShaderSurfaceA());
-        if (planet.getSurface() != PlanetSurface.SUN) {
+        makeSurface(canvas, circle, circle2, circler, planet.getShaderSurface());
 
-            makeSurface3(canvas, circle, circle2, circler, planet.getShaderSurfaceE());
-        }
 
         Paint light = new Paint();
         light.setStyle(Paint.Style.FILL);
         light.setAntiAlias(true);
-        light.setShader(new LinearGradient((float) (circle.centerX() - circle.width() / 16), circle.exactCenterY(), circle.right - circle.width() / (clickable ? 8 : 4), circle.exactCenterY(), Color.argb(clickable ? 200 : 230, 0, 0, 0), Color.argb(50, 0, 0, 0), Shader.TileMode.CLAMP));
+
+
+        light.setShader(new RadialGradient(circle.exactCenterX(),circle.exactCenterY(),clickable?circle.width()/3:circle.width()/4, Color.argb(1, 0, 0, 0), Color.argb(clickable ? 210 : 230, 0, 0, 0), Shader.TileMode.CLAMP));
         canvas.drawPath(p, light);
+
+        int oldcol = Colors.backPainterLine2.getColor();
+        Colors.backPainterLine2.setColor(Color.argb(230, 0, 0, 0));
+        Colors.backPainterLine2.setStrokeWidth(clickable?1:2);
+
+        canvas.drawPath(p, Colors.backPainterLine2);
+        Colors.backPainterLine2.setColor(oldcol);
+        Colors.backPainterLine2.setStrokeWidth(2);
 
         if (clickable) {
 
@@ -172,77 +173,10 @@ public class PlanetContent extends Content {
             id = getGasId(surface);
         }
         if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
-            id = getRockId(surface);
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
-            id = getIceId(surface);
-
-        }
-
-        if (id > 0) {
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
-        }
-    }
-
-    private void makeSurfaceEx(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
-        int id = 0;
-        if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
-
-            id = getRockId(surface);
-
-        }
-
-        if (planet.getSurface() == PlanetSurface.ICE && surface < 6) {
-            id = getIceId(surface);
-        }
-        if (planet.getSurface() == PlanetSurface.GAS && surface < 6) {
-            id = getGasId(surface);
-        }
-        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
-            id = getRockId(surface);
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
-            id = getIceId(surface);
-
-        }
-
-        if (id > 0) {
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
-        }
-    }
-
-    private void makeSurface2(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
-        int id = 0;
-        if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
-            id = getWaterId(surface);
-        }
-
-        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
-            id = getWaterId(surface);
-
-        }
-
-        if (id > 0) {
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
-        }
-    }
-
-    private void makeSurface3(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
-        int id = 0;
-        if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
             id = getGrasId(surface);
-        }
+            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
 
-        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
-            id = getGrasId(surface);
+
 
         }
 

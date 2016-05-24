@@ -141,7 +141,7 @@ public class Game extends AppCompatActivity {
 
 
             }
-        }, dd / 50, dd / 50);
+        },0,15);
 
         timer = new Runnable() {
             @Override
