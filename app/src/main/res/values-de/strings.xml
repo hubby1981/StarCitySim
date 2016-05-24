@@ -119,5 +119,10 @@
     <string name="content_planet_suface_ICE_ROCK">Eis / Stein</string>
     <string name="content_planet_suface_GAS">Gas</string>
     <string name="content_planet_suface_SUN">Sonne</string>
+    <string name="content_planet_suface_MOON">Mond</string>
+
+    <string name="window_operations_systems_planet_orbit_title">Orbit</string>
+
+
 
 </resources>

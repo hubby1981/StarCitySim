@@ -8,6 +8,7 @@ import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.T;
 import games.biitworx.starcitysim.scifi.NameGenerator;
+import games.biitworx.starcitysim.scifi.System;
 import games.biitworx.starcitysim.window.Window;
 import games.biitworx.starcitysim.window.basic.MenuCounter;
 import games.biitworx.starcitysim.window.content.MenuItemContent;
@@ -26,7 +27,7 @@ public class OperationWindow extends Window {
                 new Runnable() {
                     @Override
                     public void run() {
-                        Game.changeWindow(new PlanetWindow(new NameGenerator().getSystemName()));
+                        Game.changeWindow(new PlanetWindow(new System(new NameGenerator().getSystemName())));
                     }
                 }));
 

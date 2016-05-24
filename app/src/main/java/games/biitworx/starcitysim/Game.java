@@ -46,6 +46,7 @@ public class Game extends AppCompatActivity {
     public static boolean PORTRAIT = true;
     public static boolean ANIMATION = false;
     public static boolean LOCKED = false;
+    public static boolean SCROLLS = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +142,7 @@ public class Game extends AppCompatActivity {
 
 
             }
-        },0,15);
+        }, 0, 15);
 
         timer = new Runnable() {
             @Override
@@ -224,11 +225,12 @@ public class Game extends AppCompatActivity {
 
         if (event.getAction() == MotionEvent.ACTION_MOVE && touch) {
             int scroller = ((int) event.getY()) - OldY;
+            SCROLLS = true;
             if (scroller > 10 || scroller < -10) {
                 int newScroller = ScrollPosition;
 
 
-                newScroller -= scroller / 4;
+                newScroller -= scroller / 6;
                 if (newScroller < 0)
                     newScroller = 0;
                 touch = true;
@@ -256,7 +258,7 @@ public class Game extends AppCompatActivity {
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
             touch = false;
-
+            SCROLLS = false;
             if (!scrolled) {
                 int yy = (int) event.getY() - (int) (MenuRects.menu.get().height() / 2);
                 MenuRects.testHit((int) event.getX(), yy);

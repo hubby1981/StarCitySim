@@ -89,7 +89,7 @@ public class MenuItemContent extends Content {
 
         Fonts.FONT.setTextSize((getContentRect().height() / 7));
 
-        canvas.drawText(secondary, (float) rects.get(1).left+hh, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
+        canvas.drawText(secondary, (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
         Fonts.FONT.setTextSize((getContentRect().height() / 6));
 
         canvas.drawText(info, (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 2.5), Fonts.FONT);

@@ -1,14 +1,21 @@
 package games.biitworx.starcitysim.window.views.systems;
 
+import games.biitworx.starcitysim.B;
+import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.T;
+import games.biitworx.starcitysim.scifi.NameGenerator;
 import games.biitworx.starcitysim.scifi.PlanetConst;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 import games.biitworx.starcitysim.window.Window;
+import games.biitworx.starcitysim.window.basic.MenuCounter;
+import games.biitworx.starcitysim.window.content.ButtonContent;
 import games.biitworx.starcitysim.window.content.LineContent;
+import games.biitworx.starcitysim.window.content.MenuItemContent;
 import games.biitworx.starcitysim.window.content.PlanetContent;
+import games.biitworx.starcitysim.window.content.SpacerContent;
 import games.biitworx.starcitysim.window.content.TextContent;
 import games.biitworx.starcitysim.window.content.VirtualLineContents;
 
@@ -17,12 +24,24 @@ import games.biitworx.starcitysim.window.content.VirtualLineContents;
  */
 
 public class PlanetDetailWindow extends Window {
-    public PlanetDetailWindow(PlanetData planet) {
+    public PlanetDetailWindow(final PlanetData planet) {
         super(planet.getName());
 
 
-        getContents().add(new PlanetContent(planet).clickable(false).height(8));
+        getContents().add(new PlanetContent(planet).clickable(false).height(10));
         getContents().add(LineContent.line());
+
+        if(planet.getOrbits().size()>0) {
+            int count =  planet.getOrbits().size();
+            getContents().add(new MenuItemContent(null, B.get(R.drawable.systemsback), T.get(R.string.window_operations_systems_planet_orbit_title), T.get(R.string.window_operations_systems_planet_orbit_desc),String.valueOf(count), Colors.back001,
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            Game.changeWindow(new PlanetOrbitWindow(planet));
+                        }
+                    }));
+            getContents().add(LineContent.line());
+        }
 
         VirtualLineContents table = new VirtualLineContents();
         table.getContents().add(new TextContent(T.get(R.string.content_planet_mass)));
@@ -43,12 +62,36 @@ public class PlanetDetailWindow extends Window {
         if (planet.getSurface() == PlanetSurface.GAS) id = R.string.content_planet_suface_GAS;
         if (planet.getSurface() == PlanetSurface.ICE) id = R.string.content_planet_suface_ICE;
         if (planet.getSurface() == PlanetSurface.SUN) id = R.string.content_planet_suface_SUN;
-
+        if (planet.getSurface() == PlanetSurface.MOON) id = R.string.content_planet_suface_MOON;
         if (planet.getSurface() == PlanetSurface.ICE_ROCK)
             id = R.string.content_planet_suface_ICE_ROCK;
 
         table.getContents().add(new TextContent(T.get(id)));
 
         getContents().add(table);
+
+        if(planet.getParent()!=null) {
+            getContents().add(new ButtonContent(T.get(R.string.overlay_menu_back), new Runnable() {
+                @Override
+                public void run() {
+                    Game.changeWindow(new PlanetDetailWindow(planet.getParent()));
+                }
+            }));
+
+            getContents().add(new SpacerContent(4));
+
+        }else   if(planet.getSystem()!=null) {
+            getContents().add(new ButtonContent(T.get(R.string.overlay_menu_back), new Runnable() {
+                @Override
+                public void run() {
+                    Game.changeWindow(new PlanetWindow(planet.getSystem()));
+                }
+            }));
+
+            getContents().add(new SpacerContent(4));
+
+        }
+
+
     }
 }

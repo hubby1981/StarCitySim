@@ -2,9 +2,13 @@ package games.biitworx.starcitysim.scifi.planet;
 
 import android.graphics.Color;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import games.biitworx.starcitysim.scifi.NameGenerator;
 import games.biitworx.starcitysim.scifi.PlanetConst;
 import games.biitworx.starcitysim.scifi.RandomRange;
-import games.biitworx.starcitysim.scifi.planet.rock.RockPlanetTerrain;
+import games.biitworx.starcitysim.scifi.System;
 
 /**
  * Created by marcel.weissgerber on 18.05.2016.
@@ -22,6 +26,10 @@ public class PlanetData extends PlanetCoreData {
 
     private float temprature;
     private float day;
+
+    private List<PlanetData> orbits = new ArrayList<>();
+    private PlanetData parent;
+    private System system;
 
     public PlanetData(String name) {
         super();
@@ -50,27 +58,84 @@ public class PlanetData extends PlanetCoreData {
 
     }
 
+    public PlanetData system(System system) {
+        this.system = system;
+        return this;
+    }
+
+    public System getSystem() {
+        return system;
+    }
+
+    public PlanetData(String name, PlanetSurface surface, PlanetData parent) {
+        super();
+        this.parent = parent;
+        this.name = name;
+        surfaceThickness = RandomRange.getFloat(PlanetConst.MIN_PST, PlanetConst.MAX_PST);
+        atmosphereThickness = RandomRange.getFloat(PlanetConst.MIN_PAT, PlanetConst.MAX_PAT);
+
+
+        this.surface = surface;
+        radius();
+
+        colors();
+        day = RandomRange.getFloat(PlanetConst.MIN_PSR, PlanetConst.MAX_PSR);
+
+    }
+
+    public void addMoon(PlanetData p) {
+
+        p.surface(PlanetSurface.MOON);
+    }
+
+    public PlanetData getParent() {
+        return parent;
+    }
+
+    private void createOrbits() {
+        if (RandomRange.getRandom(1, 2) == 2 && surface != PlanetSurface.MOON &&
+        surface != PlanetSurface.SUN){
+            int max = RandomRange.getRandom(1, 6);
+
+            for (int x = 1; x <= max; x++) {
+                orbits.add(new PlanetData(new NameGenerator().getPlanetName(), PlanetSurface.MOON, this));
+            }
+        }
+    }
+
     private void radius() {
         int a = 0;
         int b = 0;
 
+        if (surface == PlanetSurface.MOON) {
+            a = 1;
+            b = 2;
+            surfaceA(RandomRange.getRandom(1, 42));
+
+        }
+
         if (surface == PlanetSurface.ICE) {
             a = 2;
             b = 6;
+            surfaceA(RandomRange.getRandom(1, 14));
+
         }
         if (surface == PlanetSurface.ICE_ROCK) {
             a = 4;
             b = 12;
+            surfaceA(RandomRange.getRandom(1, 14));
+
 
         }
         if (surface == PlanetSurface.ROCK) {
             a = 8;
             b = 32;
-
+            surfaceA(RandomRange.getRandom(1, 14));
         }
         if (surface == PlanetSurface.GAS) {
             a = 16;
             b = 64;
+            surfaceA(RandomRange.getRandom(1, 14));
 
         }
 
@@ -78,6 +143,10 @@ public class PlanetData extends PlanetCoreData {
             a = 512;
             b = 4098;
             atmosphereThickness *= 4.6f;
+        } else {
+            if (surface != PlanetSurface.MOON)
+                createOrbits();
+
         }
         radius = (super.mass + surfaceThickness) * (RandomRange.getRandom(a, b));
 
@@ -85,13 +154,16 @@ public class PlanetData extends PlanetCoreData {
         radius = Math.round(radius);
     }
 
+
+    public List<PlanetData> getOrbits() {
+        return orbits;
+    }
+
     private void colors() {
         if (surface == PlanetSurface.ROCK) {
-            RockPlanetTerrain.init(250);
-            surfaceColor = RockPlanetTerrain.getColor();
-            RockPlanetTerrain.init(100);
+            surfaceColor = Color.argb(255, 0, RandomRange.getRandom(PlanetConst.MIN_COLOR_ROCK, PlanetConst.MAX_COLOR_ROCK), RandomRange.getRandom(PlanetConst.MIN_COLOR_ROCK, PlanetConst.MAX_COLOR_ROCK));
+            surfaceColor2 = Color.argb(128, 0, RandomRange.getRandom(PlanetConst.MIN_COLOR_ROCK, PlanetConst.MAX_COLOR_ROCK), RandomRange.getRandom(PlanetConst.MIN_COLOR_ROCK, PlanetConst.MAX_COLOR_ROCK));
 
-            surfaceColor2 = RockPlanetTerrain.getColor();
 
             temprature = RandomRange.getFloat(PlanetConst.MIN_PTR, PlanetConst.MAX_PTR);
         } else if (surface == PlanetSurface.ICE) {
@@ -181,7 +253,6 @@ public class PlanetData extends PlanetCoreData {
     }
 
 
-
     public float getAtmosphereThickness() {
         return atmosphereThickness;
     }
@@ -199,7 +270,6 @@ public class PlanetData extends PlanetCoreData {
         shaderSurface = value;
         return this;
     }
-
 
 
     public PlanetData surface(PlanetSurface surface) {

@@ -130,5 +130,9 @@
     <string name="content_planet_suface_ICE_ROCK">Ice / Rock</string>
     <string name="content_planet_suface_GAS">Gas</string>
     <string name="content_planet_suface_SUN">Sun</string>
+    <string name="content_planet_suface_MOON">Moon</string>
+
+    <string name="window_operations_systems_planet_orbit_title">Orbit</string>
+    <string name="window_operations_systems_planet_orbit_desc">Show  orbital objects</string>
 
 </resources>

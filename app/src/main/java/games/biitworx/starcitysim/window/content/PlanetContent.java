@@ -23,6 +23,7 @@ import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.RectHelper;
 import games.biitworx.starcitysim.T;
 import games.biitworx.starcitysim.scifi.PlanetConst;
+import games.biitworx.starcitysim.scifi.RandomRange;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 
@@ -32,18 +33,17 @@ import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 public class PlanetContent extends Content {
     private PlanetData planet;
     private boolean clickable = false;
-    public float degree = 0;
-    public float degree2 = 0;
+
 
     public List<Scene> scenes = new ArrayList<>();
 
     public PlanetContent(PlanetData planet) {
-        super(3);
+        super(3f);
         this.planet = planet;
     }
 
     public PlanetContent(PlanetData planet, Runnable runnable) {
-        super(3);
+        super(3f);
         this.planet = planet;
         setAction(runnable);
         clickable = true;
@@ -65,11 +65,10 @@ public class PlanetContent extends Content {
         if (scenes.size() == 0) {
             scenes.add(new Scene());
         }
-        if (!clickable) {
+        if (!clickable && !Game.SCROLLS) {
             for (Scene s : scenes) {
-                s.pos -= 20;
+                s.pos -= 30;
             }
-
 
 
         }
@@ -106,25 +105,32 @@ public class PlanetContent extends Content {
         Paint circler = new Paint();
         circler.setStyle(Paint.Style.FILL);
         circler.setAntiAlias(true);
-        //circler.setColor(planet.getSurfaceColor());
-
-        //canvas.drawPath(p, circler);
 
 
-        makeSurface(canvas, circle, circle2, circler, planet.getShaderSurface());
+        if (!Game.SCROLLS)
+            makeSurface(canvas, circle, circle2, circler, planet.getShaderSurface());
+        else {
+            circler.setColor(planet.getSurfaceColor());
+            canvas.drawPath(p, circler);
 
+        }
 
         Paint light = new Paint();
         light.setStyle(Paint.Style.FILL);
         light.setAntiAlias(true);
 
+        int col001 = planet.getSurface() == PlanetSurface.SUN ? planet.getSurfaceColor2() : Color.argb(128, 0, 255, 255);
 
-        light.setShader(new RadialGradient(circle.exactCenterX(),circle.exactCenterY(),clickable?circle.width()/3:circle.width()/4, Color.argb(1, 0, 0, 0), Color.argb(clickable ? 210 : 230, 0, 0, 0), Shader.TileMode.CLAMP));
+        light.setShader(new RadialGradient(circle.exactCenterX() + h, circle.exactCenterY() - h, h * 4f, col001, Color.argb(0, 255, 255, 255), Shader.TileMode.CLAMP));
+        canvas.drawPath(p, light);
+        light.setShader(new RadialGradient(circle.exactCenterX() + h / 2, circle.exactCenterY() - h / 2, h * 1.6f, Color.argb(1, 0, 0, 0), Color.argb(clickable ? 200 : 220, 0, 0, 0), Shader.TileMode.CLAMP));
+        canvas.drawPath(p, light);
+        light.setShader(new RadialGradient(circle.exactCenterX(), circle.exactCenterY(), h * 1.1f, Color.argb(1, 0, 0, 0), Color.argb(clickable ? 200 : 220, 0, 0, 0), Shader.TileMode.CLAMP));
         canvas.drawPath(p, light);
 
         int oldcol = Colors.backPainterLine2.getColor();
         Colors.backPainterLine2.setColor(Color.argb(230, 0, 0, 0));
-        Colors.backPainterLine2.setStrokeWidth(clickable?1:2);
+        Colors.backPainterLine2.setStrokeWidth(clickable ? 1 : 1);
 
         canvas.drawPath(p, Colors.backPainterLine2);
         Colors.backPainterLine2.setColor(oldcol);
@@ -140,14 +146,14 @@ public class PlanetContent extends Content {
             canvas.drawText(planet.getName(), (float) rects.get(1).left, rects.get(1).centerY() - hh, Fonts.FONT);
             Fonts.FONT.setTextSize((getContentRect().height() / 7));
             String surface = planet.getSurface() == PlanetSurface.ICE_ROCK ? T.get(R.string.content_planet_suface_ICE_ROCK) : planet.getSurface() == PlanetSurface.ICE ? T.get(R.string.content_planet_suface_ICE)
-                    : planet.getSurface() == PlanetSurface.GAS ? T.get(R.string.content_planet_suface_GAS) : planet.getSurface() == PlanetSurface.SUN ? T.get(R.string.content_planet_suface_SUN) : T.get(R.string.content_planet_suface_ROCK);
-            canvas.drawText(T.get(R.string.content_planet_surface), (float) rects.get(1).left + hh, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
+                    : planet.getSurface() == PlanetSurface.GAS ? T.get(R.string.content_planet_suface_GAS) : planet.getSurface() == PlanetSurface.SUN ? T.get(R.string.content_planet_suface_SUN) : planet.getSurface() == PlanetSurface.MOON ? T.get(R.string.content_planet_suface_MOON) : T.get(R.string.content_planet_suface_ROCK);
+            canvas.drawText(T.get(R.string.content_planet_surface), (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
             canvas.drawText(surface, (float) rects.get(1).left + hh * 16, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
 
-            canvas.drawText(T.get(R.string.content_planet_radius), (float) rects.get(1).left + hh, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
+            canvas.drawText(T.get(R.string.content_planet_radius), (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
             canvas.drawText("" + planet.getRadius() * PlanetConst.METER / 2, (float) rects.get(1).left + hh * 16, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
 
-            canvas.drawText(T.get(R.string.content_planet_temp), (float) rects.get(1).left + hh, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 2.8), Fonts.FONT);
+            canvas.drawText(T.get(R.string.content_planet_temp), (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 2.8), Fonts.FONT);
             canvas.drawText("" + planet.getTemprature(), (float) rects.get(1).left + hh * 16, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 2.8), Fonts.FONT);
 
             canvas.drawRect(getInnerRect(), Colors.backPainterLine2);
@@ -158,7 +164,7 @@ public class PlanetContent extends Content {
 
     private void makeSurface(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
         int id = 0;
-        if (planet.getSurface() == PlanetSurface.ROCK && surface < 6) {
+        if (planet.getSurface() == PlanetSurface.ROCK && surface < 15) {
 
             id = getRockId(surface);
 
@@ -166,20 +172,25 @@ public class PlanetContent extends Content {
         if (planet.getSurface() == PlanetSurface.SUN && surface < 6) {
             id = getSunId(surface);
         }
-        if (planet.getSurface() == PlanetSurface.ICE && surface < 6) {
+        if (planet.getSurface() == PlanetSurface.ICE && surface < 15) {
             id = getIceId(surface);
         }
-        if (planet.getSurface() == PlanetSurface.GAS && surface < 6) {
+        if (planet.getSurface() == PlanetSurface.GAS && surface < 15) {
             id = getGasId(surface);
         }
-        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 6) {
+        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 15) {
             id = getGrasId(surface);
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
-
-
 
         }
+        if (planet.getSurface() == PlanetSurface.MOON && surface < 43) {
 
+            if (surface < 15)
+                id = getRockId(surface);
+            else if (surface < 29)
+                id = getIceId(surface - 15);
+            else
+                id = getGrasId(surface - 29);
+        }
         if (id > 0) {
             Bitmap b = drawOnCircle(circle2, B.get(id), circler);
 
@@ -196,6 +207,24 @@ public class PlanetContent extends Content {
             return R.drawable.rock004;
         if (id == 5)
             return R.drawable.rock005;
+        if (id == 6)
+            return R.drawable.rock006;
+        if (id == 7)
+            return R.drawable.rock007;
+        if (id == 8)
+            return R.drawable.rock008;
+        if (id == 9)
+            return R.drawable.rock009;
+        if (id == 10)
+            return R.drawable.rock010;
+        if (id == 11)
+            return R.drawable.rock011;
+        if (id == 12)
+            return R.drawable.rock012;
+        if (id == 13)
+            return R.drawable.rock013;
+        if (id == 14)
+            return R.drawable.rock014;
         if (id == 1)
             return R.drawable.rock001;
         return 0;
@@ -224,6 +253,24 @@ public class PlanetContent extends Content {
             return R.drawable.ice004;
         if (id == 5)
             return R.drawable.ice005;
+        if (id == 6)
+            return R.drawable.ice006;
+        if (id == 7)
+            return R.drawable.ice007;
+        if (id == 8)
+            return R.drawable.ice008;
+        if (id == 9)
+            return R.drawable.ice009;
+        if (id == 10)
+            return R.drawable.ice010;
+        if (id == 11)
+            return R.drawable.ice011;
+        if (id == 12)
+            return R.drawable.ice012;
+        if (id == 13)
+            return R.drawable.ice013;
+        if (id == 14)
+            return R.drawable.ice014;
         if (id == 1)
             return R.drawable.ice001;
         return 0;
@@ -238,7 +285,24 @@ public class PlanetContent extends Content {
             return R.drawable.gas004;
         if (id == 5)
             return R.drawable.gas005;
-
+        if (id == 6)
+            return R.drawable.gas006;
+        if (id == 7)
+            return R.drawable.gas007;
+        if (id == 8)
+            return R.drawable.gas008;
+        if (id == 9)
+            return R.drawable.gas009;
+        if (id == 10)
+            return R.drawable.gas010;
+        if (id == 11)
+            return R.drawable.gas011;
+        if (id == 12)
+            return R.drawable.gas012;
+        if (id == 13)
+            return R.drawable.gas013;
+        if (id == 14)
+            return R.drawable.gas014;
         if (id == 1)
             return R.drawable.gas001;
         return 0;
@@ -268,7 +332,24 @@ public class PlanetContent extends Content {
             return R.drawable.gras004;
         if (id == 5)
             return R.drawable.gras005;
-
+        if (id == 6)
+            return R.drawable.gras006;
+        if (id == 7)
+            return R.drawable.gras007;
+        if (id == 8)
+            return R.drawable.gras008;
+        if (id == 9)
+            return R.drawable.gras009;
+        if (id == 10)
+            return R.drawable.gras010;
+        if (id == 11)
+            return R.drawable.gras011;
+        if (id == 12)
+            return R.drawable.gras012;
+        if (id == 13)
+            return R.drawable.gras013;
+        if (id == 14)
+            return R.drawable.gras014;
         if (id == 1)
             return R.drawable.gras001;
         return 0;
@@ -307,11 +388,11 @@ public class PlanetContent extends Content {
         Canvas c = new Canvas(result);
         c.drawPath(p, painter);
         c.clipPath(p, Region.Op.INTERSECT);
-        if (!clickable) {
+        if (!clickable && !Game.SCROLLS) {
 
             if (scenes.size() == 1) {
                 Scene s = new Scene();
-                s.pos = scenes.get(0).pos+circle.width();
+                s.pos = scenes.get(0).pos + circle.width();
 
                 scenes.add(s);
             }
@@ -320,7 +401,7 @@ public class PlanetContent extends Content {
                 if (scenes.get(0).pos < (0 - circle.width())) {
                     scenes.remove(0);
                     Scene s = new Scene();
-                    s.pos = scenes.get(0).pos+circle.width();
+                    s.pos = scenes.get(0).pos + circle.width();
 
                     scenes.add(s);
                 }
@@ -328,7 +409,7 @@ public class PlanetContent extends Content {
 
 
             for (Scene s : scenes) {
-                circle = new Rect((int)s.pos, circle.top, (int)s.pos + circle.width(), circle.bottom);
+                circle = new Rect((int) s.pos, circle.top, (int) s.pos + circle.width(), circle.bottom);
 
                 BitmapDrawer.drawImage(bitmap, c, circle, null, true);
             }
