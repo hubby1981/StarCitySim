@@ -7,5 +7,7 @@ public enum PlanetSurface {
     ICE,
     ROCK,
     ICE_ROCK,
-    GAS
+    GAS,
+    SUN,
+    MOON
 }

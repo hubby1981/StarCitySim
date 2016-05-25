@@ -33,10 +33,6 @@ public class PlanetConst {
 
     public static int METER = 1456;
 
-
-    public static float MIN_PFM = 2.1f; //Min Meter Radius 1000 * Factor = Radius
-    public static float MAX_PFM = 4.9f; // Maximum Meter Radius
-
     public static float MIN_PSR = 0.1f; //Min Self Rotation 1 = 1 Galactic Day
     public static float MAX_PSR = 1.0f; //Max Self Rotation
 

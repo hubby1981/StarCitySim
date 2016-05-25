@@ -8,7 +8,7 @@ import java.util.List;
 import games.biitworx.starcitysim.scifi.NameGenerator;
 import games.biitworx.starcitysim.scifi.PlanetConst;
 import games.biitworx.starcitysim.scifi.RandomRange;
-import games.biitworx.starcitysim.scifi.System;
+import games.biitworx.starcitysim.scifi.PlanetSystem;
 
 /**
  * Created by marcel.weissgerber on 18.05.2016.
@@ -29,7 +29,7 @@ public class PlanetData extends PlanetCoreData {
 
     private List<PlanetData> orbits = new ArrayList<>();
     private PlanetData parent;
-    private System system;
+    private PlanetSystem planetSystem;
 
     public PlanetData(String name) {
         super();
@@ -58,13 +58,13 @@ public class PlanetData extends PlanetCoreData {
 
     }
 
-    public PlanetData system(System system) {
-        this.system = system;
+    public PlanetData system(PlanetSystem planetSystem) {
+        this.planetSystem = planetSystem;
         return this;
     }
 
-    public System getSystem() {
-        return system;
+    public PlanetSystem getPlanetSystem() {
+        return planetSystem;
     }
 
     public PlanetData(String name, PlanetSurface surface, PlanetData parent) {

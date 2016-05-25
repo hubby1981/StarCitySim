@@ -5,12 +5,10 @@ import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.T;
-import games.biitworx.starcitysim.scifi.NameGenerator;
 import games.biitworx.starcitysim.scifi.PlanetConst;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 import games.biitworx.starcitysim.window.Window;
-import games.biitworx.starcitysim.window.basic.MenuCounter;
 import games.biitworx.starcitysim.window.content.ButtonContent;
 import games.biitworx.starcitysim.window.content.LineContent;
 import games.biitworx.starcitysim.window.content.MenuItemContent;
@@ -80,11 +78,11 @@ public class PlanetDetailWindow extends Window {
 
             getContents().add(new SpacerContent(4));
 
-        }else   if(planet.getSystem()!=null) {
+        }else   if(planet.getPlanetSystem()!=null) {
             getContents().add(new ButtonContent(T.get(R.string.overlay_menu_back), new Runnable() {
                 @Override
                 public void run() {
-                    Game.changeWindow(new PlanetWindow(planet.getSystem()));
+                    Game.changeWindow(new PlanetWindow(planet.getPlanetSystem()));
                 }
             }));
 

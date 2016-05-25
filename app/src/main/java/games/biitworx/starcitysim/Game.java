@@ -1,6 +1,7 @@
 package games.biitworx.starcitysim;
 
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Paint;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,6 +19,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import games.biitworx.starcitysim.data.helper.DbHelper;
+import games.biitworx.starcitysim.data.helper.ObjectHelper;
+import games.biitworx.starcitysim.scifi.NameGenerator;
+import games.biitworx.starcitysim.scifi.PlanetSystem;
 import games.biitworx.starcitysim.window.Window;
 
 public class Game extends AppCompatActivity {
@@ -48,10 +54,24 @@ public class Game extends AppCompatActivity {
     public static boolean LOCKED = false;
     public static boolean SCROLLS = false;
 
+    DbHelper helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        helper = new DbHelper(this);
+        Cursor c = helper.get().rawQuery(ObjectHelper.createSelectStatement(PlanetSystem.class), null);
+        while (c.moveToNext()) {
+            String out = "";
+            for (String s : c.getColumnNames()) {
+                out += s + ":" + c.getString(c.getColumnIndex(s));
+            }
+            System.out.println(out);
+        }
+
+        helper.insert(new PlanetSystem("test"));
         res = getResources();
 
 
