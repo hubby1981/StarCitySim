@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 import games.biitworx.starcitysim.data.BaseDataObject;
 import games.biitworx.starcitysim.data.DbReference;
@@ -23,7 +24,7 @@ import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private final static String DBNAME = "starcity";
-    private final static int version = 19;
+    private final static int version = 26;
 
     public DbHelper(Context context) {
         super(context, DBNAME, null, version);
@@ -41,8 +42,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
         Setup s = new Setup();
 
-        for (String st : s.getCreateTables())
+        for (String st : s.getCreateTables()) {
             db.execSQL(st);
+            //System.out.println(st);
+        }
 
 
     }
@@ -51,8 +54,11 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Setup s = new Setup();
 
-        for (String st : s.getDropTables())
+        for (String st : s.getDropTables()) {
             db.execSQL(st);
+            //System.out.println(st);
+
+        }
 
         createDb(db);
     }
@@ -82,8 +88,7 @@ public class DbHelper extends SQLiteOpenHelper {
                                 if (items != null) {
                                     for (Object bo : items) {
                                         String id = insert(bo);
-                                        String st2 = "INSERT or replace INTO " + e.getKey() + " (" + e.getValue().tableA() + "_A," + e.getValue().tableB()
-                                                + "_B) VALUES ('" + ((BaseDataObject) object).getUID().toString() + "','" +
+                                        String st2 = "INSERT or replace INTO " + e.getKey() + " (parent,child) VALUES ('" + ((BaseDataObject) object).getUID().toString() + "','" +
                                                 id + "')";
                                         db.execSQL(st2);
                                     }
@@ -132,34 +137,23 @@ public class DbHelper extends SQLiteOpenHelper {
                     for (String fd : cursor.getColumnNames()) {
                         String value = cursor.getString(cursor.getColumnIndex(fd));
 
-                        if (fd.equals("uid")) {
-                            ((BaseDataObject) obj).imported(value);
-                        } else {
-                            Field fg = ObjectHelper.getDeclaredFieldByName(clazz, fd);
-                            Object val;
-                            if (fg.getGenericType().equals(int.class)) {
-                                val = Integer.parseInt(value);
-                            } else if (fg.getGenericType().equals(float.class)) {
-                                val = Float.parseFloat(value);
-                            } else if (fg.getGenericType().equals(PlanetSurface.class)) {
-                                val = Enum.valueOf(PlanetSurface.class, value);
-                            } else {
-                                val = value;
-                            }
-                            if (fg != null) {
-                                fg.setAccessible(true);
-                                try {
-                                    fg.set(obj, val);
-                                } catch (IllegalAccessException e) {
-                                    e.printStackTrace();
-                                }
+
+                        Field fg = ObjectHelper.getDeclaredFieldByName(clazz, fd);
+                        Object val = getObject(value, fg);
+                        if (fg != null) {
+                            fg.setAccessible(true);
+                            try {
+                                fg.set(obj, val);
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
                             }
                         }
+
 
                     }
 
                     loadReferences(clazz, db, obj);
-
+                    ((BaseDataObject) obj).importedEx();
                 }
             }
         }
@@ -167,17 +161,33 @@ public class DbHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    private Object getObject(String value, Field fg) {
+        Object val;
+        if (fg.getGenericType().equals(int.class)) {
+            val = Integer.parseInt(value);
+        } else if (fg.getGenericType().equals(float.class)) {
+            val = Float.parseFloat(value);
+        } else if (fg.getGenericType().equals(UUID.class)) {
+            val = UUID.fromString(value);
+        } else if (fg.getGenericType().equals(PlanetSurface.class)) {
+            val = Enum.valueOf(PlanetSurface.class, value);
+        } else {
+            val = value;
+        }
+        return val;
+    }
+
     private <T> void loadReferences(Class<T> clazz, SQLiteDatabase db, T obj) {
         HashMap<String, DbReference> ref = ObjectHelper.getReferencesEx(clazz);
         if (ref.size() > 0) {
             String refUid = ((BaseDataObject) obj).getUID().toString();
             for (Map.Entry<String, DbReference> e : ref.entrySet()) {
-                String st2 = "SELECT " + e.getValue().tableA() + "_A," + e.getValue().tableB() + "_B" + " FROM " + e.getKey() + " WHERE " + e.getValue().tableA() + "_A='" + refUid + "'";
+                String st2 = "SELECT parent,child FROM " + e.getKey() + " WHERE parent='" + refUid + "'";
                 Class cls = e.getValue().items();
                 List<Object> sub2 = new ArrayList<>();
                 Cursor cursor2 = db.rawQuery(st2, null);
                 while (cursor2.moveToNext()) {
-                    String id = cursor2.getString(cursor2.getColumnIndex(e.getValue().tableB() + "_B"));
+                    String id = cursor2.getString(cursor2.getColumnIndex("child"));
                     sub2.add(getData(e.getValue().items(), db, id));
                 }
 
@@ -229,29 +239,19 @@ public class DbHelper extends SQLiteOpenHelper {
                     for (String fd : cursor.getColumnNames()) {
                         String value = cursor.getString(cursor.getColumnIndex(fd));
 
-                        if (fd.equals("uid")) {
-                            ((BaseDataObject) obj).imported(value);
-                        } else {
-                            Field fg = ObjectHelper.getDeclaredFieldByName(clazz, fd);
-                            Object val;
-                            if (fg.getGenericType().equals(int.class)) {
-                                val = Integer.parseInt(value);
-                            } else if (fg.getGenericType().equals(float.class)) {
-                                val = Float.parseFloat(value);
-                            } else if (fg.getGenericType().equals(PlanetSurface.class)) {
-                                val = Enum.valueOf(PlanetSurface.class, value);
-                            } else {
-                                val = value;
-                            }
-                            if (fg != null) {
-                                fg.setAccessible(true);
-                                try {
-                                    fg.set(obj, val);
-                                } catch (IllegalAccessException e) {
-                                    e.printStackTrace();
-                                }
+
+                        Field fg = ObjectHelper.getDeclaredFieldByName(clazz, fd);
+                        Object val = getObject(value, fg);
+
+                        if (fg != null) {
+                            fg.setAccessible(true);
+                            try {
+                                fg.set(obj, val);
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
                             }
                         }
+
 
                     }
 
@@ -261,7 +261,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 }
             }
         }
-
+        ((BaseDataObject) obj).importedEx();
         return obj;
     }
 }

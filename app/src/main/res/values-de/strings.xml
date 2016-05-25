@@ -122,7 +122,8 @@
     <string name="content_planet_suface_MOON">Mond</string>
 
     <string name="window_operations_systems_planet_orbit_title">Orbit</string>
+    <string name="window_operations_systems_planet_orbit_desc">Anzeigen aller Orbit Objekte</string>
 
-
+    <string name="window_operations_systems_planet_desc">Planeten im System</string>
 
 </resources>

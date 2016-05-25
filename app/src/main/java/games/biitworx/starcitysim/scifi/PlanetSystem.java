@@ -20,13 +20,13 @@ import games.biitworx.starcitysim.window.views.systems.PlanetDetailWindow;
  * Created by marcel.weissgerber on 24.05.2016.
  */
 @DbTable(name = "system")
-public class PlanetSystem extends BaseDataObject{
+public class PlanetSystem extends BaseDataObject {
     @DbField(name = "name")
     private String name;
-    @DbReference( tableA = "system", tableB = "planet",items = PlanetData.class)
+    @DbReference(items = PlanetData.class)
     private List<PlanetData> planets = new ArrayList<>();
 
-    public PlanetSystem(String name,List<PlanetData> planets) {
+    public PlanetSystem(String name, List<PlanetData> planets) {
 
         this.name = name;
         this.planets = planets;
@@ -87,10 +87,11 @@ public class PlanetSystem extends BaseDataObject{
 
     @Override
     protected void imported() {
-
+        for (PlanetData p : getPlanets())
+            p.system(this);
     }
 
-    public PlanetSystem(){
+    public PlanetSystem() {
 
     }
 }

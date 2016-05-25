@@ -24,7 +24,7 @@ public class SystemsWindow extends Window {
         List<PlanetSystem> systems = Game.DATA.getData(PlanetSystem.class,null);
 
         for(final PlanetSystem p:systems){
-            getContents().add(new MenuItemContent(null, B.get(R.drawable.systemsback),p.getName(),"",String.valueOf(systems.size()), Colors.back001,
+            getContents().add(new MenuItemContent(null, B.get(R.drawable.systemsback),p.getName(),T.get(R.string.window_operations_systems_planet_desc),String.valueOf(p.getPlanets().size()), Colors.back001,
                     new Runnable() {
                         @Override
                         public void run() {

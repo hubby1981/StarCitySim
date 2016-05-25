@@ -225,9 +225,9 @@ public class PlanetContent extends Content {
             return R.drawable.rock013;
         if (id == 14)
             return R.drawable.rock014;
-        if (id == 1)
-            return R.drawable.rock001;
-        return 0;
+
+        return R.drawable.rock001;
+
     }
 
     private int getSunId(int id) {
@@ -239,9 +239,9 @@ public class PlanetContent extends Content {
             return R.drawable.sun004;
         if (id == 5)
             return R.drawable.sun005;
-        if (id == 1)
-            return R.drawable.sun001;
-        return 0;
+
+        return R.drawable.sun001;
+
     }
 
     private int getIceId(int id) {
@@ -271,9 +271,9 @@ public class PlanetContent extends Content {
             return R.drawable.ice013;
         if (id == 14)
             return R.drawable.ice014;
-        if (id == 1)
-            return R.drawable.ice001;
-        return 0;
+
+        return R.drawable.ice001;
+
     }
 
     private int getGasId(int id) {
@@ -303,9 +303,9 @@ public class PlanetContent extends Content {
             return R.drawable.gas013;
         if (id == 14)
             return R.drawable.gas014;
-        if (id == 1)
-            return R.drawable.gas001;
-        return 0;
+
+        return R.drawable.gas001;
+
     }
 
     private int getWaterId(int id) {
@@ -318,9 +318,9 @@ public class PlanetContent extends Content {
         if (id == 5)
             return R.drawable.water005;
 
-        if (id == 1)
-            return R.drawable.water001;
-        return 0;
+
+        return R.drawable.water001;
+
     }
 
     private int getGrasId(int id) {
@@ -350,9 +350,9 @@ public class PlanetContent extends Content {
             return R.drawable.gras013;
         if (id == 14)
             return R.drawable.gras014;
-        if (id == 1)
-            return R.drawable.gras001;
-        return 0;
+
+        return R.drawable.gras001;
+
     }
 
     private Bitmap multiplyBitmap(Bitmap bitmap, Rect map) {

@@ -6,6 +6,7 @@ import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.T;
 import games.biitworx.starcitysim.scifi.NameGenerator;
+import games.biitworx.starcitysim.scifi.PlanetSystem;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 import games.biitworx.starcitysim.window.content.ButtonContent;
@@ -61,6 +62,7 @@ public class ShipyardWindow extends Window {
 
                 text3.text(new NameGenerator().getSunName());
                 Game.ScrollPosition = 0;
+                Game.DATA.insert(new PlanetSystem(new NameGenerator().getSystemName()));
                 Game.update.run();
             }
         }));

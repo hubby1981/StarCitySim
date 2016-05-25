@@ -22,8 +22,7 @@ public abstract class BaseDataObject {
         return uid;
     }
 
-    public  void imported(String id){
-        setUID(id);
+    public  void importedEx(){
         imported();
     }
 

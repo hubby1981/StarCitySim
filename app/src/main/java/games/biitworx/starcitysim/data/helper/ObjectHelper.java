@@ -142,7 +142,7 @@ public class ObjectHelper {
             for(Map.Entry<String,DbReference> e : ref.entrySet()){
 
                 String result = "CREATE TABLE IF NOT EXISTS ";
-                String table = e.getKey()+" ("+e.getValue().tableA()+"_A"+","+e.getValue().tableB()+"_B"+")";
+                String table = e.getKey()+" (parent TEXT,child TEXT)";
                 refs.add(result+table);
             }
         }
@@ -153,7 +153,7 @@ public class ObjectHelper {
 
     public static List<String> createDropReferenceTableStatement(Class clazz) {
 
-        HashMap<String,DbReference> ref = getReferences(clazz);
+        HashMap<String,DbReference> ref = getReferencesEx(clazz);
         List<String> refs=new ArrayList<>();
         if(ref!=null){
             for(Map.Entry<String,DbReference> e : ref.entrySet()){

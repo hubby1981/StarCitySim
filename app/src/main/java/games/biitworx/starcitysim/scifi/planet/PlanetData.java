@@ -39,13 +39,13 @@ public class PlanetData extends PlanetCoreData {
     private float temprature;
     @DbField(name = "day")
     private float day;
-    @DbReference( tableA = "planet", tableB = "planet",items = PlanetData.class)
+    @DbReference(items = PlanetData.class)
     private List<PlanetData> orbits = new ArrayList<>();
 
     private PlanetData parent;
     private PlanetSystem planetSystem;
 
-    public PlanetData(){
+    public PlanetData() {
 
     }
 
@@ -81,6 +81,11 @@ public class PlanetData extends PlanetCoreData {
         return this;
     }
 
+    public PlanetData parent(PlanetData parent) {
+        this.parent = parent;
+        return this;
+    }
+
     public PlanetSystem getPlanetSystem() {
         return planetSystem;
     }
@@ -112,7 +117,7 @@ public class PlanetData extends PlanetCoreData {
 
     private void createOrbits() {
         if (RandomRange.getRandom(1, 2) == 2 && surface != PlanetSurface.MOON &&
-        surface != PlanetSurface.SUN){
+                surface != PlanetSurface.SUN) {
             int max = RandomRange.getRandom(1, 6);
 
             for (int x = 1; x <= max; x++) {
@@ -299,6 +304,7 @@ public class PlanetData extends PlanetCoreData {
 
     @Override
     protected void imported() {
-
+        for (PlanetData p : getOrbits())
+            p.parent(this);
     }
 }

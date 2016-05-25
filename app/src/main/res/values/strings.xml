@@ -134,5 +134,6 @@
 
     <string name="window_operations_systems_planet_orbit_title">Orbit</string>
     <string name="window_operations_systems_planet_orbit_desc">Show  orbital objects</string>
+    <string name="window_operations_systems_planet_desc">Planets in System</string>
 
 </resources>

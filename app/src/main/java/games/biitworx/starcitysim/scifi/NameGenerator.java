@@ -75,11 +75,8 @@ public class NameGenerator {
         int last = -1;
         for (int x = 0; x < len; x++) {
             last = getNumber(0, syllables.size() - 1, last);
-            int sub = RandomRange.getRandom(1, 15);
-            int a = RandomRange.getRandom(0, len - 1);
-            sub = max <= 2 ? 0 : sub;
 
-            result += x == a && sub > 9 && x + 1 < len ? syllables.get(last) + "'" : syllables.get(last);
+            result += syllables.get(last);
         }
 
         String f = result.substring(0, 1);
