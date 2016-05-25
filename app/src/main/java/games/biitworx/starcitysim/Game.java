@@ -54,24 +54,15 @@ public class Game extends AppCompatActivity {
     public static boolean LOCKED = false;
     public static boolean SCROLLS = false;
 
-    DbHelper helper;
+    public static DbHelper DATA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        helper = new DbHelper(this);
-        Cursor c = helper.get().rawQuery(ObjectHelper.createSelectStatement(PlanetSystem.class), null);
-        while (c.moveToNext()) {
-            String out = "";
-            for (String s : c.getColumnNames()) {
-                out += s + ":" + c.getString(c.getColumnIndex(s));
-            }
-            System.out.println(out);
-        }
+        DATA = new DbHelper(this);
 
-        helper.insert(new PlanetSystem("test"));
         res = getResources();
 
 

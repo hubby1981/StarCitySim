@@ -39,11 +39,15 @@ public class PlanetData extends PlanetCoreData {
     private float temprature;
     @DbField(name = "day")
     private float day;
-    @DbReference(name = "orbit", tableA = "planet", tableB = "planet",items = PlanetData.class)
+    @DbReference( tableA = "planet", tableB = "planet",items = PlanetData.class)
     private List<PlanetData> orbits = new ArrayList<>();
 
     private PlanetData parent;
     private PlanetSystem planetSystem;
+
+    public PlanetData(){
+
+    }
 
     public PlanetData(String name) {
         super();
@@ -291,5 +295,10 @@ public class PlanetData extends PlanetCoreData {
         colors();
         radius();
         return this;
+    }
+
+    @Override
+    protected void imported() {
+
     }
 }

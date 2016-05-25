@@ -1,5 +1,7 @@
 package games.biitworx.starcitysim.window.views.systems;
 
+import java.util.List;
+
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.scifi.PlanetSystem;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
@@ -14,7 +16,8 @@ public class PlanetWindow extends Window {
     public PlanetWindow(PlanetSystem planetSystem) {
         super(planetSystem.getName());
 
-        for (final PlanetData p : planetSystem.getPlanets()) {
+
+        for (final PlanetData p :  planetSystem.getPlanets()) {
             getContents().add(new PlanetContent(p, new Runnable() {
                 @Override
                 public void run() {

@@ -7,7 +7,7 @@ import games.biitworx.starcitysim.scifi.RandomRange;
 /**
  * Created by marcel.weissgerber on 18.05.2016.
  */
-public class PlanetCoreData extends BaseDataObject {
+public abstract class PlanetCoreData extends BaseDataObject {
     protected float mass = PlanetConst.MIN_PCM;
     protected float rotation = PlanetConst.MAX_PSR;
 
@@ -16,6 +16,8 @@ public class PlanetCoreData extends BaseDataObject {
         rotation = RandomRange.getFloat(PlanetConst.MIN_PSR, PlanetConst.MAX_PSR);
 
     }
+
+
 
 
 }

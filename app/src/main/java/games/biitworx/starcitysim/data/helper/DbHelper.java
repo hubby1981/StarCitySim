@@ -1,10 +1,12 @@
 package games.biitworx.starcitysim.data.helper;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +15,15 @@ import java.util.Objects;
 import games.biitworx.starcitysim.data.BaseDataObject;
 import games.biitworx.starcitysim.data.DbReference;
 import games.biitworx.starcitysim.data.Setup;
+import games.biitworx.starcitysim.scifi.PlanetSystem;
+import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 
 /**
  * Created by marcel.weissgerber on 09.05.2016.
  */
 public class DbHelper extends SQLiteOpenHelper {
     private final static String DBNAME = "starcity";
-    private final static int version = 18;
+    private final static int version = 19;
 
     public DbHelper(Context context) {
         super(context, DBNAME, null, version);
@@ -78,6 +82,10 @@ public class DbHelper extends SQLiteOpenHelper {
                                 if (items != null) {
                                     for (Object bo : items) {
                                         String id = insert(bo);
+                                        String st2 = "INSERT or replace INTO " + e.getKey() + " (" + e.getValue().tableA() + "_A," + e.getValue().tableB()
+                                                + "_B) VALUES ('" + ((BaseDataObject) object).getUID().toString() + "','" +
+                                                id + "')";
+                                        db.execSQL(st2);
                                     }
                                 }
                             } catch (IllegalAccessException e1) {
@@ -91,9 +99,169 @@ public class DbHelper extends SQLiteOpenHelper {
         return ((BaseDataObject) object).getUID().toString();
     }
 
-    public <T> List<T> getData(Class<T> clazz) {
+    public <T> List<T> getData(Class<T> clazz, SQLiteDatabase db2) {
+        SQLiteDatabase db = db2 != null ? db2 : get();
+        List<String> fields = ObjectHelper.getFieldsEx(clazz);
+        List<T> result = new ArrayList<>();
+        String table = ObjectHelper.getTableNameEx(clazz);
+        if (fields != null && table != null && db != null && db.isOpen()) {
+
+            String st = "SELECT #F FROM " + table;
+            String ff = "";
+            int index = 0;
+            for (String f : fields) {
+                ff += f;
+                if (index < fields.size() - 1)
+                    ff += ",";
+                index++;
+            }
+            st = st.replace("#F", ff);
+
+            Cursor cursor = db.rawQuery(st, null);
+            while (cursor.moveToNext()) {
+                T obj = null;
+                try {
+                    obj = clazz.newInstance();
+                    result.add(obj);
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                if (obj != null) {
+                    for (String fd : cursor.getColumnNames()) {
+                        String value = cursor.getString(cursor.getColumnIndex(fd));
+
+                        if (fd.equals("uid")) {
+                            ((BaseDataObject) obj).imported(value);
+                        } else {
+                            Field fg = ObjectHelper.getDeclaredFieldByName(clazz, fd);
+                            Object val;
+                            if (fg.getGenericType().equals(int.class)) {
+                                val = Integer.parseInt(value);
+                            } else if (fg.getGenericType().equals(float.class)) {
+                                val = Float.parseFloat(value);
+                            } else if (fg.getGenericType().equals(PlanetSurface.class)) {
+                                val = Enum.valueOf(PlanetSurface.class, value);
+                            } else {
+                                val = value;
+                            }
+                            if (fg != null) {
+                                fg.setAccessible(true);
+                                try {
+                                    fg.set(obj, val);
+                                } catch (IllegalAccessException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                    }
+
+                    loadReferences(clazz, db, obj);
+
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private <T> void loadReferences(Class<T> clazz, SQLiteDatabase db, T obj) {
+        HashMap<String, DbReference> ref = ObjectHelper.getReferencesEx(clazz);
+        if (ref.size() > 0) {
+            String refUid = ((BaseDataObject) obj).getUID().toString();
+            for (Map.Entry<String, DbReference> e : ref.entrySet()) {
+                String st2 = "SELECT " + e.getValue().tableA() + "_A," + e.getValue().tableB() + "_B" + " FROM " + e.getKey() + " WHERE " + e.getValue().tableA() + "_A='" + refUid + "'";
+                Class cls = e.getValue().items();
+                List<Object> sub2 = new ArrayList<>();
+                Cursor cursor2 = db.rawQuery(st2, null);
+                while (cursor2.moveToNext()) {
+                    String id = cursor2.getString(cursor2.getColumnIndex(e.getValue().tableB() + "_B"));
+                    sub2.add(getData(e.getValue().items(), db, id));
+                }
+
+                if (sub2 != null && sub2.size() > 0) {
+                    Field fg2 = ObjectHelper.getDeclaredFieldByName(clazz, e.getKey());
+                    if (fg2 != null) {
+                        fg2.setAccessible(true);
+                        try {
+                            fg2.set(obj, sub2);
+                        } catch (IllegalAccessException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public <T> T getData(Class<T> clazz, SQLiteDatabase db2, String id) {
+        SQLiteDatabase db = db2 != null ? db2 : get();
+        List<String> fields = ObjectHelper.getFieldsEx(clazz);
+        T obj = null;
+        try {
+            obj = clazz.newInstance();
+            ;
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        String table = ObjectHelper.getTableNameEx(clazz);
+        if (fields != null && table != null && db != null && db.isOpen()) {
+
+            String st = "SELECT #F FROM " + table + " WHERE uid='" + id + "'";
+            String ff = "";
+            int index = 0;
+            for (String f : fields) {
+                ff += f;
+                if (index < fields.size() - 1)
+                    ff += ",";
+                index++;
+            }
+            st = st.replace("#F", ff);
+
+            Cursor cursor = db.rawQuery(st, null);
+            while (cursor.moveToNext()) {
+
+                if (obj != null) {
+                    for (String fd : cursor.getColumnNames()) {
+                        String value = cursor.getString(cursor.getColumnIndex(fd));
+
+                        if (fd.equals("uid")) {
+                            ((BaseDataObject) obj).imported(value);
+                        } else {
+                            Field fg = ObjectHelper.getDeclaredFieldByName(clazz, fd);
+                            Object val;
+                            if (fg.getGenericType().equals(int.class)) {
+                                val = Integer.parseInt(value);
+                            } else if (fg.getGenericType().equals(float.class)) {
+                                val = Float.parseFloat(value);
+                            } else if (fg.getGenericType().equals(PlanetSurface.class)) {
+                                val = Enum.valueOf(PlanetSurface.class, value);
+                            } else {
+                                val = value;
+                            }
+                            if (fg != null) {
+                                fg.setAccessible(true);
+                                try {
+                                    fg.set(obj, val);
+                                } catch (IllegalAccessException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                    }
+
+                    loadReferences(clazz, db, obj);
 
 
-        return null;
+                }
+            }
+        }
+
+        return obj;
     }
 }

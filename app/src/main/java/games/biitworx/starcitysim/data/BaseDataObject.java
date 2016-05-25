@@ -21,4 +21,11 @@ public abstract class BaseDataObject {
     public UUID getUID() {
         return uid;
     }
+
+    public  void imported(String id){
+        setUID(id);
+        imported();
+    }
+
+    protected abstract void imported();
 }

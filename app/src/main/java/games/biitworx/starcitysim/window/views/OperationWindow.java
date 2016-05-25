@@ -12,6 +12,7 @@ import games.biitworx.starcitysim.window.basic.MenuCounter;
 import games.biitworx.starcitysim.window.content.MenuItemContent;
 import games.biitworx.starcitysim.window.views.production.ShipyardWindow;
 import games.biitworx.starcitysim.window.views.systems.PlanetWindow;
+import games.biitworx.starcitysim.window.views.systems.SystemsWindow;
 
 /**
  * Created by marcel.weissgerber on 27.04.2016.
@@ -24,7 +25,7 @@ public class OperationWindow extends Window {
                 new Runnable() {
                     @Override
                     public void run() {
-                        Game.changeWindow(new PlanetWindow(new PlanetSystem(new NameGenerator().getSystemName())));
+                        Game.changeWindow(new SystemsWindow());
                     }
                 }));
 
