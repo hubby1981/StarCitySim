@@ -8,7 +8,6 @@ import java.util.HashMap;
 public @interface DbReference {
     String name();
     String tableA();
-    String tableAField();
     String tableB();
-    String tableBField();
+
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import games.biitworx.starcitysim.data.DbField;
+import games.biitworx.starcitysim.data.DbReference;
 import games.biitworx.starcitysim.data.DbTable;
 
 /**
@@ -31,7 +32,7 @@ public class ObjectHelper {
 
 
     public static HashMap<String, String> getFields(Object object) {
-        Field[] fields = object.getClass().getDeclaredFields();
+        Field[] fields = getDeclaredFields(object.getClass());
         HashMap<String, String> result = new HashMap<>();
         for (Field f : fields) {
             if (f.isAnnotationPresent(DbField.class)) {
@@ -46,12 +47,56 @@ public class ObjectHelper {
         return result;
     }
 
+    public static HashMap<String,DbReference> getReferences(Object object) {
+        Field[] fields = getDeclaredFields(object.getClass());
+        HashMap<String,DbReference> result = new HashMap<>();
+        for (Field f : fields) {
+            if (f.isAnnotationPresent(DbReference.class)) {
+               result.put(f.getName(),f.getAnnotation(DbReference.class));
+            }
+        }
+        return result;
+    }
+
+    public static HashMap<String,DbReference> getReferencesEx(Class clazz) {
+        Field[] fields = getDeclaredFields(clazz);
+        HashMap<String,DbReference> result = new HashMap<>();
+        for (Field f : fields) {
+            if (f.isAnnotationPresent(DbReference.class)) {
+                result.put(f.getName(),f.getAnnotation(DbReference.class));
+            }
+        }
+        return result;
+    }
+
     public static List<String> getFieldsEx(Class clazz) {
-        Field[] fields = clazz.getDeclaredFields();
+        Field[] fields = getDeclaredFields(clazz);
         List<String> result = new ArrayList<>();
         for (Field f : fields) {
             if (f.isAnnotationPresent(DbField.class)) {
                 result.add(f.getName());
+            }
+        }
+        return result;
+    }
+
+    private static Field[] getDeclaredFields(Class clazz) {
+        Field[] result = clazz.getDeclaredFields();
+        if(clazz.getSuperclass()!=Object.class){
+            Field[] result2 = getDeclaredFields(clazz.getSuperclass());
+            if(result2.length>0){
+                Field[] result3 =new Field[result.length+result2.length];
+                int index=0;
+                for(Field f :result) {
+                    result3[index] = f;
+                    index++;
+                }
+
+                for(Field f :result2) {
+                    result3[index] = f;
+                    index++;
+                }
+                result=result3;
             }
         }
         return result;
@@ -79,6 +124,41 @@ public class ObjectHelper {
         return null;
     }
 
+
+    public static List<String> createReferenceTableStatement(Class clazz) {
+
+        HashMap<String,DbReference> ref = getReferencesEx(clazz);
+        List<String> refs=new ArrayList<>();
+        if(ref!=null){
+            for(Map.Entry<String,DbReference> e : ref.entrySet()){
+
+                String result = "CREATE TABLE IF NOT EXISTS ";
+                String table = e.getKey()+" ("+e.getValue().tableA()+"_A"+","+e.getValue().tableB()+"_B"+")";
+                refs.add(result+table);
+            }
+        }
+
+
+        return refs;
+    }
+
+    public static List<String> createDropReferenceTableStatement(Class clazz) {
+
+        HashMap<String,DbReference> ref = getReferences(clazz);
+        List<String> refs=new ArrayList<>();
+        if(ref!=null){
+            for(Map.Entry<String,DbReference> e : ref.entrySet()){
+
+                String result = "DROP TABLE IF NOT EXISTS ";
+                String table = e.getKey();
+                refs.add(result+table);
+            }
+        }
+
+
+        return refs;
+    }
+
     public static String createDropTableStatement(Class clazz) {
         String result = "DROP TABLE IF EXISTS ";
         String table = getTableNameEx(clazz);
@@ -92,6 +172,8 @@ public class ObjectHelper {
 
         return null;
     }
+
+
 
     public static String createSelectStatement(Class clazz) {
         String result = "SELECT #F FROM ";

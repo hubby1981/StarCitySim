@@ -4,7 +4,11 @@ import android.graphics.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import games.biitworx.starcitysim.data.DbField;
+import games.biitworx.starcitysim.data.DbReference;
+import games.biitworx.starcitysim.data.DbTable;
 import games.biitworx.starcitysim.scifi.NameGenerator;
 import games.biitworx.starcitysim.scifi.PlanetConst;
 import games.biitworx.starcitysim.scifi.RandomRange;
@@ -13,21 +17,31 @@ import games.biitworx.starcitysim.scifi.PlanetSystem;
 /**
  * Created by marcel.weissgerber on 18.05.2016.
  */
+@DbTable(name = "planet")
 public class PlanetData extends PlanetCoreData {
+    @DbField(name = "name")
     private String name;
+    @DbField(name = "surface")
     private PlanetSurface surface;
+    @DbField(name = "surfaceThickness")
     private float surfaceThickness = PlanetConst.MIN_PST;
+    @DbField(name = "atmosphereThickness")
     private float atmosphereThickness = PlanetConst.MIN_PAT;
+    @DbField(name = "radius")
     private float radius = 0f;
+    @DbField(name = "surfaceColor1")
     public int surfaceColor;
+    @DbField(name = "surfaceColor2")
     public int surfaceColor2;
-
+    @DbField(name = "shaderSurface")
     private int shaderSurface = RandomRange.getRandom(1, 5);
-
+    @DbField(name = "temprature")
     private float temprature;
+    @DbField(name = "day")
     private float day;
-
+    @DbReference(name = "orbit", tableA = "planet", tableB = "planet")
     private List<PlanetData> orbits = new ArrayList<>();
+
     private PlanetData parent;
     private PlanetSystem planetSystem;
 

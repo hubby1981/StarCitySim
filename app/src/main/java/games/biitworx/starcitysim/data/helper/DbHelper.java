@@ -5,8 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.List;
-import java.util.Set;
 
+import games.biitworx.starcitysim.data.BaseDataObject;
 import games.biitworx.starcitysim.data.Setup;
 
 /**
@@ -14,9 +14,10 @@ import games.biitworx.starcitysim.data.Setup;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private final static String DBNAME = "starcity";
+    private final static int version=18;
 
     public DbHelper(Context context) {
-        super(context, DBNAME, null, 3);
+        super(context, DBNAME, null, version);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return getWritableDatabase();
     }
 
-    public void insert(Object object) {
+    public String insert(BaseDataObject object) {
         SQLiteDatabase db = get();
 
         if (db != null && db.isOpen()) {
@@ -60,6 +61,7 @@ public class DbHelper extends SQLiteOpenHelper {
             if (st != null)
                 db.execSQL(st);
         }
+        return object.getUID().toString();
     }
 
     public <T> List<T> getData(Class<T> clazz){

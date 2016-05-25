@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import games.biitworx.starcitysim.Game;
+import games.biitworx.starcitysim.data.BaseDataObject;
 import games.biitworx.starcitysim.data.DbField;
 import games.biitworx.starcitysim.data.DbReference;
 import games.biitworx.starcitysim.data.DbTable;
@@ -19,22 +20,20 @@ import games.biitworx.starcitysim.window.views.systems.PlanetDetailWindow;
  * Created by marcel.weissgerber on 24.05.2016.
  */
 @DbTable(name = "system")
-public class PlanetSystem {
-    @DbField(name = "id")
-    private UUID id;
+public class PlanetSystem extends BaseDataObject{
     @DbField(name = "name")
     private String name;
-    @DbReference(name = "systemPlanets", tableA = "system", tableAField = "id", tableB = "planet", tableBField = "id")
+    @DbReference(name = "systemPlanets", tableA = "system", tableB = "planet")
     private List<PlanetData> planets = new ArrayList<>();
 
-    public PlanetSystem(String name, String id, List<PlanetData> planets) {
-        this.id = UUID.fromString(id);
+    public PlanetSystem(String name,List<PlanetData> planets) {
+
         this.name = name;
         this.planets = planets;
     }
 
     public PlanetSystem(String name) {
-        this.id = UUID.randomUUID();
+
         this.name = name;
         String sunName = name.length() > 3 ? name.substring(0, RandomRange.getRandom(2, 4)) : name.substring(0, 2);
         PlanetData sun = new PlanetData(sunName, PlanetSurface.SUN, null);
