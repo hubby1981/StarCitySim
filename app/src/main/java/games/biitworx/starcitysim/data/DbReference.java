@@ -9,5 +9,5 @@ public @interface DbReference {
     String name();
     String tableA();
     String tableB();
-
+    Class items();
 }

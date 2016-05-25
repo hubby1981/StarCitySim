@@ -80,6 +80,15 @@ public class ObjectHelper {
         return result;
     }
 
+    public static Field getDeclaredFieldByName(Class clazz,String name){
+        Field[] fields = getDeclaredFields(clazz);
+        for(Field f:fields){
+            if(f.getName().equals(name))
+                return f;
+        }
+        return null;
+    }
+
     private static Field[] getDeclaredFields(Class clazz) {
         Field[] result = clazz.getDeclaredFields();
         if(clazz.getSuperclass()!=Object.class){

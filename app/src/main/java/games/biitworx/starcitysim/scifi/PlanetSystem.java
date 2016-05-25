@@ -23,7 +23,7 @@ import games.biitworx.starcitysim.window.views.systems.PlanetDetailWindow;
 public class PlanetSystem extends BaseDataObject{
     @DbField(name = "name")
     private String name;
-    @DbReference(name = "systemPlanets", tableA = "system", tableB = "planet")
+    @DbReference(name = "systemPlanets", tableA = "system", tableB = "planet",items = PlanetData.class)
     private List<PlanetData> planets = new ArrayList<>();
 
     public PlanetSystem(String name,List<PlanetData> planets) {

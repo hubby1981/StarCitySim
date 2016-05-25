@@ -39,7 +39,7 @@ public class PlanetData extends PlanetCoreData {
     private float temprature;
     @DbField(name = "day")
     private float day;
-    @DbReference(name = "orbit", tableA = "planet", tableB = "planet")
+    @DbReference(name = "orbit", tableA = "planet", tableB = "planet",items = PlanetData.class)
     private List<PlanetData> orbits = new ArrayList<>();
 
     private PlanetData parent;
