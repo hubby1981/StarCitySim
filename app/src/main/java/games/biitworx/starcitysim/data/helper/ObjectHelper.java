@@ -158,7 +158,7 @@ public class ObjectHelper {
         if(ref!=null){
             for(Map.Entry<String,DbReference> e : ref.entrySet()){
 
-                String result = "DROP TABLE IF NOT EXISTS ";
+                String result = "DROP TABLE IF EXISTS ";
                 String table = e.getKey();
                 refs.add(result+table);
             }
@@ -227,6 +227,38 @@ public class ObjectHelper {
                 }
                 result = result.replace("#F", fields);
                 result = result.replace("#V", value);
+
+                return result;
+            }
+            return null;
+        }
+
+        return null;
+    }
+
+    public static String createUpdateStatement(Object object,int pid) {
+
+        String result = "UPDATE ";
+
+        String table = getTableName(object);
+        if (table != null) {
+            result += table + " SET ";
+
+            HashMap<String, String> values = getFields(object);
+            if (values.size() > 0) {
+                String fields = "";
+
+                int index = 0;
+                for (Map.Entry<String, String> e : values.entrySet()) {
+                    fields += e.getKey();
+                    fields += "='" + e.getValue() + "'";
+                    if (index < values.size() - 1) {
+                        fields += ",";
+
+                    }
+                    index++;
+                }
+                result+=fields+" WHERE pid="+pid;
 
                 return result;
             }

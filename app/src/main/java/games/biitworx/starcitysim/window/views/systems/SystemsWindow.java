@@ -19,8 +19,6 @@ public class SystemsWindow extends Window {
     public SystemsWindow() {
         super(T.get(R.string.window_operations_systems_title));
 
-        //new PlanetWindow(new PlanetSystem(new NameGenerator().getSystemName()))
-
         List<PlanetSystem> systems = Game.DATA.getData(PlanetSystem.class,null);
 
         for(final PlanetSystem p:systems){

@@ -85,6 +85,11 @@ public class PlanetSystem extends BaseDataObject {
         return name;
     }
 
+    public PlanetSystem setName(String name){
+        this.name = name;
+        return this;
+    }
+
     @Override
     protected void imported() {
         for (PlanetData p : getPlanets())
