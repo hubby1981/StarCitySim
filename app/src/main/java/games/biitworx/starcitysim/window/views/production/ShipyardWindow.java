@@ -62,7 +62,7 @@ public class ShipyardWindow extends Window {
 
                 text3.text(new NameGenerator().getSunName());
                 Game.ScrollPosition = 0;
-                Game.DATA.insert(new PlanetSystem(new NameGenerator().getSystemName()));
+                Game.DATA.insert(new PlanetSystem(new NameGenerator().getSystemName()),false,null);
                 Game.update.run();
             }
         }));

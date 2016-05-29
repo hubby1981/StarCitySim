@@ -24,7 +24,7 @@ import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private final static String DBNAME = "starcity";
-    private final static int version = 30;
+    private final static int version = 31;
 
     public DbHelper(Context context) {
         super(context, DBNAME, null, version);
@@ -54,6 +54,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Setup s = new Setup();
 
+        HashMap<String, List<Object>> all = s.secure().getAll(db);
+
         for (String st : s.getDropTables()) {
             db.execSQL(st);
             //System.out.println(st);
@@ -61,41 +63,45 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         createDb(db);
+
+        if (all != null && all.size() > 0)
+            s.secure().reInsertData(all,db);
     }
-
-
 
 
     public SQLiteDatabase get() {
         return getWritableDatabase();
     }
-    public void readLastIdFor(Object object,SQLiteDatabase db){
+
+    public void readLastIdFor(Object object, SQLiteDatabase db) {
         String table = ObjectHelper.getTableNameEx(object.getClass());
-        if(table!=null){
-            String st = "SELECT last_insert_rowid() AS rowid FROM "+table+" LIMIT 1";
-            Cursor c = db.rawQuery(st,null);
-            if(c.moveToNext())
-                ((BaseDataObject)object).createdEx(c.getInt(0));
+        if (table != null) {
+            String st = "SELECT last_insert_rowid() AS rowid FROM " + table + " LIMIT 1";
+            Cursor c = db.rawQuery(st, null);
+            if (c.moveToNext())
+                ((BaseDataObject) object).createdEx(c.getInt(0));
         }
     }
 
-    public String insert(Object object) {
-        SQLiteDatabase db = get();
+    public String insert(Object object, boolean forceInsert, SQLiteDatabase dbEx) {
+        SQLiteDatabase db = dbEx != null ? dbEx : get();
 
         if (db != null && db.isOpen()) {
-            int pid =  ((BaseDataObject)object).getPid()  ;
-            String st =pid==-1? ObjectHelper.createInsertStatement(object):ObjectHelper.createUpdateStatement(object, pid);
-
+            int pid = ((BaseDataObject) object).getPid();
+            String oldSt = ObjectHelper.createInsertStatement(object);
+            String st = pid == -1 ? oldSt : ObjectHelper.createUpdateStatement(object, pid);
+            if (forceInsert)
+                st = oldSt;
             if (st != null) {
 
                 db.execSQL(st);
-                if(pid==-1)
-                    readLastIdFor(object,db);
+                if (pid == -1)
+                    readLastIdFor(object, db);
                 HashMap<String, DbReference> ref = ObjectHelper.getReferencesEx(object.getClass());
                 if (ref.size() > 0) {
-                    String idb=((BaseDataObject) object).getUID().toString();
+                    String idb = ((BaseDataObject) object).getUID().toString();
                     for (Map.Entry<String, DbReference> e : ref.entrySet()) {
-                        db.execSQL("DELETE FROM "+e.getKey()+" WHERE parent='"+idb+"'");
+                        db.execSQL("DELETE FROM " + e.getKey() + " WHERE parent='" + idb + "'");
                         Field f = ObjectHelper.getDeclaredFieldByName(object.getClass(), e.getKey());
                         if (f != null) {
                             f.setAccessible(true);
@@ -103,7 +109,7 @@ public class DbHelper extends SQLiteOpenHelper {
                                 List<Object> items = (List<Object>) f.get(object);
                                 if (items != null) {
                                     for (Object bo : items) {
-                                        String id = insert(bo);
+                                        String id = insert(bo, forceInsert,dbEx);
                                         String st2 = "INSERT INTO " + e.getKey() + " (parent,child) VALUES ('" + idb + "','" +
                                                 id + "')";
                                         db.execSQL(st2);
@@ -149,7 +155,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-                int pid=-1;
+                int pid = -1;
                 if (obj != null) {
                     for (String fd : cursor.getColumnNames()) {
                         String value = cursor.getString(cursor.getColumnIndex(fd));

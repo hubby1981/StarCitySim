@@ -12,12 +12,18 @@ import games.biitworx.starcitysim.scifi.planet.PlanetData;
  */
 public class Setup {
     private List<Class> tables;
+    private SecureDataSetup secure;
     public Setup(){
+        secure=new SecureDataSetup();
         tables=new ArrayList<>();
 
         tables.add(PlanetSystem.class);
         tables.add(PlanetData.class);
 
+    }
+
+    public SecureDataSetup secure(){
+        return secure;
     }
 
     public List<String> getCreateTables(){

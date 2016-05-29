@@ -232,11 +232,11 @@ public class Game extends AppCompatActivity {
             scrolled = false;
             OldY = (int) event.getY();
             touch = true;
+            SCROLLS=false;
         }
 
         if (event.getAction() == MotionEvent.ACTION_MOVE && touch) {
             int scroller = ((int) event.getY()) - OldY;
-            SCROLLS = true;
             if (scroller > 10 || scroller < -10) {
                 int newScroller = ScrollPosition;
 
@@ -249,6 +249,8 @@ public class Game extends AppCompatActivity {
                     Window wnd = !view.getOverlaySetting() ? view.getWindow() : view.getOverlayWindow();
 
                     if (wnd != null && newScroller != 0) {
+                        SCROLLS = true;
+
                         int max = wnd.getMaxScrollPosition() - MenuRects.contentInner.get().height();
                         max += MenuRects.line.get().height();
                         wnd.down = true;
