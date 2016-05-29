@@ -154,29 +154,9 @@ public class Game extends AppCompatActivity {
 
 
             }
-        }, 0, 15);
+        }, 0, 30);
 
-        timer = new Runnable() {
-            @Override
-            public void run() {
-                int speed = 75;
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
 
-                        MenuWatcher.pulse();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                update();
-                            }
-                        });
-                    }
-                }, speed, speed);
-            }
-        };
-        //timer.run();
         runOnUiThread(update);
 
 

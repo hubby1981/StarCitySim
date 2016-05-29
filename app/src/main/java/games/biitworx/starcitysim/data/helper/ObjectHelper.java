@@ -184,25 +184,6 @@ public class ObjectHelper {
 
 
 
-    public static String createSelectStatement(Class clazz) {
-        String result = "SELECT #F FROM ";
-        List<String> fields = getFieldsEx(clazz);
-        String table = getTableNameEx(clazz);
-        if (table != null) {
-            String ff = "";
-            int index=0;
-            for (String f : fields) {
-                ff += f;
-                if (index < fields.size() - 1)
-                    ff += ",";
-                index++;
-            }
-            return result.replace("#F",ff) + table;
-        }
-        return null;
-    }
-
-
     public static String createInsertStatement(Object object) {
 
         String result = "INSERT INTO ";

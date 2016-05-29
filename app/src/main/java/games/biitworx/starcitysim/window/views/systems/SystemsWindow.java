@@ -18,8 +18,8 @@ import games.biitworx.starcitysim.window.content.MenuItemContent;
 public class SystemsWindow extends Window {
     public SystemsWindow() {
         super(T.get(R.string.window_operations_systems_title));
-
-        List<PlanetSystem> systems = Game.DATA.getData(PlanetSystem.class,null);
+        Game.LOCKED=true;
+                List<PlanetSystem> systems = Game.DATA.getData(PlanetSystem.class,null);
 
         for(final PlanetSystem p:systems){
             getContents().add(new MenuItemContent(null, B.get(R.drawable.systemsback),p.getName(),T.get(R.string.window_operations_systems_planet_desc),String.valueOf(p.getLocation()), Colors.back001,
@@ -30,5 +30,8 @@ public class SystemsWindow extends Window {
                         }
                     }));
         }
+
+        Game.LOCKED=false;
+
     }
 }

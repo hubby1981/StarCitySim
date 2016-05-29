@@ -24,7 +24,7 @@ import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private final static String DBNAME = "starcity";
-    private final static int version = 31;
+    private final static int version = 32;
 
     public DbHelper(Context context) {
         super(context, DBNAME, null, version);
@@ -133,16 +133,8 @@ public class DbHelper extends SQLiteOpenHelper {
         String table = ObjectHelper.getTableNameEx(clazz);
         if (fields != null && table != null && db != null && db.isOpen()) {
 
-            String st = "SELECT pid,#F FROM " + table;
-            String ff = "";
-            int index = 0;
-            for (String f : fields) {
-                ff += f;
-                if (index < fields.size() - 1)
-                    ff += ",";
-                index++;
-            }
-            st = st.replace("#F", ff);
+            String st = "SELECT * FROM " + table;
+
 
             Cursor cursor = db.rawQuery(st, null);
             while (cursor.moveToNext()) {
@@ -248,16 +240,8 @@ public class DbHelper extends SQLiteOpenHelper {
         String table = ObjectHelper.getTableNameEx(clazz);
         if (fields != null && table != null && db != null && db.isOpen()) {
 
-            String st = "SELECT pid,#F FROM " + table + " WHERE uid='" + id + "'";
-            String ff = "";
-            int index = 0;
-            for (String f : fields) {
-                ff += f;
-                if (index < fields.size() - 1)
-                    ff += ",";
-                index++;
-            }
-            st = st.replace("#F", ff);
+            String st = "SELECT * FROM " + table + " WHERE uid='" + id + "'";
+
             int pid = -1;
             Cursor cursor = db.rawQuery(st, null);
             while (cursor.moveToNext()) {
