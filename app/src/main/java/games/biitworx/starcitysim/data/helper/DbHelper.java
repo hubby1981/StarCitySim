@@ -65,7 +65,7 @@ public class DbHelper extends SQLiteOpenHelper {
         createDb(db);
 
         if (all != null && all.size() > 0)
-            s.secure().reInsertData(all,db);
+            s.secure().reInsertData(all, db);
     }
 
 
@@ -109,7 +109,7 @@ public class DbHelper extends SQLiteOpenHelper {
                                 List<Object> items = (List<Object>) f.get(object);
                                 if (items != null) {
                                     for (Object bo : items) {
-                                        String id = insert(bo, forceInsert,dbEx);
+                                        String id = insert(bo, forceInsert, dbEx);
                                         String st2 = "INSERT INTO " + e.getKey() + " (parent,child) VALUES ('" + idb + "','" +
                                                 id + "')";
                                         db.execSQL(st2);
@@ -171,7 +171,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         }
                     }
 
-                    loadReferences(clazz, db, obj);
+                    //loadReferences(clazz, db, obj);
                     ((BaseDataObject) obj).importedEx(pid);
                 }
             }
@@ -194,6 +194,12 @@ public class DbHelper extends SQLiteOpenHelper {
             val = value;
         }
         return val;
+    }
+
+    public <T> T getRefs(Class<T> clazz, T obj) {
+        loadReferences(clazz, get(), obj);
+        ((BaseDataObject)obj).importedEx2();
+        return obj;
     }
 
     private <T> void loadReferences(Class<T> clazz, SQLiteDatabase db, T obj) {
@@ -269,7 +275,7 @@ public class DbHelper extends SQLiteOpenHelper {
                         }
                     }
 
-                    loadReferences(clazz, db, obj);
+                    //loadReferences(clazz, db, obj);
 
 
                 }

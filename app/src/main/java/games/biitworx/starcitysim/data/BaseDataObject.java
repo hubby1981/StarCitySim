@@ -27,6 +27,11 @@ public abstract class BaseDataObject {
         this.pid = pid;
         imported();
     }
+
+    public  void importedEx2(){
+
+        imported();
+    }
     public  void createdEx(int pid){
         this.pid = pid;
 

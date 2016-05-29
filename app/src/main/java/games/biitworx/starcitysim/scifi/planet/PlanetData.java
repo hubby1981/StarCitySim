@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import games.biitworx.starcitysim.RD;
 import games.biitworx.starcitysim.data.DbField;
 import games.biitworx.starcitysim.data.DbReference;
 import games.biitworx.starcitysim.data.DbTable;
@@ -129,36 +130,31 @@ public class PlanetData extends PlanetCoreData {
     private void radius() {
         int a = 0;
         int b = 0;
-
+        surfaceA(RandomRange.getRandom(1, RD.getMax(surface)));
         if (surface == PlanetSurface.MOON) {
             a = 1;
             b = 2;
-            surfaceA(RandomRange.getRandom(1, 42));
 
         }
 
         if (surface == PlanetSurface.ICE) {
             a = 2;
             b = 6;
-            surfaceA(RandomRange.getRandom(1, 14));
 
         }
         if (surface == PlanetSurface.ICE_ROCK) {
             a = 4;
             b = 12;
-            surfaceA(RandomRange.getRandom(1, 14));
 
 
         }
         if (surface == PlanetSurface.ROCK) {
             a = 8;
             b = 32;
-            surfaceA(RandomRange.getRandom(1, 14));
         }
         if (surface == PlanetSurface.GAS) {
             a = 16;
             b = 64;
-            surfaceA(RandomRange.getRandom(1, 14));
 
         }
 

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
@@ -55,6 +56,7 @@ public class Game extends AppCompatActivity {
     public static boolean SCROLLS = false;
 
     public static DbHelper DATA;
+    public static String PACKAGE_NAME = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +81,14 @@ public class Game extends AppCompatActivity {
 
         Colors.backPainterContentShader3.setStyle(Paint.Style.FILL);
         Colors.backPainterContentShader3.setShader(Colors.shaderBack3);
+
+
 //Typeface.createFromAsset(getAssets(), "venus.ttf")
         Fonts.FONT.setTypeface(Typeface.MONOSPACE);
         setContentView(R.layout.activity_game);
         view = (GameViewBackNormal) findViewById(R.id.gameback);
-        ScrollPosition = view.getWindow().getScrollPosition();
 
+        PACKAGE_NAME = getApplicationContext().getPackageName();
 
         update = new Runnable() {
             @Override

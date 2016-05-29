@@ -20,6 +20,7 @@ import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Fonts;
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
+import games.biitworx.starcitysim.RD;
 import games.biitworx.starcitysim.RectHelper;
 import games.biitworx.starcitysim.T;
 import games.biitworx.starcitysim.scifi.PlanetConst;
@@ -108,7 +109,7 @@ public class PlanetContent extends Content {
 
 
         if (!Game.SCROLLS)
-            makeSurface(canvas, circle, circle2, circler, planet.getShaderSurface());
+            makeSurface(canvas, circle, circle2, circler, planet);
         else {
             circler.setColor(planet.getSurfaceColor());
             canvas.drawPath(p, circler);
@@ -162,35 +163,9 @@ public class PlanetContent extends Content {
 
     }
 
-    private void makeSurface(Canvas canvas, Rect circle, Rect circle2, Paint circler, int surface) {
-        int id = 0;
-        if (planet.getSurface() == PlanetSurface.ROCK && surface < 15) {
+    private void makeSurface(Canvas canvas, Rect circle, Rect circle2, Paint circler, PlanetData p) {
+        int id = RD.getResIdByName(RD.getName(p.getSurface(),p.getShaderSurface()));
 
-            id = getRockId(surface);
-
-        }
-        if (planet.getSurface() == PlanetSurface.SUN && surface < 6) {
-            id = getSunId(surface);
-        }
-        if (planet.getSurface() == PlanetSurface.ICE && surface < 15) {
-            id = getIceId(surface);
-        }
-        if (planet.getSurface() == PlanetSurface.GAS && surface < 15) {
-            id = getGasId(surface);
-        }
-        if (planet.getSurface() == PlanetSurface.ICE_ROCK && surface < 15) {
-            id = getGrasId(surface);
-
-        }
-        if (planet.getSurface() == PlanetSurface.MOON && surface < 43) {
-
-            if (surface < 15)
-                id = getRockId(surface);
-            else if (surface < 29)
-                id = getIceId(surface - 15);
-            else
-                id = getGrasId(surface - 29);
-        }
         if (id > 0) {
             Bitmap b = drawOnCircle(circle2, B.get(id), circler);
 
@@ -198,162 +173,8 @@ public class PlanetContent extends Content {
         }
     }
 
-    private int getRockId(int id) {
-        if (id == 2)
-            return R.drawable.rock002;
-        if (id == 3)
-            return R.drawable.rock003;
-        if (id == 4)
-            return R.drawable.rock004;
-        if (id == 5)
-            return R.drawable.rock005;
-        if (id == 6)
-            return R.drawable.rock006;
-        if (id == 7)
-            return R.drawable.rock007;
-        if (id == 8)
-            return R.drawable.rock008;
-        if (id == 9)
-            return R.drawable.rock009;
-        if (id == 10)
-            return R.drawable.rock010;
-        if (id == 11)
-            return R.drawable.rock011;
-        if (id == 12)
-            return R.drawable.rock012;
-        if (id == 13)
-            return R.drawable.rock013;
-        if (id == 14)
-            return R.drawable.rock014;
-
-        return R.drawable.rock001;
-
-    }
-
-    private int getSunId(int id) {
-        if (id == 2)
-            return R.drawable.sun002;
-        if (id == 3)
-            return R.drawable.sun003;
-        if (id == 4)
-            return R.drawable.sun004;
-        if (id == 5)
-            return R.drawable.sun005;
-
-        return R.drawable.sun001;
-
-    }
-
-    private int getIceId(int id) {
-        if (id == 2)
-            return R.drawable.ice002;
-        if (id == 3)
-            return R.drawable.ice003;
-        if (id == 4)
-            return R.drawable.ice004;
-        if (id == 5)
-            return R.drawable.ice005;
-        if (id == 6)
-            return R.drawable.ice006;
-        if (id == 7)
-            return R.drawable.ice007;
-        if (id == 8)
-            return R.drawable.ice008;
-        if (id == 9)
-            return R.drawable.ice009;
-        if (id == 10)
-            return R.drawable.ice010;
-        if (id == 11)
-            return R.drawable.ice011;
-        if (id == 12)
-            return R.drawable.ice012;
-        if (id == 13)
-            return R.drawable.ice013;
-        if (id == 14)
-            return R.drawable.ice014;
-
-        return R.drawable.ice001;
-
-    }
-
-    private int getGasId(int id) {
-        if (id == 2)
-            return R.drawable.gas002;
-        if (id == 3)
-            return R.drawable.gas003;
-        if (id == 4)
-            return R.drawable.gas004;
-        if (id == 5)
-            return R.drawable.gas005;
-        if (id == 6)
-            return R.drawable.gas006;
-        if (id == 7)
-            return R.drawable.gas007;
-        if (id == 8)
-            return R.drawable.gas008;
-        if (id == 9)
-            return R.drawable.gas009;
-        if (id == 10)
-            return R.drawable.gas010;
-        if (id == 11)
-            return R.drawable.gas011;
-        if (id == 12)
-            return R.drawable.gas012;
-        if (id == 13)
-            return R.drawable.gas013;
-        if (id == 14)
-            return R.drawable.gas014;
-
-        return R.drawable.gas001;
-
-    }
-
-    private int getWaterId(int id) {
-        if (id == 2)
-            return R.drawable.water002;
-        if (id == 3)
-            return R.drawable.water003;
-        if (id == 4)
-            return R.drawable.water004;
-        if (id == 5)
-            return R.drawable.water005;
 
 
-        return R.drawable.water001;
-
-    }
-
-    private int getGrasId(int id) {
-        if (id == 2)
-            return R.drawable.gras002;
-        if (id == 3)
-            return R.drawable.gras003;
-        if (id == 4)
-            return R.drawable.gras004;
-        if (id == 5)
-            return R.drawable.gras005;
-        if (id == 6)
-            return R.drawable.gras006;
-        if (id == 7)
-            return R.drawable.gras007;
-        if (id == 8)
-            return R.drawable.gras008;
-        if (id == 9)
-            return R.drawable.gras009;
-        if (id == 10)
-            return R.drawable.gras010;
-        if (id == 11)
-            return R.drawable.gras011;
-        if (id == 12)
-            return R.drawable.gras012;
-        if (id == 13)
-            return R.drawable.gras013;
-        if (id == 14)
-            return R.drawable.gras014;
-
-        return R.drawable.gras001;
-
-    }
 
     private Bitmap multiplyBitmap(Bitmap bitmap, Rect map) {
         Bitmap bit = Bitmap.createBitmap(map.width(), map.height(), Bitmap.Config.ARGB_8888);

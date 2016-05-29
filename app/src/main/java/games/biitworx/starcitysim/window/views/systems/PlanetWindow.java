@@ -25,7 +25,7 @@ public class PlanetWindow extends Window {
             getContents().add(new PlanetContent(p, new Runnable() {
                 @Override
                 public void run() {
-                    Game.changeWindow(new PlanetDetailWindow(p));
+                    Game.changeWindow(new PlanetDetailWindow(Game.DATA.getRefs(PlanetData.class,p)));
                 }
             }));
         }

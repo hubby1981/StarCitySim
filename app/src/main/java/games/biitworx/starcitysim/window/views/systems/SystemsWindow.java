@@ -26,7 +26,7 @@ public class SystemsWindow extends Window {
                     new Runnable() {
                         @Override
                         public void run() {
-                            Game.changeWindow(new PlanetWindow(p));
+                            Game.changeWindow(new PlanetWindow(Game.DATA.getRefs(PlanetSystem.class,p)));
                         }
                     }));
         }
