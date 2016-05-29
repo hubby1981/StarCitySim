@@ -3,6 +3,7 @@ package games.biitworx.starcitysim.scifi;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import games.biitworx.starcitysim.Game;
@@ -25,16 +26,15 @@ public class PlanetSystem extends BaseDataObject {
     private String name;
     @DbReference(items = PlanetData.class)
     private List<PlanetData> planets = new ArrayList<>();
+    @DbField(name = "location")
+    private String location="0.0.0.0.0";
 
-    public PlanetSystem(String name, List<PlanetData> planets) {
-
-        this.name = name;
-        this.planets = planets;
-    }
 
     public PlanetSystem(String name) {
 
         this.name = name;
+        this.location = ""+ RandomRange.getRandom(2,8)+"."+ RandomRange.getRandom(1,99)+ RandomRange.getRandom(100,900)+ RandomRange.getRandom(10,90)+ RandomRange.getRandom(1,9);
+
         String sunName = name.length() > 3 ? name.substring(0, RandomRange.getRandom(2, 4)) : name.substring(0, 2);
         PlanetData sun = new PlanetData(sunName, PlanetSurface.SUN, null);
 
@@ -98,5 +98,9 @@ public class PlanetSystem extends BaseDataObject {
 
     public PlanetSystem() {
 
+    }
+
+    public String getLocation() {
+        return location;
     }
 }

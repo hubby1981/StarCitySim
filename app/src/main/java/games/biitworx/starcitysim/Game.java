@@ -117,7 +117,8 @@ public class Game extends AppCompatActivity {
                     MONTH = 1;
                     YEAR++;
                 }
-                update.run();
+                if (!ANIMATION)
+                    update.run();
             }
         };
 
@@ -127,8 +128,8 @@ public class Game extends AppCompatActivity {
                 COUNT--;
                 if (COUNT == 0) {
                     COUNT = 59;
-                    if (!ANIMATION)
-                        runOnUiThread(run);
+
+                    runOnUiThread(run);
                 }
                 if (!ANIMATION && !LOCKED)
                     runOnUiThread(update);
@@ -232,7 +233,7 @@ public class Game extends AppCompatActivity {
             scrolled = false;
             OldY = (int) event.getY();
             touch = true;
-            SCROLLS=false;
+            SCROLLS = false;
         }
 
         if (event.getAction() == MotionEvent.ACTION_MOVE && touch) {
