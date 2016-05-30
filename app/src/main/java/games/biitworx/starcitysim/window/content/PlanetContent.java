@@ -174,7 +174,7 @@ public class PlanetContent extends Content {
 
 
         id = RD.getResIdByName(RD.getCloudName(RandomRange.getRandom(1, RD.getMaxCloud())));
-        if (id > 0 && cloud == 3) {
+        if (id > 0 && cloud == 1&&planet.getSurface()!=PlanetSurface.SUN) {
             Bitmap b = drawOnCircle(circle2, B.get(id), circler, false);
 
             BitmapDrawer.drawImage(b, canvas, circle, null, true);
