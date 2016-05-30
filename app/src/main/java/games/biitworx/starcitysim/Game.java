@@ -231,6 +231,7 @@ public class Game extends AppCompatActivity {
                     newScroller = 0;
                 touch = true;
                 if (view != null) {
+
                     Window wnd = !view.getOverlaySetting() ? view.getWindow() : view.getOverlayWindow();
 
                     if (wnd != null && newScroller != 0) {

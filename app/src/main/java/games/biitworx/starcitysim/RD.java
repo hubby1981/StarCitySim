@@ -29,7 +29,9 @@ public class RD {
         water = getRes("water");
         gras = getRes("gras");
         ice = getRes("ice");
-
+        moon.addAll(rock);
+        moon.addAll(ice);
+        moon.addAll(gras);
 
     }
 
@@ -96,7 +98,7 @@ public class RD {
         }
         if (data.size() > index)
             return data.get(index);
-        return data.size()>0?data.get(0):"rock001";
+        return data.size() > 0 ? data.get(0) : "rock001";
     }
 
     public static int getResIdByName(String name) {

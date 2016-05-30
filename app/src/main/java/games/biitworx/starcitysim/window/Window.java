@@ -30,6 +30,7 @@ public abstract class Window {
     private Contents contents = new Contents();
     public boolean scroller = false;
     public boolean down = true;
+    public Bitmap old = null;
 
     public Window(String text) {
         this(text, "");
@@ -64,24 +65,29 @@ public abstract class Window {
         return contents.getMaxLine() * (MenuRects.line.get().height());
     }
 
+    public void free() {
+        old = null;
+    }
+
     public void onDraw(Canvas canvas, boolean sc) {
-        Game.LOCKED=true;
+
+        Game.LOCKED = true;
         Rect bounds = MenuRects.contentInner.get();
 
-        Bitmap outerContent = Bitmap.createBitmap(bounds.right, bounds.height(), Bitmap.Config.ARGB_8888);
 
-        Canvas canvasOuterContent = new Canvas(outerContent);
+        old = Bitmap.createBitmap(bounds.right, bounds.height(), Bitmap.Config.ARGB_8888);
+
+        Canvas canvasOuterContent = new Canvas(old);
 
         contents.onDraw(canvasOuterContent, scrollPosition);
 
-        canvas.drawBitmap(outerContent, bounds.left, bounds.top, null);
 
-
+        canvas.drawBitmap(old, bounds.left, bounds.top, null);
         Rect base = MenuRects.info.get();
         Fonts.FONT.setTextSize((base.height() / 5));
-        String time = Game.YEAR + "." + Game.MONTH + "." + Game.DAY+"."+Game.COUNT;
+        String time = Game.YEAR + "." + Game.MONTH + "." + Game.DAY + "." + Game.COUNT;
         float size = Fonts.FONT.measureText(time);
-        canvas.drawText(time, base.centerX() - size/2, (int) (base.centerY() - Fonts.FONT.getTextSize()), Fonts.FONT);
+        canvas.drawText(time, base.centerX() - size / 2, (int) (base.centerY() - Fonts.FONT.getTextSize()), Fonts.FONT);
 
         Fonts.FONT.setTextSize((base.height() / 3));
         size = Fonts.FONT.measureText(text);
@@ -97,7 +103,7 @@ public abstract class Window {
             Rect base2 = MenuRects.notification.get();
             Fonts.FONT.setTextSize((base.height() / 6));
             size = Fonts.FONT.measureText(hint);
-            canvas.drawText(hint, base2.centerX() - size/2, (int) (base2.top + Fonts.FONT.getTextSize() * 1), Fonts.FONT);
+            canvas.drawText(hint, base2.centerX() - size / 2, (int) (base2.top + Fonts.FONT.getTextSize() * 1), Fonts.FONT);
 
         }
         if (sc) {
@@ -117,7 +123,8 @@ public abstract class Window {
                 BitmapDrawer.drawImage(b, canvas, rc, null, true);
             }
         }
-        Game.LOCKED=false;
+
+        Game.LOCKED = false;
 
     }
 
@@ -130,7 +137,7 @@ public abstract class Window {
         for (Content c : contents.getItems()) {
             if (c.hasAction() && c.isHit(x, y)) {
                 c.getAction().run();
-                c.wasHit=true;
+                c.wasHit = true;
                 ret = true;
             } else {
                 ret = c.checkHit(x, y);
