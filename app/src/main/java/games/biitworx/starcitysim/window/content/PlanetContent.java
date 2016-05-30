@@ -34,7 +34,7 @@ import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 public class PlanetContent extends Content {
     private PlanetData planet;
     private boolean clickable = false;
-
+    private int cloud = RandomRange.getRandom(1, 1);
 
     public List<Scene> scenes = new ArrayList<>();
 
@@ -164,16 +164,22 @@ public class PlanetContent extends Content {
     }
 
     private void makeSurface(Canvas canvas, Rect circle, Rect circle2, Paint circler, PlanetData p) {
-        int id = RD.getResIdByName(RD.getName(p.getSurface(),p.getShaderSurface()));
+        int id = RD.getResIdByName(RD.getName(p.getSurface(), p.getShaderSurface()));
 
         if (id > 0) {
-            Bitmap b = drawOnCircle(circle2, B.get(id), circler);
+            Bitmap b = drawOnCircle(circle2, B.get(id), circler, true);
+
+            BitmapDrawer.drawImage(b, canvas, circle, null, true);
+        }
+
+
+        id = RD.getResIdByName(RD.getCloudName(RandomRange.getRandom(1, RD.getMaxCloud())));
+        if (id > 0 && cloud == 3) {
+            Bitmap b = drawOnCircle(circle2, B.get(id), circler, false);
 
             BitmapDrawer.drawImage(b, canvas, circle, null, true);
         }
     }
-
-
 
 
     private Bitmap multiplyBitmap(Bitmap bitmap, Rect map) {
@@ -195,7 +201,7 @@ public class PlanetContent extends Content {
         return bit;
     }
 
-    private Bitmap drawOnCircle(Rect circle, Bitmap bitmap, Paint painter) {
+    private Bitmap drawOnCircle(Rect circle, Bitmap bitmap, Paint painter, boolean fill) {
 /*
         if (!clickable) {
             bitmap = multiplyBitmap(bitmap, circle);
@@ -207,6 +213,11 @@ public class PlanetContent extends Content {
         p.close();
 
         Canvas c = new Canvas(result);
+        if (!fill) {
+            painter = new Paint();
+            painter.setStyle(Paint.Style.FILL);
+            painter.setColor(Color.argb(0, 0, 0, 0));
+        }
         c.drawPath(p, painter);
         c.clipPath(p, Region.Op.INTERSECT);
         if (!clickable && !Game.SCROLLS) {

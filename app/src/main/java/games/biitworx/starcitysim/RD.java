@@ -20,6 +20,7 @@ public class RD {
     public static List<String> gras = new ArrayList<>();
     public static List<String> ice = new ArrayList<>();
     public static List<String> moon = new ArrayList<>();
+    public static List<String> cloud = new ArrayList<>();
 
     static {
 
@@ -29,6 +30,8 @@ public class RD {
         water = getRes("water");
         gras = getRes("gras");
         ice = getRes("ice");
+        cloud = getRes("cloud");
+
         moon.addAll(rock);
         moon.addAll(ice);
         moon.addAll(gras);
@@ -67,6 +70,18 @@ public class RD {
 
         }
         return 0;
+    }
+
+    public static int getMaxCloud() {
+
+        return cloud.size();
+    }
+
+    public static String getCloudName(int index){
+        List<String> data =cloud;
+        if (data.size() > index)
+            return data.get(index);
+        return data.size() > 0 ? data.get(0) : "cloud001";
     }
 
     public static String getName(PlanetSurface surface, int index) {
