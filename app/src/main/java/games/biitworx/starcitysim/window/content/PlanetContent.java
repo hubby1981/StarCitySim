@@ -22,7 +22,7 @@ import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.RD;
 import games.biitworx.starcitysim.RectHelper;
-import games.biitworx.starcitysim.T;
+import games.biitworx.starcitysim.TE;
 import games.biitworx.starcitysim.scifi.PlanetConst;
 import games.biitworx.starcitysim.scifi.RandomRange;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
@@ -146,15 +146,15 @@ public class PlanetContent extends Content {
             int hh = getContentRect().height() / 10;
             canvas.drawText(planet.getName(), (float) rects.get(1).left, rects.get(1).centerY() - hh, Fonts.FONT);
             Fonts.FONT.setTextSize((getContentRect().height() / 7));
-            String surface = planet.getSurface() == PlanetSurface.ICE_ROCK ? T.get(R.string.content_planet_suface_ICE_ROCK) : planet.getSurface() == PlanetSurface.ICE ? T.get(R.string.content_planet_suface_ICE)
-                    : planet.getSurface() == PlanetSurface.GAS ? T.get(R.string.content_planet_suface_GAS) : planet.getSurface() == PlanetSurface.SUN ? T.get(R.string.content_planet_suface_SUN) : planet.getSurface() == PlanetSurface.MOON ? T.get(R.string.content_planet_suface_MOON) : T.get(R.string.content_planet_suface_ROCK);
-            canvas.drawText(T.get(R.string.content_planet_surface), (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
+            String surface = planet.getSurface() == PlanetSurface.ICE_ROCK ? TE.get(R.string.content_planet_suface_ICE_ROCK) : planet.getSurface() == PlanetSurface.ICE ? TE.get(R.string.content_planet_suface_ICE)
+                    : planet.getSurface() == PlanetSurface.GAS ? TE.get(R.string.content_planet_suface_GAS) : planet.getSurface() == PlanetSurface.SUN ? TE.get(R.string.content_planet_suface_SUN) : planet.getSurface() == PlanetSurface.MOON ? TE.get(R.string.content_planet_suface_MOON) : TE.get(R.string.content_planet_suface_ROCK);
+            canvas.drawText(TE.get(R.string.content_planet_surface), (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
             canvas.drawText(surface, (float) rects.get(1).left + hh * 16, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 0.8), Fonts.FONT);
 
-            canvas.drawText(T.get(R.string.content_planet_radius), (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
+            canvas.drawText(TE.get(R.string.content_planet_radius), (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
             canvas.drawText("" + planet.getRadius() * PlanetConst.METER / 2, (float) rects.get(1).left + hh * 16, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 1.8), Fonts.FONT);
 
-            canvas.drawText(T.get(R.string.content_planet_temp), (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 2.8), Fonts.FONT);
+            canvas.drawText(TE.get(R.string.content_planet_temp), (float) rects.get(1).left, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 2.8), Fonts.FONT);
             canvas.drawText("" + planet.getTemprature(), (float) rects.get(1).left + hh * 16, rects.get(1).centerY() + (float) (Fonts.FONT.getTextSize() * 2.8), Fonts.FONT);
 
             canvas.drawRect(getInnerRect(), Colors.backPainterLine2);

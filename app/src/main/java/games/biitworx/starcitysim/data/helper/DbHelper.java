@@ -23,8 +23,15 @@ import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private final static String DBNAME = "starcity";
-    private final static int version = 32;
+    private final static int version = 33;
     public static final String SELECT_FROM = "SELECT * FROM ";
+    public static final String SELECT_ROWID = "SELECT last_insert_rowid() AS rowid FROM ";
+    public static final String LIMIT_1 = " LIMIT 1";
+    public static final String DELETE_FROM = "DELETE FROM ";
+    public static final String WHERE_PARENT = " WHERE parent=";
+    public static final String INSERT_INTO = "INSERT INTO ";
+    public static final String PARENT_CHILD_VALUES = " (parent,child) VALUES ";
+    public static final String SELECT_PARENT_CHILD_FROM = "SELECT parent,child FROM ";
 
     public DbHelper(Context context) {
         super(context, DBNAME, null, version);
@@ -76,10 +83,11 @@ public class DbHelper extends SQLiteOpenHelper {
     public void readLastIdFor(Object object, SQLiteDatabase db) {
         String table = ObjectHelper.getTableNameEx(object.getClass());
         if (table != null) {
-            String st = "SELECT last_insert_rowid() AS rowid FROM " + table + " LIMIT 1";
+            String st = SELECT_ROWID + table + LIMIT_1;
             Cursor c = db.rawQuery(st, null);
             if (c.moveToNext())
                 ((BaseDataObject) object).createdEx(c.getInt(0));
+            c.close();
         }
     }
 
@@ -110,7 +118,7 @@ public class DbHelper extends SQLiteOpenHelper {
                                 if (items != null) {
                                     for (Object bo : items) {
                                         String id = insert(bo, forceInsert, dbEx);
-                                        String st2 = "INSERT INTO " + e.getKey() + " (parent,child) VALUES ('" + deleteId + "','" +
+                                        String st2 = INSERT_INTO + e.getKey() + PARENT_CHILD_VALUES + "('" + deleteId + "','" +
                                                 id + "')";
                                         db.execSQL(st2);
                                     }
@@ -127,8 +135,10 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     private void deleteExisting(SQLiteDatabase db, String deleteId, Map.Entry<String, DbReference> e) {
-        db.execSQL("DELETE FROM " + e.getKey() + " WHERE parent='" + deleteId + "'");
+        db.execSQL(DELETE_FROM + e.getKey() + WHERE_PARENT + "'" + deleteId + "'");
     }
+
+
 
     public <T> List<T> getData(Class<T> clazz, SQLiteDatabase db2, boolean lazy) {
         SQLiteDatabase db = getSqLiteDatabase(db2);
@@ -231,8 +241,8 @@ public class DbHelper extends SQLiteOpenHelper {
         if (ref.size() > 0) {
             String refUid = ((BaseDataObject) obj).getUID().toString();
             for (Map.Entry<String, DbReference> e : ref.entrySet()) {
-                String st2 = "SELECT parent,child FROM " + e.getKey() + " WHERE parent='" + refUid + "'";
-                Class cls = e.getValue().items();
+                String st2 = SELECT_PARENT_CHILD_FROM + e.getKey() + WHERE_PARENT + "'" + refUid + "'";
+
                 List<Object> objectList = new ArrayList<>();
                 parseLine(db, e, st2, objectList);
                 saveValues(clazz, obj, e, objectList);
@@ -260,7 +270,7 @@ public class DbHelper extends SQLiteOpenHelper {
             String id = cursor.getString(cursor.getColumnIndex("child"));
             sub2.add(getData(e.getValue().items(), db, id, false));
         }
-        cursor = null;
+        cursor.close();
     }
 
     public <T> T getData(Class<T> clazz, SQLiteDatabase db2, String id, boolean lazy) {
@@ -304,10 +314,7 @@ public class DbHelper extends SQLiteOpenHelper {
         T obj = null;
         try {
             obj = clazz.newInstance();
-            ;
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return obj;

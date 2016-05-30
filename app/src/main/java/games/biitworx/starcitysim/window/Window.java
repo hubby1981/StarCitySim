@@ -2,19 +2,15 @@ package games.biitworx.starcitysim.window;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Path;
 import android.graphics.Rect;
-import android.view.Menu;
 
 import games.biitworx.starcitysim.B;
 import games.biitworx.starcitysim.BitmapDrawer;
-import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Fonts;
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.MenuRects;
 import games.biitworx.starcitysim.R;
-import games.biitworx.starcitysim.T;
+import games.biitworx.starcitysim.TE;
 import games.biitworx.starcitysim.window.content.Content;
 
 /**
@@ -98,7 +94,7 @@ public abstract class Window {
 
         String hint = getHint();
         if (hint.length() == 0)
-            hint = T.get(R.string.overlay_hint);
+            hint = TE.get(R.string.overlay_hint);
         if (MenuRects.notification != null && MenuRects.notification.get() != null && hint.length() > 0 && sc) {
             Rect base2 = MenuRects.notification.get();
             Fonts.FONT.setTextSize((base.height() / 6));

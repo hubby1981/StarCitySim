@@ -1,15 +1,11 @@
 package games.biitworx.starcitysim.window.views;
 
-import games.biitworx.starcitysim.B;
-import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
-import games.biitworx.starcitysim.T;
+import games.biitworx.starcitysim.TE;
 import games.biitworx.starcitysim.W;
 import games.biitworx.starcitysim.window.Window;
-import games.biitworx.starcitysim.window.basic.MenuCounter;
 import games.biitworx.starcitysim.window.content.ButtonContent;
-import games.biitworx.starcitysim.window.content.MenuItemContent;
 import games.biitworx.starcitysim.window.content.SpacerContent;
 
 /**
@@ -19,14 +15,14 @@ public class MenuOverlayWindow extends Window {
     public MenuOverlayWindow() {
         super("");
         getContents().add(new SpacerContent(1));
-        getContents().add(new ButtonContent(T.get(R.string.overlay_menu_back),
+        getContents().add(new ButtonContent(TE.get(R.string.overlay_menu_back),
                 new Runnable() {
                     @Override
                     public void run() {
                         Game.changeWindow(W.getLast());
                     }
                 }));
-        getContents().add(new ButtonContent(T.get(R.string.overlay_menu_settings),
+        getContents().add(new ButtonContent(TE.get(R.string.overlay_menu_settings),
                 new Runnable() {
                     @Override
                     public void run() {
@@ -35,21 +31,21 @@ public class MenuOverlayWindow extends Window {
                 }));
 
 
-        getContents().add(new ButtonContent(T.get(R.string.overlay_menu_save),
+        getContents().add(new ButtonContent(TE.get(R.string.overlay_menu_save),
                 new Runnable() {
                     @Override
                     public void run() {
                         Game.changeWindow(new MenuWindow());
                     }
                 }));
-        getContents().add(new ButtonContent(T.get(R.string.overlay_menu_shop),
+        getContents().add(new ButtonContent(TE.get(R.string.overlay_menu_shop),
                 new Runnable() {
                     @Override
                     public void run() {
                         Game.changeWindow(new SettingsWindow());
                     }
                 }));
-        getContents().add(new ButtonContent(T.get(R.string.overlay_menu_help),
+        getContents().add(new ButtonContent(TE.get(R.string.overlay_menu_help),
                 new Runnable() {
                     @Override
                     public void run() {
@@ -57,7 +53,7 @@ public class MenuOverlayWindow extends Window {
                     }
                 }));
 
-        getContents().add(new ButtonContent(T.get(R.string.overlay_menu_rate),
+        getContents().add(new ButtonContent(TE.get(R.string.overlay_menu_rate),
                 new Runnable() {
                     @Override
                     public void run() {
@@ -65,7 +61,7 @@ public class MenuOverlayWindow extends Window {
                     }
                 }));
 
-        getContents().add(new ButtonContent(T.get(R.string.overlay_menu_share),
+        getContents().add(new ButtonContent(TE.get(R.string.overlay_menu_share),
                 new Runnable() {
                     @Override
                     public void run() {
@@ -73,7 +69,7 @@ public class MenuOverlayWindow extends Window {
                     }
                 }));
         getContents().add(new SpacerContent(1));
-        getContents().add(new ButtonContent(T.get(R.string.overlay_menu_main),
+        getContents().add(new ButtonContent(TE.get(R.string.overlay_menu_main),
                 new Runnable() {
                     @Override
                     public void run() {

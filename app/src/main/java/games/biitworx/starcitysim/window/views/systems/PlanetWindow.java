@@ -1,10 +1,8 @@
 package games.biitworx.starcitysim.window.views.systems;
 
-import java.util.List;
-
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
-import games.biitworx.starcitysim.T;
+import games.biitworx.starcitysim.TE;
 import games.biitworx.starcitysim.scifi.PlanetSystem;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.window.Window;
@@ -29,7 +27,7 @@ public class PlanetWindow extends Window {
                 }
             }));
         }
-        getContents().add(new ButtonContent(T.get(R.string.overlay_menu_back), new Runnable() {
+        getContents().add(new ButtonContent(TE.get(R.string.overlay_menu_back), new Runnable() {
             @Override
             public void run() {
                 Game.changeWindow(new SystemsWindow());

@@ -1,6 +1,5 @@
 package games.biitworx.starcitysim.window.content;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -12,13 +11,12 @@ import android.graphics.Shader;
 import java.util.ArrayList;
 import java.util.List;
 
-import games.biitworx.starcitysim.BitmapDrawer;
 import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Fonts;
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
 import games.biitworx.starcitysim.RectHelper;
-import games.biitworx.starcitysim.T;
+import games.biitworx.starcitysim.TE;
 
 /**
  * Created by marcel.weissgerber on 26.04.2016.
@@ -29,7 +27,7 @@ public class ComboboxContent extends Content {
     private String secondary;
     private boolean show = false;
     private List<Content> contents = new ArrayList<>();
-    private String value = T.get(R.string.selection_default);
+    private String value = TE.get(R.string.selection_default);
 
     public ComboboxContent(String primary, String secondary, int color, List<Content> contents) {
         this(primary, secondary, color, null, contents);

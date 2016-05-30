@@ -4,7 +4,7 @@ import games.biitworx.starcitysim.B;
 import games.biitworx.starcitysim.Colors;
 import games.biitworx.starcitysim.Game;
 import games.biitworx.starcitysim.R;
-import games.biitworx.starcitysim.T;
+import games.biitworx.starcitysim.TE;
 import games.biitworx.starcitysim.scifi.PlanetConst;
 import games.biitworx.starcitysim.scifi.planet.PlanetData;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
@@ -31,7 +31,7 @@ public class PlanetDetailWindow extends Window {
 
         if(planet.getOrbits().size()>0) {
             int count =  planet.getOrbits().size();
-            getContents().add(new MenuItemContent(null, B.get(R.drawable.systemsback), T.get(R.string.window_operations_systems_planet_orbit_title), T.get(R.string.window_operations_systems_planet_orbit_desc),String.valueOf(count), Colors.back001,
+            getContents().add(new MenuItemContent(null, B.get(R.drawable.systemsback), TE.get(R.string.window_operations_systems_planet_orbit_title), TE.get(R.string.window_operations_systems_planet_orbit_desc),String.valueOf(count), Colors.back001,
                     new Runnable() {
                         @Override
                         public void run() {
@@ -42,11 +42,11 @@ public class PlanetDetailWindow extends Window {
         }
 
         VirtualLineContents table = new VirtualLineContents();
-        table.getContents().add(new TextContent(T.get(R.string.content_planet_mass)));
+        table.getContents().add(new TextContent(TE.get(R.string.content_planet_mass)));
         table.getContents().add(new TextContent("" + planet.getRadius()));
         getContents().add(table);
         table = new VirtualLineContents();
-        table.getContents().add(new TextContent(T.get(R.string.content_planet_radius)));
+        table.getContents().add(new TextContent(TE.get(R.string.content_planet_radius)));
         table.getContents().add(new TextContent("" + (planet.getRadius() * PlanetConst.METER) / 2));
         getContents().add(table);
         table = new VirtualLineContents();
@@ -54,7 +54,7 @@ public class PlanetDetailWindow extends Window {
         table.getContents().add(new TextContent("" + planet.getTemprature()));
         getContents().add(table);
         table = new VirtualLineContents();
-        table.getContents().add(new TextContent(T.get(R.string.content_planet_surface)));
+        table.getContents().add(new TextContent(TE.get(R.string.content_planet_surface)));
         int id = R.string.content_planet_suface_ROCK;
 
         if (planet.getSurface() == PlanetSurface.GAS) id = R.string.content_planet_suface_GAS;
@@ -64,12 +64,12 @@ public class PlanetDetailWindow extends Window {
         if (planet.getSurface() == PlanetSurface.ICE_ROCK)
             id = R.string.content_planet_suface_ICE_ROCK;
 
-        table.getContents().add(new TextContent(T.get(id)));
+        table.getContents().add(new TextContent(TE.get(id)));
 
         getContents().add(table);
 
         if(planet.getParent()!=null) {
-            getContents().add(new ButtonContent(T.get(R.string.overlay_menu_back), new Runnable() {
+            getContents().add(new ButtonContent(TE.get(R.string.overlay_menu_back), new Runnable() {
                 @Override
                 public void run() {
                     Game.changeWindow(new PlanetDetailWindow(planet.getParent()));
@@ -79,7 +79,7 @@ public class PlanetDetailWindow extends Window {
             getContents().add(new SpacerContent(4));
 
         }else   if(planet.getPlanetSystem()!=null) {
-            getContents().add(new ButtonContent(T.get(R.string.overlay_menu_back), new Runnable() {
+            getContents().add(new ButtonContent(TE.get(R.string.overlay_menu_back), new Runnable() {
                 @Override
                 public void run() {
                     Game.changeWindow(new PlanetWindow(planet.getPlanetSystem()));
