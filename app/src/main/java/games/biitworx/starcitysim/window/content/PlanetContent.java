@@ -224,6 +224,7 @@ public class PlanetContent extends Content {
 
             if (scenes.size() == 1) {
                 Scene s = new Scene();
+
                 s.pos = scenes.get(0).pos + circle.width();
 
                 scenes.add(s);
@@ -241,7 +242,8 @@ public class PlanetContent extends Content {
 
 
             for (Scene s : scenes) {
-                circle = new Rect((int) s.pos, circle.top, (int) s.pos + circle.width(), circle.bottom);
+                float pp = !fill?s.pos-30:s.pos;
+                circle = new Rect((int) pp, circle.top, (int) pp + circle.width(), circle.bottom);
 
                 BitmapDrawer.drawImage(bitmap, c, circle, null, true);
             }
