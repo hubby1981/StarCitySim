@@ -30,7 +30,7 @@ public class SecureDataSetup {
     public HashMap<String, List<Object>> getAll(SQLiteDatabase db) {
         HashMap<String, List<Object>> all = new HashMap<>();
         for (Class c : secureDataList) {
-            all.put(c.getSimpleName(), Game.DATA.getData(c, db));
+            all.put(c.getSimpleName(), Game.DATA.getData(c, db,true));
         }
         return all;
     }

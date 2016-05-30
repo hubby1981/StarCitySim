@@ -4,19 +4,18 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.Nullable;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 import games.biitworx.starcitysim.data.BaseDataObject;
 import games.biitworx.starcitysim.data.DbReference;
 import games.biitworx.starcitysim.data.Setup;
-import games.biitworx.starcitysim.scifi.PlanetSystem;
 import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 
 /**
@@ -25,6 +24,7 @@ import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
 public class DbHelper extends SQLiteOpenHelper {
     private final static String DBNAME = "starcity";
     private final static int version = 32;
+    public static final String SELECT_FROM = "SELECT * FROM ";
 
     public DbHelper(Context context) {
         super(context, DBNAME, null, version);
@@ -84,7 +84,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public String insert(Object object, boolean forceInsert, SQLiteDatabase dbEx) {
-        SQLiteDatabase db = dbEx != null ? dbEx : get();
+        SQLiteDatabase db = getSqLiteDatabase(dbEx);
 
         if (db != null && db.isOpen()) {
             int pid = ((BaseDataObject) object).getPid();
@@ -99,9 +99,9 @@ public class DbHelper extends SQLiteOpenHelper {
                     readLastIdFor(object, db);
                 HashMap<String, DbReference> ref = ObjectHelper.getReferencesEx(object.getClass());
                 if (ref.size() > 0) {
-                    String idb = ((BaseDataObject) object).getUID().toString();
+                    String deleteId = ((BaseDataObject) object).getUID().toString();
                     for (Map.Entry<String, DbReference> e : ref.entrySet()) {
-                        db.execSQL("DELETE FROM " + e.getKey() + " WHERE parent='" + idb + "'");
+                        deleteExisting(db, deleteId, e);
                         Field f = ObjectHelper.getDeclaredFieldByName(object.getClass(), e.getKey());
                         if (f != null) {
                             f.setAccessible(true);
@@ -110,7 +110,7 @@ public class DbHelper extends SQLiteOpenHelper {
                                 if (items != null) {
                                     for (Object bo : items) {
                                         String id = insert(bo, forceInsert, dbEx);
-                                        String st2 = "INSERT INTO " + e.getKey() + " (parent,child) VALUES ('" + idb + "','" +
+                                        String st2 = "INSERT INTO " + e.getKey() + " (parent,child) VALUES ('" + deleteId + "','" +
                                                 id + "')";
                                         db.execSQL(st2);
                                     }
@@ -126,58 +126,82 @@ public class DbHelper extends SQLiteOpenHelper {
         return ((BaseDataObject) object).getUID().toString();
     }
 
-    public <T> List<T> getData(Class<T> clazz, SQLiteDatabase db2) {
-        SQLiteDatabase db = db2 != null ? db2 : get();
+    private void deleteExisting(SQLiteDatabase db, String deleteId, Map.Entry<String, DbReference> e) {
+        db.execSQL("DELETE FROM " + e.getKey() + " WHERE parent='" + deleteId + "'");
+    }
+
+    public <T> List<T> getData(Class<T> clazz, SQLiteDatabase db2, boolean lazy) {
+        SQLiteDatabase db = getSqLiteDatabase(db2);
         List<String> fields = ObjectHelper.getFieldsEx(clazz);
         List<T> result = new ArrayList<>();
         String table = ObjectHelper.getTableNameEx(clazz);
-        if (fields != null && table != null && db != null && db.isOpen()) {
+        if (isInit(db, fields, table)) {
 
-            String st = "SELECT * FROM " + table;
+            String st = SELECT_FROM + table;
 
 
             Cursor cursor = db.rawQuery(st, null);
             while (cursor.moveToNext()) {
-                T obj = null;
-                try {
-                    obj = clazz.newInstance();
-                    result.add(obj);
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+                T obj = createObjInst(clazz, result);
                 int pid = -1;
                 if (obj != null) {
                     for (String fd : cursor.getColumnNames()) {
-                        String value = cursor.getString(cursor.getColumnIndex(fd));
-
-                        if (fd.equals("pid")) {
-                            pid = cursor.getInt(cursor.getColumnIndex(fd));
-                        } else {
-                            Field fg = ObjectHelper.getDeclaredFieldByName(clazz, fd);
-                            Object val = getObject(value, fg);
-
-                            if (fg != null) {
-                                fg.setAccessible(true);
-                                try {
-                                    fg.set(obj, val);
-                                } catch (IllegalAccessException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-
-                        }
+                        pid = extractValues(clazz, cursor, obj, pid, fd);
                     }
 
-                    //loadReferences(clazz, db, obj);
-                    ((BaseDataObject) obj).importedEx(pid);
+                    if (lazy)
+                        loadReferences(clazz, db, obj);
+
+                    BaseDataObject parsed = safeParseObject(obj);
+                    if (parsed != null)
+                        parsed.importedEx(pid);
                 }
             }
+
+            cursor.close();
+
         }
 
         return result;
+    }
+
+    private SQLiteDatabase getSqLiteDatabase(SQLiteDatabase db2) {
+        return db2 != null ? db2 : get();
+    }
+
+    private <T> int extractValues(Class<T> clazz, Cursor cursor, T obj, int pid, String fd) {
+        String value = cursor.getString(cursor.getColumnIndex(fd));
+
+        if (fd.equals("pid")) {
+            pid = cursor.getInt(cursor.getColumnIndex(fd));
+        } else {
+            Field fg = ObjectHelper.getDeclaredFieldByName(clazz, fd);
+            Object val = getObject(value, fg);
+
+            if (fg != null) {
+                fg.setAccessible(true);
+                try {
+                    fg.set(obj, val);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        }
+        return pid;
+    }
+
+    @Nullable
+    private <T> T createObjInst(Class<T> clazz, List<T> result) {
+        T obj = null;
+        try {
+            obj = clazz.newInstance();
+            result.add(obj);
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return obj;
     }
 
     private Object getObject(String value, Field fg) {
@@ -198,7 +222,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public <T> T getRefs(Class<T> clazz, T obj) {
         loadReferences(clazz, get(), obj);
-        ((BaseDataObject)obj).importedEx2();
+        ((BaseDataObject) obj).importedEx2();
         return obj;
     }
 
@@ -209,31 +233,74 @@ public class DbHelper extends SQLiteOpenHelper {
             for (Map.Entry<String, DbReference> e : ref.entrySet()) {
                 String st2 = "SELECT parent,child FROM " + e.getKey() + " WHERE parent='" + refUid + "'";
                 Class cls = e.getValue().items();
-                List<Object> sub2 = new ArrayList<>();
-                Cursor cursor2 = db.rawQuery(st2, null);
-                while (cursor2.moveToNext()) {
-                    String id = cursor2.getString(cursor2.getColumnIndex("child"));
-                    sub2.add(getData(e.getValue().items(), db, id));
-                }
+                List<Object> objectList = new ArrayList<>();
+                parseLine(db, e, st2, objectList);
+                saveValues(clazz, obj, e, objectList);
+            }
+        }
+    }
 
-                if (sub2 != null && sub2.size() > 0) {
-                    Field fg2 = ObjectHelper.getDeclaredFieldByName(clazz, e.getKey());
-                    if (fg2 != null) {
-                        fg2.setAccessible(true);
-                        try {
-                            fg2.set(obj, sub2);
-                        } catch (IllegalAccessException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
+    private <T> void saveValues(Class<T> clazz, T obj, Map.Entry<String, DbReference> e, List<Object> objectList) {
+        if (objectList.size() > 0) {
+            Field fg2 = ObjectHelper.getDeclaredFieldByName(clazz, e.getKey());
+            if (fg2 != null) {
+                fg2.setAccessible(true);
+                try {
+                    fg2.set(obj, objectList);
+                } catch (IllegalAccessException e1) {
+                    e1.printStackTrace();
                 }
             }
         }
     }
 
-    public <T> T getData(Class<T> clazz, SQLiteDatabase db2, String id) {
-        SQLiteDatabase db = db2 != null ? db2 : get();
+    private void parseLine(SQLiteDatabase db, Map.Entry<String, DbReference> e, String st2, List<Object> sub2) {
+        Cursor cursor = db.rawQuery(st2, null);
+        while (cursor.moveToNext()) {
+            String id = cursor.getString(cursor.getColumnIndex("child"));
+            sub2.add(getData(e.getValue().items(), db, id, false));
+        }
+        cursor = null;
+    }
+
+    public <T> T getData(Class<T> clazz, SQLiteDatabase db2, String id, boolean lazy) {
+        SQLiteDatabase db = getSqLiteDatabase(db2);
         List<String> fields = ObjectHelper.getFieldsEx(clazz);
+        T obj = createSingleInstance(clazz);
+        String table = ObjectHelper.getTableNameEx(clazz);
+        if (isInit(db, fields, table)) {
+
+            String st = SELECT_FROM + table + " WHERE uid='" + id + "'";
+
+            int pid = -1;
+            Cursor cursor = db.rawQuery(st, null);
+            while (cursor.moveToNext()) {
+
+                if (obj != null) {
+                    for (String fd : cursor.getColumnNames()) {
+                        pid = extractValues(clazz, cursor, obj, pid, fd);
+                    }
+                    checkLazy(clazz, lazy, db, obj);
+
+
+                }
+            }
+            cursor.close();
+
+            BaseDataObject parsed = safeParseObject(obj);
+            if (parsed != null)
+                parsed.importedEx(pid);
+        }
+
+        return obj;
+    }
+
+    private boolean isInit(SQLiteDatabase db, List<String> fields, String table) {
+        return fields != null && table != null && db != null && db.isOpen();
+    }
+
+    @Nullable
+    private <T> T createSingleInstance(Class<T> clazz) {
         T obj = null;
         try {
             obj = clazz.newInstance();
@@ -243,46 +310,18 @@ public class DbHelper extends SQLiteOpenHelper {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        String table = ObjectHelper.getTableNameEx(clazz);
-        if (fields != null && table != null && db != null && db.isOpen()) {
-
-            String st = "SELECT * FROM " + table + " WHERE uid='" + id + "'";
-
-            int pid = -1;
-            Cursor cursor = db.rawQuery(st, null);
-            while (cursor.moveToNext()) {
-
-                if (obj != null) {
-                    for (String fd : cursor.getColumnNames()) {
-                        String value = cursor.getString(cursor.getColumnIndex(fd));
-
-                        if (fd.equals("pid")) {
-                            pid = cursor.getInt(cursor.getColumnIndex(fd));
-                        } else {
-                            Field fg = ObjectHelper.getDeclaredFieldByName(clazz, fd);
-                            Object val = getObject(value, fg);
-
-                            if (fg != null) {
-                                fg.setAccessible(true);
-                                try {
-                                    fg.set(obj, val);
-                                } catch (IllegalAccessException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-
-                        }
-                    }
-
-                    //loadReferences(clazz, db, obj);
-
-
-                }
-            }
-            ((BaseDataObject) obj).importedEx(pid);
-        }
-
         return obj;
+    }
+
+    public BaseDataObject safeParseObject(Object obj) {
+        if (obj.getClass().getSuperclass().equals(BaseDataObject.class)) {
+            return ((BaseDataObject) obj);
+        }
+        return null;
+    }
+
+    private <T> void checkLazy(Class<T> clazz, boolean lazy, SQLiteDatabase db, T obj) {
+        if (lazy)
+            loadReferences(clazz, db, obj);
     }
 }
