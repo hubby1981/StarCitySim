@@ -39,7 +39,7 @@ public class PlanetSystem extends BaseDataObject {
         PlanetData sun = new PlanetData(sunName, PlanetSurface.SUN, null);
 
         add(sun);
-        int max = RandomRange.getRandom(RandomRange.getRandom(2, 4), RandomRange.getRandom(5, 12));
+        int max = RandomRange.getRandom(RandomRange.getRandom(2, 4), RandomRange.getRandom(6, 25));
 
         List<Integer> oldsRock = new ArrayList<>();
         List<Integer> oldsIce = new ArrayList<>();
