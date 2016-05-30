@@ -158,7 +158,7 @@ public class Game extends AppCompatActivity {
 
 
             }
-        }, 0, 30);
+        }, 0, 15);
 
 
         runOnUiThread(update);
@@ -226,7 +226,7 @@ public class Game extends AppCompatActivity {
                 int newScroller = ScrollPosition;
 
 
-                newScroller -= scroller / 6;
+                newScroller -= scroller / 4;
                 if (newScroller < 0)
                     newScroller = 0;
                 touch = true;

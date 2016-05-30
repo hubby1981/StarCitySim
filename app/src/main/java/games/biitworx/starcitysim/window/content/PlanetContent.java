@@ -68,7 +68,7 @@ public class PlanetContent extends Content {
         }
         if (!clickable && !Game.SCROLLS) {
             for (Scene s : scenes) {
-                s.pos -= 30;
+                s.pos -= 40;
             }
 
 
@@ -173,7 +173,7 @@ public class PlanetContent extends Content {
         }
 
 
-        id = RD.getResIdByName(RD.getCloudName(RandomRange.getRandom(1, RD.getMaxCloud())));
+        id = RD.getResIdByName(RD.getCloudName(planet.getClouds()));
         if (id > 0 && cloud == 1&&planet.getSurface()!=PlanetSurface.SUN) {
             Bitmap b = drawOnCircle(circle2, B.get(id), circler, false);
 
@@ -242,7 +242,7 @@ public class PlanetContent extends Content {
 
 
             for (Scene s : scenes) {
-                float pp = !fill?s.pos-30:s.pos;
+                float pp = s.pos;
                 circle = new Rect((int) pp, circle.top, (int) pp + circle.width(), circle.bottom);
 
                 BitmapDrawer.drawImage(bitmap, c, circle, null, true);

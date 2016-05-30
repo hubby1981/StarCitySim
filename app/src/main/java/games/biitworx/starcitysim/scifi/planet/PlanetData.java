@@ -42,7 +42,8 @@ public class PlanetData extends PlanetCoreData {
     private float day;
     @DbReference(items = PlanetData.class)
     private List<PlanetData> orbits = new ArrayList<>();
-
+    @DbField(name = "clouds")
+    private int clouds = -1;
     private PlanetData parent;
     private PlanetSystem planetSystem;
 
@@ -119,7 +120,7 @@ public class PlanetData extends PlanetCoreData {
     private void createOrbits() {
         if (RandomRange.getRandom(1, 2) == 2 && surface != PlanetSurface.MOON &&
                 surface != PlanetSurface.SUN) {
-            int max = RandomRange.getRandom(1, 6);
+            int max = RandomRange.getRandom(1, 3);
 
             for (int x = 1; x <= max; x++) {
                 orbits.add(new PlanetData(new NameGenerator().getPlanetName(), PlanetSurface.MOON, this));
@@ -130,7 +131,15 @@ public class PlanetData extends PlanetCoreData {
     private void radius() {
         int a = 0;
         int b = 0;
-        surfaceA(RandomRange.getRandom(1, RD.getMax(surface)));
+        surfaceA(RandomRange.getRandom(0, RD.getMax(surface)));
+        int cl = RandomRange.getRandom(1, surface == PlanetSurface.MOON ? 10 : 4);
+        if (surface != PlanetSurface.GAS)
+            if (cl > (surface == PlanetSurface.MOON ? 10 : 4) / 2)
+                if (atmosphereThickness * 10 > 2)
+                    clouds = RandomRange.getRandom(0, RD.getMaxCloud());
+                else
+                    clouds = -1;
+
         if (surface == PlanetSurface.MOON) {
             a = 1;
             b = 2;
@@ -154,13 +163,13 @@ public class PlanetData extends PlanetCoreData {
         }
         if (surface == PlanetSurface.GAS) {
             a = 16;
-            b = 64;
+            b = 128;
 
         }
 
         if (surface == PlanetSurface.SUN) {
-            a = 512;
-            b = 4098;
+            a = 256;
+            b = 3400;
             atmosphereThickness *= 4.6f;
         } else {
             if (surface != PlanetSurface.MOON)
@@ -302,5 +311,9 @@ public class PlanetData extends PlanetCoreData {
     protected void imported() {
         for (PlanetData p : getOrbits())
             p.parent(this);
+    }
+
+    public int getClouds() {
+        return clouds;
     }
 }

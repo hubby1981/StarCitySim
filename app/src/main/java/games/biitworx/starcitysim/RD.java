@@ -79,12 +79,14 @@ public class RD {
 
     public static String getCloudName(int index){
         List<String> data =cloud;
+        if(index<0)return "";
         if (data.size() > index)
             return data.get(index);
         return data.size() > 0 ? data.get(0) : "cloud001";
     }
 
     public static String getName(PlanetSurface surface, int index) {
+        if(index<0)return "";
 
         List<String> data = new ArrayList<>();
         switch (surface) {
