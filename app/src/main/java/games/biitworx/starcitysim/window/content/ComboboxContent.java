@@ -130,7 +130,7 @@ public class ComboboxContent extends Content {
             canvas.drawPath(p, Colors.backPainterContent);
         canvas.drawPath(p, !show ? Colors.backPainterLine2 : Colors.backPainterLine3);
 */
-        Fonts.FONT.setTextSize((getContentRect().height() / 3));
+        Fonts.FONT.setTextSize((getContentRect().height() / 4.5f));
 
         rects = RectHelper.makeRect3(text, (int) Fonts.FONT.getTextSize(), 2, 2);
 

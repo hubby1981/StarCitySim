@@ -8,6 +8,7 @@ import games.biitworx.starcitysim.TE;
 import games.biitworx.starcitysim.window.basic.MenuCounter;
 import games.biitworx.starcitysim.window.content.MenuItemContent;
 import games.biitworx.starcitysim.window.Window;
+import games.biitworx.starcitysim.window.views.setup.GameSetup;
 
 /**
  * Created by marce_000 on 25.04.2016.
@@ -33,7 +34,7 @@ public class MenuWindow extends Window {
                 new Runnable() {
                     @Override
                     public void run() {
-                        Game.changeWindow(new DiplomacyWindow());
+                        Game.changeWindow(new GameSetup());
                     }
                 }));
         getContents().add(new MenuItemContent(null, B.get( R.drawable.labback), TE.get(R.string.window_science_title), TE.get(R.string.window_science_desc),MenuCounter.science.concat(" ").concat(TE.get(R.string.items_count)), Colors.back001,
