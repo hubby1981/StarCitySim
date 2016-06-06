@@ -15,18 +15,13 @@ import games.biitworx.starcitysim.data.DbTable;
  */
 public class ObjectHelper {
 
-    public static String getTableName(Object object) {
-        DbTable o = object.getClass().getAnnotation(DbTable.class);
-        if (o != null)
-            return o.name();
-        return null;
-    }
+
 
 
     public static String getTableNameEx(Class clazz) {
         DbTable o = (DbTable) clazz.getAnnotation(DbTable.class);
         if (o != null)
-            return o.name();
+            return clazz.getSimpleName();
         return null;
     }
 
@@ -47,16 +42,6 @@ public class ObjectHelper {
         return result;
     }
 
-    public static HashMap<String,DbReference> getReferences(Object object) {
-        Field[] fields = getDeclaredFields(object.getClass());
-        HashMap<String,DbReference> result = new HashMap<>();
-        for (Field f : fields) {
-            if (f.isAnnotationPresent(DbReference.class)) {
-               result.put(f.getName(),f.getAnnotation(DbReference.class));
-            }
-        }
-        return result;
-    }
 
     public static HashMap<String,DbReference> getReferencesEx(Class clazz) {
         Field[] fields = getDeclaredFields(clazz);
@@ -74,6 +59,7 @@ public class ObjectHelper {
         List<String> result = new ArrayList<>();
         for (Field f : fields) {
             if (f.isAnnotationPresent(DbField.class)) {
+                f.setAccessible(true);
                 result.add(f.getName());
             }
         }
@@ -92,20 +78,20 @@ public class ObjectHelper {
     private static Field[] getDeclaredFields(Class clazz) {
         Field[] result = clazz.getDeclaredFields();
         if(clazz.getSuperclass()!=Object.class){
-            Field[] result2 = getDeclaredFields(clazz.getSuperclass());
-            if(result2.length>0){
-                Field[] result3 =new Field[result.length+result2.length];
+            Field[] resultSuperclass = getDeclaredFields(clazz.getSuperclass());
+            if(resultSuperclass.length>0){
+                Field[] resultCombined =new Field[result.length+resultSuperclass.length];
                 int index=0;
                 for(Field f :result) {
-                    result3[index] = f;
+                    resultCombined[index] = f;
                     index++;
                 }
 
-                for(Field f :result2) {
-                    result3[index] = f;
+                for(Field f :resultSuperclass) {
+                    resultCombined[index] = f;
                     index++;
                 }
-                result=result3;
+                result=resultCombined;
             }
         }
         return result;
@@ -188,7 +174,7 @@ public class ObjectHelper {
 
         String result = "INSERT INTO ";
 
-        String table = getTableName(object);
+        String table = getTableNameEx(object.getClass());
         if (table != null) {
             result += table + " (#F) VALUES (#V)";
 
@@ -221,7 +207,7 @@ public class ObjectHelper {
 
         String result = "UPDATE ";
 
-        String table = getTableName(object);
+        String table = getTableNameEx(object.getClass());
         if (table != null) {
             result += table + " SET ";
 

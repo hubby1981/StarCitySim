@@ -124,14 +124,14 @@ public class RD {
             try {
                 return (int) drawables.get(R.drawable.class.newInstance());
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+
             } catch (InstantiationException e) {
-                e.printStackTrace();
+
             }
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+
         }
 
-        return 0;
+        return 1;
     }
 }

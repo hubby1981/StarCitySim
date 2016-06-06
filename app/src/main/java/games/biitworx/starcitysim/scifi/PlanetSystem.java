@@ -20,13 +20,13 @@ import games.biitworx.starcitysim.window.views.systems.PlanetDetailWindow;
 /**
  * Created by marcel.weissgerber on 24.05.2016.
  */
-@DbTable(name = "system")
+@DbTable
 public class PlanetSystem extends BaseDataObject {
-    @DbField(name = "name")
+    @DbField
     private String name;
     @DbReference(items = PlanetData.class)
     private List<PlanetData> planets = new ArrayList<>();
-    @DbField(name = "location")
+    @DbField
     private String location="0.0.0.0.0";
 
 

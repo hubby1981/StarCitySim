@@ -7,17 +7,17 @@ import games.biitworx.starcitysim.data.DbTable;
 /**
  * Created by marce_000 on 29.05.2016.
  */
-@DbTable(name="players")
+@DbTable
 public class PlayerData extends BaseDataObject {
-    @DbField(name="name")
+    @DbField
     private String name;
-    @DbField(name="day")
+    @DbField
     private int day;
-    @DbField(name="month")
+    @DbField
     private int month;
-    @DbField(name="year")
+    @DbField
     private int year;
-    @DbField(name="race")
+    @DbField
     private int race;
 
 

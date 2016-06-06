@@ -23,7 +23,7 @@ import games.biitworx.starcitysim.scifi.planet.PlanetSurface;
  */
 public class DbHelper extends SQLiteOpenHelper {
     private final static String DBNAME = "starcity";
-    private final static int version = 33;
+    private final static int version = 1;
     public static final String SELECT_FROM = "SELECT * FROM ";
     public static final String SELECT_ROWID = "SELECT last_insert_rowid() AS rowid FROM ";
     public static final String LIMIT_1 = " LIMIT 1";

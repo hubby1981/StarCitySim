@@ -22,6 +22,8 @@ public class SecureDataSetup {
 
     public SecureDataSetup() {
 
+
+
         secureDataList.add(PlanetSystem.class);
         secureDataList.add(PlanetData.class);
 

@@ -168,16 +168,16 @@ public class PlanetContent extends Content {
 
         if (id > 0) {
             Bitmap b = drawOnCircle(circle2, B.get(id), circler, true);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
+            if (b != null)
+                BitmapDrawer.drawImage(b, canvas, circle, null, true);
         }
 
 
         id = RD.getResIdByName(RD.getCloudName(planet.getClouds()));
-        if (id > 0 && cloud == 1&&planet.getSurface()!=PlanetSurface.SUN) {
+        if (id > 0 && cloud == 1 && planet.getSurface() != PlanetSurface.SUN) {
             Bitmap b = drawOnCircle(circle2, B.get(id), circler, false);
-
-            BitmapDrawer.drawImage(b, canvas, circle, null, true);
+            if (b != null)
+                BitmapDrawer.drawImage(b, canvas, circle, null, true);
         }
     }
 
@@ -202,6 +202,8 @@ public class PlanetContent extends Content {
     }
 
     private Bitmap drawOnCircle(Rect circle, Bitmap bitmap, Paint painter, boolean fill) {
+        if(bitmap==null)
+            return null;
 /*
         if (!clickable) {
             bitmap = multiplyBitmap(bitmap, circle);

@@ -18,31 +18,31 @@ import games.biitworx.starcitysim.scifi.PlanetSystem;
 /**
  * Created by marcel.weissgerber on 18.05.2016.
  */
-@DbTable(name = "planet")
+@DbTable
 public class PlanetData extends PlanetCoreData {
-    @DbField(name = "name")
+    @DbField
     private String name;
-    @DbField(name = "surface")
+    @DbField
     private PlanetSurface surface;
-    @DbField(name = "surfaceThickness")
+    @DbField
     private float surfaceThickness = PlanetConst.MIN_PST;
-    @DbField(name = "atmosphereThickness")
+    @DbField
     private float atmosphereThickness = PlanetConst.MIN_PAT;
-    @DbField(name = "radius")
+    @DbField
     private float radius = 0f;
-    @DbField(name = "surfaceColor1")
+    @DbField
     public int surfaceColor;
-    @DbField(name = "surfaceColor2")
+    @DbField
     public int surfaceColor2;
-    @DbField(name = "shaderSurface")
+    @DbField
     private int shaderSurface = RandomRange.getRandom(1, 5);
-    @DbField(name = "temprature")
+    @DbField
     private float temprature;
-    @DbField(name = "day")
+    @DbField
     private float day;
     @DbReference(items = PlanetData.class)
     private List<PlanetData> orbits = new ArrayList<>();
-    @DbField(name = "clouds")
+    @DbField
     private int clouds = -1;
     private PlanetData parent;
     private PlanetSystem planetSystem;

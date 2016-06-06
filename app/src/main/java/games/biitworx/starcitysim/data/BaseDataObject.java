@@ -7,7 +7,7 @@ import java.util.UUID;
  */
 public abstract class BaseDataObject {
     private int pid =-1;
-    @DbField(name="uid")
+    @DbField
     private UUID uid;
 
     public void setUID(String uid){
